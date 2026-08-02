@@ -10,6 +10,7 @@ body{
 }
 
 .navbar{
+    top:42px;
     background:#ffffff;
     box-shadow:0 2px 10px rgba(0,0,0,.1);
     padding:15px 0;
@@ -676,5 +677,100 @@ color:#fff;
 border-color:#334155;
 
 margin:40px 0 20px;
+
+}
+/*====================================
+NEWS FLASH
+====================================*/
+
+.top-news{
+
+background:#d90429;
+
+color:#fff;
+
+height:42px;
+
+display:flex;
+
+align-items:center;
+
+overflow:hidden;
+
+font-size:14px;
+
+font-weight:500;
+
+}
+
+.news-wrapper{
+
+display:flex;
+
+align-items:center;
+
+}
+
+.news-label{
+
+background:#000;
+
+padding:10px 18px;
+
+font-weight:700;
+
+white-space:nowrap;
+
+}
+
+.news-marquee{
+
+overflow:hidden;
+
+white-space:nowrap;
+
+width:100%;
+
+margin-left:15px;
+
+}
+
+#newsFlashContent{
+
+display:inline-block;
+
+padding-left:100%;
+
+animation:marquee 35s linear infinite;
+
+}
+
+.news-item{
+
+margin-right:70px;
+
+}
+
+.news-item strong{
+
+color:#ffe066;
+
+margin-right:8px;
+
+}
+
+@keyframes marquee{
+
+0%{
+
+transform:translateX(0);
+
+}
+
+100%{
+
+transform:translateX(-100%);
+
+}
 
 }
