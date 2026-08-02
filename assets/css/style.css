@@ -779,3 +779,35 @@ transform:translateX(-100%);
     animation-play-state: paused;
 
 }
+.live-dot{
+
+    display:inline-block;
+
+    width:10px;
+
+    height:10px;
+
+    background:#ff0000;
+
+    border-radius:50%;
+
+    margin-right:8px;
+
+    animation:blink 1s infinite;
+
+}
+
+@keyframes blink{
+
+    50%{
+
+        opacity:.3;
+
+    }
+
+}
+#newsFlashContent:hover{
+
+    animation-play-state: paused;
+
+}
