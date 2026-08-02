@@ -1,17 +1,34 @@
 [
+{
+"id":1,
+"slug":"panulisan",
+"nama":"Panulisan",
+"penduduk":"5.250",
+"umkm":"186",
+"bumdes":"Jagara",
+"potensi":"Pertanian & UMKM",
+"gambar":"assets/images/desa/panulisan.jpg",
+"link":"#"
+},
   {
-    "nama": "Panulisan",
-    "potensi": "Pertanian dan UMKM",
-    "gambar": "assets/images/desa/panulisan.jpg",
-    "link": "#"
-  },
-  {
+    "id":2,
+    "slug":"hanum",
+    "nama":"hanum",
+    "penduduk":"5.250",
+    "umkm":"152",
+    "bumdes":"Bakti",
     "nama": "Hanum",
     "potensi": "Perkebunan dan Wisata",
     "gambar": "assets/images/desa/hanum.jpg",
     "link": "#"
   },
   {
+    "ide":3,
+    "slug":"bolang",
+    "nama":"bolang",
+    "penduduk":"5.250",
+    "umkm":"165",
+    "bumdes":"Bakti Bolang",
     "nama": "Bolang",
     "potensi": "Perdagangan",
     "gambar": "assets/images/desa/bolang.jpg",

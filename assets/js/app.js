@@ -1,41 +1,45 @@
-fetch('data/desa.json')
-.then(res => res.json())
-.then(data => {
+<div class="mb-3">
 
-    let html = "";
+<span class="badge bg-success">
 
-    data.forEach(desa => {
+${desa.potensi}
 
-        html += `
+</span>
 
-        <div class="col-lg-4 col-md-6 mb-4">
+</div>
 
-            <div class="card desa-card h-100 shadow">
+<ul class="list-unstyled">
 
-                <img src="${desa.gambar}" class="card-img-top">
+<li>
 
-                <div class="card-body">
+<i class="fa-solid fa-users text-primary"></i>
 
-                    <h4>${desa.nama}</h4>
+Penduduk : ${desa.penduduk}
 
-                    <p>${desa.potensi}</p>
+</li>
 
-                    <a href="${desa.link}" class="btn btn-primary">
+<li>
 
-                        Lihat Profil
+<i class="fa-solid fa-store text-warning"></i>
 
-                    </a>
+UMKM : ${desa.umkm}
 
-                </div>
+</li>
 
-            </div>
+<li>
 
-        </div>
+<i class="fa-solid fa-building text-success"></i>
 
-        `;
+BUMDes : ${desa.bumdes}
 
-    });
+</li>
 
-    document.getElementById("desaContainer").innerHTML = html;
+</ul>
 
-});
+<a href="${desa.link}"
+
+class="btn btn-primary w-100">
+
+Lihat Profil
+
+</a>
