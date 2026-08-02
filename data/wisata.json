@@ -1,0 +1,26 @@
+[
+{
+"nama":"Curug Cimandala",
+"desa":"Hanum",
+"kategori":"Air Terjun",
+"rating":"4.9",
+"gambar":"assets/images/wisata/cimandala.jpg",
+"maps":"https://maps.google.com"
+},
+{
+"nama":"Bukit Dayeuhluhur",
+"desa":"Panulisan",
+"kategori":"Perbukitan",
+"rating":"4.8",
+"gambar":"assets/images/wisata/bukit.jpg",
+"maps":"https://maps.google.com"
+},
+{
+"nama":"Camping Ground",
+"desa":"Bolang",
+"kategori":"Camping",
+"rating":"4.7",
+"gambar":"assets/images/wisata/camping.jpg",
+"maps":"https://maps.google.com"
+}
+]

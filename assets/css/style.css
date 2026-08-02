@@ -429,3 +429,50 @@ font-weight:600;
 font-size:13px;
 
 }
+/*====================================
+WISATA
+====================================*/
+
+.wisata-card{
+
+    border:none;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    transition:.4s;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.wisata-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.wisata-card img{
+
+    height:230px;
+
+    object-fit:cover;
+
+}
+
+.wisata-card .btn{
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+.wisata-card .badge{
+
+    font-size:13px;
+
+}
