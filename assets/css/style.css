@@ -148,3 +148,31 @@ font-weight:500;
 margin-top:10px;
 
 }
+/* ==========================
+   DESA
+========================== */
+
+#desa{
+    padding:80px 0;
+}
+
+.desa-card{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.desa-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.desa-card img{
+    height:220px;
+    object-fit:cover;
+}
+
+.desa-card h4{
+    font-weight:700;
+}

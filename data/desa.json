@@ -1,0 +1,20 @@
+[
+  {
+    "nama": "Panulisan",
+    "potensi": "Pertanian dan UMKM",
+    "gambar": "assets/images/desa/panulisan.jpg",
+    "link": "#"
+  },
+  {
+    "nama": "Hanum",
+    "potensi": "Perkebunan dan Wisata",
+    "gambar": "assets/images/desa/hanum.jpg",
+    "link": "#"
+  },
+  {
+    "nama": "Bolang",
+    "potensi": "Perdagangan",
+    "gambar": "assets/images/desa/bolang.jpg",
+    "link": "#"
+  }
+]
