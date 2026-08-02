@@ -476,3 +476,44 @@ WISATA
     font-size:13px;
 
 }
+/*====================================
+BERITA
+====================================*/
+
+.berita-card{
+
+border:none;
+
+border-radius:25px;
+
+overflow:hidden;
+
+transition:.4s;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.berita-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.berita-card img{
+
+height:220px;
+
+object-fit:cover;
+
+}
+
+.berita-card .btn{
+
+border-radius:30px;
+
+font-weight:600;
+
+}
