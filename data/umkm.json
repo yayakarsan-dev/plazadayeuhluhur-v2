@@ -1,26 +1,34 @@
 [
-{
-  "nama":"Kopi Arabika Dayeuhluhur",
-  "harga":"Rp45.000",
-  "umkm":"Kopi Jagara",
-  "desa":"Panulisan",
-  "wa":"628123456789",
-  "link":"#",
-  "gambar":"assets/images/umkm/kopi.jpg"
-}
-{
-"nama":"Keripik Pisang",
-"harga":"Rp18.000",
-"desa":"Hanum",
-"kategori":"Makanan",
-"gambar":"assets/images/umkm/keripik.jpg"
-},
+  {
+    "nama": "Kopi Arabika Dayeuhluhur",
+    "harga": "Rp45.000",
+    "umkm": "Kopi Jagara",
+    "desa": "Panulisan",
+    "kategori": "Minuman",
+    "wa": "628123456789",
+    "link": "#",
+    "gambar": "assets/images/umkm/kopi.jpg"
+  },
 
-{
-"nama":"Madu Hutan",
-"harga":"Rp95.000",
-"desa":"Bolang",
-"kategori":"Produk Alam",
-"gambar":"assets/images/umkm/madu.jpg"
-}
+  {
+    "nama": "Keripik Pisang",
+    "harga": "Rp18.000",
+    "umkm": "UMKM Hanum Jaya",
+    "desa": "Hanum",
+    "kategori": "Makanan",
+    "wa": "628123456780",
+    "link": "#",
+    "gambar": "assets/images/umkm/keripik.jpg"
+  },
+
+  {
+    "nama": "Madu Hutan",
+    "harga": "Rp95.000",
+    "umkm": "Bolang Sejahtera",
+    "desa": "Bolang",
+    "kategori": "Produk Alam",
+    "wa": "628123456781",
+    "link": "#",
+    "gambar": "assets/images/umkm/madu.jpg"
+  }
 ]
