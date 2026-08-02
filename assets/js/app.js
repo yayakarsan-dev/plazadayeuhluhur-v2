@@ -1,45 +1,63 @@
-<div class="mb-3">
+fetch('data/desa.json')
+.then(response => response.json())
+.then(data => {
 
-<span class="badge bg-success">
+    let html = "";
 
-${desa.potensi}
+    data.forEach(desa => {
 
-</span>
+        html += `
+        <div class="col-lg-4 col-md-6 mb-4">
 
-</div>
+            <div class="card desa-card h-100">
 
-<ul class="list-unstyled">
+                <img src="${desa.gambar}" class="card-img-top" alt="${desa.nama}">
 
-<li>
+                <div class="card-body">
 
-<i class="fa-solid fa-users text-primary"></i>
+                    <h4>${desa.nama}</h4>
 
-Penduduk : ${desa.penduduk}
+                    <div class="mb-3">
+                        <span class="badge bg-success">
+                            ${desa.potensi}
+                        </span>
+                    </div>
 
-</li>
+                    <ul class="list-unstyled">
 
-<li>
+                        <li>
+                            <i class="fa-solid fa-users text-primary"></i>
+                            Penduduk : ${desa.penduduk}
+                        </li>
 
-<i class="fa-solid fa-store text-warning"></i>
+                        <li>
+                            <i class="fa-solid fa-store text-warning"></i>
+                            UMKM : ${desa.umkm}
+                        </li>
 
-UMKM : ${desa.umkm}
+                        <li>
+                            <i class="fa-solid fa-building text-success"></i>
+                            BUMDes : ${desa.bumdes}
+                        </li>
 
-</li>
+                    </ul>
 
-<li>
+                    <a href="${desa.link}" class="btn btn-primary w-100">
+                        Lihat Profil
+                    </a>
 
-<i class="fa-solid fa-building text-success"></i>
+                </div>
 
-BUMDes : ${desa.bumdes}
+            </div>
 
-</li>
+        </div>
+        `;
 
-</ul>
+    });
 
-<a href="${desa.link}"
+    document.getElementById("desaContainer").innerHTML = html;
 
-class="btn btn-primary w-100">
-
-Lihat Profil
-
-</a>
+})
+.catch(error => {
+    console.error("Gagal membaca data desa:", error);
+});
