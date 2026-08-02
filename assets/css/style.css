@@ -386,3 +386,46 @@ object-fit:cover;
 border-radius:30px;
 
 }
+.umkm-card{
+
+border:none;
+
+border-radius:25px;
+
+overflow:hidden;
+
+transition:.4s;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.umkm-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.umkm-card img{
+
+height:230px;
+
+object-fit:cover;
+
+}
+
+.umkm-card .btn{
+
+border-radius:30px;
+
+font-weight:600;
+
+}
+
+.umkm-card .badge{
+
+font-size:13px;
+
+}

@@ -1,0 +1,25 @@
+[
+{
+"nama":"Kopi Dayeuhluhur",
+"harga":"Rp45.000",
+"desa":"Panulisan",
+"kategori":"Minuman",
+"gambar":"assets/images/umkm/kopi.jpg"
+},
+
+{
+"nama":"Keripik Pisang",
+"harga":"Rp18.000",
+"desa":"Hanum",
+"kategori":"Makanan",
+"gambar":"assets/images/umkm/keripik.jpg"
+},
+
+{
+"nama":"Madu Hutan",
+"harga":"Rp95.000",
+"desa":"Bolang",
+"kategori":"Produk Alam",
+"gambar":"assets/images/umkm/madu.jpg"
+}
+]
