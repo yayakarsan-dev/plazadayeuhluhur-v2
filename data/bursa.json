@@ -1,34 +1,22 @@
 [
   {
-    "judul":"Jual Tanah Strategis",
-    "kategori":"Properti",
+    "judul":"Jual Tanah 500 m²",
+    "kategori":"🏠 Properti",
+    "gambar":"assets/images/bursa/properti.jpg",
     "harga":"Rp175.000.000",
     "desa":"Panulisan",
     "penjual":"Bapak Budi",
     "wa":"628123456789",
-    "gambar":"assets/images/bursa/tanah.jpg",
     "cta":"Hubungi Penjual"
   },
-
   {
-    "judul":"Jual Motor NMAX",
-    "kategori":"Kendaraan",
+    "judul":"Jual Yamaha NMAX",
+    "kategori":"🚗 Kendaraan",
+    "gambar":"assets/images/bursa/kendaraan.jpg",
     "harga":"Rp28.500.000",
     "desa":"Hanum",
     "penjual":"Andi",
     "wa":"628123456780",
-    "gambar":"assets/images/bursa/nmax.jpg",
     "cta":"Tanya Unit"
-  },
-
-  {
-    "judul":"Jual Sapi Limousin",
-    "kategori":"Peternakan",
-    "harga":"Rp22.000.000",
-    "desa":"Bolang",
-    "penjual":"Pak Dedi",
-    "wa":"628123456781",
-    "gambar":"assets/images/bursa/sapi.jpg",
-    "cta":"Hubungi Penjual"
   }
 ]
