@@ -1,12 +1,13 @@
 [
 {
-"nama":"Kopi Dayeuhluhur",
-"harga":"Rp45.000",
-"desa":"Panulisan",
-"kategori":"Minuman",
-"gambar":"assets/images/umkm/kopi.jpg"
-},
-
+  "nama":"Kopi Arabika Dayeuhluhur",
+  "harga":"Rp45.000",
+  "umkm":"Kopi Jagara",
+  "desa":"Panulisan",
+  "wa":"628123456789",
+  "link":"#",
+  "gambar":"assets/images/umkm/kopi.jpg"
+}
 {
 "nama":"Keripik Pisang",
 "harga":"Rp18.000",
