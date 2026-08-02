@@ -774,3 +774,8 @@ transform:translateX(-100%);
 }
 
 }
+#newsFlashContent:hover{
+
+    animation-play-state: paused;
+
+}
