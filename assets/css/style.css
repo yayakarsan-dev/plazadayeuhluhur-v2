@@ -176,3 +176,56 @@ margin-top:10px;
 .desa-card h4{
     font-weight:700;
 }
+/* ==========================
+   TENTANG
+========================== */
+
+#tentang{
+
+padding:100px 0;
+
+background:white;
+
+}
+
+#tentang h2{
+
+font-size:42px;
+
+font-weight:700;
+
+}
+
+#tentang p{
+
+font-size:17px;
+
+line-height:1.8;
+
+color:#666;
+
+}
+
+#tentang img{
+
+border-radius:25px;
+
+transition:.4s;
+
+}
+
+#tentang img:hover{
+
+transform:scale(1.02);
+
+}
+
+.btn-primary{
+
+padding:12px 30px;
+
+border-radius:30px;
+
+font-weight:600;
+
+}
