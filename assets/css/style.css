@@ -95,3 +95,56 @@ padding:14px 34px;
 border-radius:50px;
 
 }
+/* ==========================
+   STATISTIK
+========================== */
+
+#statistik{
+
+margin-top:-70px;
+
+position:relative;
+
+z-index:20;
+
+}
+
+.stat-card{
+
+background:white;
+
+padding:40px 25px;
+
+border-radius:20px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+transition:.4s;
+
+}
+
+.stat-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.stat-card h2{
+
+font-size:42px;
+
+font-weight:700;
+
+color:#0d6efd;
+
+}
+
+.stat-card p{
+
+font-size:18px;
+
+font-weight:500;
+
+margin-top:10px;
+
+}
