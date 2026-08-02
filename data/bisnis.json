@@ -1,28 +1,40 @@
 [
-{
-"nama":"Wahyu Barbershop",
-"kategori":"Barbershop",
-"desa":"Panulisan",
-"deskripsi":"Potong rambut modern dan perawatan rambut pria.",
-"gambar":"assets/images/bisnis/barbershop.jpg",
-"link":"#"
-},
+  {
+    "id": 1,
+    "nama": "Wahyu Barbershop",
+    "kategori": "Barbershop",
+    "desa": "Panulisan",
+    "deskripsi": "Potong rambut modern, hair coloring dan hair spa.",
+    "gambar": "assets/images/bisnis/barbershop.jpg",
+    "wa": "628123456789",
+    "cta": "✂️ Tanya Jadwal",
+    "pesan": "Halo Wahyu Barbershop, saya ingin menanyakan jadwal potong rambut yang masih tersedia.",
+    "verified": true
+  },
 
-{
-"nama":"ZH Wedding",
-"kategori":"Wedding Organizer",
-"desa":"Dayeuhluhur",
-"deskripsi":"Dekorasi, MUA, dokumentasi dan wedding planner.",
-"gambar":"assets/images/bisnis/wedding.jpg",
-"link":"#"
-},
+  {
+    "id": 2,
+    "nama": "Aura Wedding Organizer",
+    "kategori": "Wedding Organizer",
+    "desa": "Dayeuhluhur",
+    "deskripsi": "Dekorasi, MUA, Photography dan Wedding Planner.",
+    "gambar": "assets/images/bisnis/wedding.jpg",
+    "wa": "628123456780",
+    "cta": "💍 Hubungi WO",
+    "pesan": "Halo Aura Wedding Organizer, saya ingin mengetahui informasi paket wedding.",
+    "verified": true
+  },
 
-{
-"nama":"Berkah Rental Mobil",
-"kategori":"Rental Mobil",
-"desa":"Hanum",
-"deskripsi":"Sewa mobil harian dan wisata.",
-"gambar":"assets/images/bisnis/rental.jpg",
-"link":"#"
-}
+  {
+    "id": 3,
+    "nama": "Berkah Rental Mobil",
+    "kategori": "Rental Mobil",
+    "desa": "Hanum",
+    "deskripsi": "Rental mobil harian, mingguan dan wisata.",
+    "gambar": "assets/images/bisnis/rental.jpg",
+    "wa": "628123456781",
+    "cta": "🚗 Tanya Harga",
+    "pesan": "Halo Berkah Rental Mobil, saya ingin mengetahui harga sewa mobil yang tersedia.",
+    "verified": true
+  }
 ]

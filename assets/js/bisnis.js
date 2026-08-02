@@ -1,63 +1,76 @@
 fetch('data/bisnis.json')
+.then(res => res.json())
+.then(data => {
 
-.then(res=>res.json())
+    let html = "";
 
-.then(data=>{
+    data.forEach(item => {
 
-let html="";
+        html += `
 
-data.forEach(item=>{
+        <div class="col-lg-4 col-md-6 mb-4">
 
-html+=`
+            <div class="card bisnis-card h-100 shadow-sm">
 
-<div class="col-lg-4 col-md-6">
+                <img src="${item.gambar}" class="card-img-top" alt="${item.nama}">
 
-<div class="card bisnis-card shadow-sm h-100">
+                <div class="card-body">
 
-<img src="${item.gambar}" class="card-img-top">
+                    <span class="badge bg-primary mb-2">
+                        ${item.kategori}
+                    </span>
 
-<div class="card-body">
+                    <h5 class="fw-bold">
+                        ${item.nama}
+                    </h5>
 
-<span class="badge bg-primary mb-2">
+                    <p class="text-muted mb-2">
+                        <i class="fa-solid fa-location-dot text-danger"></i>
+                        ${item.desa}
+                    </p>
 
-${item.kategori}
+                    <p>
+                        ${item.deskripsi}
+                    </p>
 
-</span>
+                    ${
+                        item.verified ?
+                        `
+                        <div class="mb-3">
 
-<h5>${item.nama}</h5>
+                            <span class="badge bg-success">
 
-<p class="text-muted">
+                                <i class="fa-solid fa-circle-check"></i>
 
-<i class="fa-solid fa-location-dot"></i>
+                                Verified by PLAZA DAYEUHLUHUR
 
-${item.desa}
+                            </span>
 
-</p>
+                        </div>
+                        `
+                        : ""
+                    }
 
-<p>
+                    <a
+                        href="https://wa.me/${item.wa}?text=${encodeURIComponent(item.pesan)}"
+                        target="_blank"
+                        class="btn btn-success w-100">
 
-${item.deskripsi}
+                        ${item.cta}
 
-</p>
+                    </a>
 
-<a href="${item.link}"
+                </div>
 
-class="btn btn-primary w-100">
+            </div>
 
-Lihat Profil
+        </div>
 
-</a>
+        `;
 
-</div>
+    });
 
-</div>
+    document.getElementById("bisnisContainer").innerHTML = html;
 
-</div>
-
-`;
-
-});
-
-document.getElementById("bisnisContainer").innerHTML=html;
-
-});
+})
+.catch(error => console.error(error));

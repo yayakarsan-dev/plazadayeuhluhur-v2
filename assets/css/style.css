@@ -842,3 +842,42 @@ transform:translateY(-8px);
 box-shadow:0 20px 40px rgba(0,0,0,.15);
 
 }
+/*=========================
+DIREKTORI BISNIS
+=========================*/
+
+.bisnis-card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+}
+
+.bisnis-card img{
+
+    height:230px;
+
+    object-fit:cover;
+
+}
+
+.bisnis-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.bisnis-card .btn{
+
+    border-radius:12px;
+
+    font-weight:600;
+
+}
