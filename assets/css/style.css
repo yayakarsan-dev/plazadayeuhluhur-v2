@@ -572,3 +572,28 @@ AGENDA
     margin-bottom:20px;
 
 }
+/*====================================
+PARTNER
+====================================*/
+
+.partner-logo{
+
+    max-height:80px;
+
+    opacity:.8;
+
+    transition:.3s;
+
+    filter:grayscale(100%);
+
+}
+
+.partner-logo:hover{
+
+    opacity:1;
+
+    filter:none;
+
+    transform:scale(1.08);
+
+}
