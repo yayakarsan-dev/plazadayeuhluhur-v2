@@ -351,3 +351,38 @@ padding:14px 35px;
 font-weight:600;
 
 }
+.bumdes-card{
+
+border:none;
+
+border-radius:25px;
+
+overflow:hidden;
+
+transition:.4s;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.bumdes-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 20px 35px rgba(0,0,0,.15);
+
+}
+
+.bumdes-card img{
+
+height:220px;
+
+object-fit:cover;
+
+}
+
+.bumdes-card .btn{
+
+border-radius:30px;
+
+}

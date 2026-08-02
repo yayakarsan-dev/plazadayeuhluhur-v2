@@ -1,0 +1,20 @@
+[
+    {
+        "nama":"BUMDes Jagara",
+        "desa":"Panulisan",
+        "usaha":"Pertanian, Air Bersih",
+        "gambar":"assets/images/bumdes/jagara.jpg"
+    },
+    {
+        "nama":"BUMDes Bakti Hanum",
+        "desa":"Hanum",
+        "usaha":"Wisata & Perdagangan",
+        "gambar":"assets/images/bumdes/hanum.jpg"
+    },
+    {
+        "nama":"BUMDes Bolang Sejahtera",
+        "desa":"Bolang",
+        "usaha":"Perdagangan",
+        "gambar":"assets/images/bumdes/bolang.jpg"
+    }
+]
