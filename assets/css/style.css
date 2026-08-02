@@ -811,3 +811,34 @@ transform:translateX(-100%);
     animation-play-state: paused;
 
 }
+/*==========================
+DIREKTORI BISNIS
+==========================*/
+
+.bisnis-card{
+
+transition:.35s;
+
+border:none;
+
+border-radius:18px;
+
+overflow:hidden;
+
+}
+
+.bisnis-card img{
+
+height:220px;
+
+object-fit:cover;
+
+}
+
+.bisnis-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}

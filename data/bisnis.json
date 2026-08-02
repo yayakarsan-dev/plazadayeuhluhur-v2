@@ -1,0 +1,28 @@
+[
+{
+"nama":"Wahyu Barbershop",
+"kategori":"Barbershop",
+"desa":"Panulisan",
+"deskripsi":"Potong rambut modern dan perawatan rambut pria.",
+"gambar":"assets/images/bisnis/barbershop.jpg",
+"link":"#"
+},
+
+{
+"nama":"Aura Wedding Organizer",
+"kategori":"Wedding Organizer",
+"desa":"Dayeuhluhur",
+"deskripsi":"Dekorasi, MUA, dokumentasi dan wedding planner.",
+"gambar":"assets/images/bisnis/wedding.jpg",
+"link":"#"
+},
+
+{
+"nama":"Berkah Rental Mobil",
+"kategori":"Rental Mobil",
+"desa":"Hanum",
+"deskripsi":"Sewa mobil harian dan wisata.",
+"gambar":"assets/images/bisnis/rental.jpg",
+"link":"#"
+}
+]
