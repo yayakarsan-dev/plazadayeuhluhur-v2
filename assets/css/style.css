@@ -881,3 +881,62 @@ DIREKTORI BISNIS
     font-weight:600;
 
 }
+/*==============================
+ VERIFIED ICON
+==============================*/
+
+.verified-icon{
+
+    color:#0d6efd;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.verified-icon:hover{
+
+    color:#198754;
+
+    transform:scale(1.2);
+
+}
+
+.bisnis-card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+}
+
+.bisnis-card img{
+
+    height:220px;
+
+    object-fit:cover;
+
+}
+
+.bisnis-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.bisnis-card .btn{
+
+    border-radius:12px;
+
+    font-weight:600;
+
+}
