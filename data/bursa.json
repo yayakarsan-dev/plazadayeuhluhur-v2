@@ -1,0 +1,34 @@
+[
+  {
+    "judul":"Jual Tanah Strategis",
+    "kategori":"Properti",
+    "harga":"Rp175.000.000",
+    "desa":"Panulisan",
+    "penjual":"Bapak Budi",
+    "wa":"628123456789",
+    "gambar":"assets/images/bursa/tanah.jpg",
+    "cta":"Hubungi Penjual"
+  },
+
+  {
+    "judul":"Jual Motor NMAX",
+    "kategori":"Kendaraan",
+    "harga":"Rp28.500.000",
+    "desa":"Hanum",
+    "penjual":"Andi",
+    "wa":"628123456780",
+    "gambar":"assets/images/bursa/nmax.jpg",
+    "cta":"Tanya Unit"
+  },
+
+  {
+    "judul":"Jual Sapi Limousin",
+    "kategori":"Peternakan",
+    "harga":"Rp22.000.000",
+    "desa":"Bolang",
+    "penjual":"Pak Dedi",
+    "wa":"628123456781",
+    "gambar":"assets/images/bursa/sapi.jpg",
+    "cta":"Hubungi Penjual"
+  }
+]
