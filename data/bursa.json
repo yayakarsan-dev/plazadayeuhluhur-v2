@@ -9,6 +9,7 @@
     "wa":"628123456789",
     "cta":"Hubungi Penjual"
   },
+
   {
     "judul":"Jual Yamaha NMAX",
     "kategori":"🚗 Kendaraan",
@@ -18,10 +19,11 @@
     "penjual":"Andi",
     "wa":"628123456780",
     "cta":"Tanya Unit"
-  }
-    {
+  },
+
+  {
     "judul":"Jual Mie Baso",
-    "kategori":"Kuliner",
+    "kategori":"🍜 Kuliner",
     "gambar":"assets/images/bursa/kuliner.jpg",
     "harga":"Rp15.000",
     "desa":"Panulisan",
@@ -29,4 +31,5 @@
     "wa":"628123456780",
     "cta":"Hubungi Penjual"
   }
-]}
+
+]
