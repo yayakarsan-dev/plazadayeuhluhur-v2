@@ -19,4 +19,14 @@
     "wa":"628123456780",
     "cta":"Tanya Unit"
   }
+    {
+    "judul":"Jual Mie Baso",
+    "kategori":"Kuliner",
+    "gambar":"assets/images/bursa/kuliner.jpg",
+    "harga":"Rp15.000",
+    "desa":"Panulisan",
+    "penjual":"Mang Enceng",
+    "wa":"628123456780",
+    "cta":"Hubungi Penjual"
+  }
 ]
