@@ -597,3 +597,84 @@ PARTNER
     transform:scale(1.08);
 
 }
+/*====================================
+FOOTER
+====================================*/
+
+.footer{
+
+background:#0f172a;
+
+color:#fff;
+
+padding:70px 0 30px;
+
+}
+
+.footer h5{
+
+margin-bottom:20px;
+
+font-weight:700;
+
+}
+
+.footer a{
+
+color:#ddd;
+
+text-decoration:none;
+
+display:block;
+
+margin-bottom:10px;
+
+transition:.3s;
+
+}
+
+.footer a:hover{
+
+color:#0dcaf0;
+
+padding-left:5px;
+
+}
+
+.social-icons a{
+
+display:inline-flex;
+
+width:45px;
+
+height:45px;
+
+align-items:center;
+
+justify-content:center;
+
+background:#1e293b;
+
+border-radius:50%;
+
+margin-right:10px;
+
+font-size:20px;
+
+}
+
+.social-icons a:hover{
+
+background:#0dcaf0;
+
+color:#fff;
+
+}
+
+.footer hr{
+
+border-color:#334155;
+
+margin:40px 0 20px;
+
+}
