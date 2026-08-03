@@ -12,29 +12,45 @@ fetch('data/desa.json')
 
             <div class="card desa-card shadow h-100">
 
-                <img src="${item.gambar}" class="card-img-top">
+                <img src="${item.gambar}" class="card-img-top" alt="${item.nama}">
 
                 <div class="card-body">
 
-                    <span class="badge bg-success badge-status">
+                    <span class="badge bg-success badge-status mb-2">
 
                         ${item.status}
 
                     </span>
 
-                    <h4 class="mt-3">
+                    <h4 class="fw-bold">
 
                         ${item.nama}
 
+                        ${
+                            item.verified
+                            ?
+                            `<i class="fa-solid fa-circle-check text-primary"
+                            title="Verified by PLAZA DAYEUHLUHUR"></i>`
+                            :
+                            ""
+                        }
+
                     </h4>
 
-                    <p class="text-muted">
+                    <p class="text-success fw-semibold">
 
-                        ${item.deskripsi}
+                        ${item.potensi}
 
                     </p>
 
-                    <div class="row">
+                    <p class="small text-muted">
+
+                        🎁 Produk Unggulan :
+                        <b>${item.produk}</b>
+
+                    </p>
+
+                    <div class="row mt-3">
 
                         <div class="col-6">
 
@@ -64,7 +80,7 @@ fetch('data/desa.json')
 
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-6 mt-2">
 
                             <div class="stat-box">
 
@@ -78,7 +94,7 @@ fetch('data/desa.json')
 
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-6 mt-2">
 
                             <div class="stat-box">
 
@@ -98,7 +114,7 @@ fetch('data/desa.json')
 
                        class="btn btn-success w-100 mt-4">
 
-                        Lihat Profil
+                       Jelajahi Desa →
 
                     </a>
 
@@ -114,5 +130,35 @@ fetch('data/desa.json')
 
     document.getElementById("desaContainer").innerHTML = html;
 
+    // ===========================
+    // LIVE SEARCH
+    // ===========================
+
+    const search = document.getElementById("searchDesa");
+
+    search.addEventListener("keyup", function(){
+
+        let keyword = this.value.toLowerCase();
+
+        let cards = document.querySelectorAll(".desa-card");
+
+        cards.forEach(card=>{
+
+            let text = card.innerText.toLowerCase();
+
+            if(text.includes(keyword)){
+
+                card.parentElement.style.display="block";
+
+            }else{
+
+                card.parentElement.style.display="none";
+
+            }
+
+        });
+
+    });
+
 })
-.catch(error => console.log(error));
+.catch(error => console.error(error));
