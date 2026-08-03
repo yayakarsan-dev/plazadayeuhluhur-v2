@@ -1,4 +1,4 @@
-fetch('../../data/desa.json')
+fetch('data/desa.json')
 .then(response => response.json())
 .then(data => {
 
@@ -10,66 +10,97 @@ fetch('../../data/desa.json')
 
         <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card h-100 desa-card">
+            <div class="card desa-card shadow h-100">
 
-                <img src="${item.gambar}"
-                     class="card-img-top"
-                     alt="${item.nama}">
+                <img src="${item.gambar}" class="card-img-top">
 
                 <div class="card-body">
 
-                    <span class="badge bg-success mb-2">
+                    <span class="badge bg-success badge-status">
+
                         ${item.status}
+
                     </span>
 
-                    <h4 class="fw-bold">
+                    <h4 class="mt-3">
+
                         ${item.nama}
+
                     </h4>
 
                     <p class="text-muted">
+
                         ${item.deskripsi}
+
                     </p>
 
-                    <hr>
+                    <div class="row">
 
-                    <div class="row text-center">
+                        <div class="col-6">
 
-                        <div class="col-6 mb-3">
-                            👥<br>
-                            <b>${item.penduduk}</b><br>
-                            Penduduk
-                        </div>
+                            <div class="stat-box">
 
-                        <div class="col-6 mb-3">
-                            🛍<br>
-                            <b>${item.umkm}</b><br>
-                            UMKM
+                                👥
+
+                                <b>${item.penduduk}</b>
+
+                                Penduduk
+
+                            </div>
+
                         </div>
 
                         <div class="col-6">
-                            🏢<br>
-                            <b>${item.bumdes}</b><br>
-                            BUMDes
+
+                            <div class="stat-box">
+
+                                🛍
+
+                                <b>${item.umkm}</b>
+
+                                UMKM
+
+                            </div>
+
                         </div>
 
                         <div class="col-6">
-                            🌄<br>
-                            <b>${item.wisata}</b><br>
-                            Wisata
+
+                            <div class="stat-box">
+
+                                🏢
+
+                                <b>${item.bumdes}</b>
+
+                                BUMDes
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="stat-box">
+
+                                🌄
+
+                                <b>${item.wisata}</b>
+
+                                Wisata
+
+                            </div>
+
                         </div>
 
                     </div>
 
-                    <div class="d-grid mt-4">
+                    <a href="${item.link}"
 
-                        <a href="${item.link}"
-                           class="btn btn-success">
+                       class="btn btn-success w-100 mt-4">
 
-                           Lihat Profil Desa
+                        Lihat Profil
 
-                        </a>
-
-                    </div>
+                    </a>
 
                 </div>
 
