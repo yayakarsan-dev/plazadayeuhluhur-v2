@@ -1,0 +1,23 @@
+[
+  {
+    "judul": "Festival UMKM Dayeuhluhur",
+    "tanggal": "15 Agustus 2026",
+    "kategori": "UMKM",
+    "ringkasan": "Festival UMKM diikuti oleh pelaku usaha dari 14 desa di Kecamatan Dayeuhluhur.",
+    "gambar": "assets/images/berita/festival.jpg"
+  },
+  {
+    "judul": "Pelatihan Digital Marketing",
+    "tanggal": "20 Agustus 2026",
+    "kategori": "Pelatihan",
+    "ringkasan": "Pelaku UMKM mendapatkan pelatihan pemasaran digital.",
+    "gambar": "assets/images/berita/pelatihan.jpg"
+  },
+  {
+    "judul": "Gotong Royong Desa",
+    "tanggal": "25 Agustus 2026",
+    "kategori": "Desa",
+    "ringkasan": "Masyarakat bergotong royong membersihkan lingkungan desa.",
+    "gambar": "assets/images/berita/gotongroyong.jpg"
+  }
+]
