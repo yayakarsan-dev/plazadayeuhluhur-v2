@@ -1,138 +1,118 @@
 fetch('../data/bumdes.json')
-<<<<<<< HEAD
-
 .then(response => response.json())
-
 .then(data => {
 
-let html = "";
-=======
-.then(res => res.json())
-.then(data => {
+    let html = "";
 
-let html = "";
+    data.forEach(item => {
 
-data.forEach(item => {
+        html += `
 
-html += `
->>>>>>> c43d0d9 (sprint sesi berita)
+        <div class="col-lg-4 col-md-6 mb-4">
 
-data.forEach(item => {
+            <div class="card shadow h-100 desa-card">
 
-html += `
+                <img src="../${item.gambar}" class="card-img-top" alt="${item.nama}">
 
-<<<<<<< HEAD
-<div class="col-lg-4 col-md-6 mb-4">
+                <div class="card-body">
 
-<div class="card shadow h-100 desa-card">
+                    <span class="badge bg-success">
 
-=======
->>>>>>> c43d0d9 (sprint sesi berita)
-<img src="../${item.gambar}" class="card-img-top">
+                        ${item.status}
 
-<div class="card-body">
+                    </span>
 
-<span class="badge bg-success">
+                    <h4 class="mt-3">
 
-${item.status}
+                        ${item.nama}
 
-</span>
+                    </h4>
 
-<h4 class="mt-3">
+                    <p class="text-muted">
 
-${item.nama}
+                        📍 ${item.desa}
 
-</h4>
+                    </p>
 
-<p class="text-muted">
+                    <div class="row">
 
-📍 ${item.desa}
+                        <div class="col-6">
 
-</p>
+                            <div class="stat-box">
 
-<div class="row">
+                                🏢
 
-<div class="col-6">
+                                <b>${item.unit}</b>
 
-<div class="stat-box">
+                                Unit Usaha
 
-🏢
+                            </div>
 
-<b>${item.unit}</b>
+                        </div>
 
-Unit Usaha
+                        <div class="col-6">
 
-</div>
+                            <div class="stat-box">
 
-</div>
+                                🛍
 
-<div class="col-6">
+                                <b>${item.produk}</b>
 
-<div class="stat-box">
+                                Produk
 
-🛍
+                            </div>
 
-<b>${item.produk}</b>
+                        </div>
 
-Produk
+                        <div class="col-6">
 
-</div>
+                            <div class="stat-box">
 
-</div>
+                                👤
 
-<div class="col-6">
+                                <b>${item.direktur}</b>
 
-<div class="stat-box">
+                                Direktur
 
-👤
+                            </div>
 
-<b>${item.direktur}</b>
+                        </div>
 
-Direktur
+                        <div class="col-6">
 
-</div>
+                            <div class="stat-box">
 
-</div>
+                                ✅
 
-<div class="col-6">
+                                <b>${item.status}</b>
 
-<div class="stat-box">
+                                Status
 
-✅
+                            </div>
 
-<b>${item.status}</b>
+                        </div>
 
-Status
+                    </div>
 
-</div>
+                    <a href="${item.link}"
 
-</div>
+                       class="btn btn-success w-100 mt-4">
 
-</div>
+                        Lihat Profil
 
-<a href="${item.link}"
+                    </a>
 
-class="btn btn-success w-100 mt-4">
+                </div>
 
-Lihat Profil
+            </div>
 
-</a>
+        </div>
 
-</div>
+        `;
 
-</div>
+    });
 
-</div>
-
-`;
-
-});
-
-document.getElementById("bumdesContainer").innerHTML = html;
+    document.getElementById("bumdesContainer").innerHTML = html;
 
 })
-<<<<<<< HEAD
-
-=======
->>>>>>> c43d0d9 (sprint sesi berita)
 .catch(error => console.log(error));
