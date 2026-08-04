@@ -1,32 +1,46 @@
 [
   {
-    "nama": "Kopi Arabika Dayeuhluhur",
-    "harga": "Rp45.000",
-    "umkm": "Kopi Jagara",
+    "id": 1,
+    "nama": "WAHYU Barbershop",
+    "kategori": "Jasa",
+    "desa": "Dayeuhluhur",
+    "produk": "Potong Rambut Pria",
+    "rating": "4.9",
+    "status": "Buka",
+    "gambar": "assets/images/umkm/default.jpg",
+    "link": "#"
+  },
+  {
+    "id": 2,
+    "nama": "GINONG Kuliner",
+    "kategori": "Kuliner",
     "desa": "Panulisan",
-    "kategori": "Minuman",
-    "wa": "628123456789",
-    "link": "#",
-    "gambar": "assets/images/umkm/kopi.jpg"
+    "produk": "Makanan & Minuman",
+    "rating": "4.8",
+    "status": "Buka",
+    "gambar": "assets/images/umkm/default.jpg",
+    "link": "#"
   },
   {
-    "nama": "Keripik Pisang",
-    "harga": "Rp18.000",
-    "umkm": "UMKM Hanum Jaya",
-    "desa": "Hanum",
-    "kategori": "Makanan",
-    "wa": "628123456780",
-    "link": "#",
-    "gambar": "assets/images/umkm/keripik.jpg"
+    "id": 3,
+    "nama": "Berkah Material",
+    "kategori": "Toko Bangunan",
+    "desa": "Panulisan",
+    "produk": "Material Bangunan",
+    "rating": "4.7",
+    "status": "Buka",
+    "gambar": "assets/images/umkm/default.jpg",
+    "link": "#"
   },
   {
-    "nama": "Madu Hutan",
-    "harga": "Rp95.000",
-    "umkm": "Bolang Sejahtera",
-    "desa": "Bolang",
-    "kategori": "Produk Alam",
-    "wa": "628123456781",
-    "link": "#",
-    "gambar": "assets/images/umkm/madu.jpg"
+    "id": 4,
+    "nama": "Toko Sumber Rejeki",
+    "kategori": "Sembako",
+    "desa": "Dayeuhluhur",
+    "produk": "Kebutuhan Harian",
+    "rating": "4.8",
+    "status": "Buka",
+    "gambar": "assets/images/umkm/default.jpg",
+    "link": "#"
   }
 ]

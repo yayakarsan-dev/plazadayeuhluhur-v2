@@ -1,73 +1,87 @@
-fetch('data/umkm.json')
-.then(res => res.json())
+fetch('../data/umkm.json')
+
+.then(response => response.json())
+
 .then(data => {
 
-    let html = "";
+let html="";
 
-    data.forEach(item => {
+data.forEach(item=>{
 
-        html += `
-        <div class="col-lg-4 col-md-6 mb-4">
+html+=`
 
-            <div class="card umkm-card h-100 shadow-sm">
+<div class="col-lg-3 col-md-6 mb-4">
 
-                <img src="${item.gambar}" class="card-img-top" alt="${item.nama}">
+<div class="card h-100 shadow umkm-card">
 
-                <div class="card-body">
+<img src="../${item.gambar}" class="card-img-top" alt="${item.nama}">
 
-                    <span class="badge bg-success mb-2">
-                        ${item.kategori}
-                    </span>
+<div class="card-body">
 
-                    <h5 class="fw-bold">
-                        ${item.nama}
-                    </h5>
+<span class="badge bg-success">
 
-                    <h4 class="text-primary mb-3">
-                        ${item.harga}
-                    </h4>
+${item.status}
 
-                    <p class="mb-1">
-                        <i class="fa-solid fa-store text-success"></i>
-                        <strong>UMKM :</strong> ${item.umkm}
-                    </p>
+</span>
 
-                    <p class="text-muted">
-                        <i class="fa-solid fa-location-dot text-danger"></i>
-                        ${item.desa}
-                    </p>
+<h5 class="mt-3 fw-bold">
 
-                    <div class="d-grid gap-2 mt-3">
+${item.nama}
 
-                        <a href="${item.link}"
-                           class="btn btn-outline-primary">
+</h5>
 
-                           <i class="fa-solid fa-circle-info"></i>
-                           Detail Produk
+<p class="text-muted mb-2">
 
-                        </a>
+<i class="fa-solid fa-layer-group"></i>
 
-                        <a href="https://wa.me/${item.wa}?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(item.nama)}"
-                           target="_blank"
-                           class="btn btn-success">
+${item.kategori}
 
-                           <i class="fa-brands fa-whatsapp"></i>
-                           Beli via WA
+</p>
 
-                        </a>
+<p>
 
-                    </div>
+<i class="fa-solid fa-location-dot text-danger"></i>
 
-                </div>
+${item.desa}
 
-            </div>
+</p>
 
-        </div>
-        `;
+<div class="d-flex justify-content-between">
 
-    });
+<span>
 
-    document.getElementById("umkmContainer").innerHTML = html;
+⭐ ${item.rating}
+
+</span>
+
+<span>
+
+${item.produk}
+
+</span>
+
+</div>
+
+<a href="${item.link}"
+
+class="btn btn-success w-100 mt-3">
+
+Lihat Toko
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("umkmContainer").innerHTML=html;
 
 })
-.catch(error => console.error(error));
+
+.catch(error=>console.log(error));
