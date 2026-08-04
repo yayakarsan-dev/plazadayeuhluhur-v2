@@ -1,7 +1,13 @@
 fetch('../data/bumdes.json')
+<<<<<<< HEAD
 
 .then(response => response.json())
 
+.then(data => {
+
+let html = "";
+=======
+.then(res => res.json())
 .then(data => {
 
 let html = "";
@@ -9,11 +15,19 @@ let html = "";
 data.forEach(item => {
 
 html += `
+>>>>>>> c43d0d9 (sprint sesi berita)
 
+data.forEach(item => {
+
+html += `
+
+<<<<<<< HEAD
 <div class="col-lg-4 col-md-6 mb-4">
 
 <div class="card shadow h-100 desa-card">
 
+=======
+>>>>>>> c43d0d9 (sprint sesi berita)
 <img src="../${item.gambar}" class="card-img-top">
 
 <div class="card-body">
@@ -117,5 +131,8 @@ Lihat Profil
 document.getElementById("bumdesContainer").innerHTML = html;
 
 })
+<<<<<<< HEAD
 
+=======
+>>>>>>> c43d0d9 (sprint sesi berita)
 .catch(error => console.log(error));
