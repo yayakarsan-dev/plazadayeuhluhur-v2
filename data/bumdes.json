@@ -1,0 +1,22 @@
+[
+  {
+    "nama": "BUMDes Jagara",
+    "desa": "Panulisan",
+    "status": "Aktif",
+    "unit": "4",
+    "produk": "186",
+    "direktur": "Yaya Karsan",
+    "gambar": "assets/images/bumdes/default.jpg",
+    "link": "#"
+  },
+  {
+    "nama": "BUMDes Hanum",
+    "desa": "Hanum",
+    "status": "Segera Hadir",
+    "unit": "-",
+    "produk": "-",
+    "direktur": "-",
+    "gambar": "assets/images/bumdes/default.jpg",
+    "link": "#"
+  }
+]
