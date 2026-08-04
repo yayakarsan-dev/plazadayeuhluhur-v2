@@ -1018,20 +1018,33 @@ text-align:center;
 
 }
 
-.stat-box b{
+.stat-box{
 
-font-size:22px;
+    background:#f8f9fa;
 
-display:block;
+    border-radius:12px;
+
+    padding:10px;
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+    transition:0.3s;
 
 }
 
-.badge-status{
+.stat-box:hover{
 
-font-size:14px;
+    background:#198754;
 
-padding:8px 15px;
+    color:white;
 
-border-radius:30px;
+}
+.stat-box i{
+
+    font-size:15px;
+
+    margin-bottom:5px;
 
 }
