@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
 /* =====================================================
    LOAD SEMUA DATA
 ===================================================== */
@@ -46,65 +45,101 @@ async function loadDashboardData() {
     };
 
 
-    try {
-
-        const results = await Promise.all(
-
-            Object.entries(files).map(
-                async ([key, url]) => {
-
-                    const response = await fetch(url);
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            `Gagal mengambil ${url}`
-                        );
-
-                    }
-
-                    const data = await response.json();
-
-                    return [key, data];
-
-                }
-            )
-
-        );
+    const data = {};
 
 
-        const data = Object.fromEntries(results);
+    /* =============================================
+       LOAD DATA SATU PER SATU
+    ============================================= */
+
+    for (const [key, url] of Object.entries(files)) {
+
+        try {
+
+            const response =
+                await fetch(url);
 
 
-        console.log("Data dashboard berhasil dimuat:", data);
+            if (!response.ok) {
+
+                throw new Error(
+                    `HTTP ${response.status}`
+                );
+
+            }
 
 
-        /* Statistik */
+            const json =
+                await response.json();
 
-        updateStatistics(data);
+
+            /* Pastikan JSON berbentuk array */
+
+            if (!Array.isArray(json)) {
+
+                throw new Error(
+                    "Format JSON bukan array"
+                );
+
+            }
 
 
-        /* Aktivitas */
+            data[key] = json;
 
-        updateActivities(data);
 
+            console.log(
+                `✓ ${key}: ${json.length} data`
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                `✗ Gagal memuat ${key}:`,
+                error
+            );
+
+
+            /*
+               Kalau gagal, gunakan array kosong
+               agar statistik lain tetap berjalan.
+            */
+
+            data[key] = [];
+
+        }
 
     }
 
-    catch (error) {
 
-        console.error(
-            "Gagal memuat data dashboard:",
-            error
-        );
+    console.log(
+        "Data dashboard:",
+        data
+    );
 
-        showDataError();
 
-    }
+    /* =============================================
+       UPDATE STATISTIK
+    ============================================= */
+
+    updateStatistics(data);
+
+
+    /* =============================================
+       UPDATE AKTIVITAS
+    ============================================= */
+
+    updateActivities(data);
+
+
+    /* =============================================
+       UPDATE STATUS DATA
+    ============================================= */
+
+    updateSystemStatus(data);
 
 }
-
-
 /* =====================================================
    UPDATE STATISTIK
 ===================================================== */
