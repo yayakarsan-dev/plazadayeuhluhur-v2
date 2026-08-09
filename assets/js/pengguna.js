@@ -1,593 +1,940 @@
 /* =====================================================
-PLAZA DAYEUHLUHUR
-USER MANAGEMENT V1
+   PLAZA DAYEUHLUHUR
+   USER MANAGEMENT DATA ENGINE V1
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-```
-console.log("====================================");
-console.log("PLAZA DAYEUHLUHUR");
-console.log("User Management V1 aktif");
-console.log("====================================");
+    console.log("====================================");
+    console.log("PLAZA DAYEUHLUHUR");
+    console.log("User Management V1 aktif");
+    console.log("====================================");
 
-loadUsers();
-
-setupMobileMenu();
-
-setupLogout();
-
-setupSearch();
-```
+    loadAdminProfile();
+    loadUsers();
+    setupSearch();
+    setupMobileMenu();
+    setupLogout();
 
 });
 
+
 /* =====================================================
-LOAD USERS
+   DATABASE PENGGUNA
+===================================================== */
+
+let usersData = [];
+
+
+/* =====================================================
+   LOAD DATA PENGGUNA
 ===================================================== */
 
 async function loadUsers() {
 
-```
-const tableBody =
-    document.getElementById("userTableBody");
+    const url = "data/pengguna.json";
 
-if (!tableBody) return;
+    try {
 
+        console.log("Membaca database pengguna...");
 
-try {
+        const response = await fetch(
+            url,
+            {
+                cache: "no-store"
+            }
+        );
 
-    const response = await fetch(
-        "data/users.json",
-        {
-            cache: "no-store"
+        if (!response.ok) {
+
+            throw new Error(
+                `HTTP ${response.status} - ${response.statusText}`
+            );
+
         }
-    );
+
+        const text = await response.text();
+
+        if (!text.trim()) {
+
+            throw new Error(
+                "File pengguna.json kosong"
+            );
+
+        }
+
+        let json;
+
+        try {
+
+            json = JSON.parse(text);
+
+        } catch (error) {
+
+            console.error(
+                "Isi pengguna.json:",
+                text.substring(0, 300)
+            );
+
+            throw new Error(
+                "Format pengguna.json tidak valid"
+            );
+
+        }
 
 
-    if (!response.ok) {
+        /* =============================================
+           NORMALISASI DATA
+        ============================================= */
 
-        throw new Error(
-            `HTTP ${response.status}`
+        if (Array.isArray(json)) {
+
+            usersData = json;
+
+        }
+
+        else if (
+            json &&
+            Array.isArray(json.data)
+        ) {
+
+            usersData = json.data;
+
+        }
+
+        else if (
+            json &&
+            Array.isArray(json.items)
+        ) {
+
+            usersData = json.items;
+
+        }
+
+        else {
+
+            throw new Error(
+                "Format data pengguna tidak dikenali"
+            );
+
+        }
+
+
+        console.log(
+            `✓ Berhasil membaca ${usersData.length} pengguna`
         );
+
+
+        updateUserStatistics(usersData);
+
+        renderUsers(usersData);
 
     }
 
+    catch (error) {
 
-    const text =
-        await response.text();
-
-
-    if (!text.trim()) {
-
-        throw new Error(
-            "users.json kosong"
+        console.error(
+            "✗ Gagal memuat pengguna:",
+            error
         );
+
+        showUserError();
 
     }
 
-
-    const users =
-        JSON.parse(text);
-
-
-    if (!Array.isArray(users)) {
-
-        throw new Error(
-            "Format users.json harus berupa array"
-        );
-
-    }
-
-
-    console.log(
-        `✓ Users: ${users.length} data`
-    );
-
-
-    updateUserStatistics(users);
-
-    renderUsers(users);
-
-
-    window.plazaUsers = users;
-
-
 }
 
-catch (error) {
-
-    console.error(
-        "✗ Gagal membaca users.json:",
-        error
-    );
-
-
-    tableBody.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="7"
-                class="text-center text-danger py-4">
-
-                <i class="fa-solid fa-triangle-exclamation"></i>
-
-                Gagal membaca data pengguna.
-
-            </td>
-
-        </tr>
-
-    `;
-
-}
-```
-
-}
 
 /* =====================================================
-STATISTIK
+   STATISTIK PENGGUNA
 ===================================================== */
 
 function updateUserStatistics(users) {
 
-```
-setValue(
-    "totalUsers",
-    users.length
-);
+    const total =
+        users.length;
 
 
-setValue(
-    "totalAdmin",
-    users.filter(
-        user =>
-            user.role === "Administrator"
-    ).length
-);
+    const admin =
+        users.filter(
+            user =>
+                String(user.role || "")
+                    .toLowerCase() === "admin"
+        ).length;
 
 
-setValue(
-    "totalUmkm",
-    users.filter(
-        user =>
-            user.role === "Pelaku UMKM"
-    ).length
-);
+    const umkm =
+        users.filter(
+            user =>
+                String(user.role || "")
+                    .toLowerCase() === "umkm"
+        ).length;
 
 
-setValue(
-    "totalDesa",
-    users.filter(
-        user =>
-            user.role === "Admin Desa"
-    ).length
-);
-```
+    const desa =
+        users.filter(
+            user =>
+                String(user.role || "")
+                    .toLowerCase() === "desa"
+        ).length;
+
+
+    setValue(
+        "totalUsers",
+        total
+    );
+
+
+    setValue(
+        "totalAdmin",
+        admin
+    );
+
+
+    setValue(
+        "totalUmkm",
+        umkm
+    );
+
+
+    setValue(
+        "totalDesa",
+        desa
+    );
 
 }
 
+
 /* =====================================================
-RENDER USERS
+   RENDER TABEL PENGGUNA
 ===================================================== */
 
 function renderUsers(users) {
 
-```
-const tableBody =
-    document.getElementById(
-        "userTableBody"
-    );
+    const tbody =
+        document.getElementById(
+            "userTableBody"
+        );
 
 
-if (!tableBody) return;
+    if (!tbody) {
+
+        console.error(
+            "Element userTableBody tidak ditemukan."
+        );
+
+        return;
+
+    }
 
 
-if (!users.length) {
+    if (!users.length) {
 
-    tableBody.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="7"
-                class="text-center py-4">
-
-                Belum ada pengguna.
-
-            </td>
-
-        </tr>
-
-    `;
-
-    return;
-
-}
-
-
-tableBody.innerHTML =
-    users.map(
-        (user, index) => `
+        tbody.innerHTML = `
 
             <tr>
 
-                <td>
-                    ${index + 1}
-                </td>
+                <td
+                    colspan="7"
+                    class="text-center py-4">
 
-                <td>
+                    <i class="fa-solid fa-users-slash"></i>
 
-                    <div class="user-name">
-
-                        <div class="user-avatar">
-
-                            <i class="fa-solid fa-user"></i>
-
-                        </div>
-
-                        <strong>
-                            ${escapeHtml(user.nama)}
-                        </strong>
-
-                    </div>
-
-                </td>
-
-                <td>
-                    ${escapeHtml(user.username)}
-                </td>
-
-                <td>
-
-                    <span class="role-badge">
-
-                        ${escapeHtml(user.role)}
-
-                    </span>
-
-                </td>
-
-                <td>
-                    ${escapeHtml(user.unit)}
-                </td>
-
-                <td>
-
-                    <span class="status-badge">
-
-                        <span class="status-dot online"></span>
-
-                        ${escapeHtml(user.status)}
-
-                    </span>
-
-                </td>
-
-                <td>
-
-                    <div class="user-actions">
-
-                        <button
-                            class="btn btn-sm btn-outline-primary"
-                            onclick="editUser(${user.id})"
-                            title="Edit">
-
-                            <i class="fa-solid fa-pen"></i>
-
-                        </button>
-
-
-                        <button
-                            class="btn btn-sm btn-outline-danger"
-                            onclick="deleteUser(${user.id})"
-                            title="Hapus">
-
-                            <i class="fa-solid fa-trash"></i>
-
-                        </button>
-
+                    <div class="mt-2">
+                        Belum ada data pengguna.
                     </div>
 
                 </td>
 
             </tr>
 
-        `
-    ).join("");
-```
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        users.map(
+            (user, index) => {
+
+                return `
+
+                    <tr>
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${escapeHtml(
+                                    user.nama ||
+                                    "Tanpa Nama"
+                                )}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHtml(
+                                user.username ||
+                                "-"
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            ${getRoleBadge(
+                                user.role
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHtml(
+                                user.entitas ||
+                                "-"
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            ${getStatusBadge(
+                                user.status
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-primary"
+                                onclick="editUser(${user.id})"
+                                title="Edit pengguna">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-danger"
+                                onclick="deleteUser(${user.id})"
+                                title="Hapus pengguna">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        ).join("");
 
 }
 
+
 /* =====================================================
-SEARCH
+   ROLE BADGE
+===================================================== */
+
+function getRoleBadge(role) {
+
+    const value =
+        String(
+            role || "-"
+        ).toLowerCase();
+
+
+    const labels = {
+
+        admin: "Administrator",
+
+        desa: "Desa",
+
+        bumdes: "BUMDes",
+
+        umkm: "UMKM",
+
+        bisnis: "Bisnis",
+
+        editor: "Editor"
+
+    };
+
+
+    const label =
+        labels[value] ||
+        role ||
+        "-";
+
+
+    return `
+
+        <span class="badge bg-primary">
+
+            ${escapeHtml(label)}
+
+        </span>
+
+    `;
+
+}
+
+
+/* =====================================================
+   STATUS BADGE
+===================================================== */
+
+function getStatusBadge(status) {
+
+    const value =
+        String(
+            status || ""
+        ).toLowerCase();
+
+
+    if (value === "aktif") {
+
+        return `
+
+            <span class="badge bg-success">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Aktif
+
+            </span>
+
+        `;
+
+    }
+
+
+    return `
+
+        <span class="badge bg-secondary">
+
+            <i class="fa-solid fa-circle-xmark"></i>
+
+            ${escapeHtml(
+                status || "Nonaktif"
+            )}
+
+        </span>
+
+    `;
+
+}
+
+
+/* =====================================================
+   SEARCH PENGGUNA
 ===================================================== */
 
 function setupSearch() {
 
-```
-const search =
-    document.getElementById(
-        "searchUser"
-    );
+    const search =
+        document.getElementById(
+            "searchUser"
+        );
 
 
-if (!search) return;
+    if (!search) return;
 
 
-search.addEventListener(
-    "input",
-    () => {
+    search.addEventListener(
+        "input",
+        () => {
 
-        const keyword =
-            search.value
-                .toLowerCase()
-                .trim();
-
-
-        const users =
-            window.plazaUsers || [];
+            const keyword =
+                search.value
+                    .toLowerCase()
+                    .trim();
 
 
-        const filtered =
-            users.filter(user =>
+            if (!keyword) {
 
-                String(
-                    user.nama || ""
-                )
-                .toLowerCase()
-                .includes(keyword)
+                renderUsers(
+                    usersData
+                );
 
-                ||
+                return;
 
-                String(
-                    user.username || ""
-                )
-                .toLowerCase()
-                .includes(keyword)
+            }
 
-                ||
 
-                String(
-                    user.role || ""
-                )
-                .toLowerCase()
-                .includes(keyword)
+            const filtered =
+                usersData.filter(
+                    user => {
 
-                ||
+                        const nama =
+                            String(
+                                user.nama || ""
+                            ).toLowerCase();
 
-                String(
-                    user.unit || ""
-                )
-                .toLowerCase()
-                .includes(keyword)
 
+                        const username =
+                            String(
+                                user.username || ""
+                            ).toLowerCase();
+
+
+                        const role =
+                            String(
+                                user.role || ""
+                            ).toLowerCase();
+
+
+                        const entitas =
+                            String(
+                                user.entitas || ""
+                            ).toLowerCase();
+
+
+                        return (
+
+                            nama.includes(
+                                keyword
+                            ) ||
+
+                            username.includes(
+                                keyword
+                            ) ||
+
+                            role.includes(
+                                keyword
+                            ) ||
+
+                            entitas.includes(
+                                keyword
+                            )
+
+                        );
+
+                    }
+                );
+
+
+            renderUsers(
+                filtered
             );
 
-
-        renderUsers(filtered);
-
-    }
-);
-```
+        }
+    );
 
 }
 
+
 /* =====================================================
-EDIT USER
+   TOMBOL TAMBAH PENGGUNA
+===================================================== */
+
+function setupAddUserButton() {
+
+    const button =
+        document.getElementById(
+            "addUserButton"
+        );
+
+
+    if (!button) return;
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            alert(
+                "Form Tambah Pengguna akan kita buat pada tahap berikutnya."
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   EDIT PENGGUNA
 ===================================================== */
 
 function editUser(id) {
 
-```
-const users =
-    window.plazaUsers || [];
+    const user =
+        usersData.find(
+            item =>
+                Number(item.id) === Number(id)
+        );
 
 
-const user =
-    users.find(
-        item => item.id === id
+    if (!user) {
+
+        alert(
+            "Data pengguna tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        `Edit pengguna:\n\n${user.nama}\nUsername: ${user.username}\nRole: ${user.role}`
     );
-
-
-if (!user) return;
-
-
-alert(
-    `Edit pengguna:\n\n${user.nama}\n${user.username}\n${user.role}\n\nFitur edit akan kita bangun pada tahap berikutnya.`
-);
-```
 
 }
 
+
 /* =====================================================
-DELETE USER
+   HAPUS PENGGUNA
 ===================================================== */
 
 function deleteUser(id) {
 
-```
-const users =
-    window.plazaUsers || [];
+    const user =
+        usersData.find(
+            item =>
+                Number(item.id) === Number(id)
+        );
 
 
-const user =
-    users.find(
-        item => item.id === id
+    if (!user) {
+
+        alert(
+            "Data pengguna tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    const confirmDelete =
+        confirm(
+            `Apakah Anda yakin ingin menghapus pengguna "${user.nama}"?`
+        );
+
+
+    if (!confirmDelete) return;
+
+
+    alert(
+        "Pada tahap prototype JSON, penghapusan belum disimpan ke database."
     );
-
-
-if (!user) return;
-
-
-alert(
-    `Pengguna "${user.nama}" siap dihapus.\n\nFitur hapus akan kita aktifkan setelah sistem penyimpanan database dibuat.`
-);
-```
 
 }
 
+
 /* =====================================================
-HELPER
+   HELPER SET VALUE
 ===================================================== */
 
 function setValue(id, value) {
 
-```
-const element =
-    document.getElementById(id);
+    const element =
+        document.getElementById(id);
 
 
-if (element) {
+    if (element) {
 
-    element.textContent = value;
-
-}
-```
-
-}
-
-/* =====================================================
-ESCAPE HTML
-===================================================== */
-
-function escapeHtml(value) {
-
-```
-return String(value ?? "")
-
-    .replace(/&/g, "&amp;")
-
-    .replace(/</g, "&lt;")
-
-    .replace(/>/g, "&gt;")
-
-    .replace(/"/g, "&quot;")
-
-    .replace(/'/g, "&#039;");
-```
-
-}
-
-/* =====================================================
-MOBILE SIDEBAR
-===================================================== */
-
-function setupMobileMenu() {
-
-```
-const button =
-    document.getElementById(
-        "mobileMenuBtn"
-    );
-
-
-const sidebar =
-    document.getElementById(
-        "sidebar"
-    );
-
-
-const overlay =
-    document.getElementById(
-        "sidebarOverlay"
-    );
-
-
-if (
-    !button ||
-    !sidebar ||
-    !overlay
-) {
-
-    return;
-
-}
-
-
-button.addEventListener(
-    "click",
-    () => {
-
-        sidebar.classList.add("show");
-
-        overlay.classList.add("show");
+        element.textContent =
+            value;
 
     }
-);
-
-
-overlay.addEventListener(
-    "click",
-    () => {
-
-        sidebar.classList.remove("show");
-
-        overlay.classList.remove("show");
-
-    }
-);
-
-
-document
-    .querySelectorAll(".menu-item")
-    .forEach(item => {
-
-        item.addEventListener(
-            "click",
-            () => {
-
-                sidebar.classList.remove("show");
-
-                overlay.classList.remove("show");
-
-            }
-        );
-
-    });
-```
 
 }
 
+
 /* =====================================================
-LOGOUT
+   ERROR DATA
 ===================================================== */
 
-function setupLogout() {
+function showUserError() {
 
-```
-const logoutButton =
-    document.getElementById(
-        "logoutButton"
-    );
-
-
-if (!logoutButton) return;
-
-
-logoutButton.addEventListener(
-    "click",
-    event => {
-
-        event.preventDefault();
-
-
-        sessionStorage.removeItem(
-            "plazaAdminLogin"
+    const tbody =
+        document.getElementById(
+            "userTableBody"
         );
 
 
-        sessionStorage.removeItem(
+    if (!tbody) return;
+
+
+    tbody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="7"
+                class="text-center py-4 text-danger">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <div class="mt-2">
+                    Data pengguna gagal dimuat.
+                </div>
+
+                <small>
+                    Periksa file data/pengguna.json
+                </small>
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    setValue(
+        "totalUsers",
+        0
+    );
+
+    setValue(
+        "totalAdmin",
+        0
+    );
+
+    setValue(
+        "totalUmkm",
+        0
+    );
+
+    setValue(
+        "totalDesa",
+        0
+    );
+
+}
+
+
+/* =====================================================
+   LOAD ADMIN PROFILE
+===================================================== */
+
+function loadAdminProfile() {
+
+    const adminName =
+        sessionStorage.getItem(
             "plazaAdminName"
         );
 
 
-        window.location.href =
-            "login.html";
+    if (!adminName) return;
+
+
+    const profileName =
+        document.querySelector(
+            ".profile-info strong"
+        );
+
+
+    if (profileName) {
+
+        profileName.textContent =
+            adminName;
 
     }
-);
-```
 
 }
+
+
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
+
+function setupMobileMenu() {
+
+    const button =
+        document.getElementById(
+            "mobileMenuBtn"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    const overlay =
+        document.getElementById(
+            "sidebarOverlay"
+        );
+
+
+    if (
+        !button ||
+        !sidebar ||
+        !overlay
+    ) {
+
+        return;
+
+    }
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.add(
+                "show"
+            );
+
+            overlay.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+    overlay.addEventListener(
+        "click",
+        () => {
+
+            sidebar.classList.remove(
+                "show"
+            );
+
+            overlay.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".menu-item"
+        )
+        .forEach(
+            item => {
+
+                item.addEventListener(
+                    "click",
+                    () => {
+
+                        sidebar.classList.remove(
+                            "show"
+                        );
+
+                        overlay.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function setupLogout() {
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    if (!logoutButton) return;
+
+
+    logoutButton.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+
+            sessionStorage.removeItem(
+                "plazaAdminLogin"
+            );
+
+
+            sessionStorage.removeItem(
+                "plazaAdminName"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ""
+    )
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   START ADD USER
+===================================================== */
+
+setupAddUserButton();
