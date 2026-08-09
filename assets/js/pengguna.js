@@ -1,4 +1,3 @@
-```javascript
 /* =====================================================
    PLAZA DAYEUHLUHUR
    USER MANAGEMENT ENGINE V3 FINAL
