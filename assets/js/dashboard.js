@@ -1,516 +1,745 @@
 /* =====================================================
-   PLAZA DAYEUHLUHUR
-   DASHBOARD DATA ENGINE V1
+PLAZA DAYEUHLUHUR
+DASHBOARD DATA ENGINE V2
 ===================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log(
-        "Dashboard Plaza Dayeuhluhur aktif."
-    );
+```
+console.log("====================================");
+console.log("PLAZA DAYEUHLUHUR");
+console.log("Dashboard Data Engine V2 aktif");
+console.log("====================================");
 
-    loadAdminProfile();
-
-    loadDashboardData();
-
-    setupMobileMenu();
-
-    setupLogout();
+loadAdminProfile();
+loadDashboardData();
+setupMobileMenu();
+setupLogout();
+```
 
 });
 
 /* =====================================================
-   LOAD SEMUA DATA
+LOAD SEMUA DATA
 ===================================================== */
 
 async function loadDashboardData() {
 
-    const files = {
+```
+const files = {
 
-        desa: "data/desa.json",
+    desa: "data/desa.json",
 
-        bumdes: "data/bumdes.json",
+    bumdes: "data/bumdes.json",
 
-        umkm: "data/umkm.json",
+    umkm: "data/umkm.json",
 
-        bisnis: "data/bisnis.json",
+    bisnis: "data/bisnis.json",
 
-        bursa: "data/bursa.json",
+    bursa: "data/bursa.json",
 
-        wisata: "data/wisata.json",
+    wisata: "data/wisata.json",
 
-        berita: "data/berita.json",
+    berita: "data/berita.json",
 
-        agenda: "data/agenda.json"
+    agenda: "data/agenda.json"
 
-    };
-
-
-    const data = {};
+};
 
 
-    /* =============================================
-       LOAD DATA SATU PER SATU
-    ============================================= */
+const data = {};
 
-    for (const [key, url] of Object.entries(files)) {
+
+console.log("Mulai membaca database JSON...");
+
+
+/*
+   LOAD DATA SATU PER SATU
+*/
+
+for (const [key, url] of Object.entries(files)) {
+
+    try {
+
+        console.log(`Membaca ${key}: ${url}`);
+
+
+        const response = await fetch(
+            url,
+            {
+                cache: "no-store"
+            }
+        );
+
+
+        /*
+           CEK HTTP
+        */
+
+        if (!response.ok) {
+
+            throw new Error(
+                `HTTP ${response.status} - ${response.statusText}`
+            );
+
+        }
+
+
+        /*
+           BACA SEBAGAI TEXT TERLEBIH DAHULU
+
+           Ini sengaja dilakukan agar kita bisa
+           mengetahui apabila server mengembalikan
+           HTML/error page.
+        */
+
+        const text = await response.text();
+
+
+        if (!text.trim()) {
+
+            throw new Error(
+                "File kosong"
+            );
+
+        }
+
+
+        /*
+           PARSE JSON
+        */
+
+        let json;
 
         try {
 
-            const response =
-                await fetch(url);
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    `HTTP ${response.status}`
-                );
-
-            }
-
-
-            const json =
-                await response.json();
-
-
-            /* Pastikan JSON berbentuk array */
-
-            if (!Array.isArray(json)) {
-
-                throw new Error(
-                    "Format JSON bukan array"
-                );
-
-            }
-
-
-            data[key] = json;
-
-
-            console.log(
-                `✓ ${key}: ${json.length} data`
-            );
+            json = JSON.parse(text);
 
         }
 
-        catch (error) {
+        catch (jsonError) {
 
             console.error(
-                `✗ Gagal memuat ${key}:`,
-                error
+                `Isi ${url} bukan JSON valid:`,
+                text.substring(0, 200)
             );
 
-
-            /*
-               Kalau gagal, gunakan array kosong
-               agar statistik lain tetap berjalan.
-            */
-
-            data[key] = [];
+            throw new Error(
+                "Isi file bukan JSON valid"
+            );
 
         }
+
+
+        /*
+           NORMALISASI DATA
+
+           Mendukung:
+
+           1. Array langsung
+           2. Object { data: [] }
+           3. Object { items: [] }
+        */
+
+        let arrayData;
+
+
+        if (Array.isArray(json)) {
+
+            arrayData = json;
+
+        }
+
+        else if (
+            json &&
+            Array.isArray(json.data)
+        ) {
+
+            arrayData = json.data;
+
+        }
+
+        else if (
+            json &&
+            Array.isArray(json.items)
+        ) {
+
+            arrayData = json.items;
+
+        }
+
+        else {
+
+            throw new Error(
+                "Format JSON tidak dikenali"
+            );
+
+        }
+
+
+        data[key] = arrayData;
+
+
+        console.log(
+            `✓ ${key}: ${arrayData.length} data`
+        );
 
     }
 
 
-    console.log(
-        "Data dashboard:",
-        data
-    );
+    catch (error) {
+
+        console.error(
+            `✗ GAGAL ${key}:`,
+            error
+        );
 
 
-    /* =============================================
-       UPDATE STATISTIK
-    ============================================= */
+        /*
+           Tetap gunakan array kosong
+           supaya dashboard lainnya
+           tetap berjalan.
+        */
 
-    updateStatistics(data);
+        data[key] = [];
 
-
-    /* =============================================
-       UPDATE AKTIVITAS
-    ============================================= */
-
-    updateActivities(data);
-
-
-    /* =============================================
-       UPDATE STATUS DATA
-    ============================================= */
-
-    updateSystemStatus(data);
+    }
 
 }
-/* =====================================================
+
+
+console.log("====================================");
+console.log("HASIL DATA DASHBOARD");
+console.log(data);
+console.log("====================================");
+
+
+/*
    UPDATE STATISTIK
+*/
+
+updateStatistics(data);
+
+
+/*
+   UPDATE AKTIVITAS
+*/
+
+updateActivities(data);
+
+
+/*
+   UPDATE STATUS DATA
+*/
+
+updateSystemStatus(data);
+```
+
+}
+
+/* =====================================================
+UPDATE STATISTIK
 ===================================================== */
 
 function updateStatistics(data) {
 
-    setValue(
-        "statDesa",
-        data.desa.length
-    );
+```
+setValue(
+    "statDesa",
+    data.desa.length
+);
 
 
-    setValue(
-        "statBumdes",
-        data.bumdes.length
-    );
+setValue(
+    "statBumdes",
+    data.bumdes.length
+);
 
 
-    setValue(
-        "statUmkm",
-        data.umkm.length
-    );
+setValue(
+    "statUmkm",
+    data.umkm.length
+);
 
 
-    setValue(
-        "statBisnis",
-        data.bisnis.length
-    );
+setValue(
+    "statBisnis",
+    data.bisnis.length
+);
 
 
-    setValue(
-        "statBursa",
-        data.bursa.length
-    );
+setValue(
+    "statBursa",
+    data.bursa.length
+);
 
 
-    setValue(
-        "statWisata",
-        data.wisata.length
-    );
+setValue(
+    "statWisata",
+    data.wisata.length
+);
 
 
-    setValue(
-        "statBerita",
-        data.berita.length
-    );
+setValue(
+    "statBerita",
+    data.berita.length
+);
 
 
-    setValue(
-        "statAgenda",
-        data.agenda.length
-    );
+setValue(
+    "statAgenda",
+    data.agenda.length
+);
+```
 
 }
 
-
 /* =====================================================
-   HELPER SET VALUE
+HELPER SET VALUE
 ===================================================== */
 
 function setValue(id, value) {
 
-    const element =
-        document.getElementById(id);
+```
+const element =
+    document.getElementById(id);
 
 
-    if (element) {
+if (element) {
 
-        element.textContent = value;
+    element.textContent = value;
 
-    }
+}
+```
 
 }
 
+/* =====================================================
+UPDATE STATUS EKOSISTEM
+===================================================== */
+
+function updateSystemStatus(data) {
+
+```
+setValue(
+    "statusDesa",
+    `${data.desa.length} DATA`
+);
+
+
+setValue(
+    "statusBumdes",
+    `${data.bumdes.length} DATA`
+);
+
+
+setValue(
+    "statusUmkm",
+    `${data.umkm.length} DATA`
+);
+
+
+setValue(
+    "statusBisnis",
+    `${data.bisnis.length} DATA`
+);
+
+
+setValue(
+    "statusBursa",
+    `${data.bursa.length} DATA`
+);
+
+
+setValue(
+    "statusWisata",
+    `${data.wisata.length} DATA`
+);
+
+
+setValue(
+    "statusBerita",
+    `${data.berita.length} DATA`
+);
+
+
+setValue(
+    "statusAgenda",
+    `${data.agenda.length} DATA`
+);
+```
+
+}
 
 /* =====================================================
-   AKTIVITAS TERBARU
+AKTIVITAS TERBARU
 ===================================================== */
 
 function updateActivities(data) {
 
-    const container =
-        document.getElementById(
-            "activityList"
-        );
+```
+const container =
+    document.getElementById(
+        "activityList"
+    );
 
 
-    if (!container) return;
+if (!container) return;
 
 
-    const activities = [];
+const activities = [];
 
 
-    /* Berita */
+/*
+   BERITA
+*/
 
-    data.berita
-        .slice(0, 3)
-        .forEach(item => {
+data.berita
+    .slice(0, 3)
+    .forEach(item => {
 
-            activities.push({
+        activities.push({
 
-                icon: "fa-newspaper",
+            icon: "fa-newspaper",
 
-                title: item.judul,
+            title:
+                item.judul ||
+                item.nama ||
+                "Berita baru",
 
-                info:
-                    `${item.kategori || "Berita"} • ${item.tanggal || ""}`
-
-            });
-
-        });
-
-
-    /* Agenda */
-
-    data.agenda
-        .slice(0, 3)
-        .forEach(item => {
-
-            activities.push({
-
-                icon: "fa-calendar-days",
-
-                title: item.judul,
-
-                info:
-                    `${item.kategori || "Agenda"} • ${item.tanggal || ""}`
-
-            });
+            info:
+                `${item.kategori || "Berita"} • ${item.tanggal || ""}`
 
         });
 
+    });
 
-    /* UMKM */
 
-    data.umkm
-        .slice(0, 2)
-        .forEach(item => {
+/*
+   AGENDA
+*/
 
-            activities.push({
+data.agenda
+    .slice(0, 3)
+    .forEach(item => {
 
-                icon: "fa-store",
+        activities.push({
 
-                title:
-                    `${item.nama} terdaftar sebagai UMKM`,
+            icon: "fa-calendar-days",
 
-                info:
-                    `${item.kategori || "UMKM"} • ${item.desa || ""}`
+            title:
+                item.judul ||
+                item.nama ||
+                "Agenda baru",
 
-            });
+            info:
+                `${item.kategori || "Agenda"} • ${item.tanggal || ""}`
 
         });
 
-
-    /* Maksimal 7 aktivitas */
-
-    const latest =
-        activities.slice(0, 7);
+    });
 
 
-    if (!latest.length) {
+/*
+   UMKM
+*/
 
-        container.innerHTML = `
+data.umkm
+    .slice(0, 2)
+    .forEach(item => {
 
-            <div class="loading-state">
+        activities.push({
 
-                Belum ada aktivitas.
+            icon: "fa-store",
 
-            </div>
+            title:
+                `${item.nama || "UMKM baru"} terdaftar`,
 
-        `;
+            info:
+                `${item.kategori || "UMKM"} • ${item.desa || ""}`
 
-        return;
+        });
 
-    }
-
-
-    container.innerHTML =
-        latest.map(item => `
-
-            <div class="activity-item">
-
-                <div class="activity-icon">
-
-                    <i class="fa-solid ${item.icon}"></i>
-
-                </div>
-
-                <div class="activity-content">
-
-                    <strong>
-                        ${escapeHtml(item.title)}
-                    </strong>
-
-                    <span>
-                        ${escapeHtml(item.info)}
-                    </span>
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
+    });
 
 
-/* =====================================================
-   ERROR DATA
-===================================================== */
+/*
+   BUMDES
+*/
 
-function showDataError() {
+data.bumdes
+    .slice(0, 2)
+    .forEach(item => {
 
-    const container =
-        document.getElementById(
-            "activityList"
-        );
+        activities.push({
+
+            icon: "fa-building",
+
+            title:
+                `${item.nama || "BUMDes baru"} terdaftar`,
+
+            info:
+                `BUMDes • ${item.desa || ""}`
+
+        });
+
+    });
 
 
-    if (!container) return;
+/*
+   DESA
+*/
 
+data.desa
+    .slice(0, 2)
+    .forEach(item => {
+
+        activities.push({
+
+            icon: "fa-house",
+
+            title:
+                item.nama ||
+                item.nama_desa ||
+                "Desa",
+
+            info:
+                "Data Desa"
+
+        });
+
+    });
+
+
+/*
+   MAKSIMAL 7 AKTIVITAS
+*/
+
+const latest =
+    activities.slice(0, 7);
+
+
+if (!latest.length) {
 
     container.innerHTML = `
 
         <div class="loading-state">
 
-            <i class="fa-solid fa-triangle-exclamation"></i>
+            <i class="fa-solid fa-circle-info"></i>
 
-            Data belum dapat dimuat.
+            Belum ada aktivitas.
 
         </div>
 
     `;
 
+    return;
+
 }
 
 
+container.innerHTML =
+    latest.map(item => `
+
+        <div class="activity-item">
+
+            <div class="activity-icon">
+
+                <i class="fa-solid ${item.icon}"></i>
+
+            </div>
+
+            <div class="activity-content">
+
+                <strong>
+                    ${escapeHtml(item.title)}
+                </strong>
+
+                <span>
+                    ${escapeHtml(item.info)}
+                </span>
+
+            </div>
+
+        </div>
+
+    `).join("");
+```
+
+}
+
 /* =====================================================
-   ESCAPE HTML
+ESCAPE HTML
 ===================================================== */
 
 function escapeHtml(value) {
 
-    return String(value ?? "")
+```
+return String(value ?? "")
 
-        .replace(/&/g, "&amp;")
+    .replace(/&/g, "&amp;")
 
-        .replace(/</g, "&lt;")
+    .replace(/</g, "&lt;")
 
-        .replace(/>/g, "&gt;")
+    .replace(/>/g, "&gt;")
 
-        .replace(/"/g, "&quot;")
+    .replace(/"/g, "&quot;")
 
-        .replace(/'/g, "&#039;");
+    .replace(/'/g, "&#039;");
+```
 
 }
 
+/* =====================================================
+LOAD ADMIN PROFILE
+===================================================== */
+
+function loadAdminProfile() {
+
+```
+const adminName =
+    sessionStorage.getItem(
+        "plazaAdminName"
+    );
+
+
+if (!adminName) return;
+
+
+const profileName =
+    document.querySelector(
+        ".profile-info strong"
+    );
+
+
+if (profileName) {
+
+    profileName.textContent =
+        adminName;
+
+}
+```
+
+}
 
 /* =====================================================
-   MOBILE SIDEBAR
+MOBILE SIDEBAR
 ===================================================== */
 
 function setupMobileMenu() {
 
-    const button =
-        document.getElementById(
-            "mobileMenuBtn"
-        );
-
-
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-
-    const overlay =
-        document.getElementById(
-            "sidebarOverlay"
-        );
-
-
-    if (
-        !button ||
-        !sidebar ||
-        !overlay
-    ) {
-
-        return;
-
-    }
-
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            sidebar.classList.add("show");
-
-            overlay.classList.add("show");
-
-        }
+```
+const button =
+    document.getElementById(
+        "mobileMenuBtn"
     );
 
 
-    overlay.addEventListener(
-        "click",
-        () => {
-
-            sidebar.classList.remove("show");
-
-            overlay.classList.remove("show");
-
-        }
+const sidebar =
+    document.getElementById(
+        "sidebar"
     );
 
 
-    document
-        .querySelectorAll(".menu-item")
-        .forEach(item => {
+const overlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
 
-            item.addEventListener(
-                "click",
-                () => {
 
-                    sidebar.classList.remove("show");
+if (
+    !button ||
+    !sidebar ||
+    !overlay
+) {
 
-                    overlay.classList.remove("show");
-
-                }
-            );
-
-        });
+    return;
 
 }
+
+
+button.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.add("show");
+
+        overlay.classList.add("show");
+
+    }
+);
+
+
+overlay.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.remove("show");
+
+        overlay.classList.remove("show");
+
+    }
+);
+
+
+document
+    .querySelectorAll(".menu-item")
+    .forEach(item => {
+
+        item.addEventListener(
+            "click",
+            () => {
+
+                sidebar.classList.remove("show");
+
+                overlay.classList.remove("show");
+
+            }
+        );
+
+    });
+```
+
+}
+
 /* =====================================================
-   LOGOUT ADMIN
+LOGOUT ADMIN
 ===================================================== */
 
 function setupLogout() {
 
-    const logoutButton =
-        document.getElementById(
-            "logoutButton"
+```
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+if (!logoutButton) return;
+
+
+logoutButton.addEventListener(
+    "click",
+    (event) => {
+
+        event.preventDefault();
+
+
+        sessionStorage.removeItem(
+            "plazaAdminLogin"
         );
 
 
-    if (!logoutButton) return;
+        sessionStorage.removeItem(
+            "plazaAdminName"
+        );
 
 
-    logoutButton.addEventListener(
-        "click",
-        (event) => {
+        window.location.href =
+            "login.html";
 
-            event.preventDefault();
-
-
-            sessionStorage.removeItem(
-                "plazaAdminLogin"
-            );
-
-
-            sessionStorage.removeItem(
-                "plazaAdminName"
-            );
-
-
-            window.location.href =
-                "login.html";
-
-        }
-    );
+    }
+);
+```
 
 }
