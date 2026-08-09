@@ -2,223 +2,108 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
    USER MANAGEMENT ENGINE V3
-   CRUD LOCAL STORAGE
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("User Management Engine V3 aktif");
+    console.log("USER MANAGEMENT ENGINE V3");
     console.log("====================================");
 
     loadUsers();
-
     setupSearch();
-
-    setupAddUser();
-
-    setupUserForm();
-
     setupMobileMenu();
-
     setupLogout();
-
     loadAdminProfile();
 
 });
 
 
 /* =====================================================
-   KONFIGURASI
-===================================================== */
-
-const USER_STORAGE_KEY =
-    "plazaDayeuhluhurUsers";
-
-
-/* =====================================================
-   LOAD USERS
+   LOAD DATABASE USERS
 ===================================================== */
 
 async function loadUsers() {
 
-    const tableBody =
-        document.getElementById("userTableBody");
+    const tableBody = document.getElementById("userTableBody");
 
     if (!tableBody) {
-
-        console.error(
-            "Element userTableBody tidak ditemukan."
-        );
-
+        console.error("userTableBody tidak ditemukan.");
         return;
     }
 
     try {
 
-        /*
-           CEK LOCAL STORAGE TERLEBIH DAHULU
-        */
+        console.log("Membaca database pengguna...");
 
-        const savedUsers =
-            localStorage.getItem(
-                USER_STORAGE_KEY
-            );
-
-
-        if (savedUsers) {
-
-            const users =
-                JSON.parse(savedUsers);
-
-            window.plazaUsers = users;
-
-            console.log(
-                "✓ Data pengguna dimuat dari localStorage:",
-                users
-            );
-
-            updateUserStatistics(users);
-
-            renderUsers(users);
-
-            return;
-        }
-
-
-        /*
-           JIKA BELUM ADA LOCAL STORAGE
-           BACA users.json
-        */
-
-        console.log(
-            "Membaca database awal users.json..."
-        );
-
-
-        const response =
-            await fetch(
-                "data/users.json",
-                {
-                    cache: "no-store"
-                }
-            );
-
+        const response = await fetch("data/users.json", {
+            cache: "no-store"
+        });
 
         if (!response.ok) {
-
             throw new Error(
                 "HTTP " +
                 response.status +
                 " - " +
                 response.statusText
             );
-
         }
 
-
-        const text =
-            await response.text();
-
+        const text = await response.text();
 
         if (!text.trim()) {
-
-            throw new Error(
-                "users.json kosong."
-            );
-
+            throw new Error("users.json kosong.");
         }
-
 
         let users;
 
-
         try {
 
-            users =
-                JSON.parse(text);
+            users = JSON.parse(text);
 
-        }
+        } catch (error) {
 
-        catch (error) {
-
-            console.error(
-                "Isi users.json:",
-                text.substring(0, 300)
-            );
+            console.error("Isi users.json tidak valid:");
+            console.error(text);
 
             throw new Error(
-                "users.json bukan JSON valid."
+                "Format users.json tidak valid."
             );
-
         }
-
 
         if (!Array.isArray(users)) {
-
             throw new Error(
-                "Format users.json harus berupa array."
+                "users.json harus berbentuk array."
             );
-
         }
 
-
-        /*
-           SIMPAN KE GLOBAL
-        */
+        console.log(
+            "Berhasil membaca " +
+            users.length +
+            " pengguna."
+        );
 
         window.plazaUsers = users;
-
-
-        /*
-           SIMPAN SALINAN KE LOCAL STORAGE
-        */
-
-        localStorage.setItem(
-            USER_STORAGE_KEY,
-            JSON.stringify(users)
-        );
-
-
-        console.log(
-            "✓ Database awal berhasil dimuat:",
-            users.length,
-            "pengguna"
-        );
-
 
         updateUserStatistics(users);
 
         renderUsers(users);
 
-    }
-
-
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "✗ Gagal membaca database pengguna:",
+            "Gagal membaca database pengguna:",
             error
         );
 
-
-        tableBody.innerHTML = `
-
-            <tr>
-
-                <td colspan="7"
-                    class="text-center py-4 text-danger">
-
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-
-                    Gagal membaca database pengguna.
-
-                </td>
-
-            </tr>
-
-        `;
+        tableBody.innerHTML =
+            '<tr>' +
+                '<td colspan="7" class="text-center py-4 text-danger">' +
+                    '<i class="fa-solid fa-triangle-exclamation"></i> ' +
+                    'Gagal membaca database pengguna.' +
+                '</td>' +
+            '</tr>';
 
     }
 
@@ -226,7 +111,7 @@ async function loadUsers() {
 
 
 /* =====================================================
-   STATISTIK
+   STATISTIK PENGGUNA
 ===================================================== */
 
 function updateUserStatistics(users) {
@@ -237,12 +122,11 @@ function updateUserStatistics(users) {
     );
 
 
-    const totalAdmin =
-        users.filter(function (user) {
+    const totalAdmin = users.filter(function (user) {
 
-            return user.role === "Administrator";
+        return user.role === "Administrator";
 
-        }).length;
+    }).length;
 
 
     setValue(
@@ -251,15 +135,14 @@ function updateUserStatistics(users) {
     );
 
 
-    const totalUmkm =
-        users.filter(function (user) {
+    const totalUmkm = users.filter(function (user) {
 
-            return (
-                user.role === "Pelaku UMKM" ||
-                user.role === "UMKM"
-            );
+        return (
+            user.role === "Pelaku UMKM" ||
+            user.role === "UMKM"
+        );
 
-        }).length;
+    }).length;
 
 
     setValue(
@@ -268,15 +151,14 @@ function updateUserStatistics(users) {
     );
 
 
-    const totalDesa =
-        users.filter(function (user) {
+    const totalDesa = users.filter(function (user) {
 
-            return (
-                user.role === "Admin Desa" ||
-                user.role === "Desa"
-            );
+        return (
+            user.role === "Admin Desa" ||
+            user.role === "Desa"
+        );
 
-        }).length;
+    }).length;
 
 
     setValue(
@@ -294,831 +176,136 @@ function updateUserStatistics(users) {
 function renderUsers(users) {
 
     const tableBody =
-        document.getElementById(
-            "userTableBody"
-        );
+        document.getElementById("userTableBody");
 
-
-    if (!tableBody) return;
+    if (!tableBody) {
+        return;
+    }
 
 
     if (!users.length) {
 
-        tableBody.innerHTML = `
-
-            <tr>
-
-                <td colspan="7"
-                    class="text-center py-4">
-
-                    <i class="fa-solid fa-users-slash"></i>
-
-                    Belum ada pengguna.
-
-                </td>
-
-            </tr>
-
-        `;
+        tableBody.innerHTML =
+            '<tr>' +
+                '<td colspan="7" class="text-center py-4">' +
+                    '<i class="fa-solid fa-users-slash"></i> ' +
+                    'Belum ada pengguna.' +
+                '</td>' +
+            '</tr>';
 
         return;
-
     }
 
 
-    tableBody.innerHTML =
-        users.map(function (user, index) {
+    let html = "";
 
-            const status =
-                user.status || "Aktif";
 
+    users.forEach(function (user, index) {
 
-            const statusClass =
-                status.toLowerCase() === "aktif"
-                    ? "text-success"
-                    : "text-danger";
+        const status =
+            user.status || "Aktif";
 
 
-            return `
+        let statusClass =
+            "text-success";
 
-                <tr>
 
-                    <td>
-                        ${index + 1}
-                    </td>
+        if (
+            status.toLowerCase() !== "aktif"
+        ) {
 
-
-                    <td>
-
-                        <strong>
-                            ${escapeHtml(user.nama)}
-                        </strong>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHtml(user.username)}
-                    </td>
-
-
-                    <td>
-
-                        <span class="user-role">
-
-                            ${escapeHtml(user.role)}
-
-                        </span>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHtml(user.unit || "-")}
-                    </td>
-
-
-                    <td>
-
-                        <span class="${statusClass}">
-
-                            <i class="fa-solid fa-circle"></i>
-
-                            ${escapeHtml(status)}
-
-                        </span>
-
-                    </td>
-
-
-                    <td>
-
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-outline-primary"
-                            onclick="editUser(${user.id})"
-                            title="Edit Pengguna">
-
-                            <i class="fa-solid fa-pen"></i>
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-outline-warning"
-                            onclick="toggleUserStatus(${user.id})"
-                            title="Ubah Status">
-
-                            <i class="fa-solid fa-power-off"></i>
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-outline-danger"
-                            onclick="deleteUser(${user.id})"
-                            title="Hapus Pengguna">
-
-                            <i class="fa-solid fa-trash"></i>
-
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }).join("");
-
-}
-
-
-/* =====================================================
-   TAMBAH PENGGUNA
-===================================================== */
-
-function setupAddUser() {
-
-    const button =
-        document.getElementById(
-            "addUserButton"
-        );
-
-
-    if (!button) {
-
-        console.warn(
-            "Tombol addUserButton tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
-    button.addEventListener(
-        "click",
-        function () {
-
-            openAddUserModal();
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   BUKA MODAL TAMBAH
-===================================================== */
-
-function openAddUserModal() {
-
-    const form =
-        document.getElementById(
-            "userForm"
-        );
-
-
-    if (!form) return;
-
-
-    form.reset();
-
-
-    document.getElementById(
-        "userId"
-    ).value = "";
-
-
-    document.getElementById(
-        "userModalTitle"
-    ).textContent =
-        "Tambah Pengguna";
-
-
-    const status =
-        document.getElementById(
-            "userStatus"
-        );
-
-
-    if (status) {
-
-        status.value = "Aktif";
-
-    }
-
-
-    const modalElement =
-        document.getElementById(
-            "userModal"
-        );
-
-
-    if (!modalElement) {
-
-        alert(
-            "Modal pengguna belum tersedia."
-        );
-
-        return;
-
-    }
-
-
-    const modal =
-        bootstrap.Modal.getOrCreateInstance(
-            modalElement
-        );
-
-
-    modal.show();
-
-}
-
-
-/* =====================================================
-   FORM TAMBAH / EDIT
-===================================================== */
-
-function setupUserForm() {
-
-    const form =
-        document.getElementById(
-            "userForm"
-        );
-
-
-    if (!form) {
-
-        console.warn(
-            "Form userForm tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
-    form.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            saveUser();
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   SIMPAN PENGGUNA
-===================================================== */
-
-function saveUser() {
-
-    const id =
-        document.getElementById(
-            "userId"
-        ).value;
-
-
-    const nama =
-        document.getElementById(
-            "userNama"
-        ).value.trim();
-
-
-    const username =
-        document.getElementById(
-            "userUsername"
-        ).value.trim();
-
-
-    const role =
-        document.getElementById(
-            "userRole"
-        ).value;
-
-
-    const unit =
-        document.getElementById(
-            "userUnit"
-        ).value.trim();
-
-
-    const status =
-        document.getElementById(
-            "userStatus"
-        ).value;
-
-
-    if (!nama || !username || !role) {
-
-        alert(
-            "Nama, username dan role wajib diisi."
-        );
-
-        return;
-
-    }
-
-
-    const users =
-        window.plazaUsers || [];
-
-
-    /*
-       CEK USERNAME DUPLIKAT
-    */
-
-    const duplicate =
-        users.find(function (user) {
-
-            return (
-                user.username.toLowerCase() ===
-                username.toLowerCase() &&
-                String(user.id) !== String(id)
-            );
-
-        });
-
-
-    if (duplicate) {
-
-        alert(
-            "Username tersebut sudah digunakan."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       EDIT
-    */
-
-    if (id) {
-
-        const index =
-            users.findIndex(function (user) {
-
-                return String(user.id) ===
-                    String(id);
-
-            });
-
-
-        if (index === -1) {
-
-            alert(
-                "Data pengguna tidak ditemukan."
-            );
-
-            return;
+            statusClass =
+                "text-danger";
 
         }
 
 
-        users[index].nama =
-            nama;
+        html +=
+            '<tr>' +
 
-        users[index].username =
-            username;
+                '<td>' +
+                    (index + 1) +
+                '</td>' +
 
-        users[index].role =
-            role;
+                '<td>' +
+                    '<strong>' +
+                        escapeHtml(user.nama) +
+                    '</strong>' +
+                '</td>' +
 
-        users[index].unit =
-            unit;
+                '<td>' +
+                    escapeHtml(user.username) +
+                '</td>' +
 
-        users[index].status =
-            status;
+                '<td>' +
+                    '<span class="user-role">' +
+                        escapeHtml(user.role) +
+                    '</span>' +
+                '</td>' +
 
+                '<td>' +
+                    escapeHtml(user.unit || "-") +
+                '</td>' +
 
-        alert(
-            "Data pengguna berhasil diperbarui."
-        );
+                '<td>' +
+                    '<span class="' +
+                        statusClass +
+                    '">' +
+                        '<i class="fa-solid fa-circle"></i> ' +
+                        escapeHtml(status) +
+                    '</span>' +
+                '</td>' +
 
-    }
+                '<td>' +
 
+                    '<button ' +
+                        'type="button" ' +
+                        'class="btn btn-sm btn-outline-primary me-1" ' +
+                        'onclick="editUser(' +
+                            user.id +
+                        ')" ' +
+                        'title="Edit Pengguna">' +
 
-    /*
-       TAMBAH
-    */
+                        '<i class="fa-solid fa-pen"></i>' +
 
-    else {
+                    '</button>' +
 
-        const newId =
-            getNextUserId(users);
+                    '<button ' +
+                        'type="button" ' +
+                        'class="btn btn-sm btn-outline-danger" ' +
+                        'onclick="deleteUser(' +
+                            user.id +
+                        ')" ' +
+                        'title="Hapus Pengguna">' +
 
+                        '<i class="fa-solid fa-trash"></i>' +
 
-        const newUser = {
+                    '</button>' +
 
-            id: newId,
+                '</td>' +
 
-            nama: nama,
+            '</tr>';
 
-            username: username,
-
-            role: role,
-
-            unit: unit,
-
-            status: status
-
-        };
-
-
-        users.push(
-            newUser
-        );
-
-
-        alert(
-            "Pengguna baru berhasil ditambahkan."
-        );
-
-    }
-
-
-    /*
-       SIMPAN
-    */
-
-    saveUsersToStorage(
-        users
-    );
+    });
 
 
-    /*
-       UPDATE TAMPILAN
-    */
-
-    window.plazaUsers =
-        users;
-
-
-    updateUserStatistics(
-        users
-    );
-
-
-    renderUsers(
-        users
-    );
-
-
-    /*
-       TUTUP MODAL
-    */
-
-    const modalElement =
-        document.getElementById(
-            "userModal"
-        );
-
-
-    if (modalElement) {
-
-        const modal =
-            bootstrap.Modal.getInstance(
-                modalElement
-            );
-
-
-        if (modal) {
-
-            modal.hide();
-
-        }
-
-    }
+    tableBody.innerHTML = html;
 
 }
 
 
 /* =====================================================
-   EDIT USER
-===================================================== */
-
-function editUser(id) {
-
-    const users =
-        window.plazaUsers || [];
-
-
-    const user =
-        users.find(function (item) {
-
-            return String(item.id) ===
-                String(id);
-
-        });
-
-
-    if (!user) {
-
-        alert(
-            "Data pengguna tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
-    document.getElementById(
-        "userId"
-    ).value =
-        user.id;
-
-
-    document.getElementById(
-        "userNama"
-    ).value =
-        user.nama || "";
-
-
-    document.getElementById(
-        "userUsername"
-    ).value =
-        user.username || "";
-
-
-    document.getElementById(
-        "userRole"
-    ).value =
-        user.role || "";
-
-
-    document.getElementById(
-        "userUnit"
-    ).value =
-        user.unit || "";
-
-
-    document.getElementById(
-        "userStatus"
-    ).value =
-        user.status || "Aktif";
-
-
-    document.getElementById(
-        "userModalTitle"
-    ).textContent =
-        "Edit Pengguna";
-
-
-    const modalElement =
-        document.getElementById(
-            "userModal"
-        );
-
-
-    const modal =
-        bootstrap.Modal.getOrCreateInstance(
-            modalElement
-        );
-
-
-    modal.show();
-
-}
-
-
-/* =====================================================
-   UBAH STATUS
-===================================================== */
-
-function toggleUserStatus(id) {
-
-    const users =
-        window.plazaUsers || [];
-
-
-    const user =
-        users.find(function (item) {
-
-            return String(item.id) ===
-                String(id);
-
-        });
-
-
-    if (!user) {
-
-        alert(
-            "Data pengguna tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
-    if (user.status === "Aktif") {
-
-        user.status =
-            "Nonaktif";
-
-    }
-
-    else {
-
-        user.status =
-            "Aktif";
-
-    }
-
-
-    saveUsersToStorage(
-        users
-    );
-
-
-    updateUserStatistics(
-        users
-    );
-
-
-    renderUsers(
-        users
-    );
-
-
-    console.log(
-        "Status pengguna diperbarui:",
-        user
-    );
-
-}
-
-
-/* =====================================================
-   DELETE USER
-===================================================== */
-
-function deleteUser(id) {
-
-    const users =
-        window.plazaUsers || [];
-
-
-    const user =
-        users.find(function (item) {
-
-            return String(item.id) ===
-                String(id);
-
-        });
-
-
-    if (!user) {
-
-        alert(
-            "Data pengguna tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       PENGAMAN ADMINISTRATOR
-    */
-
-    if (
-        user.role === "Administrator" &&
-        users.filter(function (item) {
-
-            return item.role ===
-                "Administrator";
-
-        }).length <= 1
-    ) {
-
-        alert(
-            "Administrator terakhir tidak boleh dihapus."
-        );
-
-        return;
-
-    }
-
-
-    const confirmed =
-        confirm(
-            'Hapus pengguna "' +
-            user.nama +
-            '"?'
-        );
-
-
-    if (!confirmed) return;
-
-
-    const filteredUsers =
-        users.filter(function (item) {
-
-            return String(item.id) !==
-                String(id);
-
-        });
-
-
-    saveUsersToStorage(
-        filteredUsers
-    );
-
-
-    window.plazaUsers =
-        filteredUsers;
-
-
-    updateUserStatistics(
-        filteredUsers
-    );
-
-
-    renderUsers(
-        filteredUsers
-    );
-
-
-    alert(
-        "Pengguna berhasil dihapus."
-    );
-
-}
-
-
-/* =====================================================
-   NEXT ID
-===================================================== */
-
-function getNextUserId(users) {
-
-    if (!users.length) {
-
-        return 1;
-
-    }
-
-
-    const ids =
-        users.map(function (user) {
-
-            return Number(user.id) || 0;
-
-        });
-
-
-    return Math.max.apply(
-        null,
-        ids
-    ) + 1;
-
-}
-
-
-/* =====================================================
-   SAVE LOCAL STORAGE
-===================================================== */
-
-function saveUsersToStorage(users) {
-
-    localStorage.setItem(
-        USER_STORAGE_KEY,
-        JSON.stringify(users)
-    );
-
-}
-
-
-/* =====================================================
-   SEARCH
+   SEARCH USER
 ===================================================== */
 
 function setupSearch() {
 
     const searchInput =
-        document.getElementById(
-            "searchUser"
-        );
+        document.getElementById("searchUser");
 
-
-    if (!searchInput) return;
+    if (!searchInput) {
+        return;
+    }
 
 
     searchInput.addEventListener(
@@ -1152,16 +339,12 @@ function setupSearch() {
                         ).toLowerCase();
 
 
-                    return text.includes(
-                        keyword
-                    );
+                    return text.includes(keyword);
 
                 });
 
 
-            renderUsers(
-                filteredUsers
-            );
+            renderUsers(filteredUsers);
 
         }
     );
@@ -1178,13 +361,96 @@ function setValue(id, value) {
     const element =
         document.getElementById(id);
 
-
     if (element) {
 
         element.textContent =
             value;
 
     }
+
+}
+
+
+/* =====================================================
+   EDIT USER
+===================================================== */
+
+function editUser(id) {
+
+    const users =
+        window.plazaUsers || [];
+
+
+    const user =
+        users.find(function (item) {
+
+            return item.id === id;
+
+        });
+
+
+    if (!user) {
+
+        alert(
+            "Data pengguna tidak ditemukan."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "EDIT PENGGUNA\n\n" +
+        "Nama: " +
+        user.nama +
+        "\nUsername: " +
+        user.username +
+        "\nRole: " +
+        user.role +
+        "\nUnit: " +
+        (user.unit || "-") +
+        "\nStatus: " +
+        (user.status || "Aktif")
+    );
+
+}
+
+
+/* =====================================================
+   DELETE USER
+===================================================== */
+
+function deleteUser(id) {
+
+    const users =
+        window.plazaUsers || [];
+
+
+    const user =
+        users.find(function (item) {
+
+            return item.id === id;
+
+        });
+
+
+    if (!user) {
+
+        alert(
+            "Data pengguna tidak ditemukan."
+        );
+
+        return;
+    }
+
+
+    alert(
+        'Pengguna "' +
+        user.nama +
+        '" siap untuk dihapus.\n\n' +
+        "Fitur penghapusan permanen akan " +
+        "kita aktifkan setelah sistem CRUD selesai."
+    );
 
 }
 
@@ -1201,7 +467,9 @@ function loadAdminProfile() {
         );
 
 
-    if (!adminName) return;
+    if (!adminName) {
+        return;
+    }
 
 
     const profileName =
@@ -1221,7 +489,7 @@ function loadAdminProfile() {
 
 
 /* =====================================================
-   MOBILE MENU
+   MOBILE SIDEBAR
 ===================================================== */
 
 function setupMobileMenu() {
@@ -1251,7 +519,6 @@ function setupMobileMenu() {
     ) {
 
         return;
-
     }
 
 
@@ -1259,13 +526,9 @@ function setupMobileMenu() {
         "click",
         function () {
 
-            sidebar.classList.add(
-                "show"
-            );
+            sidebar.classList.add("show");
 
-            overlay.classList.add(
-                "show"
-            );
+            overlay.classList.add("show");
 
         }
     );
@@ -1275,13 +538,9 @@ function setupMobileMenu() {
         "click",
         function () {
 
-            sidebar.classList.remove(
-                "show"
-            );
+            sidebar.classList.remove("show");
 
-            overlay.classList.remove(
-                "show"
-            );
+            overlay.classList.remove("show");
 
         }
     );
@@ -1295,13 +554,9 @@ function setupMobileMenu() {
                 "click",
                 function () {
 
-                    sidebar.classList.remove(
-                        "show"
-                    );
+                    sidebar.classList.remove("show");
 
-                    overlay.classList.remove(
-                        "show"
-                    );
+                    overlay.classList.remove("show");
 
                 }
             );
@@ -1323,7 +578,9 @@ function setupLogout() {
         );
 
 
-    if (!logoutButton) return;
+    if (!logoutButton) {
+        return;
+    }
 
 
     logoutButton.addEventListener(
@@ -1359,31 +616,11 @@ function setupLogout() {
 function escapeHtml(value) {
 
     return String(value ?? "")
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 ```
