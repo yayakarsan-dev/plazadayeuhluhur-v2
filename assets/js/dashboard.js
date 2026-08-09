@@ -1,6 +1,6 @@
 /* =====================================================
 PLAZA DAYEUHLUHUR
-DASHBOARD DATA ENGINE V2
+DASHBOARD DATA ENGINE V2.1
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 ```
 console.log("====================================");
 console.log("PLAZA DAYEUHLUHUR");
-console.log("Dashboard Data Engine V2 aktif");
+console.log("Dashboard Data Engine V2.1 aktif");
 console.log("====================================");
 
 loadAdminProfile();
@@ -29,19 +29,12 @@ async function loadDashboardData() {
 const files = {
 
     desa: "data/desa.json",
-
     bumdes: "data/bumdes.json",
-
     umkm: "data/umkm.json",
-
     bisnis: "data/bisnis.json",
-
     bursa: "data/bursa.json",
-
     wisata: "data/wisata.json",
-
     berita: "data/berita.json",
-
     agenda: "data/agenda.json"
 
 };
@@ -52,10 +45,6 @@ const data = {};
 
 console.log("Mulai membaca database JSON...");
 
-
-/*
-   LOAD DATA SATU PER SATU
-*/
 
 for (const [key, url] of Object.entries(files)) {
 
@@ -72,10 +61,6 @@ for (const [key, url] of Object.entries(files)) {
         );
 
 
-        /*
-           CEK HTTP
-        */
-
         if (!response.ok) {
 
             throw new Error(
@@ -84,14 +69,6 @@ for (const [key, url] of Object.entries(files)) {
 
         }
 
-
-        /*
-           BACA SEBAGAI TEXT TERLEBIH DAHULU
-
-           Ini sengaja dilakukan agar kita bisa
-           mengetahui apabila server mengembalikan
-           HTML/error page.
-        */
 
         const text = await response.text();
 
@@ -105,11 +82,8 @@ for (const [key, url] of Object.entries(files)) {
         }
 
 
-        /*
-           PARSE JSON
-        */
-
         let json;
+
 
         try {
 
@@ -130,16 +104,6 @@ for (const [key, url] of Object.entries(files)) {
 
         }
 
-
-        /*
-           NORMALISASI DATA
-
-           Mendukung:
-
-           1. Array langsung
-           2. Object { data: [] }
-           3. Object { items: [] }
-        */
 
         let arrayData;
 
@@ -195,12 +159,6 @@ for (const [key, url] of Object.entries(files)) {
         );
 
 
-        /*
-           Tetap gunakan array kosong
-           supaya dashboard lainnya
-           tetap berjalan.
-        */
-
         data[key] = [];
 
     }
@@ -214,23 +172,9 @@ console.log(data);
 console.log("====================================");
 
 
-/*
-   UPDATE STATISTIK
-*/
-
 updateStatistics(data);
 
-
-/*
-   UPDATE AKTIVITAS
-*/
-
 updateActivities(data);
-
-
-/*
-   UPDATE STATUS DATA
-*/
 
 updateSystemStatus(data);
 ```
@@ -390,9 +334,7 @@ if (!container) return;
 const activities = [];
 
 
-/*
-   BERITA
-*/
+/* BERITA */
 
 data.berita
     .slice(0, 3)
@@ -415,9 +357,7 @@ data.berita
     });
 
 
-/*
-   AGENDA
-*/
+/* AGENDA */
 
 data.agenda
     .slice(0, 3)
@@ -440,9 +380,7 @@ data.agenda
     });
 
 
-/*
-   UMKM
-*/
+/* UMKM */
 
 data.umkm
     .slice(0, 2)
@@ -463,9 +401,7 @@ data.umkm
     });
 
 
-/*
-   BUMDES
-*/
+/* BUMDES */
 
 data.bumdes
     .slice(0, 2)
@@ -486,9 +422,7 @@ data.bumdes
     });
 
 
-/*
-   DESA
-*/
+/* DESA */
 
 data.desa
     .slice(0, 2)
@@ -511,9 +445,7 @@ data.desa
     });
 
 
-/*
-   MAKSIMAL 7 AKTIVITAS
-*/
+/* MAKSIMAL 7 AKTIVITAS */
 
 const latest =
     activities.slice(0, 7);
