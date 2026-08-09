@@ -1,832 +1,436 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+/* =====================================================
+   PLAZA DAYEUHLUHUR
+   DASHBOARD DATA ENGINE V1
+===================================================== */
 
-    <meta charset="UTF-8">
+document.addEventListener("DOMContentLoaded", () => {
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    console.log("Dashboard Plaza Dayeuhluhur aktif.");
 
-    <title>Dashboard Admin | Plaza Dayeuhluhur</title>
+    loadDashboardData();
+    setupMobileMenu();
 
-    <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+});
 
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Dashboard CSS -->
-    <link
-        rel="stylesheet"
-        href="assets/css/dashboard.css">
+/* =====================================================
+   LOAD SEMUA DATA
+===================================================== */
 
-</head>
+async function loadDashboardData() {
 
-<body>
+    const files = {
 
-<div class="dashboard-wrapper">
+        desa: "data/desa.json",
 
-    <!-- =========================================
-         SIDEBAR
-    ========================================== -->
+        bumdes: "data/bumdes.json",
 
-    <aside class="sidebar">
+        umkm: "data/umkm.json",
 
-        <div class="sidebar-brand">
+        bisnis: "data/bisnis.json",
 
-            <div class="brand-icon">
-                <i class="fa-solid fa-city"></i>
+        bursa: "data/bursa.json",
+
+        wisata: "data/wisata.json",
+
+        berita: "data/berita.json",
+
+        agenda: "data/agenda.json"
+
+    };
+
+
+    try {
+
+        const results = await Promise.all(
+
+            Object.entries(files).map(
+                async ([key, url]) => {
+
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            `Gagal mengambil ${url}`
+                        );
+
+                    }
+
+                    const data = await response.json();
+
+                    return [key, data];
+
+                }
+            )
+
+        );
+
+
+        const data = Object.fromEntries(results);
+
+
+        console.log("Data dashboard berhasil dimuat:", data);
+
+
+        /* Statistik */
+
+        updateStatistics(data);
+
+
+        /* Aktivitas */
+
+        updateActivities(data);
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Gagal memuat data dashboard:",
+            error
+        );
+
+        showDataError();
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE STATISTIK
+===================================================== */
+
+function updateStatistics(data) {
+
+    setValue(
+        "statDesa",
+        data.desa.length
+    );
+
+
+    setValue(
+        "statBumdes",
+        data.bumdes.length
+    );
+
+
+    setValue(
+        "statUmkm",
+        data.umkm.length
+    );
+
+
+    setValue(
+        "statBisnis",
+        data.bisnis.length
+    );
+
+
+    setValue(
+        "statBursa",
+        data.bursa.length
+    );
+
+
+    setValue(
+        "statWisata",
+        data.wisata.length
+    );
+
+
+    setValue(
+        "statBerita",
+        data.berita.length
+    );
+
+
+    setValue(
+        "statAgenda",
+        data.agenda.length
+    );
+
+}
+
+
+/* =====================================================
+   HELPER SET VALUE
+===================================================== */
+
+function setValue(id, value) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.textContent = value;
+
+    }
+
+}
+
+
+/* =====================================================
+   AKTIVITAS TERBARU
+===================================================== */
+
+function updateActivities(data) {
+
+    const container =
+        document.getElementById(
+            "activityList"
+        );
+
+
+    if (!container) return;
+
+
+    const activities = [];
+
+
+    /* Berita */
+
+    data.berita
+        .slice(0, 3)
+        .forEach(item => {
+
+            activities.push({
+
+                icon: "fa-newspaper",
+
+                title: item.judul,
+
+                info:
+                    `${item.kategori || "Berita"} • ${item.tanggal || ""}`
+
+            });
+
+        });
+
+
+    /* Agenda */
+
+    data.agenda
+        .slice(0, 3)
+        .forEach(item => {
+
+            activities.push({
+
+                icon: "fa-calendar-days",
+
+                title: item.judul,
+
+                info:
+                    `${item.kategori || "Agenda"} • ${item.tanggal || ""}`
+
+            });
+
+        });
+
+
+    /* UMKM */
+
+    data.umkm
+        .slice(0, 2)
+        .forEach(item => {
+
+            activities.push({
+
+                icon: "fa-store",
+
+                title:
+                    `${item.nama} terdaftar sebagai UMKM`,
+
+                info:
+                    `${item.kategori || "UMKM"} • ${item.desa || ""}`
+
+            });
+
+        });
+
+
+    /* Maksimal 7 aktivitas */
+
+    const latest =
+        activities.slice(0, 7);
+
+
+    if (!latest.length) {
+
+        container.innerHTML = `
+
+            <div class="loading-state">
+
+                Belum ada aktivitas.
+
             </div>
 
-            <div>
-                <h5>PLAZA</h5>
-                <span>DAYEUHLUHUR</span>
-            </div>
+        `;
 
-        </div>
+        return;
 
+    }
 
-        <!-- MENU -->
 
-        <nav class="sidebar-menu">
+    container.innerHTML =
+        latest.map(item => `
 
-            <p class="menu-title">
-                UTAMA
-            </p>
+            <div class="activity-item">
 
-            <a href="dashboard.html"
-               class="menu-item active">
+                <div class="activity-icon">
 
-                <i class="fa-solid fa-gauge-high"></i>
-
-                <span>Dashboard</span>
-
-            </a>
-
-
-            <p class="menu-title">
-                EKOSISTEM
-            </p>
-
-            <a href="desa.html"
-               class="menu-item">
-
-                <i class="fa-solid fa-house"></i>
-
-                <span>Desa</span>
-
-            </a>
-
-
-            <a href="bumdes.html"
-               class="menu-item">
-
-                <i class="fa-solid fa-building"></i>
-
-                <span>BUMDes</span>
-
-            </a>
-
-
-            <a href="umkm.html"
-               class="menu-item">
-
-                <i class="fa-solid fa-store"></i>
-
-                <span>UMKM</span>
-
-            </a>
-
-
-            <a href="#"
-               class="menu-item">
-
-                <i class="fa-solid fa-briefcase"></i>
-
-                <span>Bisnis</span>
-
-            </a>
-
-
-            <a href="#"
-               class="menu-item">
-
-                <i class="fa-solid fa-arrows-rotate"></i>
-
-                <span>Bursa Lokal</span>
-
-            </a>
-
-
-            <a href="#"
-               class="menu-item">
-
-                <i class="fa-solid fa-mountain-sun"></i>
-
-                <span>Wisata</span>
-
-            </a>
-
-
-            <p class="menu-title">
-                KONTEN
-            </p>
-
-
-            <a href="#"
-               class="menu-item">
-
-                <i class="fa-solid fa-newspaper"></i>
-
-                <span>Berita</span>
-
-            </a>
-
-
-            <a href="#"
-               class="menu-item">
-
-                <i class="fa-solid fa-calendar-days"></i>
-
-                <span>Agenda</span>
-
-            </a>
-
-
-            <p class="menu-title">
-                SISTEM
-            </p>
-
-
-            <a href="#"
-               class="menu-item">
-
-                <i class="fa-solid fa-users"></i>
-
-                <span>Pengguna</span>
-
-            </a>
-
-
-            <a href="#"
-               class="menu-item">
-
-                <i class="fa-solid fa-gear"></i>
-
-                <span>Pengaturan</span>
-
-            </a>
-
-        </nav>
-
-
-        <!-- SIDEBAR FOOTER -->
-
-        <div class="sidebar-footer">
-
-            <a href="index.html"
-               class="back-home">
-
-                <i class="fa-solid fa-arrow-left"></i>
-
-                Kembali ke Plaza
-
-            </a>
-
-        </div>
-
-    </aside>
-
-
-
-    <!-- =========================================
-         MAIN CONTENT
-    ========================================== -->
-
-    <main class="main-content">
-
-
-        <!-- TOPBAR -->
-
-        <header class="dashboard-header">
-
-            <div>
-
-                <button
-                    class="mobile-menu-btn"
-                    id="mobileMenuBtn">
-
-                    <i class="fa-solid fa-bars"></i>
-
-                </button>
-
-                <div class="header-title">
-
-                    <span class="header-label">
-                        ADMINISTRATOR
-                    </span>
-
-                    <h1>
-                        Dashboard
-                    </h1>
-
-                    <p>
-                        Pusat pengelolaan eKosistem Digital
-                        Kecamatan Dayeuhluhur.
-                    </p>
+                    <i class="fa-solid ${item.icon}"></i>
 
                 </div>
 
-            </div>
-
-
-            <div class="header-profile">
-
-                <div class="profile-icon">
-
-                    <i class="fa-solid fa-user-shield"></i>
-
-                </div>
-
-                <div class="profile-info">
+                <div class="activity-content">
 
                     <strong>
-                        Admin Plaza
+                        ${escapeHtml(item.title)}
                     </strong>
 
                     <span>
-                        Administrator
+                        ${escapeHtml(item.info)}
                     </span>
 
                 </div>
 
             </div>
 
-        </header>
+        `).join("");
 
+}
 
 
-        <!-- =========================================
-             WELCOME CARD
-        ========================================== -->
+/* =====================================================
+   ERROR DATA
+===================================================== */
 
-        <section class="welcome-card">
+function showDataError() {
 
-            <div>
+    const container =
+        document.getElementById(
+            "activityList"
+        );
 
-                <span class="welcome-label">
-                    PLAZA DAYEUHLUHUR
-                </span>
 
-                <h2>
-                    Selamat Datang di Dashboard 👋
-                </h2>
+    if (!container) return;
 
-                <p>
-                    Pantau perkembangan ekosistem digital
-                    Desa, BUMDes, UMKM, Bisnis dan potensi
-                    lokal Kecamatan Dayeuhluhur.
-                </p>
 
-            </div>
+    container.innerHTML = `
 
-            <div class="welcome-icon">
+        <div class="loading-state">
 
-                <i class="fa-solid fa-chart-line"></i>
+            <i class="fa-solid fa-triangle-exclamation"></i>
 
-            </div>
+            Data belum dapat dimuat.
 
-        </section>
+        </div>
 
+    `;
 
+}
 
-        <!-- =========================================
-             STATISTIK
-        ========================================== -->
 
-        <section class="dashboard-section">
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-            <div class="section-heading">
+function escapeHtml(value) {
 
-                <div>
+    return String(value ?? "")
 
-                    <span>
-                        RINGKASAN DATA
-                    </span>
+        .replace(/&/g, "&amp;")
 
-                    <h3>
-                        Statistik Ekosistem
-                    </h3>
+        .replace(/</g, "&lt;")
 
-                </div>
+        .replace(/>/g, "&gt;")
 
-            </div>
+        .replace(/"/g, "&quot;")
 
+        .replace(/'/g, "&#039;");
 
-            <div class="row g-4">
+}
 
 
-                <!-- DESA -->
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
 
-                <div class="col-xl-3 col-md-6">
+function setupMobileMenu() {
 
-                    <div class="stat-card">
+    const button =
+        document.getElementById(
+            "mobileMenuBtn"
+        );
 
-                        <div class="stat-icon desa-icon">
 
-                            <i class="fa-solid fa-house"></i>
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
 
-                        </div>
 
-                        <div class="stat-content">
+    const overlay =
+        document.getElementById(
+            "sidebarOverlay"
+        );
 
-                            <span>
-                                Desa
-                            </span>
 
-                            <strong id="totalDesa">
-                                -
-                            </strong>
+    if (
+        !button ||
+        !sidebar ||
+        !overlay
+    ) {
 
-                            <small>
-                                Desa terdaftar
-                            </small>
+        return;
 
-                        </div>
+    }
 
-                    </div>
 
-                </div>
+    button.addEventListener(
+        "click",
+        () => {
 
+            sidebar.classList.add("show");
 
-                <!-- BUMDES -->
+            overlay.classList.add("show");
 
-                <div class="col-xl-3 col-md-6">
+        }
+    );
 
-                    <div class="stat-card">
 
-                        <div class="stat-icon bumdes-icon">
+    overlay.addEventListener(
+        "click",
+        () => {
 
-                            <i class="fa-solid fa-building"></i>
+            sidebar.classList.remove("show");
 
-                        </div>
+            overlay.classList.remove("show");
 
-                        <div class="stat-content">
+        }
+    );
 
-                            <span>
-                                BUMDes
-                            </span>
 
-                            <strong id="totalBumdes">
-                                -
-                            </strong>
+    document
+        .querySelectorAll(".menu-item")
+        .forEach(item => {
 
-                            <small>
-                                Unit BUMDes
-                            </small>
+            item.addEventListener(
+                "click",
+                () => {
 
-                        </div>
+                    sidebar.classList.remove("show");
 
-                    </div>
+                    overlay.classList.remove("show");
 
-                </div>
+                }
+            );
 
+        });
 
-                <!-- UMKM -->
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon umkm-icon">
-
-                            <i class="fa-solid fa-store"></i>
-
-                        </div>
-
-                        <div class="stat-content">
-
-                            <span>
-                                UMKM
-                            </span>
-
-                            <strong id="totalUmkm">
-                                -
-                            </strong>
-
-                            <small>
-                                UMKM terdaftar
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- BISNIS -->
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon bisnis-icon">
-
-                            <i class="fa-solid fa-briefcase"></i>
-
-                        </div>
-
-                        <div class="stat-content">
-
-                            <span>
-                                Bisnis
-                            </span>
-
-                            <strong id="totalBisnis">
-                                -
-                            </strong>
-
-                            <small>
-                                Direktori bisnis
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- BURSA -->
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon bursa-icon">
-
-                            <i class="fa-solid fa-arrows-rotate"></i>
-
-                        </div>
-
-                        <div class="stat-content">
-
-                            <span>
-                                Bursa
-                            </span>
-
-                            <strong id="totalBursa">
-                                -
-                            </strong>
-
-                            <small>
-                                Listing lokal
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- WISATA -->
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon wisata-icon">
-
-                            <i class="fa-solid fa-mountain-sun"></i>
-
-                        </div>
-
-                        <div class="stat-content">
-
-                            <span>
-                                Wisata
-                            </span>
-
-                            <strong id="totalWisata">
-                                -
-                            </strong>
-
-                            <small>
-                                Destinasi
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- BERITA -->
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon berita-icon">
-
-                            <i class="fa-solid fa-newspaper"></i>
-
-                        </div>
-
-                        <div class="stat-content">
-
-                            <span>
-                                Berita
-                            </span>
-
-                            <strong id="totalBerita">
-                                -
-                            </strong>
-
-                            <small>
-                                Informasi
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- AGENDA -->
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon agenda-icon">
-
-                            <i class="fa-solid fa-calendar-days"></i>
-
-                        </div>
-
-                        <div class="stat-content">
-
-                            <span>
-                                Agenda
-                            </span>
-
-                            <strong id="totalAgenda">
-                                -
-                            </strong>
-
-                            <small>
-                                Kegiatan
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================================
-             INFORMASI BAWAH
-        ========================================== -->
-
-        <section class="dashboard-section">
-
-            <div class="row g-4">
-
-
-                <!-- AKTIVITAS TERBARU -->
-
-                <div class="col-lg-7">
-
-                    <div class="dashboard-panel">
-
-                        <div class="panel-header">
-
-                            <div>
-
-                                <span>
-                                    AKTIVITAS
-                                </span>
-
-                                <h3>
-                                    Informasi Terbaru
-                                </h3>
-
-                            </div>
-
-                            <i class="fa-solid fa-bell"></i>
-
-                        </div>
-
-
-                        <div
-                            id="aktivitasTerbaru"
-                            class="activity-list">
-
-                            <div class="loading-state">
-
-                                <i class="fa-solid fa-spinner fa-spin"></i>
-
-                                <span>
-                                    Memuat informasi...
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- STATUS SISTEM -->
-
-                <div class="col-lg-5">
-
-                    <div class="dashboard-panel">
-
-                        <div class="panel-header">
-
-                            <div>
-
-                                <span>
-                                    SISTEM
-                                </span>
-
-                                <h3>
-                                    Status Platform
-                                </h3>
-
-                            </div>
-
-                            <i class="fa-solid fa-server"></i>
-
-                        </div>
-
-
-                        <div class="system-status">
-
-
-                            <div class="system-item">
-
-                                <div>
-
-                                    <span class="status-dot online"></span>
-
-                                    Data Desa
-
-                                </div>
-
-                                <strong>
-                                    Aktif
-                                </strong>
-
-                            </div>
-
-
-                            <div class="system-item">
-
-                                <div>
-
-                                    <span class="status-dot online"></span>
-
-                                    Data UMKM
-
-                                </div>
-
-                                <strong>
-                                    Aktif
-                                </strong>
-
-                            </div>
-
-
-                            <div class="system-item">
-
-                                <div>
-
-                                    <span class="status-dot online"></span>
-
-                                    Data BUMDes
-
-                                </div>
-
-                                <strong>
-                                    Aktif
-                                </strong>
-
-                            </div>
-
-
-                            <div class="system-item">
-
-                                <div>
-
-                                    <span class="status-dot online"></span>
-
-                                    Data Bisnis
-
-                                </div>
-
-                                <strong>
-                                    Aktif
-                                </strong>
-
-                            </div>
-
-
-                            <div class="system-item">
-
-                                <div>
-
-                                    <span class="status-dot online"></span>
-
-                                    Data Bursa
-
-                                </div>
-
-                                <strong>
-                                    Aktif
-                                </strong>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================================
-             FOOTER DASHBOARD
-        ========================================== -->
-
-        <footer class="dashboard-footer">
-
-            <span>
-                © 2026 Plaza Dayeuhluhur
-            </span>
-
-            <span>
-                eKatalog & eKosistem Digital
-            </span>
-
-        </footer>
-
-
-    </main>
-
-</div>
-
-
-
-<!-- =========================================
-     MOBILE OVERLAY
-========================================== -->
-
-<div
-    class="sidebar-overlay"
-    id="sidebarOverlay">
-</div>
-
-
-
-<!-- Bootstrap JS -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-</script>
-
-
-<!-- Dashboard JS -->
-
-<script
-    src="assets/js/dashboard.js">
-</script>
-
-
-</body>
-</html>
+}
