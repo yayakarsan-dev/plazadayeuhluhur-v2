@@ -2,7 +2,6 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
    USER MANAGEMENT ENGINE V3
-   FINAL - STABIL
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -27,36 +26,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function loadUsers() {
 
-    var tableBody =
-        document.getElementById("userTableBody");
+    const tableBody = document.getElementById("userTableBody");
 
     if (!tableBody) {
 
-        console.error(
-            "Element userTableBody tidak ditemukan."
-        );
+        console.error("Element userTableBody tidak ditemukan.");
 
         return;
     }
 
+    console.log("Membaca database pengguna...");
+
     try {
 
-        console.log(
-            "Membaca database pengguna..."
-        );
-
-
-        var response = await fetch(
+        const response = await fetch(
             "data/users.json",
             {
                 cache: "no-store"
             }
         );
 
+        console.log(
+            "Status users.json:",
+            response.status
+        );
 
-        /* =============================================
-           CEK RESPONSE SERVER
-        ============================================= */
 
         if (!response.ok) {
 
@@ -70,17 +64,7 @@ async function loadUsers() {
         }
 
 
-        console.log(
-            "users.json berhasil ditemukan."
-        );
-
-
-        /* =============================================
-           BACA TEXT
-        ============================================= */
-
-        var text =
-            await response.text();
+        const text = await response.text();
 
 
         if (!text.trim()) {
@@ -92,27 +76,23 @@ async function loadUsers() {
         }
 
 
-        /* =============================================
-           PARSE JSON
-        ============================================= */
+        console.log(
+            "Isi awal users.json:",
+            text.substring(0, 200)
+        );
 
-        var users;
+
+        let users;
 
         try {
 
-            users =
-                JSON.parse(text);
+            users = JSON.parse(text);
 
-        }
-
-        catch (jsonError) {
+        } catch (jsonError) {
 
             console.error(
-                "Isi users.json tidak valid:"
-            );
-
-            console.error(
-                text.substring(0, 500)
+                "JSON ERROR:",
+                jsonError
             );
 
             throw new Error(
@@ -122,48 +102,31 @@ async function loadUsers() {
         }
 
 
-        /* =============================================
-           PASTIKAN ARRAY
-        ============================================= */
-
         if (!Array.isArray(users)) {
 
             throw new Error(
-                "Format users.json harus berupa array."
+                "Format users.json harus berupa ARRAY."
             );
 
         }
 
 
         console.log(
-            "Jumlah pengguna: " +
+            "Jumlah pengguna:",
             users.length
         );
 
 
-        /* =============================================
-           SIMPAN GLOBAL
-        ============================================= */
-
         window.plazaUsers = users;
 
 
-        /* =============================================
-           UPDATE STATISTIK
-        ============================================= */
-
         updateUserStatistics(users);
-
-
-        /* =============================================
-           TAMPILKAN DATA
-        ============================================= */
 
         renderUsers(users);
 
 
         console.log(
-            "✓ Database pengguna berhasil ditampilkan."
+            "Database pengguna berhasil ditampilkan."
         );
 
     }
@@ -171,28 +134,28 @@ async function loadUsers() {
     catch (error) {
 
         console.error(
-            "✗ GAGAL MEMBACA DATABASE PENGGUNA"
+            "GAGAL MEMBACA DATABASE PENGGUNA:",
+            error
         );
-
-        console.error(error);
 
 
         tableBody.innerHTML =
 
             '<tr>' +
 
-                '<td colspan="7" ' +
-                    'class="text-center py-4 text-danger">' +
+                '<td colspan="7" class="text-center py-4 text-danger">' +
 
-                    '<i class="fa-solid fa-triangle-exclamation"></i>' +
+                    '<i class="fa-solid fa-triangle-exclamation"></i> ' +
 
-                    '<br><br>' +
-
-                    '<strong>Gagal membaca database pengguna.</strong>' +
+                    'Gagal membaca database pengguna.' +
 
                     '<br>' +
 
-                    escapeHtml(error.message) +
+                    '<small>' +
+
+                        escapeHtml(error.message) +
+
+                    '</small>' +
 
                 '</td>' +
 
@@ -204,15 +167,10 @@ async function loadUsers() {
 
 
 /* =====================================================
-   UPDATE STATISTIK PENGGUNA
+   UPDATE STATISTIK
 ===================================================== */
 
 function updateUserStatistics(users) {
-
-
-    /* =============================================
-       TOTAL PENGGUNA
-    ============================================= */
 
     setValue(
         "totalUsers",
@@ -220,16 +178,11 @@ function updateUserStatistics(users) {
     );
 
 
-    /* =============================================
-       ADMINISTRATOR
-    ============================================= */
+    const totalAdmin = users.filter(function (user) {
 
-    var totalAdmin =
-        users.filter(function (user) {
+        return user.role === "Administrator";
 
-            return user.role === "Administrator";
-
-        }).length;
+    }).length;
 
 
     setValue(
@@ -238,19 +191,14 @@ function updateUserStatistics(users) {
     );
 
 
-    /* =============================================
-       UMKM
-    ============================================= */
+    const totalUmkm = users.filter(function (user) {
 
-    var totalUmkm =
-        users.filter(function (user) {
+        return (
+            user.role === "Pelaku UMKM" ||
+            user.role === "UMKM"
+        );
 
-            return (
-                user.role === "Pelaku UMKM" ||
-                user.role === "UMKM"
-            );
-
-        }).length;
+    }).length;
 
 
     setValue(
@@ -259,19 +207,14 @@ function updateUserStatistics(users) {
     );
 
 
-    /* =============================================
-       ADMIN DESA
-    ============================================= */
+    const totalDesa = users.filter(function (user) {
 
-    var totalDesa =
-        users.filter(function (user) {
+        return (
+            user.role === "Admin Desa" ||
+            user.role === "Desa"
+        );
 
-            return (
-                user.role === "Admin Desa" ||
-                user.role === "Desa"
-            );
-
-        }).length;
+    }).length;
 
 
     setValue(
@@ -283,12 +226,12 @@ function updateUserStatistics(users) {
 
 
 /* =====================================================
-   RENDER USER TABLE
+   RENDER TABLE
 ===================================================== */
 
 function renderUsers(users) {
 
-    var tableBody =
+    const tableBody =
         document.getElementById(
             "userTableBody"
         );
@@ -301,26 +244,19 @@ function renderUsers(users) {
     }
 
 
-    /* =============================================
-       JIKA TIDAK ADA DATA
-    ============================================= */
-
-    if (!users.length) {
+    if (!users || users.length === 0) {
 
         tableBody.innerHTML =
 
             '<tr>' +
 
-                '<td colspan="7" ' +
-                    'class="text-center py-4">' +
+                '<td colspan="7" class="text-center py-4">' +
 
-                    '<i class="fa-solid fa-users-slash"></i>' +
+                    '<i class="fa-solid fa-users-slash"></i> ' +
 
-                    '<br><br>' +
+                    'Belum ada pengguna.' +
 
-                    'Belum ada pengguna.'
-
-                + '</td>' +
+                '</td>' +
 
             '</tr>';
 
@@ -329,46 +265,46 @@ function renderUsers(users) {
     }
 
 
-    /* =============================================
-       BUAT BARIS TABEL
-    ============================================= */
-
-    var html = "";
+    let html = "";
 
 
     users.forEach(function (user, index) {
 
-
-        var status =
+        const status =
             user.status || "Aktif";
 
 
-        var statusClass =
-            status.toLowerCase() === "aktif"
-                ? "text-success"
-                : "text-danger";
+        let statusClass =
+            "text-success";
+
+
+        if (
+            String(status).toLowerCase() !== "aktif"
+        ) {
+
+            statusClass =
+                "text-danger";
+
+        }
 
 
         html +=
 
             '<tr>' +
 
-
-                /* NO */
-
                 '<td>' +
+
                     (index + 1) +
+
                 '</td>' +
 
-
-                /* NAMA */
 
                 '<td>' +
 
                     '<strong>' +
 
                         escapeHtml(
-                            user.nama || "-"
+                            user.nama
                         ) +
 
                     '</strong>' +
@@ -376,33 +312,27 @@ function renderUsers(users) {
                 '</td>' +
 
 
-                /* USERNAME */
-
                 '<td>' +
 
                     escapeHtml(
-                        user.username || "-"
+                        user.username
                     ) +
 
                 '</td>' +
 
-
-                /* ROLE */
 
                 '<td>' +
 
                     '<span class="user-role">' +
 
                         escapeHtml(
-                            user.role || "-"
+                            user.role
                         ) +
 
                     '</span>' +
 
                 '</td>' +
 
-
-                /* UNIT */
 
                 '<td>' +
 
@@ -412,8 +342,6 @@ function renderUsers(users) {
 
                 '</td>' +
 
-
-                /* STATUS */
 
                 '<td>' +
 
@@ -432,16 +360,18 @@ function renderUsers(users) {
                 '</td>' +
 
 
-                /* AKSI */
-
                 '<td>' +
 
                     '<button ' +
+
                         'type="button" ' +
+
                         'class="btn btn-sm btn-outline-primary me-1" ' +
+
                         'onclick="editUser(' +
                             Number(user.id) +
                         ')" ' +
+
                         'title="Edit Pengguna">' +
 
                         '<i class="fa-solid fa-pen"></i>' +
@@ -450,11 +380,15 @@ function renderUsers(users) {
 
 
                     '<button ' +
+
                         'type="button" ' +
+
                         'class="btn btn-sm btn-outline-danger" ' +
+
                         'onclick="deleteUser(' +
                             Number(user.id) +
                         ')" ' +
+
                         'title="Hapus Pengguna">' +
 
                         '<i class="fa-solid fa-trash"></i>' +
@@ -463,14 +397,12 @@ function renderUsers(users) {
 
                 '</td>' +
 
-
             '</tr>';
 
     });
 
 
-    tableBody.innerHTML =
-        html;
+    tableBody.innerHTML = html;
 
 }
 
@@ -481,7 +413,7 @@ function renderUsers(users) {
 
 function setupSearch() {
 
-    var searchInput =
+    const searchInput =
         document.getElementById(
             "searchUser"
         );
@@ -498,31 +430,29 @@ function setupSearch() {
         "input",
         function () {
 
-
-            var keyword =
+            const keyword =
                 searchInput.value
                     .toLowerCase()
                     .trim();
 
 
-            var users =
+            const users =
                 window.plazaUsers || [];
 
 
-            var filteredUsers =
+            const filteredUsers =
                 users.filter(function (user) {
 
+                    const text =
 
-                    var text =
+                        (user.nama || "") + " " +
 
-                        (user.nama || "") +
-                        " " +
-                        (user.username || "") +
-                        " " +
-                        (user.role || "") +
-                        " " +
-                        (user.unit || "") +
-                        " " +
+                        (user.username || "") + " " +
+
+                        (user.role || "") + " " +
+
+                        (user.unit || "") + " " +
+
                         (user.status || "");
 
 
@@ -549,7 +479,7 @@ function setupSearch() {
 
 function setValue(id, value) {
 
-    var element =
+    const element =
         document.getElementById(id);
 
 
@@ -569,11 +499,11 @@ function setValue(id, value) {
 
 function editUser(id) {
 
-    var users =
+    const users =
         window.plazaUsers || [];
 
 
-    var user =
+    const user =
         users.find(function (item) {
 
             return Number(item.id) === Number(id);
@@ -622,11 +552,11 @@ function editUser(id) {
 
 function deleteUser(id) {
 
-    var users =
+    const users =
         window.plazaUsers || [];
 
 
-    var user =
+    const user =
         users.find(function (item) {
 
             return Number(item.id) === Number(id);
@@ -647,12 +577,13 @@ function deleteUser(id) {
 
     alert(
 
-        "Pengguna \"" +
-        (user.nama || "-") +
-        "\" siap untuk dihapus.\n\n" +
+        'Pengguna "' +
+        (user.nama || "") +
+        '" siap dihapus.\n\n' +
 
-        "Fitur hapus permanen akan kita aktifkan " +
-        "setelah sistem CRUD database selesai."
+        "Fitur hapus permanen akan diaktifkan " +
+
+        "setelah sistem CRUD terhubung."
 
     );
 
@@ -665,7 +596,7 @@ function deleteUser(id) {
 
 function loadAdminProfile() {
 
-    var adminName =
+    const adminName =
         sessionStorage.getItem(
             "plazaAdminName"
         );
@@ -678,7 +609,7 @@ function loadAdminProfile() {
     }
 
 
-    var profileName =
+    const profileName =
         document.querySelector(
             ".profile-info strong"
         );
@@ -700,19 +631,19 @@ function loadAdminProfile() {
 
 function setupMobileMenu() {
 
-    var button =
+    const button =
         document.getElementById(
             "mobileMenuBtn"
         );
 
 
-    var sidebar =
+    const sidebar =
         document.getElementById(
             "sidebar"
         );
 
 
-    var overlay =
+    const overlay =
         document.getElementById(
             "sidebarOverlay"
         );
@@ -791,7 +722,7 @@ function setupMobileMenu() {
 
 function setupLogout() {
 
-    var logoutButton =
+    const logoutButton =
         document.getElementById(
             "logoutButton"
         );
@@ -836,7 +767,9 @@ function setupLogout() {
 
 function escapeHtml(value) {
 
-    return String(value || "")
+    return String(
+        value ?? ""
+    )
 
         .replace(
             /&/g,
