@@ -1,14 +1,15 @@
 ```javascript
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   USER MANAGEMENT ENGINE V2
+   USER MANAGEMENT ENGINE V3
+   FINAL - STABIL
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("User Management Engine V2 aktif");
+    console.log("User Management Engine V3 aktif");
     console.log("====================================");
 
     loadUsers();
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadUsers() {
 
-    const tableBody =
+    var tableBody =
         document.getElementById("userTableBody");
 
     if (!tableBody) {
@@ -44,7 +45,8 @@ async function loadUsers() {
             "Membaca database pengguna..."
         );
 
-        const response = await fetch(
+
+        var response = await fetch(
             "data/users.json",
             {
                 cache: "no-store"
@@ -52,16 +54,32 @@ async function loadUsers() {
         );
 
 
+        /* =============================================
+           CEK RESPONSE SERVER
+        ============================================= */
+
         if (!response.ok) {
 
             throw new Error(
-                `HTTP ${response.status} - ${response.statusText}`
+                "HTTP " +
+                response.status +
+                " - " +
+                response.statusText
             );
 
         }
 
 
-        const text =
+        console.log(
+            "users.json berhasil ditemukan."
+        );
+
+
+        /* =============================================
+           BACA TEXT
+        ============================================= */
+
+        var text =
             await response.text();
 
 
@@ -74,8 +92,11 @@ async function loadUsers() {
         }
 
 
-        let users;
+        /* =============================================
+           PARSE JSON
+        ============================================= */
 
+        var users;
 
         try {
 
@@ -87,8 +108,11 @@ async function loadUsers() {
         catch (jsonError) {
 
             console.error(
-                "Isi users.json:",
-                text.substring(0, 300)
+                "Isi users.json tidak valid:"
+            );
+
+            console.error(
+                text.substring(0, 500)
             );
 
             throw new Error(
@@ -97,6 +121,10 @@ async function loadUsers() {
 
         }
 
+
+        /* =============================================
+           PASTIKAN ARRAY
+        ============================================= */
 
         if (!Array.isArray(users)) {
 
@@ -108,50 +136,67 @@ async function loadUsers() {
 
 
         console.log(
-            `✓ ${users.length} pengguna berhasil dibaca.`
+            "Jumlah pengguna: " +
+            users.length
         );
 
 
-        /*
-           SIMPAN DATA KE GLOBAL
-           untuk pencarian dan statistik
-        */
+        /* =============================================
+           SIMPAN GLOBAL
+        ============================================= */
 
         window.plazaUsers = users;
 
 
+        /* =============================================
+           UPDATE STATISTIK
+        ============================================= */
+
         updateUserStatistics(users);
+
+
+        /* =============================================
+           TAMPILKAN DATA
+        ============================================= */
 
         renderUsers(users);
 
-    }
 
+        console.log(
+            "✓ Database pengguna berhasil ditampilkan."
+        );
+
+    }
 
     catch (error) {
 
         console.error(
-            "✗ Gagal membaca database pengguna:",
-            error
+            "✗ GAGAL MEMBACA DATABASE PENGGUNA"
         );
 
+        console.error(error);
 
-        tableBody.innerHTML = `
 
-            <tr>
+        tableBody.innerHTML =
 
-                <td
-                    colspan="7"
-                    class="text-center py-4 text-danger">
+            '<tr>' +
 
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                '<td colspan="7" ' +
+                    'class="text-center py-4 text-danger">' +
 
-                    Gagal membaca database pengguna.
+                    '<i class="fa-solid fa-triangle-exclamation"></i>' +
 
-                </td>
+                    '<br><br>' +
 
-            </tr>
+                    '<strong>Gagal membaca database pengguna.</strong>' +
 
-        `;
+                    '<br>' +
+
+                    escapeHtml(error.message) +
+
+                '</td>' +
+
+            '</tr>';
 
     }
 
@@ -164,9 +209,10 @@ async function loadUsers() {
 
 function updateUserStatistics(users) {
 
-    /*
-       TOTAL USER
-    */
+
+    /* =============================================
+       TOTAL PENGGUNA
+    ============================================= */
 
     setValue(
         "totalUsers",
@@ -174,14 +220,16 @@ function updateUserStatistics(users) {
     );
 
 
-    /*
+    /* =============================================
        ADMINISTRATOR
-    */
+    ============================================= */
 
-    const totalAdmin =
-        users.filter(user =>
-            user.role === "Administrator"
-        ).length;
+    var totalAdmin =
+        users.filter(function (user) {
+
+            return user.role === "Administrator";
+
+        }).length;
 
 
     setValue(
@@ -190,19 +238,19 @@ function updateUserStatistics(users) {
     );
 
 
-    /*
+    /* =============================================
        UMKM
+    ============================================= */
 
-       Mendukung:
-       Pelaku UMKM
-       UMKM
-    */
+    var totalUmkm =
+        users.filter(function (user) {
 
-    const totalUmkm =
-        users.filter(user =>
-            user.role === "Pelaku UMKM" ||
-            user.role === "UMKM"
-        ).length;
+            return (
+                user.role === "Pelaku UMKM" ||
+                user.role === "UMKM"
+            );
+
+        }).length;
 
 
     setValue(
@@ -211,19 +259,19 @@ function updateUserStatistics(users) {
     );
 
 
-    /*
+    /* =============================================
        ADMIN DESA
+    ============================================= */
 
-       Mendukung:
-       Admin Desa
-       Desa
-    */
+    var totalDesa =
+        users.filter(function (user) {
 
-    const totalDesa =
-        users.filter(user =>
-            user.role === "Admin Desa" ||
-            user.role === "Desa"
-        ).length;
+            return (
+                user.role === "Admin Desa" ||
+                user.role === "Desa"
+            );
+
+        }).length;
 
 
     setValue(
@@ -235,150 +283,194 @@ function updateUserStatistics(users) {
 
 
 /* =====================================================
-   RENDER TABLE
+   RENDER USER TABLE
 ===================================================== */
 
 function renderUsers(users) {
 
-    const tableBody =
+    var tableBody =
         document.getElementById(
             "userTableBody"
         );
 
 
-    if (!tableBody) return;
-
-
-    if (!users.length) {
-
-        tableBody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="7"
-                    class="text-center py-4">
-
-                    <i class="fa-solid fa-users-slash"></i>
-
-                    Belum ada pengguna.
-
-                </td>
-
-            </tr>
-
-        `;
+    if (!tableBody) {
 
         return;
 
     }
 
 
+    /* =============================================
+       JIKA TIDAK ADA DATA
+    ============================================= */
+
+    if (!users.length) {
+
+        tableBody.innerHTML =
+
+            '<tr>' +
+
+                '<td colspan="7" ' +
+                    'class="text-center py-4">' +
+
+                    '<i class="fa-solid fa-users-slash"></i>' +
+
+                    '<br><br>' +
+
+                    'Belum ada pengguna.'
+
+                + '</td>' +
+
+            '</tr>';
+
+        return;
+
+    }
+
+
+    /* =============================================
+       BUAT BARIS TABEL
+    ============================================= */
+
+    var html = "";
+
+
+    users.forEach(function (user, index) {
+
+
+        var status =
+            user.status || "Aktif";
+
+
+        var statusClass =
+            status.toLowerCase() === "aktif"
+                ? "text-success"
+                : "text-danger";
+
+
+        html +=
+
+            '<tr>' +
+
+
+                /* NO */
+
+                '<td>' +
+                    (index + 1) +
+                '</td>' +
+
+
+                /* NAMA */
+
+                '<td>' +
+
+                    '<strong>' +
+
+                        escapeHtml(
+                            user.nama || "-"
+                        ) +
+
+                    '</strong>' +
+
+                '</td>' +
+
+
+                /* USERNAME */
+
+                '<td>' +
+
+                    escapeHtml(
+                        user.username || "-"
+                    ) +
+
+                '</td>' +
+
+
+                /* ROLE */
+
+                '<td>' +
+
+                    '<span class="user-role">' +
+
+                        escapeHtml(
+                            user.role || "-"
+                        ) +
+
+                    '</span>' +
+
+                '</td>' +
+
+
+                /* UNIT */
+
+                '<td>' +
+
+                    escapeHtml(
+                        user.unit || "-"
+                    ) +
+
+                '</td>' +
+
+
+                /* STATUS */
+
+                '<td>' +
+
+                    '<span class="' +
+                        statusClass +
+                    '">' +
+
+                        '<i class="fa-solid fa-circle"></i> ' +
+
+                        escapeHtml(
+                            status
+                        ) +
+
+                    '</span>' +
+
+                '</td>' +
+
+
+                /* AKSI */
+
+                '<td>' +
+
+                    '<button ' +
+                        'type="button" ' +
+                        'class="btn btn-sm btn-outline-primary me-1" ' +
+                        'onclick="editUser(' +
+                            Number(user.id) +
+                        ')" ' +
+                        'title="Edit Pengguna">' +
+
+                        '<i class="fa-solid fa-pen"></i>' +
+
+                    '</button>' +
+
+
+                    '<button ' +
+                        'type="button" ' +
+                        'class="btn btn-sm btn-outline-danger" ' +
+                        'onclick="deleteUser(' +
+                            Number(user.id) +
+                        ')" ' +
+                        'title="Hapus Pengguna">' +
+
+                        '<i class="fa-solid fa-trash"></i>' +
+
+                    '</button>' +
+
+                '</td>' +
+
+
+            '</tr>';
+
+    });
+
+
     tableBody.innerHTML =
-        users.map((user, index) => {
-
-            const status =
-                user.status || "Aktif";
-
-
-            const statusClass =
-                status.toLowerCase() === "aktif"
-                    ? "text-success"
-                    : "text-danger";
-
-
-            return `
-
-                <tr>
-
-                    <td>
-                        ${index + 1}
-                    </td>
-
-
-                    <td>
-
-                        <strong>
-                            ${escapeHtml(
-                                user.nama
-                            )}
-                        </strong>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHtml(
-                            user.username
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <span class="user-role">
-
-                            ${escapeHtml(
-                                user.role
-                            )}
-
-                        </span>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHtml(
-                            user.unit || "-"
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <span class="${statusClass}">
-
-                            <i class="fa-solid fa-circle"></i>
-
-                            ${escapeHtml(
-                                status
-                            )}
-
-                        </span>
-
-                    </td>
-
-
-                    <td>
-
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-outline-primary"
-                            onclick="editUser(${user.id})"
-                            title="Edit Pengguna">
-
-                            <i class="fa-solid fa-pen"></i>
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-outline-danger"
-                            onclick="deleteUser(${user.id})"
-                            title="Hapus Pengguna">
-
-                            <i class="fa-solid fa-trash"></i>
-
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }).join("");
+        html;
 
 }
 
@@ -389,50 +481,54 @@ function renderUsers(users) {
 
 function setupSearch() {
 
-    const searchInput =
+    var searchInput =
         document.getElementById(
             "searchUser"
         );
 
 
-    if (!searchInput) return;
+    if (!searchInput) {
+
+        return;
+
+    }
 
 
     searchInput.addEventListener(
         "input",
-        () => {
+        function () {
 
-            const keyword =
+
+            var keyword =
                 searchInput.value
                     .toLowerCase()
                     .trim();
 
 
-            const users =
+            var users =
                 window.plazaUsers || [];
 
 
-            const filteredUsers =
-                users.filter(user => {
-
-                    const text = `
-
-                        ${user.nama || ""}
-
-                        ${user.username || ""}
-
-                        ${user.role || ""}
-
-                        ${user.unit || ""}
-
-                        ${user.status || ""}
-
-                    `.toLowerCase();
+            var filteredUsers =
+                users.filter(function (user) {
 
 
-                    return text.includes(
-                        keyword
-                    );
+                    var text =
+
+                        (user.nama || "") +
+                        " " +
+                        (user.username || "") +
+                        " " +
+                        (user.role || "") +
+                        " " +
+                        (user.unit || "") +
+                        " " +
+                        (user.status || "");
+
+
+                    return text
+                        .toLowerCase()
+                        .includes(keyword);
 
                 });
 
@@ -453,7 +549,7 @@ function setupSearch() {
 
 function setValue(id, value) {
 
-    const element =
+    var element =
         document.getElementById(id);
 
 
@@ -473,14 +569,16 @@ function setValue(id, value) {
 
 function editUser(id) {
 
-    const users =
+    var users =
         window.plazaUsers || [];
 
 
-    const user =
-        users.find(
-            item => item.id === id
-        );
+    var user =
+        users.find(function (item) {
+
+            return Number(item.id) === Number(id);
+
+        });
 
 
     if (!user) {
@@ -495,11 +593,24 @@ function editUser(id) {
 
 
     alert(
-        `Edit pengguna:\n\n` +
-        `Nama: ${user.nama}\n` +
-        `Username: ${user.username}\n` +
-        `Role: ${user.role}\n` +
-        `Unit: ${user.unit || "-"}`
+
+        "Edit Pengguna\n\n" +
+
+        "Nama: " +
+        (user.nama || "-") +
+
+        "\nUsername: " +
+        (user.username || "-") +
+
+        "\nRole: " +
+        (user.role || "-") +
+
+        "\nUnit: " +
+        (user.unit || "-") +
+
+        "\nStatus: " +
+        (user.status || "-")
+
     );
 
 }
@@ -511,14 +622,16 @@ function editUser(id) {
 
 function deleteUser(id) {
 
-    const users =
+    var users =
         window.plazaUsers || [];
 
 
-    const user =
-        users.find(
-            item => item.id === id
-        );
+    var user =
+        users.find(function (item) {
+
+            return Number(item.id) === Number(id);
+
+        });
 
 
     if (!user) {
@@ -532,18 +645,15 @@ function deleteUser(id) {
     }
 
 
-    /*
-       UNTUK SEMENTARA
-       belum menghapus users.json.
-
-       Kita akan membuat sistem CRUD
-       pada tahap berikutnya.
-    */
-
     alert(
-        `Pengguna "${user.nama}" siap untuk dihapus.\n\n` +
-        `Fitur penghapusan permanen akan kita aktifkan ` +
-        `setelah sistem penyimpanan CRUD selesai.`
+
+        "Pengguna \"" +
+        (user.nama || "-") +
+        "\" siap untuk dihapus.\n\n" +
+
+        "Fitur hapus permanen akan kita aktifkan " +
+        "setelah sistem CRUD database selesai."
+
     );
 
 }
@@ -555,16 +665,20 @@ function deleteUser(id) {
 
 function loadAdminProfile() {
 
-    const adminName =
+    var adminName =
         sessionStorage.getItem(
             "plazaAdminName"
         );
 
 
-    if (!adminName) return;
+    if (!adminName) {
+
+        return;
+
+    }
 
 
-    const profileName =
+    var profileName =
         document.querySelector(
             ".profile-info strong"
         );
@@ -586,19 +700,19 @@ function loadAdminProfile() {
 
 function setupMobileMenu() {
 
-    const button =
+    var button =
         document.getElementById(
             "mobileMenuBtn"
         );
 
 
-    const sidebar =
+    var sidebar =
         document.getElementById(
             "sidebar"
         );
 
 
-    const overlay =
+    var overlay =
         document.getElementById(
             "sidebarOverlay"
         );
@@ -617,7 +731,7 @@ function setupMobileMenu() {
 
     button.addEventListener(
         "click",
-        () => {
+        function () {
 
             sidebar.classList.add(
                 "show"
@@ -633,7 +747,7 @@ function setupMobileMenu() {
 
     overlay.addEventListener(
         "click",
-        () => {
+        function () {
 
             sidebar.classList.remove(
                 "show"
@@ -649,11 +763,11 @@ function setupMobileMenu() {
 
     document
         .querySelectorAll(".menu-item")
-        .forEach(item => {
+        .forEach(function (item) {
 
             item.addEventListener(
                 "click",
-                () => {
+                function () {
 
                     sidebar.classList.remove(
                         "show"
@@ -677,18 +791,22 @@ function setupMobileMenu() {
 
 function setupLogout() {
 
-    const logoutButton =
+    var logoutButton =
         document.getElementById(
             "logoutButton"
         );
 
 
-    if (!logoutButton) return;
+    if (!logoutButton) {
+
+        return;
+
+    }
 
 
     logoutButton.addEventListener(
         "click",
-        event => {
+        function (event) {
 
             event.preventDefault();
 
@@ -718,7 +836,7 @@ function setupLogout() {
 
 function escapeHtml(value) {
 
-    return String(value ?? "")
+    return String(value || "")
 
         .replace(
             /&/g,
