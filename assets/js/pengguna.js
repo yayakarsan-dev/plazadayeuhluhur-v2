@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("User Management Engine V3 aktif");
+    console.log("USER MANAGEMENT ENGINE V3 AKTIF");
     console.log("====================================");
 
     loadUsers();
@@ -29,58 +29,36 @@ async function loadUsers() {
     const tableBody = document.getElementById("userTableBody");
 
     if (!tableBody) {
-
         console.error("Element userTableBody tidak ditemukan.");
-
         return;
     }
 
-    console.log("Membaca database pengguna...");
-
     try {
 
-        const response = await fetch(
-            "data/users.json",
-            {
-                cache: "no-store"
-            }
-        );
+        console.log("Membaca database pengguna...");
 
-        console.log(
-            "Status users.json:",
-            response.status
-        );
+        const response = await fetch("data/users.json", {
+            cache: "no-store"
+        });
 
+        console.log("HTTP Status:", response.status);
 
         if (!response.ok) {
-
             throw new Error(
                 "HTTP " +
                 response.status +
                 " - " +
                 response.statusText
             );
-
         }
-
 
         const text = await response.text();
 
+        console.log("Isi users.json:", text.substring(0, 200));
 
         if (!text.trim()) {
-
-            throw new Error(
-                "users.json kosong."
-            );
-
+            throw new Error("users.json kosong.");
         }
-
-
-        console.log(
-            "Isi awal users.json:",
-            text.substring(0, 200)
-        );
-
 
         let users;
 
@@ -88,86 +66,70 @@ async function loadUsers() {
 
             users = JSON.parse(text);
 
-        } catch (jsonError) {
+        } catch (error) {
 
             console.error(
-                "JSON ERROR:",
-                jsonError
+                "JSON users.json tidak valid:",
+                error
             );
 
             throw new Error(
                 "users.json bukan JSON yang valid."
             );
-
         }
-
 
         if (!Array.isArray(users)) {
 
             throw new Error(
                 "Format users.json harus berupa ARRAY."
             );
-
         }
 
-
         console.log(
-            "Jumlah pengguna:",
+            "✓ Jumlah pengguna:",
             users.length
         );
 
-
         window.plazaUsers = users;
-
 
         updateUserStatistics(users);
 
         renderUsers(users);
-
-
-        console.log(
-            "Database pengguna berhasil ditampilkan."
-        );
 
     }
 
     catch (error) {
 
         console.error(
-            "GAGAL MEMBACA DATABASE PENGGUNA:",
+            "✗ GAGAL MEMUAT USERS:",
             error
         );
 
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7"
+                    class="text-center py-4 text-danger">
 
-        tableBody.innerHTML =
+                    <i class="fa-solid fa-triangle-exclamation"></i>
 
-            '<tr>' +
+                    Gagal membaca database pengguna.
 
-                '<td colspan="7" class="text-center py-4 text-danger">' +
+                    <br>
 
-                    '<i class="fa-solid fa-triangle-exclamation"></i> ' +
+                    <small>
+                        ${escapeHtml(error.message)}
+                    </small>
 
-                    'Gagal membaca database pengguna.' +
-
-                    '<br>' +
-
-                    '<small>' +
-
-                        escapeHtml(error.message) +
-
-                    '</small>' +
-
-                '</td>' +
-
-            '</tr>';
-
+                </td>
+            </tr>
+        `;
     }
 
 }
 
 
 /* =====================================================
-   UPDATE STATISTIK
+   STATISTIK PENGGUNA
 ===================================================== */
 
 function updateUserStatistics(users) {
@@ -238,30 +200,26 @@ function renderUsers(users) {
 
 
     if (!tableBody) {
-
         return;
-
     }
 
 
-    if (!users || users.length === 0) {
+    if (!users.length) {
 
-        tableBody.innerHTML =
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7"
+                    class="text-center py-4">
 
-            '<tr>' +
+                    <i class="fa-solid fa-users-slash"></i>
 
-                '<td colspan="7" class="text-center py-4">' +
+                    Belum ada pengguna.
 
-                    '<i class="fa-solid fa-users-slash"></i> ' +
-
-                    'Belum ada pengguna.' +
-
-                '</td>' +
-
-            '</tr>';
+                </td>
+            </tr>
+        `;
 
         return;
-
     }
 
 
@@ -274,130 +232,90 @@ function renderUsers(users) {
             user.status || "Aktif";
 
 
-        let statusClass =
-            "text-success";
+        const statusClass =
+            status.toLowerCase() === "aktif"
+                ? "text-success"
+                : "text-danger";
 
 
-        if (
-            String(status).toLowerCase() !== "aktif"
-        ) {
+        html += `
 
-            statusClass =
-                "text-danger";
+            <tr>
 
-        }
-
-
-        html +=
-
-            '<tr>' +
-
-                '<td>' +
-
-                    (index + 1) +
-
-                '</td>' +
+                <td>
+                    ${index + 1}
+                </td>
 
 
-                '<td>' +
+                <td>
 
-                    '<strong>' +
+                    <strong>
+                        ${escapeHtml(user.nama)}
+                    </strong>
 
-                        escapeHtml(
-                            user.nama
-                        ) +
-
-                    '</strong>' +
-
-                '</td>' +
+                </td>
 
 
-                '<td>' +
-
-                    escapeHtml(
-                        user.username
-                    ) +
-
-                '</td>' +
+                <td>
+                    ${escapeHtml(user.username)}
+                </td>
 
 
-                '<td>' +
+                <td>
 
-                    '<span class="user-role">' +
+                    <span class="user-role">
+                        ${escapeHtml(user.role)}
+                    </span>
 
-                        escapeHtml(
-                            user.role
-                        ) +
-
-                    '</span>' +
-
-                '</td>' +
+                </td>
 
 
-                '<td>' +
-
-                    escapeHtml(
-                        user.unit || "-"
-                    ) +
-
-                '</td>' +
+                <td>
+                    ${escapeHtml(user.unit || "-")}
+                </td>
 
 
-                '<td>' +
+                <td>
 
-                    '<span class="' +
-                        statusClass +
-                    '">' +
+                    <span class="${statusClass}">
 
-                        '<i class="fa-solid fa-circle"></i> ' +
+                        <i class="fa-solid fa-circle"></i>
 
-                        escapeHtml(
-                            status
-                        ) +
+                        ${escapeHtml(status)}
 
-                    '</span>' +
+                    </span>
 
-                '</td>' +
+                </td>
 
 
-                '<td>' +
+                <td>
 
-                    '<button ' +
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        onclick="editUser(${user.id})"
+                        title="Edit Pengguna">
 
-                        'type="button" ' +
+                        <i class="fa-solid fa-pen"></i>
 
-                        'class="btn btn-sm btn-outline-primary me-1" ' +
-
-                        'onclick="editUser(' +
-                            Number(user.id) +
-                        ')" ' +
-
-                        'title="Edit Pengguna">' +
-
-                        '<i class="fa-solid fa-pen"></i>' +
-
-                    '</button>' +
+                    </button>
 
 
-                    '<button ' +
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-danger"
+                        onclick="deleteUser(${user.id})"
+                        title="Hapus Pengguna">
 
-                        'type="button" ' +
+                        <i class="fa-solid fa-trash"></i>
 
-                        'class="btn btn-sm btn-outline-danger" ' +
+                    </button>
 
-                        'onclick="deleteUser(' +
-                            Number(user.id) +
-                        ')" ' +
+                </td>
 
-                        'title="Hapus Pengguna">' +
+            </tr>
 
-                        '<i class="fa-solid fa-trash"></i>' +
-
-                    '</button>' +
-
-                '</td>' +
-
-            '</tr>';
+        `;
 
     });
 
@@ -420,9 +338,7 @@ function setupSearch() {
 
 
     if (!searchInput) {
-
         return;
-
     }
 
 
@@ -445,14 +361,14 @@ function setupSearch() {
 
                     const text =
 
-                        (user.nama || "") + " " +
-
-                        (user.username || "") + " " +
-
-                        (user.role || "") + " " +
-
-                        (user.unit || "") + " " +
-
+                        (user.nama || "") +
+                        " " +
+                        (user.username || "") +
+                        " " +
+                        (user.role || "") +
+                        " " +
+                        (user.unit || "") +
+                        " " +
                         (user.status || "");
 
 
@@ -485,8 +401,7 @@ function setValue(id, value) {
 
     if (element) {
 
-        element.textContent =
-            value;
+        element.textContent = value;
 
     }
 
@@ -506,7 +421,7 @@ function editUser(id) {
     const user =
         users.find(function (item) {
 
-            return Number(item.id) === Number(id);
+            return item.id === id;
 
         });
 
@@ -518,28 +433,31 @@ function editUser(id) {
         );
 
         return;
-
     }
 
 
     alert(
 
-        "Edit Pengguna\n\n" +
+        "EDIT PENGGUNA\n\n" +
 
         "Nama: " +
-        (user.nama || "-") +
+        user.nama +
+        "\n" +
 
-        "\nUsername: " +
-        (user.username || "-") +
+        "Username: " +
+        user.username +
+        "\n" +
 
-        "\nRole: " +
-        (user.role || "-") +
+        "Role: " +
+        user.role +
+        "\n" +
 
-        "\nUnit: " +
+        "Unit: " +
         (user.unit || "-") +
+        "\n" +
 
-        "\nStatus: " +
-        (user.status || "-")
+        "Status: " +
+        (user.status || "Aktif")
 
     );
 
@@ -559,7 +477,7 @@ function deleteUser(id) {
     const user =
         users.find(function (item) {
 
-            return Number(item.id) === Number(id);
+            return item.id === id;
 
         });
 
@@ -571,19 +489,17 @@ function deleteUser(id) {
         );
 
         return;
-
     }
 
 
     alert(
 
         'Pengguna "' +
-        (user.nama || "") +
-        '" siap dihapus.\n\n' +
+        user.nama +
+        '" siap untuk dihapus.\n\n' +
 
-        "Fitur hapus permanen akan diaktifkan " +
-
-        "setelah sistem CRUD terhubung."
+        "Fitur penghapusan permanen akan " +
+        "diaktifkan setelah sistem CRUD selesai."
 
     );
 
@@ -603,9 +519,7 @@ function loadAdminProfile() {
 
 
     if (!adminName) {
-
         return;
-
     }
 
 
@@ -656,7 +570,6 @@ function setupMobileMenu() {
     ) {
 
         return;
-
     }
 
 
@@ -729,9 +642,7 @@ function setupLogout() {
 
 
     if (!logoutButton) {
-
         return;
-
     }
 
 
@@ -767,9 +678,7 @@ function setupLogout() {
 
 function escapeHtml(value) {
 
-    return String(
-        value ?? ""
-    )
+    return String(value ?? "")
 
         .replace(
             /&/g,
