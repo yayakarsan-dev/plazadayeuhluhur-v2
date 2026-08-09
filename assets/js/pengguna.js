@@ -1,14 +1,14 @@
 ```javascript
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   USER MANAGEMENT ENGINE V3
+   USER MANAGEMENT ENGINE V3 FINAL
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("USER MANAGEMENT ENGINE V3");
+    console.log("USER MANAGEMENT ENGINE V3 FINAL");
     console.log("====================================");
 
     loadUsers();
@@ -26,56 +26,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function loadUsers() {
 
-    const tableBody = document.getElementById("userTableBody");
+    var tableBody = document.getElementById("userTableBody");
 
     if (!tableBody) {
-        console.error("userTableBody tidak ditemukan.");
+        console.error("Element userTableBody tidak ditemukan.");
         return;
     }
 
+    console.log("Membaca database pengguna...");
+
     try {
 
-        console.log("Membaca database pengguna...");
-
-        const response = await fetch("data/users.json", {
+        var response = await fetch("data/users.json", {
             cache: "no-store"
         });
 
         if (!response.ok) {
+
             throw new Error(
                 "HTTP " +
                 response.status +
                 " - " +
                 response.statusText
             );
+
         }
 
-        const text = await response.text();
+        var text = await response.text();
 
         if (!text.trim()) {
             throw new Error("users.json kosong.");
         }
 
-        let users;
+        var users;
 
         try {
 
             users = JSON.parse(text);
 
-        } catch (error) {
+        } catch (jsonError) {
 
-            console.error("Isi users.json tidak valid:");
+            console.error("Isi users.json tidak valid.");
             console.error(text);
 
             throw new Error(
-                "Format users.json tidak valid."
+                "users.json bukan JSON yang valid."
             );
+
         }
 
         if (!Array.isArray(users)) {
+
             throw new Error(
-                "users.json harus berbentuk array."
+                "Format users.json harus berupa array."
             );
+
         }
 
         console.log(
@@ -90,7 +95,9 @@ async function loadUsers() {
 
         renderUsers(users);
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
             "Gagal membaca database pengguna:",
@@ -111,72 +118,78 @@ async function loadUsers() {
 
 
 /* =====================================================
-   STATISTIK PENGGUNA
+   UPDATE STATISTIK
 ===================================================== */
 
 function updateUserStatistics(users) {
 
+    var totalUsers =
+        users.length;
+
+    var totalAdmin =
+        users.filter(function (user) {
+
+            return user.role === "Administrator";
+
+        }).length;
+
+    var totalUmkm =
+        users.filter(function (user) {
+
+            return (
+                user.role === "Pelaku UMKM" ||
+                user.role === "UMKM"
+            );
+
+        }).length;
+
+    var totalDesa =
+        users.filter(function (user) {
+
+            return (
+                user.role === "Admin Desa" ||
+                user.role === "Desa"
+            );
+
+        }).length;
+
+
     setValue(
         "totalUsers",
-        users.length
+        totalUsers
     );
-
-
-    const totalAdmin = users.filter(function (user) {
-
-        return user.role === "Administrator";
-
-    }).length;
-
 
     setValue(
         "totalAdmin",
         totalAdmin
     );
 
-
-    const totalUmkm = users.filter(function (user) {
-
-        return (
-            user.role === "Pelaku UMKM" ||
-            user.role === "UMKM"
-        );
-
-    }).length;
-
-
     setValue(
         "totalUmkm",
         totalUmkm
     );
-
-
-    const totalDesa = users.filter(function (user) {
-
-        return (
-            user.role === "Admin Desa" ||
-            user.role === "Desa"
-        );
-
-    }).length;
-
 
     setValue(
         "totalDesa",
         totalDesa
     );
 
+
+    console.log("Statistik pengguna diperbarui.");
+
 }
 
 
 /* =====================================================
-   RENDER USERS
+   RENDER TABLE
 ===================================================== */
 
 function renderUsers(users) {
 
-    const tableBody =
-        document.getElementById("userTableBody");
+    var tableBody =
+        document.getElementById(
+            "userTableBody"
+        );
 
     if (!tableBody) {
         return;
@@ -197,16 +210,16 @@ function renderUsers(users) {
     }
 
 
-    let html = "";
+    var html = "";
 
 
     users.forEach(function (user, index) {
 
-        const status =
+        var status =
             user.status || "Aktif";
 
 
-        let statusClass =
+        var statusClass =
             "text-success";
 
 
@@ -244,16 +257,23 @@ function renderUsers(users) {
                 '</td>' +
 
                 '<td>' +
-                    escapeHtml(user.unit || "-") +
+                    escapeHtml(
+                        user.unit || "-"
+                    ) +
                 '</td>' +
 
                 '<td>' +
+
                     '<span class="' +
                         statusClass +
                     '">' +
+
                         '<i class="fa-solid fa-circle"></i> ' +
+
                         escapeHtml(status) +
+
                     '</span>' +
+
                 '</td>' +
 
                 '<td>' +
@@ -289,19 +309,27 @@ function renderUsers(users) {
     });
 
 
-    tableBody.innerHTML = html;
+    tableBody.innerHTML =
+        html;
+
+
+    console.log(
+        "Tabel pengguna berhasil ditampilkan."
+    );
 
 }
 
 
 /* =====================================================
-   SEARCH USER
+   SEARCH
 ===================================================== */
 
 function setupSearch() {
 
-    const searchInput =
-        document.getElementById("searchUser");
+    var searchInput =
+        document.getElementById(
+            "searchUser"
+        );
 
     if (!searchInput) {
         return;
@@ -312,39 +340,41 @@ function setupSearch() {
         "input",
         function () {
 
-            const keyword =
+            var keyword =
                 searchInput.value
                     .toLowerCase()
                     .trim();
 
 
-            const users =
+            var users =
                 window.plazaUsers || [];
 
 
-            const filteredUsers =
+            var filteredUsers =
                 users.filter(function (user) {
 
-                    const text =
-                        (
-                            (user.nama || "") +
-                            " " +
-                            (user.username || "") +
-                            " " +
-                            (user.role || "") +
-                            " " +
-                            (user.unit || "") +
-                            " " +
-                            (user.status || "")
-                        ).toLowerCase();
+                    var text =
+                        (user.nama || "") +
+                        " " +
+                        (user.username || "") +
+                        " " +
+                        (user.role || "") +
+                        " " +
+                        (user.unit || "") +
+                        " " +
+                        (user.status || "");
 
 
-                    return text.includes(keyword);
+                    return text
+                        .toLowerCase()
+                        .includes(keyword);
 
                 });
 
 
-            renderUsers(filteredUsers);
+            renderUsers(
+                filteredUsers
+            );
 
         }
     );
@@ -358,7 +388,7 @@ function setupSearch() {
 
 function setValue(id, value) {
 
-    const element =
+    var element =
         document.getElementById(id);
 
     if (element) {
@@ -377,11 +407,11 @@ function setValue(id, value) {
 
 function editUser(id) {
 
-    const users =
+    var users =
         window.plazaUsers || [];
 
 
-    const user =
+    var user =
         users.find(function (item) {
 
             return item.id === id;
@@ -422,11 +452,11 @@ function editUser(id) {
 
 function deleteUser(id) {
 
-    const users =
+    var users =
         window.plazaUsers || [];
 
 
-    const user =
+    var user =
         users.find(function (item) {
 
             return item.id === id;
@@ -449,7 +479,7 @@ function deleteUser(id) {
         user.nama +
         '" siap untuk dihapus.\n\n' +
         "Fitur penghapusan permanen akan " +
-        "kita aktifkan setelah sistem CRUD selesai."
+        "diaktifkan setelah sistem CRUD selesai."
     );
 
 }
@@ -461,7 +491,7 @@ function deleteUser(id) {
 
 function loadAdminProfile() {
 
-    const adminName =
+    var adminName =
         sessionStorage.getItem(
             "plazaAdminName"
         );
@@ -472,7 +502,7 @@ function loadAdminProfile() {
     }
 
 
-    const profileName =
+    var profileName =
         document.querySelector(
             ".profile-info strong"
         );
@@ -489,24 +519,24 @@ function loadAdminProfile() {
 
 
 /* =====================================================
-   MOBILE SIDEBAR
+   MOBILE MENU
 ===================================================== */
 
 function setupMobileMenu() {
 
-    const button =
+    var button =
         document.getElementById(
             "mobileMenuBtn"
         );
 
 
-    const sidebar =
+    var sidebar =
         document.getElementById(
             "sidebar"
         );
 
 
-    const overlay =
+    var overlay =
         document.getElementById(
             "sidebarOverlay"
         );
@@ -526,9 +556,13 @@ function setupMobileMenu() {
         "click",
         function () {
 
-            sidebar.classList.add("show");
+            sidebar.classList.add(
+                "show"
+            );
 
-            overlay.classList.add("show");
+            overlay.classList.add(
+                "show"
+            );
 
         }
     );
@@ -538,9 +572,13 @@ function setupMobileMenu() {
         "click",
         function () {
 
-            sidebar.classList.remove("show");
+            sidebar.classList.remove(
+                "show"
+            );
 
-            overlay.classList.remove("show");
+            overlay.classList.remove(
+                "show"
+            );
 
         }
     );
@@ -554,9 +592,13 @@ function setupMobileMenu() {
                 "click",
                 function () {
 
-                    sidebar.classList.remove("show");
+                    sidebar.classList.remove(
+                        "show"
+                    );
 
-                    overlay.classList.remove("show");
+                    overlay.classList.remove(
+                        "show"
+                    );
 
                 }
             );
@@ -572,7 +614,7 @@ function setupMobileMenu() {
 
 function setupLogout() {
 
-    const logoutButton =
+    var logoutButton =
         document.getElementById(
             "logoutButton"
         );
@@ -615,12 +657,27 @@ function setupLogout() {
 
 function escapeHtml(value) {
 
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 ```
