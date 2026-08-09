@@ -1,0 +1,24 @@
+body {
+    background: #f5f7f9;
+}
+
+.sidebar {
+    background: white;
+    width: 260px;
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.main-content {
+    margin-left: 260px;
+    padding: 30px;
+}
+
+.welcome-card {
+    background: #198754;
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+}
