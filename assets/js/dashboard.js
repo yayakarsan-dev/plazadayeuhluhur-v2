@@ -2,13 +2,19 @@
    PLAZA DAYEUHLUHUR
    DASHBOARD DATA ENGINE V1
 ===================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("Dashboard Plaza Dayeuhluhur aktif.");
+    console.log(
+        "Dashboard Plaza Dayeuhluhur aktif."
+    );
+
+    loadAdminProfile();
 
     loadDashboardData();
+
     setupMobileMenu();
+
+    setupLogout();
 
 });
 
@@ -432,5 +438,44 @@ function setupMobileMenu() {
             );
 
         });
+
+}
+/* =====================================================
+   LOGOUT ADMIN
+===================================================== */
+
+function setupLogout() {
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    if (!logoutButton) return;
+
+
+    logoutButton.addEventListener(
+        "click",
+        (event) => {
+
+            event.preventDefault();
+
+
+            sessionStorage.removeItem(
+                "plazaAdminLogin"
+            );
+
+
+            sessionStorage.removeItem(
+                "plazaAdminName"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
 
 }

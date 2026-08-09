@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
+<script>
+    if (sessionStorage.getItem("plazaAdminLogin") !== "true") {
+        window.location.href = "login.html";
+    }
+</script>
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -180,18 +184,29 @@
         </nav>
 
 
-        <div class="sidebar-footer">
+<div class="sidebar-footer">
 
-            <a href="index.html"
-               class="back-home">
+    <a href="index.html" class="back-home">
 
-                <i class="fa-solid fa-arrow-left"></i>
+        <i class="fa-solid fa-house"></i>
 
-                Kembali ke Plaza
+        Kembali ke Plaza Dayeuhluhur
 
-            </a>
+    </a>
 
-        </div>
+
+    <a
+        href="#"
+        class="back-home logout-button"
+        id="logoutButton">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Keluar dari Dashboard
+
+    </a>
+
+</div>
 
     </aside>
 
