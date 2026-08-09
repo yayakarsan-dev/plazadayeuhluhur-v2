@@ -1,910 +1,577 @@
+```javascript
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   UMKM MANAGEMENT ENGINE V1
+   UMKM MANAGEMENT ENGINE V2
+   Form Tambah & Simpan UMKM
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("UMKM MANAGEMENT ENGINE V1");
+    console.log("UMKM MANAGEMENT ENGINE V2");
     console.log("====================================");
 
-    loadUmkm();
-    setupUmkmSearch();
-    setupUmkmFilter();
-    setupMobileMenu();
-    setupLogout();
-    loadAdminProfile();
-    setupAddUmkm();
 
-});
+    /* =================================================
+       ELEMENT
+    ================================================= */
+
+    const daftarUMKM = document.getElementById("daftarUMKM");
+    const emptyUMKM = document.getElementById("emptyUMKM");
+
+    const modalUMKM = document.getElementById("modalUMKM");
+    const formUMKM = document.getElementById("formUMKM");
+
+    const btnTambahUMKM = document.getElementById("btnTambahUMKM");
+    const btnTutupModal = document.getElementById("btnTutupModal");
+    const btnBatal = document.getElementById("btnBatal");
+
+    const searchUMKM = document.getElementById("searchUMKM");
+    const filterKategori = document.getElementById("filterKategori");
+    const filterDesa = document.getElementById("filterDesa");
+
+    const totalUMKM = document.getElementById("totalUMKM");
+    const totalJasa = document.getElementById("totalJasa");
+    const totalKuliner = document.getElementById("totalKuliner");
+    const totalPerdagangan = document.getElementById("totalPerdagangan");
 
 
-/* =====================================================
-   DATABASE UMKM
-===================================================== */
+    /* =================================================
+       STORAGE KEY
+    ================================================= */
 
-async function loadUmkm() {
+    const STORAGE_KEY = "plaza_dayeuhluhur_umkm";
 
-    var tableBody =
-        document.getElementById("umkmTableBody");
 
-    if (!tableBody) {
-        console.error("umkmTableBody tidak ditemukan.");
-        return;
+    /* =================================================
+       DATA
+    ================================================= */
+
+    let dataUMKM = [];
+
+
+    /* =================================================
+       LOAD DATA
+    ================================================= */
+
+    function loadData() {
+
+        const dataLocal = localStorage.getItem(STORAGE_KEY);
+
+        if (dataLocal) {
+
+            try {
+
+                dataUMKM = JSON.parse(dataLocal);
+
+                console.log(
+                    "Data UMKM dari localStorage:",
+                    dataUMKM.length
+                );
+
+                renderUMKM();
+
+            } catch (error) {
+
+                console.error(
+                    "localStorage rusak:",
+                    error
+                );
+
+                loadJSON();
+
+            }
+
+        } else {
+
+            loadJSON();
+
+        }
+
     }
 
-    console.log("Membaca database UMKM...");
 
-    try {
+    /* =================================================
+       LOAD DATA DARI JSON
+    ================================================= */
 
-        var response =
-            await fetch("data/umkm.json", {
-                cache: "no-store"
-            });
-
-        if (!response.ok) {
-
-            throw new Error(
-                "HTTP " +
-                response.status +
-                " - " +
-                response.statusText
-            );
-
-        }
-
-        var text =
-            await response.text();
-
-        if (!text.trim()) {
-            throw new Error("umkm.json kosong.");
-        }
-
-        var data;
+    async function loadJSON() {
 
         try {
 
-            data = JSON.parse(text);
+            const response = await fetch("umkm.json");
+
+            if (!response.ok) {
+                throw new Error(
+                    "Gagal mengambil umkm.json"
+                );
+            }
+
+            const data = await response.json();
+
+            dataUMKM = Array.isArray(data) ? data : [];
+
+            console.log(
+                "Data UMKM dari umkm.json:",
+                dataUMKM.length
+            );
+
+            saveLocalStorage();
+
+            renderUMKM();
 
         } catch (error) {
 
-            console.error("Isi umkm.json:");
-            console.error(text);
-
-            throw new Error(
-                "umkm.json bukan JSON yang valid."
+            console.error(
+                "Error load umkm.json:",
+                error
             );
 
-        }
+            dataUMKM = [];
 
-        if (!Array.isArray(data)) {
-
-            throw new Error(
-                "Format umkm.json harus berupa array."
-            );
+            renderUMKM();
 
         }
 
-        window.plazaUmkm = data;
-
-        console.log(
-            "Berhasil membaca " +
-            data.length +
-            " data UMKM."
-        );
-
-        updateUmkmStatistics(data);
-        renderUmkm(data);
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Gagal membaca database UMKM:",
-            error
-        );
-
-        tableBody.innerHTML =
-            '<tr>' +
-                '<td colspan="8" class="text-center py-4 text-danger">' +
-                    '<i class="fa-solid fa-triangle-exclamation"></i> ' +
-                    'Gagal membaca database UMKM.' +
-                '</td>' +
-            '</tr>';
-
-    }
-
-}
-
-
-/* =====================================================
-   STATISTIK UMKM
-===================================================== */
-
-function updateUmkmStatistics(data) {
-
-    setValue(
-        "totalUmkm",
-        data.length
-    );
-
-
-    var totalBuka =
-        data.filter(function (item) {
-
-            return String(item.status || "")
-                .toLowerCase() === "buka";
-
-        }).length;
-
-
-    setValue(
-        "totalUmkmBuka",
-        totalBuka
-    );
-
-
-    var totalKuliner =
-        data.filter(function (item) {
-
-            return String(item.kategori || "")
-                .toLowerCase() === "kuliner";
-
-        }).length;
-
-
-    setValue(
-        "totalKuliner",
-        totalKuliner
-    );
-
-
-    var totalDesa =
-        new Set(
-            data.map(function (item) {
-                return item.desa;
-            })
-        ).size;
-
-
-    setValue(
-        "totalUmkmDesa",
-        totalDesa
-    );
-
-}
-
-
-/* =====================================================
-   RENDER UMKM
-===================================================== */
-
-function renderUmkm(data) {
-
-    var tableBody =
-        document.getElementById(
-            "umkmTableBody"
-        );
-
-    if (!tableBody) {
-        return;
     }
 
 
-    if (!data.length) {
+    /* =================================================
+       SAVE LOCAL STORAGE
+    ================================================= */
 
-        tableBody.innerHTML =
-            '<tr>' +
-                '<td colspan="8" class="umkm-empty">' +
-                    '<i class="fa-solid fa-store-slash"></i>' +
-                    '<div>Belum ada data UMKM.</div>' +
-                '</td>' +
-            '</tr>';
+    function saveLocalStorage() {
 
-        return;
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(dataUMKM)
+        );
+
     }
 
 
-    var html = "";
+    /* =================================================
+       RENDER UMKM
+    ================================================= */
 
+    function renderUMKM() {
 
-    data.forEach(function (item, index) {
-
-        var status =
-            item.status || "Buka";
-
-
-        var statusClass =
-            String(status).toLowerCase() === "buka"
-                ? "open"
-                : "closed";
-
-
-        html +=
-            '<tr>' +
-
-                '<td>' +
-                    (index + 1) +
-                '</td>' +
-
-
-                '<td>' +
-
-                    '<div class="umkm-name">' +
-
-                        '<img ' +
-                            'src="' +
-                            escapeHtml(
-                                item.gambar ||
-                                "assets/images/umkm/default.jpg"
-                            ) +
-                            '" ' +
-                            'class="umkm-image" ' +
-                            'alt="UMKM" ' +
-                            'onerror="this.src=\'assets/images/umkm/default.jpg\'">' +
-
-                        '<div class="umkm-name-content">' +
-
-                            '<strong>' +
-                                escapeHtml(
-                                    item.nama
-                                ) +
-                            '</strong>' +
-
-                            '<small>' +
-                                escapeHtml(
-                                    item.produk || "-"
-                                ) +
-                            '</small>' +
-
-                        '</div>' +
-
-                    '</div>' +
-
-                '</td>' +
-
-
-                '<td>' +
-
-                    '<span class="umkm-category">' +
-                        escapeHtml(
-                            item.kategori || "-"
-                        ) +
-                    '</span>' +
-
-                '</td>' +
-
-
-                '<td>' +
-                    escapeHtml(
-                        item.desa || "-"
-                    ) +
-                '</td>' +
-
-
-                '<td>' +
-
-                    '<span class="umkm-rating">' +
-
-                        '<i class="fa-solid fa-star"></i>' +
-
-                        '<strong>' +
-                            escapeHtml(
-                                item.rating || "0"
-                            ) +
-                        '</strong>' +
-
-                    '</span>' +
-
-                '</td>' +
-
-
-                '<td>' +
-
-                    '<span class="umkm-status ' +
-                        statusClass +
-                    '">' +
-
-                        '<i class="fa-solid fa-circle"></i>' +
-
-                        escapeHtml(status) +
-
-                    '</span>' +
-
-                '</td>' +
-
-
-                '<td>' +
-
-                    '<a ' +
-                        'href="' +
-                        escapeHtml(
-                            item.link || "#"
-                        ) +
-                        '" ' +
-                        'class="btn btn-sm btn-outline-secondary me-1" ' +
-                        'target="_blank" ' +
-                        'title="Lihat">' +
-
-                        '<i class="fa-solid fa-eye"></i>' +
-
-                    '</a>' +
-
-
-                    '<button ' +
-                        'type="button" ' +
-                        'class="btn btn-sm btn-outline-primary me-1" ' +
-                        'onclick="editUmkm(' +
-                            item.id +
-                        ')" ' +
-                        'title="Edit">' +
-
-                        '<i class="fa-solid fa-pen"></i>' +
-
-                    '</button>' +
-
-
-                    '<button ' +
-                        'type="button" ' +
-                        'class="btn btn-sm btn-outline-danger" ' +
-                        'onclick="deleteUmkm(' +
-                            item.id +
-                        ')" ' +
-                        'title="Hapus">' +
-
-                        '<i class="fa-solid fa-trash"></i>' +
-
-                    '</button>' +
-
-                '</td>' +
-
-            '</tr>';
-
-    });
-
-
-    tableBody.innerHTML =
-        html;
-
-
-    console.log(
-        "Tabel UMKM berhasil ditampilkan."
-    );
-
-}
-
-
-/* =====================================================
-   SEARCH UMKM
-===================================================== */
-
-function setupUmkmSearch() {
-
-    var input =
-        document.getElementById(
-            "searchUmkm"
-        );
-
-    if (!input) {
-        return;
-    }
-
-
-    input.addEventListener(
-        "input",
-        function () {
-
-            filterUmkm();
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   FILTER KATEGORI
-===================================================== */
-
-function setupUmkmFilter() {
-
-    var filter =
-        document.getElementById(
-            "filterKategori"
-        );
-
-    if (!filter) {
-        return;
-    }
-
-
-    filter.addEventListener(
-        "change",
-        function () {
-
-            filterUmkm();
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   FILTER ENGINE
-===================================================== */
-
-function filterUmkm() {
-
-    var keywordElement =
-        document.getElementById(
-            "searchUmkm"
-        );
-
-
-    var categoryElement =
-        document.getElementById(
-            "filterKategori"
-        );
-
-
-    var keyword =
-        keywordElement
-            ? keywordElement.value
+        const keyword =
+            searchUMKM.value
                 .toLowerCase()
-                .trim()
-            : "";
+                .trim();
+
+        const kategori =
+            filterKategori.value;
+
+        const desa =
+            filterDesa.value;
 
 
-    var category =
-        categoryElement
-            ? categoryElement.value
-            : "";
+        const hasil = dataUMKM.filter((umkm) => {
 
-
-    var data =
-        window.plazaUmkm || [];
-
-
-    var filtered =
-        data.filter(function (item) {
-
-            var text =
-                (item.nama || "") +
-                " " +
-                (item.kategori || "") +
-                " " +
-                (item.desa || "") +
-                " " +
-                (item.produk || "");
-
-
-            var cocokKeyword =
-                text
+            const cocokNama =
+                (umkm.nama || "")
                     .toLowerCase()
                     .includes(keyword);
 
+            const cocokKategori =
+                !kategori ||
+                umkm.kategori === kategori;
 
-            var cocokKategori =
-                category === "" ||
-                item.kategori === category;
-
+            const cocokDesa =
+                !desa ||
+                umkm.desa === desa;
 
             return (
-                cocokKeyword &&
-                cocokKategori
+                cocokNama &&
+                cocokKategori &&
+                cocokDesa
             );
 
         });
 
 
-    renderUmkm(filtered);
-
-}
+        daftarUMKM.innerHTML = "";
 
 
-/* =====================================================
-   TAMBAH UMKM
-===================================================== */
+        if (hasil.length === 0) {
 
-function setupAddUmkm() {
+            emptyUMKM.style.display = "block";
 
-    var button =
-        document.getElementById(
-            "addUmkmButton"
-        );
+        } else {
 
+            emptyUMKM.style.display = "none";
 
-    if (!button) {
-        return;
-    }
+            hasil.forEach((umkm) => {
 
+                const card =
+                    document.createElement("div");
 
-    button.addEventListener(
-        "click",
-        function () {
+                card.className = "umkm-card";
 
-            openUmkmModal();
+                card.innerHTML = `
+
+                    <span class="umkm-kategori">
+                        ${escapeHTML(umkm.kategori || "Lainnya")}
+                    </span>
+
+                    <h3>
+                        ${escapeHTML(umkm.nama || "-")}
+                    </h3>
+
+                    <div class="umkm-info">
+                        📍 ${escapeHTML(umkm.desa || "-")}
+                    </div>
+
+                    <div class="umkm-info">
+                        🛍️ ${escapeHTML(umkm.produk || "-")}
+                    </div>
+
+                    <div class="umkm-rating">
+                        ⭐ ${escapeHTML(umkm.rating || "0")}
+                    </div>
+
+                `;
+
+                daftarUMKM.appendChild(card);
+
+            });
 
         }
-    );
-
-}
 
 
-/* =====================================================
-   BUKA MODAL TAMBAH
-===================================================== */
-
-function openUmkmModal() {
-
-    var form =
-        document.getElementById(
-            "umkmForm"
-        );
-
-
-    if (form) {
-        form.reset();
-    }
-
-
-    setValue(
-        "umkmModalTitle",
-        "Tambah UMKM"
-    );
-
-
-    var id =
-        document.getElementById(
-            "umkmId"
-        );
-
-
-    if (id) {
-        id.value = "";
-    }
-
-
-    var modalElement =
-        document.getElementById(
-            "umkmModal"
-        );
-
-
-    if (
-        modalElement &&
-        typeof bootstrap !== "undefined"
-    ) {
-
-        var modal =
-            bootstrap.Modal.getOrCreateInstance(
-                modalElement
-            );
-
-        modal.show();
+        updateStatistik();
+        updateFilterDesa();
 
     }
 
-}
+
+    /* =================================================
+       UPDATE STATISTIK
+    ================================================= */
+
+    function updateStatistik() {
+
+        totalUMKM.textContent =
+            dataUMKM.length;
+
+        totalJasa.textContent =
+            dataUMKM.filter(
+                item => item.kategori === "Jasa"
+            ).length;
+
+        totalKuliner.textContent =
+            dataUMKM.filter(
+                item => item.kategori === "Kuliner"
+            ).length;
+
+        totalPerdagangan.textContent =
+            dataUMKM.filter(
+                item => item.kategori === "Perdagangan"
+            ).length;
+
+    }
 
 
-/* =====================================================
-   EDIT UMKM
-===================================================== */
+    /* =================================================
+       UPDATE FILTER DESA
+    ================================================= */
 
-function editUmkm(id) {
+    function updateFilterDesa() {
 
-    var data =
-        window.plazaUmkm || [];
+        const desaSaatIni =
+            filterDesa.value;
+
+        const daftarDesa =
+            [...new Set(
+                dataUMKM
+                    .map(item => item.desa)
+                    .filter(Boolean)
+            )]
+            .sort();
 
 
-    var item =
-        data.find(function (umkm) {
+        filterDesa.innerHTML =
+            `<option value="">Semua Desa</option>`;
 
-            return umkm.id === id;
+
+        daftarDesa.forEach((desa) => {
+
+            const option =
+                document.createElement("option");
+
+            option.value = desa;
+            option.textContent = desa;
+
+            filterDesa.appendChild(option);
 
         });
 
 
-    if (!item) {
+        if (daftarDesa.includes(desaSaatIni)) {
+            filterDesa.value = desaSaatIni;
+        }
+
+    }
+
+
+    /* =================================================
+       BUKA MODAL
+    ================================================= */
+
+    function bukaModal() {
+
+        modalUMKM.classList.add("active");
+
+        document
+            .getElementById("namaUMKM")
+            .focus();
+
+    }
+
+
+    /* =================================================
+       TUTUP MODAL
+    ================================================= */
+
+    function tutupModal() {
+
+        modalUMKM.classList.remove("active");
+
+        formUMKM.reset();
+
+        document.getElementById(
+            "ratingUMKM"
+        ).value = "5";
+
+    }
+
+
+    /* =================================================
+       SIMPAN UMKM
+    ================================================= */
+
+    function simpanUMKM(event) {
+
+        event.preventDefault();
+
+
+        const nama =
+            document
+                .getElementById("namaUMKM")
+                .value
+                .trim();
+
+        const kategori =
+            document
+                .getElementById("kategoriUMKM")
+                .value;
+
+        const desa =
+            document
+                .getElementById("desaUMKM")
+                .value
+                .trim();
+
+        const produk =
+            document
+                .getElementById("produkUMKM")
+                .value
+                .trim();
+
+        const rating =
+            document
+                .getElementById("ratingUMKM")
+                .value;
+
+        const whatsapp =
+            document
+                .getElementById("whatsappUMKM")
+                .value
+                .trim();
+
+        const deskripsi =
+            document
+                .getElementById("deskripsiUMKM")
+                .value
+                .trim();
+
+
+        /* ---------------------------------------------
+           VALIDASI
+        --------------------------------------------- */
+
+        if (!nama || !kategori || !desa || !produk) {
+
+            alert(
+                "Mohon lengkapi data wajib UMKM."
+            );
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------
+           ID OTOMATIS
+        --------------------------------------------- */
+
+        const idBaru =
+            dataUMKM.length > 0
+                ? Math.max(
+                    ...dataUMKM.map(
+                        item => Number(item.id) || 0
+                    )
+                ) + 1
+                : 1;
+
+
+        /* ---------------------------------------------
+           OBJECT UMKM
+        --------------------------------------------- */
+
+        const umkmBaru = {
+
+            id: idBaru,
+
+            nama: nama,
+
+            kategori: kategori,
+
+            desa: desa,
+
+            produk: produk,
+
+            rating: rating || "5",
+
+            whatsapp: whatsapp,
+
+            deskripsi: deskripsi
+
+        };
+
+
+        /* ---------------------------------------------
+           TAMBAHKAN DATA
+        --------------------------------------------- */
+
+        dataUMKM.push(umkmBaru);
+
+
+        /* ---------------------------------------------
+           SIMPAN
+        --------------------------------------------- */
+
+        saveLocalStorage();
+
+
+        /* ---------------------------------------------
+           REFRESH TAMPILAN
+        --------------------------------------------- */
+
+        renderUMKM();
+
+
+        /* ---------------------------------------------
+           TUTUP FORM
+        --------------------------------------------- */
+
+        tutupModal();
+
 
         alert(
-            "Data UMKM tidak ditemukan."
+            "Data UMKM berhasil disimpan."
         );
 
-        return;
+
+        console.log(
+            "UMKM baru:",
+            umkmBaru
+        );
 
     }
 
 
-    alert(
-        "EDIT UMKM\n\n" +
-        "Nama: " +
-        item.nama +
-        "\nKategori: " +
-        item.kategori +
-        "\nDesa: " +
-        item.desa +
-        "\nProduk: " +
-        item.produk +
-        "\nStatus: " +
-        (item.status || "Buka")
-    );
+    /* =================================================
+       ESCAPE HTML
+       Mencegah HTML injection sederhana
+    ================================================= */
 
-}
+    function escapeHTML(value) {
 
-
-/* =====================================================
-   DELETE UMKM
-===================================================== */
-
-function deleteUmkm(id) {
-
-    var data =
-        window.plazaUmkm || [];
-
-
-    var item =
-        data.find(function (umkm) {
-
-            return umkm.id === id;
-
-        });
-
-
-    if (!item) {
-
-        alert(
-            "Data UMKM tidak ditemukan."
-        );
-
-        return;
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
     }
 
 
-    var yakin =
-        confirm(
-            'Apakah Anda yakin ingin menghapus "' +
-            item.nama +
-            '"?'
-        );
+    /* =================================================
+       EVENT
+    ================================================= */
 
-
-    if (!yakin) {
-        return;
-    }
-
-
-    alert(
-        "Data UMKM siap dihapus.\n\n" +
-        "Pada tahap berikutnya kita akan " +
-        "menghubungkan tombol ini dengan sistem CRUD."
-    );
-
-}
-
-
-/* =====================================================
-   HELPER
-===================================================== */
-
-function setValue(id, value) {
-
-    var element =
-        document.getElementById(id);
-
-
-    if (element) {
-
-        element.textContent =
-            value;
-
-    }
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHtml(value) {
-
-    return String(value || "")
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   ADMIN PROFILE
-===================================================== */
-
-function loadAdminProfile() {
-
-    var adminName =
-        sessionStorage.getItem(
-            "plazaAdminName"
-        );
-
-
-    if (!adminName) {
-        return;
-    }
-
-
-    var profileName =
-        document.querySelector(
-            ".profile-info strong"
-        );
-
-
-    if (profileName) {
-
-        profileName.textContent =
-            adminName;
-
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE MENU
-===================================================== */
-
-function setupMobileMenu() {
-
-    var button =
-        document.getElementById(
-            "mobileMenuBtn"
-        );
-
-
-    var sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-
-    var overlay =
-        document.getElementById(
-            "sidebarOverlay"
-        );
-
-
-    if (
-        !button ||
-        !sidebar ||
-        !overlay
-    ) {
-        return;
-    }
-
-
-    button.addEventListener(
+    btnTambahUMKM.addEventListener(
         "click",
-        function () {
-
-            sidebar.classList.add(
-                "show"
-            );
-
-            overlay.classList.add(
-                "show"
-            );
-
-        }
+        bukaModal
     );
 
-
-    overlay.addEventListener(
+    btnTutupModal.addEventListener(
         "click",
-        function () {
+        tutupModal
+    );
 
-            sidebar.classList.remove(
-                "show"
-            );
+    btnBatal.addEventListener(
+        "click",
+        tutupModal
+    );
 
-            overlay.classList.remove(
-                "show"
-            );
+    formUMKM.addEventListener(
+        "submit",
+        simpanUMKM
+    );
 
-        }
+    searchUMKM.addEventListener(
+        "input",
+        renderUMKM
+    );
+
+    filterKategori.addEventListener(
+        "change",
+        renderUMKM
+    );
+
+    filterDesa.addEventListener(
+        "change",
+        renderUMKM
     );
 
 
-    document
-        .querySelectorAll(".menu-item")
-        .forEach(function (item) {
+    /* =================================================
+       TUTUP MODAL KLIK LUAR
+    ================================================= */
 
-            item.addEventListener(
-                "click",
-                function () {
-
-                    sidebar.classList.remove(
-                        "show"
-                    );
-
-                    overlay.classList.remove(
-                        "show"
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-function setupLogout() {
-
-    var logoutButton =
-        document.getElementById(
-            "logoutButton"
-        );
-
-
-    if (!logoutButton) {
-        return;
-    }
-
-
-    logoutButton.addEventListener(
+    modalUMKM.addEventListener(
         "click",
         function (event) {
 
-            event.preventDefault();
-
-
-            sessionStorage.removeItem(
-                "plazaAdminLogin"
-            );
-
-
-            sessionStorage.removeItem(
-                "plazaAdminName"
-            );
-
-
-            window.location.href =
-                "login.html";
+            if (event.target === modalUMKM) {
+                tutupModal();
+            }
 
         }
     );
 
-}
+
+    /* =================================================
+       START ENGINE
+    ================================================= */
+
+    loadData();
+
+});
+```

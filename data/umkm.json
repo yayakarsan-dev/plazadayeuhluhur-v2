@@ -1,46 +1,54 @@
+```json
 [
-  {
-    "id": 1,
-    "nama": "WAHYU Barbershop",
-    "kategori": "Jasa",
-    "desa": "Dayeuhluhur",
-    "produk": "Potong Rambut Pria",
-    "rating": "4.9",
-    "status": "Buka",
-    "gambar": "assets/images/umkm/default.jpg",
-    "link": "#"
-  },
-  {
-    "id": 2,
-    "nama": "GINONG Kuliner",
-    "kategori": "Kuliner",
-    "desa": "Panulisan",
-    "produk": "Makanan & Minuman",
-    "rating": "4.8",
-    "status": "Buka",
-    "gambar": "assets/images/umkm/default.jpg",
-    "link": "#"
-  },
-  {
-    "id": 3,
-    "nama": "Berkah Material",
-    "kategori": "Toko Bangunan",
-    "desa": "Panulisan",
-    "produk": "Material Bangunan",
-    "rating": "4.7",
-    "status": "Buka",
-    "gambar": "assets/images/umkm/default.jpg",
-    "link": "#"
-  },
-  {
-    "id": 4,
-    "nama": "Toko Sumber Rejeki",
-    "kategori": "Sembako",
-    "desa": "Dayeuhluhur",
-    "produk": "Kebutuhan Harian",
-    "rating": "4.8",
-    "status": "Buka",
-    "gambar": "assets/images/umkm/default.jpg",
-    "link": "#"
-  }
+    {
+        "id": 1,
+        "nama": "WAHYU Barbershop",
+        "kategori": "Jasa",
+        "desa": "Dayeuhluhur",
+        "produk": "Potong Rambut Pria",
+        "rating": "4.8",
+        "whatsapp": "081234567890",
+        "deskripsi": "Jasa potong rambut pria dan perawatan rambut."
+    },
+    {
+        "id": 2,
+        "nama": "Warung Ginong",
+        "kategori": "Kuliner",
+        "desa": "Dayeuhluhur",
+        "produk": "Makanan dan Minuman",
+        "rating": "4.7",
+        "whatsapp": "081234567891",
+        "deskripsi": "Warung kuliner lokal dengan berbagai pilihan makanan dan minuman."
+    },
+    {
+        "id": 3,
+        "nama": "Toko Bangunan Berkah",
+        "kategori": "Perdagangan",
+        "desa": "Panulisan",
+        "produk": "Material Bangunan",
+        "rating": "4.6",
+        "whatsapp": "081234567892",
+        "deskripsi": "Menyediakan berbagai kebutuhan material dan perlengkapan bangunan."
+    },
+    {
+        "id": 4,
+        "nama": "Bengkel Maju Jaya",
+        "kategori": "Jasa",
+        "desa": "Hanum",
+        "produk": "Servis Sepeda Motor",
+        "rating": "4.7",
+        "whatsapp": "081234567893",
+        "deskripsi": "Jasa servis dan perawatan sepeda motor."
+    },
+    {
+        "id": 5,
+        "nama": "Tani Makmur",
+        "kategori": "Pertanian",
+        "desa": "Bolang",
+        "produk": "Hasil Pertanian",
+        "rating": "4.5",
+        "whatsapp": "081234567894",
+        "deskripsi": "Usaha hasil pertanian dan produk lokal masyarakat."
+    }
 ]
+```

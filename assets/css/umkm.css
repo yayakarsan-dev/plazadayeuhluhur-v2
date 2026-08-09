@@ -1,247 +1,195 @@
+```css
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   UMKM MANAGEMENT STYLE V1
+   UMKM MANAGEMENT - V2
 ===================================================== */
 
-
-/* =====================================================
-   UMKM FILTER
-===================================================== */
-
-.umkm-filter {
-    max-width: 190px;
-    min-width: 150px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-
-/* =====================================================
-   UMKM TABLE
-===================================================== */
-
-.umkm-table {
-    min-width: 1100px;
-}
-
-
-.umkm-table th {
-    white-space: nowrap;
-    vertical-align: middle;
-}
-
-
-.umkm-table td {
-    vertical-align: middle;
-}
-
-
-/* =====================================================
-   NAMA UMKM
-===================================================== */
-
-.umkm-name {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 220px;
-}
-
-
-.umkm-image {
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
-    object-fit: cover;
-    border: 1px solid #e5e7eb;
-    background: #f3f4f6;
-}
-
-
-.umkm-name-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-
-.umkm-name-content strong {
-    font-size: 14px;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
     color: #1f2937;
+    padding: 25px;
 }
-
-
-.umkm-name-content small {
-    color: #6b7280;
-    font-size: 12px;
-}
-
 
 /* =====================================================
-   BADGE KATEGORI
+   HEADER
 ===================================================== */
 
-.umkm-category {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background: #f3f4f6;
-    color: #374151;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.umkm-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-
-.umkm-status i {
-    font-size: 7px;
-}
-
-
-.umkm-status.open {
-    color: #198754;
-}
-
-
-.umkm-status.closed {
-    color: #dc3545;
-}
-
-
-/* =====================================================
-   RATING
-===================================================== */
-
-.umkm-rating {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    white-space: nowrap;
-}
-
-
-.umkm-rating i {
-    color: #f59e0b;
-}
-
-
-.umkm-rating strong {
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   FEATURED / TAMPIL BERANDA
-===================================================== */
-
-.umkm-featured {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-
-.umkm-featured.yes {
-    color: #198754;
-}
-
-
-.umkm-featured.no {
-    color: #6c757d;
-}
-
-
-/* =====================================================
-   ACTION BUTTON
-===================================================== */
-
-.umkm-actions {
+.page-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 5px;
-    white-space: nowrap;
+    gap: 20px;
+    margin-bottom: 25px;
 }
 
+.page-header h1 {
+    font-size: 30px;
+    margin-bottom: 6px;
+}
 
-.umkm-actions .btn {
-    width: 34px;
-    height: 34px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.page-header p {
+    color: #6b7280;
 }
 
 
 /* =====================================================
-   MODAL
+   BUTTON
 ===================================================== */
 
-#umkmModal .modal-content {
+button {
     border: none;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    font-family: inherit;
 }
 
-
-#umkmModal .modal-header {
-    padding: 20px 24px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-
-#umkmModal .modal-header h5 {
-    margin-top: 4px;
-    font-weight: 700;
-}
-
-
-#umkmModal .modal-body {
-    padding: 24px;
-}
-
-
-#umkmModal .modal-footer {
-    padding: 16px 24px;
-    border-top: 1px solid #e5e7eb;
-}
-
-
-/* =====================================================
-   FORM
-===================================================== */
-
-#umkmModal .form-label {
+.btn-primary {
+    background: #0f766e;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
     font-weight: 600;
-    color: #374151;
-    font-size: 13px;
 }
 
+.btn-primary:hover {
+    background: #115e59;
+}
 
-#umkmModal .form-control,
-#umkmModal .form-select {
-    min-height: 42px;
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+    padding: 12px 20px;
     border-radius: 8px;
 }
 
+.btn-secondary:hover {
+    background: #d1d5db;
+}
 
-#umkmModal .form-control:focus,
-#umkmModal .form-select:focus {
-    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.10);
+
+/* =====================================================
+   STATISTIK
+===================================================== */
+
+.umkm-statistik {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card span {
+    display: block;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.stat-card strong {
+    font-size: 28px;
+    color: #0f766e;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.filter-area {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filter-area input,
+.filter-area select,
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    padding: 11px 12px;
+    font-size: 14px;
+    outline: none;
+}
+
+.filter-area input:focus,
+.filter-area select:focus,
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #0f766e;
+}
+
+
+/* =====================================================
+   UMKM CARD
+===================================================== */
+
+.umkm-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.umkm-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    transition: 0.2s ease;
+}
+
+.umkm-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.umkm-card h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.umkm-kategori {
+    display: inline-block;
+    background: #ccfbf1;
+    color: #115e59;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.umkm-info {
+    margin-bottom: 7px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.umkm-rating {
+    color: #d97706;
+    font-weight: bold;
+    margin-top: 12px;
 }
 
 
@@ -249,33 +197,110 @@
    EMPTY STATE
 ===================================================== */
 
-.umkm-empty {
+.empty-state {
+    display: none;
+    background: white;
     padding: 45px 20px;
     text-align: center;
+    border-radius: 12px;
     color: #6b7280;
 }
 
-
-.umkm-empty i {
-    display: block;
-    font-size: 32px;
-    margin-bottom: 12px;
+.empty-state h3 {
+    color: #374151;
+    margin-bottom: 8px;
 }
 
 
 /* =====================================================
-   LOADING
+   MODAL
 ===================================================== */
 
-.umkm-loading {
-    padding: 40px 20px;
-    text-align: center;
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+    padding: 30px 15px;
+    overflow-y: auto;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    border-radius: 14px;
+    margin-top: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+    font-size: 22px;
+}
+
+.btn-close {
+    background: transparent;
+    font-size: 28px;
     color: #6b7280;
 }
 
+.btn-close:hover {
+    color: #111827;
+}
 
-.umkm-loading i {
-    margin-right: 7px;
+
+/* =====================================================
+   FORM
+===================================================== */
+
+#formUMKM {
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
 }
 
 
@@ -283,65 +308,44 @@
    RESPONSIVE
 ===================================================== */
 
-@media (max-width: 991px) {
+@media (max-width: 900px) {
 
-    .umkm-filter {
-        max-width: none;
-        width: 100%;
+    .umkm-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .umkm-statistik {
+        grid-template-columns: repeat(2, 1fr);
     }
 
 }
 
+@media (max-width: 600px) {
 
-@media (max-width: 767px) {
+    body {
+        padding: 15px;
+    }
 
-    .user-toolbar {
+    .page-header {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
     }
 
-
-    .search-box {
-        width: 100%;
+    .filter-area {
+        grid-template-columns: 1fr;
     }
 
-
-    .umkm-filter {
-        width: 100%;
+    .umkm-container {
+        grid-template-columns: 1fr;
     }
 
-
-    #umkmModal .modal-body {
-        padding: 18px;
+    .umkm-statistik {
+        grid-template-columns: 1fr 1fr;
     }
 
-
-    #umkmModal .modal-header {
-        padding: 18px;
-    }
-
-
-    #umkmModal .modal-footer {
-        padding: 14px 18px;
+    .form-row {
+        grid-template-columns: 1fr;
     }
 
 }
-
-
-/* =====================================================
-   SMALL SCREEN
-===================================================== */
-
-@media (max-width: 575px) {
-
-    .umkm-name {
-        min-width: 180px;
-    }
-
-
-    .umkm-image {
-        width: 42px;
-        height: 42px;
-    }
-
-}
+```
