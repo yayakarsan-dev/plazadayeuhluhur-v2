@@ -1,17 +1,20 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   USER MANAGEMENT ENGINE V3 FINAL
+   USER MANAGEMENT ENGINE V4
+   CRUD + LOCAL STORAGE
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("USER MANAGEMENT ENGINE V3 FINAL");
+    console.log("USER MANAGEMENT ENGINE V4");
     console.log("====================================");
 
     loadUsers();
     setupSearch();
+    setupAddUser();
+    setupUserForm();
     setupMobileMenu();
     setupLogout();
     loadAdminProfile();
@@ -20,25 +23,116 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* =====================================================
+   KONFIGURASI
+===================================================== */
+
+var USER_STORAGE_KEY = "plazaUsers";
+
+
+/* =====================================================
    LOAD DATABASE USERS
 ===================================================== */
 
 async function loadUsers() {
 
-    var tableBody = document.getElementById("userTableBody");
+    var tableBody =
+        document.getElementById("userTableBody");
 
     if (!tableBody) {
-        console.error("Element userTableBody tidak ditemukan.");
+
+        console.error(
+            "Element userTableBody tidak ditemukan."
+        );
+
         return;
     }
 
-    console.log("Membaca database pengguna...");
+
+    console.log(
+        "Memeriksa database pengguna..."
+    );
+
+
+    /*
+       PRIORITAS 1
+       Baca data dari localStorage
+    */
+
+    var savedUsers =
+        localStorage.getItem(
+            USER_STORAGE_KEY
+        );
+
+
+    if (savedUsers) {
+
+        try {
+
+            var localUsers =
+                JSON.parse(savedUsers);
+
+
+            if (Array.isArray(localUsers)) {
+
+                console.log(
+                    "Database lokal ditemukan: " +
+                    localUsers.length +
+                    " pengguna."
+                );
+
+
+                window.plazaUsers =
+                    localUsers;
+
+
+                updateUserStatistics(
+                    localUsers
+                );
+
+
+                renderUsers(
+                    localUsers
+                );
+
+
+                return;
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Data localStorage tidak valid."
+            );
+
+        }
+
+    }
+
+
+    /*
+       PRIORITAS 2
+       Jika belum ada localStorage,
+       baca users.json
+    */
+
+    console.log(
+        "Membaca data/users.json..."
+    );
+
 
     try {
 
-        var response = await fetch("data/users.json", {
-            cache: "no-store"
-        });
+        var response =
+            await fetch(
+                "data/users.json",
+                {
+                    cache: "no-store"
+                }
+            );
+
 
         if (!response.ok) {
 
@@ -51,28 +145,44 @@ async function loadUsers() {
 
         }
 
-        var text = await response.text();
+
+        var text =
+            await response.text();
+
 
         if (!text.trim()) {
-            throw new Error("users.json kosong.");
-        }
-
-        var users;
-
-        try {
-
-            users = JSON.parse(text);
-
-        } catch (jsonError) {
-
-            console.error("Isi users.json tidak valid.");
-            console.error(text);
 
             throw new Error(
-                "users.json bukan JSON yang valid."
+                "users.json kosong."
             );
 
         }
+
+
+        var users;
+
+
+        try {
+
+            users =
+                JSON.parse(text);
+
+        }
+
+        catch (jsonError) {
+
+            console.error(
+                "Isi users.json tidak valid:"
+            );
+
+            console.error(text);
+
+            throw new Error(
+                "users.json bukan JSON valid."
+            );
+
+        }
+
 
         if (!Array.isArray(users)) {
 
@@ -82,19 +192,40 @@ async function loadUsers() {
 
         }
 
+
+        /*
+           Simpan database awal
+           ke localStorage
+        */
+
+        localStorage.setItem(
+            USER_STORAGE_KEY,
+            JSON.stringify(users)
+        );
+
+
+        window.plazaUsers =
+            users;
+
+
         console.log(
             "Berhasil membaca " +
             users.length +
             " pengguna."
         );
 
-        window.plazaUsers = users;
 
-        updateUserStatistics(users);
+        updateUserStatistics(
+            users
+        );
 
-        renderUsers(users);
+
+        renderUsers(
+            users
+        );
 
     }
+
 
     catch (error) {
 
@@ -102,6 +233,7 @@ async function loadUsers() {
             "Gagal membaca database pengguna:",
             error
         );
+
 
         tableBody.innerHTML =
             '<tr>' +
@@ -125,12 +257,14 @@ function updateUserStatistics(users) {
     var totalUsers =
         users.length;
 
+
     var totalAdmin =
         users.filter(function (user) {
 
             return user.role === "Administrator";
 
         }).length;
+
 
     var totalUmkm =
         users.filter(function (user) {
@@ -141,6 +275,7 @@ function updateUserStatistics(users) {
             );
 
         }).length;
+
 
     var totalDesa =
         users.filter(function (user) {
@@ -158,15 +293,18 @@ function updateUserStatistics(users) {
         totalUsers
     );
 
+
     setValue(
         "totalAdmin",
         totalAdmin
     );
 
+
     setValue(
         "totalUmkm",
         totalUmkm
     );
+
 
     setValue(
         "totalDesa",
@@ -174,7 +312,9 @@ function updateUserStatistics(users) {
     );
 
 
-    console.log("Statistik pengguna diperbarui.");
+    console.log(
+        "Statistik pengguna diperbarui."
+    );
 
 }
 
@@ -190,8 +330,11 @@ function renderUsers(users) {
             "userTableBody"
         );
 
+
     if (!tableBody) {
+
         return;
+
     }
 
 
@@ -206,6 +349,7 @@ function renderUsers(users) {
             '</tr>';
 
         return;
+
     }
 
 
@@ -219,17 +363,9 @@ function renderUsers(users) {
 
 
         var statusClass =
-            "text-success";
-
-
-        if (
-            status.toLowerCase() !== "aktif"
-        ) {
-
-            statusClass =
-                "text-danger";
-
-        }
+            status.toLowerCase() === "aktif"
+                ? "text-success"
+                : "text-danger";
 
 
         html +=
@@ -239,27 +375,46 @@ function renderUsers(users) {
                     (index + 1) +
                 '</td>' +
 
+
                 '<td>' +
+
                     '<strong>' +
-                        escapeHtml(user.nama) +
+                        escapeHtml(
+                            user.nama
+                        ) +
                     '</strong>' +
+
                 '</td>' +
 
-                '<td>' +
-                    escapeHtml(user.username) +
-                '</td>' +
-
-                '<td>' +
-                    '<span class="user-role">' +
-                        escapeHtml(user.role) +
-                    '</span>' +
-                '</td>' +
 
                 '<td>' +
                     escapeHtml(
-                        user.unit || "-"
+                        user.username
                     ) +
                 '</td>' +
+
+
+                '<td>' +
+
+                    '<span class="user-role">' +
+
+                        escapeHtml(
+                            user.role
+                        ) +
+
+                    '</span>' +
+
+                '</td>' +
+
+
+                '<td>' +
+
+                    escapeHtml(
+                        user.unit || "-"
+                    ) +
+
+                '</td>' +
+
 
                 '<td>' +
 
@@ -269,11 +424,14 @@ function renderUsers(users) {
 
                         '<i class="fa-solid fa-circle"></i> ' +
 
-                        escapeHtml(status) +
+                        escapeHtml(
+                            status
+                        ) +
 
                     '</span>' +
 
                 '</td>' +
+
 
                 '<td>' +
 
@@ -288,6 +446,7 @@ function renderUsers(users) {
                         '<i class="fa-solid fa-pen"></i>' +
 
                     '</button>' +
+
 
                     '<button ' +
                         'type="button" ' +
@@ -320,6 +479,782 @@ function renderUsers(users) {
 
 
 /* =====================================================
+   TAMBAH PENGGUNA
+===================================================== */
+
+function setupAddUser() {
+
+    var button =
+        document.getElementById(
+            "addUserButton"
+        );
+
+
+    if (!button) {
+
+        console.warn(
+            "Tombol Tambah Pengguna tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    button.addEventListener(
+        "click",
+        function () {
+
+            openAddUserModal();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   BUKA MODAL TAMBAH
+===================================================== */
+
+function openAddUserModal() {
+
+    var form =
+        document.getElementById(
+            "userForm"
+        );
+
+
+    if (form) {
+
+        form.reset();
+
+    }
+
+
+    setValue(
+        "userId",
+        ""
+    );
+
+
+    var userId =
+        document.getElementById(
+            "userId"
+        );
+
+
+    if (userId) {
+
+        userId.value = "";
+
+    }
+
+
+    var title =
+        document.getElementById(
+            "userModalTitle"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            "Tambah Pengguna";
+
+    }
+
+
+    var modalElement =
+        document.getElementById(
+            "userModal"
+        );
+
+
+    if (!modalElement) {
+
+        alert(
+            "Modal pengguna tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    var modal =
+        bootstrap.Modal.getOrCreateInstance(
+            modalElement
+        );
+
+
+    modal.show();
+
+}
+
+
+/* =====================================================
+   FORM TAMBAH / EDIT
+===================================================== */
+
+function setupUserForm() {
+
+    var form =
+        document.getElementById(
+            "userForm"
+        );
+
+
+    if (!form) {
+
+        console.warn(
+            "Form userForm tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            saveUser();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SIMPAN PENGGUNA
+===================================================== */
+
+function saveUser() {
+
+    var users =
+        window.plazaUsers || [];
+
+
+    var idElement =
+        document.getElementById(
+            "userId"
+        );
+
+
+    var namaElement =
+        document.getElementById(
+            "userNama"
+        );
+
+
+    var usernameElement =
+        document.getElementById(
+            "userUsername"
+        );
+
+
+    var roleElement =
+        document.getElementById(
+            "userRole"
+        );
+
+
+    var unitElement =
+        document.getElementById(
+            "userUnit"
+        );
+
+
+    var statusElement =
+        document.getElementById(
+            "userStatus"
+        );
+
+
+    if (
+        !namaElement ||
+        !usernameElement ||
+        !roleElement ||
+        !unitElement ||
+        !statusElement
+    ) {
+
+        alert(
+            "Form pengguna tidak lengkap."
+        );
+
+        return;
+
+    }
+
+
+    var id =
+        idElement
+            ? idElement.value
+            : "";
+
+
+    var nama =
+        namaElement.value.trim();
+
+
+    var username =
+        usernameElement.value
+            .trim()
+            .toLowerCase();
+
+
+    var role =
+        roleElement.value;
+
+
+    var unit =
+        unitElement.value.trim();
+
+
+    var status =
+        statusElement.value;
+
+
+    /*
+       VALIDASI
+    */
+
+    if (!nama) {
+
+        alert(
+            "Nama lengkap wajib diisi."
+        );
+
+        namaElement.focus();
+
+        return;
+
+    }
+
+
+    if (!username) {
+
+        alert(
+            "Username wajib diisi."
+        );
+
+        usernameElement.focus();
+
+        return;
+
+    }
+
+
+    if (!role) {
+
+        alert(
+            "Silakan pilih role pengguna."
+        );
+
+        roleElement.focus();
+
+        return;
+
+    }
+
+
+    /*
+       CEK USERNAME DUPLIKAT
+    */
+
+    var duplicate =
+        users.some(function (user) {
+
+            return (
+                user.username &&
+                user.username.toLowerCase() === username &&
+                String(user.id) !== String(id)
+            );
+
+        });
+
+
+    if (duplicate) {
+
+        alert(
+            "Username \"" +
+            username +
+            "\" sudah digunakan.\n\n" +
+            "Silakan gunakan username lain."
+        );
+
+        usernameElement.focus();
+
+        return;
+
+    }
+
+
+    /*
+       EDIT DATA
+    */
+
+    if (id) {
+
+        var userIndex =
+            users.findIndex(
+                function (user) {
+
+                    return String(user.id) ===
+                        String(id);
+
+                }
+            );
+
+
+        if (userIndex === -1) {
+
+            alert(
+                "Data pengguna tidak ditemukan."
+            );
+
+            return;
+
+        }
+
+
+        users[userIndex].nama =
+            nama;
+
+        users[userIndex].username =
+            username;
+
+        users[userIndex].role =
+            role;
+
+        users[userIndex].unit =
+            unit;
+
+        users[userIndex].status =
+            status;
+
+
+        alert(
+            "Data pengguna berhasil diperbarui."
+        );
+
+    }
+
+
+    /*
+       TAMBAH DATA BARU
+    */
+
+    else {
+
+        var newId =
+            generateUserId(
+                users
+            );
+
+
+        var newUser = {
+
+            id: newId,
+
+            nama: nama,
+
+            username: username,
+
+            role: role,
+
+            unit: unit,
+
+            status: status
+
+        };
+
+
+        users.push(
+            newUser
+        );
+
+
+        alert(
+            "Pengguna baru berhasil ditambahkan."
+        );
+
+    }
+
+
+    /*
+       SIMPAN
+    */
+
+    window.plazaUsers =
+        users;
+
+
+    localStorage.setItem(
+        USER_STORAGE_KEY,
+        JSON.stringify(users)
+    );
+
+
+    /*
+       REFRESH TAMPILAN
+    */
+
+    updateUserStatistics(
+        users
+    );
+
+
+    renderUsers(
+        users
+    );
+
+
+    /*
+       TUTUP MODAL
+    */
+
+    closeUserModal();
+
+}
+
+
+/* =====================================================
+   GENERATE ID
+===================================================== */
+
+function generateUserId(users) {
+
+    if (!users.length) {
+
+        return 1;
+
+    }
+
+
+    var maxId = 0;
+
+
+    users.forEach(function (user) {
+
+        var id =
+            parseInt(
+                user.id,
+                10
+            );
+
+
+        if (
+            !isNaN(id) &&
+            id > maxId
+        ) {
+
+            maxId = id;
+
+        }
+
+    });
+
+
+    return maxId + 1;
+
+}
+
+
+/* =====================================================
+   EDIT USER
+===================================================== */
+
+function editUser(id) {
+
+    var users =
+        window.plazaUsers || [];
+
+
+    var user =
+        users.find(
+            function (item) {
+
+                return String(item.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if (!user) {
+
+        alert(
+            "Data pengguna tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    var idElement =
+        document.getElementById(
+            "userId"
+        );
+
+
+    var namaElement =
+        document.getElementById(
+            "userNama"
+        );
+
+
+    var usernameElement =
+        document.getElementById(
+            "userUsername"
+        );
+
+
+    var roleElement =
+        document.getElementById(
+            "userRole"
+        );
+
+
+    var unitElement =
+        document.getElementById(
+            "userUnit"
+        );
+
+
+    var statusElement =
+        document.getElementById(
+            "userStatus"
+        );
+
+
+    if (idElement) {
+
+        idElement.value =
+            user.id;
+
+    }
+
+
+    if (namaElement) {
+
+        namaElement.value =
+            user.nama || "";
+
+    }
+
+
+    if (usernameElement) {
+
+        usernameElement.value =
+            user.username || "";
+
+    }
+
+
+    if (roleElement) {
+
+        roleElement.value =
+            user.role || "";
+
+    }
+
+
+    if (unitElement) {
+
+        unitElement.value =
+            user.unit || "";
+
+    }
+
+
+    if (statusElement) {
+
+        statusElement.value =
+            user.status || "Aktif";
+
+    }
+
+
+    var title =
+        document.getElementById(
+            "userModalTitle"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            "Edit Pengguna";
+
+    }
+
+
+    var modalElement =
+        document.getElementById(
+            "userModal"
+        );
+
+
+    if (!modalElement) {
+
+        return;
+
+    }
+
+
+    var modal =
+        bootstrap.Modal.getOrCreateInstance(
+            modalElement
+        );
+
+
+    modal.show();
+
+}
+
+
+/* =====================================================
+   TUTUP MODAL
+===================================================== */
+
+function closeUserModal() {
+
+    var modalElement =
+        document.getElementById(
+            "userModal"
+        );
+
+
+    if (!modalElement) {
+
+        return;
+
+    }
+
+
+    var modal =
+        bootstrap.Modal.getInstance(
+            modalElement
+        );
+
+
+    if (modal) {
+
+        modal.hide();
+
+    }
+
+}
+
+
+/* =====================================================
+   DELETE USER
+===================================================== */
+
+function deleteUser(id) {
+
+    var users =
+        window.plazaUsers || [];
+
+
+    var user =
+        users.find(
+            function (item) {
+
+                return String(item.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if (!user) {
+
+        alert(
+            "Data pengguna tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       KONFIRMASI
+    */
+
+    var confirmed =
+        confirm(
+            'Apakah Anda yakin ingin menghapus pengguna "' +
+            user.nama +
+            '"?\n\n' +
+            "Data yang dihapus tidak dapat dikembalikan."
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    /*
+       HAPUS
+    */
+
+    var newUsers =
+        users.filter(
+            function (item) {
+
+                return String(item.id) !==
+                    String(id);
+
+            }
+        );
+
+
+    window.plazaUsers =
+        newUsers;
+
+
+    localStorage.setItem(
+        USER_STORAGE_KEY,
+        JSON.stringify(newUsers)
+    );
+
+
+    /*
+       UPDATE TAMPILAN
+    */
+
+    updateUserStatistics(
+        newUsers
+    );
+
+
+    renderUsers(
+        newUsers
+    );
+
+
+    alert(
+        "Pengguna berhasil dihapus."
+    );
+
+}
+
+
+/* =====================================================
    SEARCH
 ===================================================== */
 
@@ -330,8 +1265,11 @@ function setupSearch() {
             "searchUser"
         );
 
+
     if (!searchInput) {
+
         return;
+
     }
 
 
@@ -350,25 +1288,29 @@ function setupSearch() {
 
 
             var filteredUsers =
-                users.filter(function (user) {
+                users.filter(
+                    function (user) {
 
-                    var text =
-                        (user.nama || "") +
-                        " " +
-                        (user.username || "") +
-                        " " +
-                        (user.role || "") +
-                        " " +
-                        (user.unit || "") +
-                        " " +
-                        (user.status || "");
+                        var text =
+                            (user.nama || "") +
+                            " " +
+                            (user.username || "") +
+                            " " +
+                            (user.role || "") +
+                            " " +
+                            (user.unit || "") +
+                            " " +
+                            (user.status || "");
 
 
-                    return text
-                        .toLowerCase()
-                        .includes(keyword);
+                        return text
+                            .toLowerCase()
+                            .includes(
+                                keyword
+                            );
 
-                });
+                    }
+                );
 
 
             renderUsers(
@@ -388,7 +1330,10 @@ function setupSearch() {
 function setValue(id, value) {
 
     var element =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
+
 
     if (element) {
 
@@ -396,90 +1341,6 @@ function setValue(id, value) {
             value;
 
     }
-
-}
-
-
-/* =====================================================
-   EDIT USER
-===================================================== */
-
-function editUser(id) {
-
-    var users =
-        window.plazaUsers || [];
-
-
-    var user =
-        users.find(function (item) {
-
-            return item.id === id;
-
-        });
-
-
-    if (!user) {
-
-        alert(
-            "Data pengguna tidak ditemukan."
-        );
-
-        return;
-    }
-
-
-    alert(
-        "EDIT PENGGUNA\n\n" +
-        "Nama: " +
-        user.nama +
-        "\nUsername: " +
-        user.username +
-        "\nRole: " +
-        user.role +
-        "\nUnit: " +
-        (user.unit || "-") +
-        "\nStatus: " +
-        (user.status || "Aktif")
-    );
-
-}
-
-
-/* =====================================================
-   DELETE USER
-===================================================== */
-
-function deleteUser(id) {
-
-    var users =
-        window.plazaUsers || [];
-
-
-    var user =
-        users.find(function (item) {
-
-            return item.id === id;
-
-        });
-
-
-    if (!user) {
-
-        alert(
-            "Data pengguna tidak ditemukan."
-        );
-
-        return;
-    }
-
-
-    alert(
-        'Pengguna "' +
-        user.nama +
-        '" siap untuk dihapus.\n\n' +
-        "Fitur penghapusan permanen akan " +
-        "diaktifkan setelah sistem CRUD selesai."
-    );
 
 }
 
@@ -497,7 +1358,9 @@ function loadAdminProfile() {
 
 
     if (!adminName) {
+
         return;
+
     }
 
 
@@ -548,6 +1411,7 @@ function setupMobileMenu() {
     ) {
 
         return;
+
     }
 
 
@@ -585,24 +1449,26 @@ function setupMobileMenu() {
 
     document
         .querySelectorAll(".menu-item")
-        .forEach(function (item) {
+        .forEach(
+            function (item) {
 
-            item.addEventListener(
-                "click",
-                function () {
+                item.addEventListener(
+                    "click",
+                    function () {
 
-                    sidebar.classList.remove(
-                        "show"
-                    );
+                        sidebar.classList.remove(
+                            "show"
+                        );
 
-                    overlay.classList.remove(
-                        "show"
-                    );
+                        overlay.classList.remove(
+                            "show"
+                        );
 
-                }
-            );
+                    }
+                );
 
-        });
+            }
+        );
 
 }
 
@@ -620,7 +1486,9 @@ function setupLogout() {
 
 
     if (!logoutButton) {
+
         return;
+
     }
 
 
@@ -656,26 +1524,35 @@ function setupLogout() {
 
 function escapeHtml(value) {
 
-    return String(value || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    return String(
+        value == null
+            ? ""
+            : value
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
