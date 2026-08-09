@@ -1,4 +1,3 @@
-```javascript
 /* =====================================================
    PLAZA DAYEUHLUHUR
    USER MANAGEMENT ENGINE V3
@@ -8,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("USER MANAGEMENT ENGINE V3 AKTIF");
+    console.log("User Management Engine V3 aktif");
     console.log("====================================");
 
     loadUsers();
@@ -29,13 +28,13 @@ async function loadUsers() {
     const tableBody = document.getElementById("userTableBody");
 
     if (!tableBody) {
-        console.error("Element userTableBody tidak ditemukan.");
+        console.error("userTableBody tidak ditemukan.");
         return;
     }
 
-    try {
+    console.log("Membaca database pengguna...");
 
-        console.log("Membaca database pengguna...");
+    try {
 
         const response = await fetch("data/users.json", {
             cache: "no-store"
@@ -54,9 +53,9 @@ async function loadUsers() {
 
         const text = await response.text();
 
-        console.log("Isi users.json:", text.substring(0, 200));
+        console.log("Isi awal users.json:", text.substring(0, 100));
 
-        if (!text.trim()) {
+        if (text.trim() === "") {
             throw new Error("users.json kosong.");
         }
 
@@ -68,25 +67,23 @@ async function loadUsers() {
 
         } catch (error) {
 
-            console.error(
-                "JSON users.json tidak valid:",
-                error
-            );
+            console.error("JSON ERROR:", error);
+            console.error("Isi users.json:", text);
 
             throw new Error(
-                "users.json bukan JSON yang valid."
+                "users.json bukan JSON valid."
             );
         }
 
         if (!Array.isArray(users)) {
 
             throw new Error(
-                "Format users.json harus berupa ARRAY."
+                "Format users.json harus berupa array."
             );
         }
 
         console.log(
-            "✓ Jumlah pengguna:",
+            "Jumlah pengguna:",
             users.length
         );
 
@@ -96,40 +93,28 @@ async function loadUsers() {
 
         renderUsers(users);
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "✗ GAGAL MEMUAT USERS:",
+            "GAGAL MEMBACA USERS:",
             error
         );
 
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="7"
-                    class="text-center py-4 text-danger">
+        tableBody.innerHTML =
+            '<tr>' +
+            '<td colspan="7" class="text-center py-4 text-danger">' +
+            '<i class="fa-solid fa-triangle-exclamation"></i> ' +
+            'Gagal membaca database pengguna.' +
+            '</td>' +
+            '</tr>';
 
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-
-                    Gagal membaca database pengguna.
-
-                    <br>
-
-                    <small>
-                        ${escapeHtml(error.message)}
-                    </small>
-
-                </td>
-            </tr>
-        `;
     }
 
 }
 
 
 /* =====================================================
-   STATISTIK PENGGUNA
+   UPDATE STATISTIK
 ===================================================== */
 
 function updateUserStatistics(users) {
@@ -194,9 +179,7 @@ function updateUserStatistics(users) {
 function renderUsers(users) {
 
     const tableBody =
-        document.getElementById(
-            "userTableBody"
-        );
+        document.getElementById("userTableBody");
 
 
     if (!tableBody) {
@@ -204,20 +187,15 @@ function renderUsers(users) {
     }
 
 
-    if (!users.length) {
+    if (users.length === 0) {
 
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="7"
-                    class="text-center py-4">
-
-                    <i class="fa-solid fa-users-slash"></i>
-
-                    Belum ada pengguna.
-
-                </td>
-            </tr>
-        `;
+        tableBody.innerHTML =
+            '<tr>' +
+            '<td colspan="7" class="text-center py-4">' +
+            '<i class="fa-solid fa-users-slash"></i> ' +
+            'Belum ada pengguna.' +
+            '</td>' +
+            '</tr>';
 
         return;
     }
@@ -232,90 +210,83 @@ function renderUsers(users) {
             user.status || "Aktif";
 
 
-        const statusClass =
-            status.toLowerCase() === "aktif"
-                ? "text-success"
-                : "text-danger";
+        let statusClass = "text-success";
 
 
-        html += `
+        if (
+            status.toLowerCase() !== "aktif"
+        ) {
 
-            <tr>
+            statusClass = "text-danger";
 
-                <td>
-                    ${index + 1}
-                </td>
-
-
-                <td>
-
-                    <strong>
-                        ${escapeHtml(user.nama)}
-                    </strong>
-
-                </td>
+        }
 
 
-                <td>
-                    ${escapeHtml(user.username)}
-                </td>
+        html +=
+            '<tr>' +
 
+            '<td>' +
+            (index + 1) +
+            '</td>' +
 
-                <td>
+            '<td>' +
+            '<strong>' +
+            escapeHtml(user.nama) +
+            '</strong>' +
+            '</td>' +
 
-                    <span class="user-role">
-                        ${escapeHtml(user.role)}
-                    </span>
+            '<td>' +
+            escapeHtml(user.username) +
+            '</td>' +
 
-                </td>
+            '<td>' +
+            '<span class="user-role">' +
+            escapeHtml(user.role) +
+            '</span>' +
+            '</td>' +
 
+            '<td>' +
+            escapeHtml(user.unit || "-") +
+            '</td>' +
 
-                <td>
-                    ${escapeHtml(user.unit || "-")}
-                </td>
+            '<td>' +
+            '<span class="' +
+            statusClass +
+            '">' +
+            '<i class="fa-solid fa-circle"></i> ' +
+            escapeHtml(status) +
+            '</span>' +
+            '</td>' +
 
+            '<td>' +
 
-                <td>
+            '<button ' +
+            'type="button" ' +
+            'class="btn btn-sm btn-outline-primary" ' +
+            'onclick="editUser(' +
+            user.id +
+            ')" ' +
+            'title="Edit Pengguna">' +
 
-                    <span class="${statusClass}">
+            '<i class="fa-solid fa-pen"></i>' +
 
-                        <i class="fa-solid fa-circle"></i>
+            '</button> ' +
 
-                        ${escapeHtml(status)}
+            '<button ' +
+            'type="button" ' +
+            'class="btn btn-sm btn-outline-danger" ' +
+            'onclick="deleteUser(' +
+            user.id +
+            ')" ' +
+            'title="Hapus Pengguna">' +
 
-                    </span>
+            '<i class="fa-solid fa-trash"></i>' +
 
-                </td>
+            '</button>' +
 
+            '</td>' +
 
-                <td>
-
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-outline-primary"
-                        onclick="editUser(${user.id})"
-                        title="Edit Pengguna">
-
-                        <i class="fa-solid fa-pen"></i>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-outline-danger"
-                        onclick="deleteUser(${user.id})"
-                        title="Hapus Pengguna">
-
-                        <i class="fa-solid fa-trash"></i>
-
-                    </button>
-
-                </td>
-
-            </tr>
-
-        `;
+            '</tr>';
 
     });
 
@@ -326,15 +297,13 @@ function renderUsers(users) {
 
 
 /* =====================================================
-   SEARCH USER
+   SEARCH
 ===================================================== */
 
 function setupSearch() {
 
     const searchInput =
-        document.getElementById(
-            "searchUser"
-        );
+        document.getElementById("searchUser");
 
 
     if (!searchInput) {
@@ -360,28 +329,25 @@ function setupSearch() {
                 users.filter(function (user) {
 
                     const text =
+                        (
+                            (user.nama || "") +
+                            " " +
+                            (user.username || "") +
+                            " " +
+                            (user.role || "") +
+                            " " +
+                            (user.unit || "") +
+                            " " +
+                            (user.status || "")
+                        ).toLowerCase();
 
-                        (user.nama || "") +
-                        " " +
-                        (user.username || "") +
-                        " " +
-                        (user.role || "") +
-                        " " +
-                        (user.unit || "") +
-                        " " +
-                        (user.status || "");
 
-
-                    return text
-                        .toLowerCase()
-                        .includes(keyword);
+                    return text.includes(keyword);
 
                 });
 
 
-            renderUsers(
-                filteredUsers
-            );
+            renderUsers(filteredUsers);
 
         }
     );
@@ -390,7 +356,7 @@ function setupSearch() {
 
 
 /* =====================================================
-   HELPER SET VALUE
+   SET VALUE
 ===================================================== */
 
 function setValue(id, value) {
@@ -437,28 +403,15 @@ function editUser(id) {
 
 
     alert(
-
-        "EDIT PENGGUNA\n\n" +
-
+        "Edit pengguna:\n\n" +
         "Nama: " +
         user.nama +
-        "\n" +
-
-        "Username: " +
+        "\nUsername: " +
         user.username +
-        "\n" +
-
-        "Role: " +
+        "\nRole: " +
         user.role +
-        "\n" +
-
-        "Unit: " +
-        (user.unit || "-") +
-        "\n" +
-
-        "Status: " +
-        (user.status || "Aktif")
-
+        "\nUnit: " +
+        (user.unit || "-")
     );
 
 }
@@ -493,14 +446,11 @@ function deleteUser(id) {
 
 
     alert(
-
         'Pengguna "' +
         user.nama +
-        '" siap untuk dihapus.\n\n' +
-
-        "Fitur penghapusan permanen akan " +
-        "diaktifkan setelah sistem CRUD selesai."
-
+        '" siap dihapus.\n\n' +
+        "Fitur hapus permanen akan dibuat " +
+        "pada tahap CRUD berikutnya."
     );
 
 }
@@ -540,7 +490,7 @@ function loadAdminProfile() {
 
 
 /* =====================================================
-   MOBILE SIDEBAR
+   MOBILE MENU
 ===================================================== */
 
 function setupMobileMenu() {
@@ -577,13 +527,9 @@ function setupMobileMenu() {
         "click",
         function () {
 
-            sidebar.classList.add(
-                "show"
-            );
+            sidebar.classList.add("show");
 
-            overlay.classList.add(
-                "show"
-            );
+            overlay.classList.add("show");
 
         }
     );
@@ -593,13 +539,9 @@ function setupMobileMenu() {
         "click",
         function () {
 
-            sidebar.classList.remove(
-                "show"
-            );
+            sidebar.classList.remove("show");
 
-            overlay.classList.remove(
-                "show"
-            );
+            overlay.classList.remove("show");
 
         }
     );
@@ -613,13 +555,9 @@ function setupMobileMenu() {
                 "click",
                 function () {
 
-                    sidebar.classList.remove(
-                        "show"
-                    );
+                    sidebar.classList.remove("show");
 
-                    overlay.classList.remove(
-                        "show"
-                    );
+                    overlay.classList.remove("show");
 
                 }
             );
@@ -679,31 +617,10 @@ function setupLogout() {
 function escapeHtml(value) {
 
     return String(value ?? "")
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
-```
