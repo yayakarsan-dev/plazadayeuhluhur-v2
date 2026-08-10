@@ -1,164 +1,850 @@
-fetch('data/desa.json')
-.then(response => response.json())
-.then(data => {
+```javascript
+/* =====================================================
+   PLAZA DAYEUHLUHUR
+   DESA DIRECTORY ENGINE V2
+   Direktori 14 Desa Kecamatan Dayeuhluhur
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("====================================");
+    console.log("PLAZA DAYEUHLUHUR");
+    console.log("DESA DIRECTORY ENGINE V2");
+    console.log("====================================");
+
+    loadDesa();
+    setupSearchDesa();
+
+});
+
+
+/* =====================================================
+   DATABASE DESA
+===================================================== */
+
+async function loadDesa() {
+
+    const container =
+        document.getElementById("desaContainer");
+
+
+    if (!container) {
+
+        console.error(
+            "desaContainer tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        console.log(
+            "Membaca database desa..."
+        );
+
+
+        const response =
+            await fetch(
+                "data/desa.json",
+                {
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " +
+                response.status +
+                " - " +
+                response.statusText
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!Array.isArray(data)) {
+
+            throw new Error(
+                "Format desa.json harus berupa array."
+            );
+
+        }
+
+
+        window.plazaDesa =
+            data;
+
+
+        console.log(
+            "Berhasil membaca " +
+            data.length +
+            " data desa."
+        );
+
+
+        renderDesa(data);
+
+        updateStatistikDesa(data);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Gagal membaca database desa:",
+            error
+        );
+
+
+        container.innerHTML =
+
+            '<div class="col-12">' +
+
+                '<div class="alert alert-danger text-center">' +
+
+                    '<i class="fa-solid fa-triangle-exclamation me-2"></i>' +
+
+                    'Gagal membaca data desa.' +
+
+                '</div>' +
+
+            '</div>';
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER DESA
+===================================================== */
+
+function renderDesa(data) {
+
+    const container =
+        document.getElementById(
+            "desaContainer"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    if (!data.length) {
+
+        container.innerHTML =
+
+            '<div class="col-12">' +
+
+                '<div class="text-center py-5 text-muted">' +
+
+                    '<i class="fa-solid fa-house-circle-xmark fa-3x mb-3"></i>' +
+
+                    '<h4>Data desa belum tersedia</h4>' +
+
+                    '<p>Belum ada data desa yang dapat ditampilkan.</p>' +
+
+                '</div>' +
+
+            '</div>';
+
+        return;
+
+    }
+
 
     let html = "";
 
-    data.forEach(item => {
 
-        html += `
+    data.forEach(function (item) {
 
-        <div class="col-lg-4 col-md-6 mb-4">
+        const gambar =
+            escapeHTML(
+                item.gambar ||
+                "assets/images/desa/default.jpg"
+            );
 
-            <div class="card desa-card shadow h-100">
 
-                <img src="${item.gambar}" class="card-img-top" alt="${item.nama}">
+        const nama =
+            escapeHTML(
+                item.nama ||
+                "Nama Desa"
+            );
 
-                <div class="card-body">
 
-                    <span class="badge bg-success badge-status mb-2">
+        const status =
+            escapeHTML(
+                item.status ||
+                "Aktif"
+            );
 
-                        ${item.status}
 
-                    </span>
+        const potensi =
+            escapeHTML(
+                item.potensi ||
+                "Potensi Desa"
+            );
 
-                    <h4 class="fw-bold">
 
-                        ${item.nama}
+        const produk =
+            escapeHTML(
+                item.produk ||
+                "-"
+            );
 
-                        ${
-                            item.verified
-                            ?
-                            `<i class="fa-solid fa-circle-check text-primary"
-                            title="Verified by PLAZA DAYEUHLUHUR"></i>`
-                            :
-                            ""
-                        }
 
-                    </h4>
+        const penduduk =
+            escapeHTML(
+                item.penduduk ||
+                "0"
+            );
 
-                    <p class="text-success fw-semibold">
 
-                        ${item.potensi}
+        const umkm =
+            escapeHTML(
+                item.umkm ||
+                "0"
+            );
 
-                    </p>
 
-                    <p class="small text-muted">
+        const bumdes =
+            escapeHTML(
+                item.bumdes ||
+                "0"
+            );
 
-                        🎁 Produk Unggulan :
-                        <b>${item.produk}</b>
 
-                    </p>
+        const wisata =
+            escapeHTML(
+                item.wisata ||
+                "0"
+            );
 
-                    <div class="row mt-3">
 
-                        <div class="col-6">
+        const link =
+            escapeHTML(
+                item.link ||
+                "#"
+            );
 
-                            <div class="stat-box">
 
-                                👥
+        const verified =
+            item.verified
+                ?
 
-                                <b>${item.penduduk}</b>
+                '<i class="fa-solid fa-circle-check text-primary ms-1" ' +
+                'title="Verified by PLAZA DAYEUHLUHUR"></i>'
 
-                                Penduduk
+                :
 
-                            </div>
+                "";
 
-                        </div>
 
-                        <div class="col-6">
+        html +=
 
-                            <div class="stat-box">
+            '<div class="col-lg-4 col-md-6 mb-4 desa-item">' +
 
-                                🛍
+                '<div class="card desa-card shadow h-100 overflow-hidden">' +
 
-                                <b>${item.umkm}</b>
 
-                                UMKM
+                    '<img ' +
 
-                            </div>
+                        'src="' +
+                        gambar +
+                        '" ' +
 
-                        </div>
+                        'class="card-img-top" ' +
 
-                        <div class="col-6 mt-2">
+                        'alt="' +
+                        nama +
+                        '" ' +
 
-                            <div class="stat-box">
+                        'loading="lazy" ' +
 
-                                🏢
+                        'onerror="' +
+                        "this.src='assets/images/desa/default.jpg'" +
+                        '"' +
 
-                                <b>${item.bumdes}</b>
+                    '>' +
 
-                                BUMDes
 
-                            </div>
+                    '<div class="card-body d-flex flex-column">' +
 
-                        </div>
 
-                        <div class="col-6 mt-2">
+                        '<span class="badge bg-success badge-status mb-2 align-self-start">' +
 
-                            <div class="stat-box">
+                            status +
 
-                                🌄
+                        '</span>' +
 
-                                <b>${item.wisata}</b>
 
-                                Wisata
+                        '<h4 class="fw-bold">' +
 
-                            </div>
+                            nama +
 
-                        </div>
+                            verified +
 
-                    </div>
+                        '</h4>' +
 
-                    <a href="${item.link}"
 
-                       class="btn btn-success w-100 mt-4">
+                        '<p class="text-success fw-semibold mb-2">' +
 
-                       Jelajahi Desa →
+                            potensi +
 
-                    </a>
+                        '</p>' +
 
-                </div>
 
-            </div>
+                        '<p class="small text-muted">' +
 
-        </div>
+                            '🎁 Produk Unggulan : ' +
 
-        `;
+                            '<b>' +
+                            produk +
+                            '</b>' +
+
+                        '</p>' +
+
+
+                        '<div class="row mt-3">' +
+
+
+                            '<div class="col-6">' +
+
+                                '<div class="stat-box">' +
+
+                                    '👥 ' +
+
+                                    '<b>' +
+                                    penduduk +
+                                    '</b>' +
+
+                                    '<small class="d-block">' +
+                                    'Penduduk' +
+                                    '</small>' +
+
+                                '</div>' +
+
+                            '</div>' +
+
+
+                            '<div class="col-6">' +
+
+                                '<div class="stat-box">' +
+
+                                    '🛍️ ' +
+
+                                    '<b>' +
+                                    umkm +
+                                    '</b>' +
+
+                                    '<small class="d-block">' +
+                                    'UMKM' +
+                                    '</small>' +
+
+                                '</div>' +
+
+                            '</div>' +
+
+
+                            '<div class="col-6 mt-2">' +
+
+                                '<div class="stat-box">' +
+
+                                    '🏢 ' +
+
+                                    '<b>' +
+                                    bumdes +
+                                    '</b>' +
+
+                                    '<small class="d-block">' +
+                                    'BUMDes' +
+                                    '</small>' +
+
+                                '</div>' +
+
+                            '</div>' +
+
+
+                            '<div class="col-6 mt-2">' +
+
+                                '<div class="stat-box">' +
+
+                                    '🌄 ' +
+
+                                    '<b>' +
+                                    wisata +
+                                    '</b>' +
+
+                                    '<small class="d-block">' +
+                                    'Wisata' +
+                                    '</small>' +
+
+                                '</div>' +
+
+                            '</div>' +
+
+                        '</div>' +
+
+
+                        '<a ' +
+
+                            'href="' +
+                            link +
+                            '" ' +
+
+                            'class="btn btn-success w-100 mt-auto pt-2 mt-4">' +
+
+                            '<i class="fa-solid fa-compass me-1"></i>' +
+
+                            'Jelajahi Desa' +
+
+                        '</a>' +
+
+
+                    '</div>' +
+
+                '</div>' +
+
+            '</div>';
 
     });
 
-    document.getElementById("desaContainer").innerHTML = html;
 
-    // ===========================
-    // LIVE SEARCH
-    // ===========================
+    container.innerHTML =
+        html;
 
-    const search = document.getElementById("searchDesa");
 
-    search.addEventListener("keyup", function(){
+    console.log(
+        "Kartu desa berhasil ditampilkan."
+    );
 
-        let keyword = this.value.toLowerCase();
+}
 
-        let cards = document.querySelectorAll(".desa-card");
 
-        cards.forEach(card=>{
+/* =====================================================
+   SEARCH DESA
+===================================================== */
 
-            let text = card.innerText.toLowerCase();
+function setupSearchDesa() {
 
-            if(text.includes(keyword)){
+    const search =
+        document.getElementById(
+            "searchDesa"
+        );
 
-                card.parentElement.style.display="block";
 
-            }else{
+    if (!search) {
+        return;
+    }
 
-                card.parentElement.style.display="none";
+
+    search.addEventListener(
+        "input",
+        function () {
+
+            filterDesa(
+                this.value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FILTER DESA
+===================================================== */
+
+function filterDesa(keyword) {
+
+    const container =
+        document.getElementById(
+            "desaContainer"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const items =
+        container.querySelectorAll(
+            ".desa-item"
+        );
+
+
+    const kataKunci =
+        String(
+            keyword || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    let jumlahTampil =
+        0;
+
+
+    items.forEach(
+        function (item) {
+
+            const text =
+                item.textContent
+                    .toLowerCase();
+
+
+            if (
+                text.includes(
+                    kataKunci
+                )
+            ) {
+
+                item.style.display =
+                    "";
+
+                jumlahTampil++;
 
             }
 
-        });
+            else {
 
-    });
+                item.style.display =
+                    "none";
 
-})
-.catch(error => console.error(error));
+            }
+
+        }
+    );
+
+
+    tampilkanPesanPencarian(
+        jumlahTampil,
+        kataKunci
+    );
+
+}
+
+
+/* =====================================================
+   PESAN HASIL PENCARIAN
+===================================================== */
+
+function tampilkanPesanPencarian(
+    jumlah,
+    keyword
+) {
+
+    const container =
+        document.getElementById(
+            "desaContainer"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    let pesan =
+        document.getElementById(
+            "desaSearchEmpty"
+        );
+
+
+    if (
+        jumlah === 0 &&
+        keyword !== ""
+    ) {
+
+        if (!pesan) {
+
+            pesan =
+                document.createElement(
+                    "div"
+                );
+
+            pesan.id =
+                "desaSearchEmpty";
+
+            pesan.className =
+                "col-12 text-center py-5";
+
+            pesan.innerHTML =
+
+                '<i class="fa-solid fa-magnifying-glass fa-3x text-muted mb-3"></i>' +
+
+                '<h4>Desa tidak ditemukan</h4>' +
+
+                '<p class="text-muted">' +
+
+                    'Tidak ada desa yang sesuai dengan pencarian "' +
+
+                    escapeHTML(keyword) +
+
+                    '".' +
+
+                '</p>';
+
+            container.appendChild(
+                pesan
+            );
+
+        }
+
+    }
+
+    else {
+
+        if (pesan) {
+
+            pesan.remove();
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   STATISTIK DESA
+===================================================== */
+
+function updateStatistikDesa(data) {
+
+    console.log(
+        "Statistik desa:",
+        data.length
+    );
+
+
+    /*
+       Jika nanti desa.html mempunyai
+       elemen statistik dengan ID berikut,
+       otomatis akan terisi.
+    */
+
+
+    setValue(
+        "totalDesa",
+        data.length
+    );
+
+
+    const totalPenduduk =
+        data.reduce(
+            function (total, item) {
+
+                return (
+                    total +
+                    parseNumber(
+                        item.penduduk
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    const totalUMKM =
+        data.reduce(
+            function (total, item) {
+
+                return (
+                    total +
+                    parseNumber(
+                        item.umkm
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    const totalBUMDes =
+        data.reduce(
+            function (total, item) {
+
+                return (
+                    total +
+                    parseNumber(
+                        item.bumdes
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    const totalWisata =
+        data.reduce(
+            function (total, item) {
+
+                return (
+                    total +
+                    parseNumber(
+                        item.wisata
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    setValue(
+        "totalPenduduk",
+        totalPenduduk
+    );
+
+
+    setValue(
+        "totalUMKM",
+        totalUMKM
+    );
+
+
+    setValue(
+        "totalBUMDes",
+        totalBUMDes
+    );
+
+
+    setValue(
+        "totalWisata",
+        totalWisata
+    );
+
+}
+
+
+/* =====================================================
+   SET VALUE
+===================================================== */
+
+function setValue(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+
+    if (element) {
+
+        element.textContent =
+            value;
+
+    }
+
+}
+
+
+/* =====================================================
+   PARSE NUMBER
+===================================================== */
+
+function parseNumber(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return 0;
+
+    }
+
+
+    /*
+       Mengubah:
+
+       "1.250"
+       "1,250"
+       "1250"
+
+       menjadi angka.
+    */
+
+    const clean =
+        String(value)
+            .replace(
+                /\./g,
+                ""
+            )
+            .replace(
+                /,/g,
+                ""
+            )
+            .replace(
+                /[^0-9]/g,
+                ""
+            );
+
+
+    return (
+        parseInt(
+            clean,
+            10
+        ) || 0
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(
+        value || ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+```
