@@ -1,413 +1,163 @@
-```javascript
-/* =====================================================
-   PLAZA DAYEUHLUHUR
-   DESA DIRECTORY ENGINE - SAFE VERSION
-===================================================== */
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("DESA.JS AKTIF");
-
-    loadDesa();
-
-});
-
-
-/* =====================================================
-   LOAD DESA
-===================================================== */
-
-async function loadDesa() {
+    console.log("DESA.JS BERHASIL AKTIF");
 
     var container = document.getElementById("desaContainer");
 
     if (!container) {
+
         console.error("desaContainer tidak ditemukan.");
+
         return;
     }
 
-    try {
+    fetch("./data/desa.json")
 
-        console.log("Membaca data/desa.json...");
+        .then(function (response) {
 
-        var response = await fetch("./data/desa.json", {
-            cache: "no-store"
-        });
+            console.log("Status desa.json:", response.status);
 
-        if (!response.ok) {
-            throw new Error(
-                "desa.json gagal dibaca. HTTP " +
-                response.status
+            if (!response.ok) {
+
+                throw new Error(
+                    "desa.json gagal dimuat. HTTP " +
+                    response.status
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(function (data) {
+
+            console.log(
+                "DATA DESA BERHASIL DIBACA:",
+                data
             );
-        }
 
-        var data = await response.json();
-
-        console.log("Jumlah data desa:", data.length);
-
-        if (!Array.isArray(data)) {
-            throw new Error(
-                "Format desa.json harus berupa array."
+            console.log(
+                "JUMLAH DESA:",
+                data.length
             );
-        }
-
-        renderDesa(data);
-
-        updateStatistik(data);
-
-        setupSearch();
-
-        console.log(
-            "Berhasil menampilkan " +
-            data.length +
-            " desa."
-        );
-
-    } catch (error) {
-
-        console.error(
-            "ERROR DESA:",
-            error
-        );
-
-        container.innerHTML =
-            '<div class="col-12">' +
-                '<div class="alert alert-danger text-center">' +
-                    '<strong>Data desa gagal dimuat.</strong>' +
-                    '<br>' +
-                    escapeHTML(error.message) +
-                '</div>' +
-            '</div>';
-
-    }
-
-}
 
 
-/* =====================================================
-   RENDER DESA
-===================================================== */
-
-function renderDesa(data) {
-
-    var container =
-        document.getElementById("desaContainer");
-
-    if (!container) {
-        return;
-    }
-
-    var html = "";
-
-    data.forEach(function (item) {
-
-        var gambar =
-            item.gambar ||
-            "assets/images/desa/default.jpg";
-
-        var nama =
-            item.nama || "-";
-
-        var status =
-            item.status || "Desa";
-
-        var deskripsi =
-            item.deskripsi || "-";
-
-        var penduduk =
-            item.penduduk || "-";
-
-        var umkm =
-            item.umkm || "-";
-
-        var bumdes =
-            item.bumdes || "-";
-
-        var wisata =
-            item.wisata || "-";
-
-        var link =
-            item.link || "#";
+            var html = "";
 
 
-        html +=
-            '<div class="col-lg-4 col-md-6 mb-4 desa-item">' +
+            data.forEach(function (item) {
 
-                '<div class="card desa-card shadow h-100">' +
+                html +=
+                    '<div class="col-lg-4 col-md-6 mb-4">' +
 
-                    '<img ' +
-                        'src="' + escapeHTML(gambar) + '" ' +
-                        'class="card-img-top" ' +
-                        'alt="' + escapeHTML(nama) + '" ' +
-                        'loading="lazy" ' +
-                        'onerror="this.onerror=null;this.src=\'assets/images/desa/default.jpg\'">' +
+                        '<div class="card shadow h-100">' +
 
-                    '<div class="card-body">' +
+                            '<img ' +
+                                'src="' +
+                                (item.gambar ||
+                                "assets/images/desa/default.jpg") +
+                                '" ' +
+                                'class="card-img-top" ' +
+                                'alt="' +
+                                (item.nama || "Desa") +
+                                '">' +
 
-                        '<span class="badge bg-success mb-2">' +
-                            escapeHTML(status) +
-                        '</span>' +
+                            '<div class="card-body">' +
 
-                        '<h4 class="fw-bold">' +
-                            escapeHTML(nama) +
-                        '</h4>' +
+                                '<span class="badge bg-success mb-2">' +
+                                    (item.status || "Desa") +
+                                '</span>' +
 
-                        '<p class="text-success fw-semibold">' +
-                            escapeHTML(deskripsi) +
-                        '</p>' +
+                                '<h4 class="fw-bold">' +
+                                    (item.nama || "-") +
+                                '</h4>' +
 
-                        '<div class="row mt-3">' +
+                                '<p class="text-success">' +
+                                    (item.deskripsi || "-") +
+                                '</p>' +
 
-                            '<div class="col-6 mb-2">' +
-                                '<div class="stat-box">' +
-                                    '<div>👥</div>' +
+                                '<p>' +
+                                    '👥 Penduduk: ' +
                                     '<strong>' +
-                                        escapeHTML(penduduk) +
+                                        (item.penduduk || "-") +
                                     '</strong>' +
-                                    '<small>Penduduk</small>' +
-                                '</div>' +
-                            '</div>' +
+                                '</p>' +
 
-                            '<div class="col-6 mb-2">' +
-                                '<div class="stat-box">' +
-                                    '<div>🛍️</div>' +
+                                '<p>' +
+                                    '🛍️ UMKM: ' +
                                     '<strong>' +
-                                        escapeHTML(umkm) +
+                                        (item.umkm || "-") +
                                     '</strong>' +
-                                    '<small>UMKM</small>' +
-                                '</div>' +
-                            '</div>' +
+                                '</p>' +
 
-                            '<div class="col-6">' +
-                                '<div class="stat-box">' +
-                                    '<div>🏢</div>' +
+                                '<p>' +
+                                    '🏢 BUMDes: ' +
                                     '<strong>' +
-                                        escapeHTML(bumdes) +
+                                        (item.bumdes || "-") +
                                     '</strong>' +
-                                    '<small>BUMDes</small>' +
-                                '</div>' +
-                            '</div>' +
+                                '</p>' +
 
-                            '<div class="col-6">' +
-                                '<div class="stat-box">' +
-                                    '<div>🌄</div>' +
+                                '<p>' +
+                                    '🌄 Wisata: ' +
                                     '<strong>' +
-                                        escapeHTML(wisata) +
+                                        (item.wisata || "-") +
                                     '</strong>' +
-                                    '<small>Wisata</small>' +
-                                '</div>' +
+                                '</p>' +
+
+                                '<a ' +
+                                    'href="' +
+                                    (item.link || "#") +
+                                    '" ' +
+                                    'class="btn btn-success w-100">' +
+
+                                    'Jelajahi Desa →' +
+
+                                '</a>' +
+
                             '</div>' +
 
                         '</div>' +
 
-                        '<a ' +
-                            'href="' + escapeHTML(link) + '" ' +
-                            'class="btn btn-success w-100 mt-4">' +
+                    '</div>';
 
-                            '<i class="fa-solid fa-compass me-1"></i>' +
-                            ' Jelajahi Desa' +
+            });
 
-                        '</a>' +
+
+            container.innerHTML = html;
+
+
+            console.log(
+                "14 DESA SELESAI DITAMPILKAN."
+            );
+
+        })
+
+        .catch(function (error) {
+
+            console.error(
+                "GAGAL MEMUAT DESA:",
+                error
+            );
+
+
+            container.innerHTML =
+                '<div class="col-12">' +
+
+                    '<div class="alert alert-danger text-center">' +
+
+                        '<strong>' +
+                            'Data desa gagal dimuat.' +
+                        '</strong>' +
+
+                        '<br>' +
+
+                        error.message +
 
                     '</div>' +
 
-                '</div>' +
+                '</div>';
 
-            '</div>';
+        });
 
-    });
-
-    container.innerHTML = html;
-
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function setupSearch() {
-
-    var search =
-        document.getElementById("searchDesa");
-
-    if (!search) {
-        return;
-    }
-
-    search.addEventListener(
-        "input",
-        function () {
-
-            var keyword =
-                this.value
-                    .toLowerCase()
-                    .trim();
-
-            var items =
-                document.querySelectorAll(
-                    ".desa-item"
-                );
-
-            items.forEach(
-                function (item) {
-
-                    var text =
-                        item.innerText
-                            .toLowerCase();
-
-                    if (
-                        text.indexOf(keyword) !== -1
-                    ) {
-
-                        item.style.display = "";
-
-                    } else {
-
-                        item.style.display = "none";
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   STATISTIK
-===================================================== */
-
-function updateStatistik(data) {
-
-    var totalDesa =
-        document.getElementById("totalDesa");
-
-    var totalPenduduk =
-        document.getElementById("totalPenduduk");
-
-    var totalUMKM =
-        document.getElementById("totalUMKM");
-
-    var totalBUMDes =
-        document.getElementById("totalBUMDes");
-
-
-    if (totalDesa) {
-
-        totalDesa.textContent =
-            data.length;
-
-    }
-
-
-    var jumlahPenduduk = 0;
-
-    var jumlahUMKM = 0;
-
-    var jumlahBUMDes = 0;
-
-
-    data.forEach(function (item) {
-
-        jumlahPenduduk +=
-            parseNumber(item.penduduk);
-
-        jumlahUMKM +=
-            parseNumber(item.umkm);
-
-
-        if (
-            item.bumdes &&
-            item.bumdes !== "-"
-        ) {
-
-            jumlahBUMDes++;
-
-        }
-
-    });
-
-
-    if (totalPenduduk) {
-
-        totalPenduduk.textContent =
-            jumlahPenduduk.toLocaleString(
-                "id-ID"
-            );
-
-    }
-
-
-    if (totalUMKM) {
-
-        totalUMKM.textContent =
-            jumlahUMKM.toLocaleString(
-                "id-ID"
-            );
-
-    }
-
-
-    if (totalBUMDes) {
-
-        totalBUMDes.textContent =
-            jumlahBUMDes;
-
-    }
-
-}
-
-
-/* =====================================================
-   PARSE NUMBER
-===================================================== */
-
-function parseNumber(value) {
-
-    if (
-        !value ||
-        value === "-"
-    ) {
-
-        return 0;
-
-    }
-
-    var angka =
-        String(value)
-            .replace(/\./g, "")
-            .replace(/,/g, "")
-            .replace(/\D/g, "");
-
-    return parseInt(
-        angka,
-        10
-    ) || 0;
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(value) {
-
-    return String(value || "")
-
-        .replace(/&/g, "&amp;")
-
-        .replace(/</g, "&lt;")
-
-        .replace(/>/g, "&gt;")
-
-        .replace(/"/g, "&quot;")
-
-        .replace(/'/g, "&#039;");
-
-}
-```
+});
