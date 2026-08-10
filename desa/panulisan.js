@@ -1,15 +1,13 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
    DESA PANULISAN
-   DETAIL PAGE ENGINE
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("====================================");
-    console.log("DESA PANULISAN");
-    console.log("DETAIL PAGE ENGINE");
-    console.log("====================================");
+    console.log("================================");
+    console.log("PANULISAN DETAIL PAGE");
+    console.log("================================");
 
     loadPanulisan();
 
@@ -17,23 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* =====================================================
-   LOAD DATA PANULISAN
+   LOAD DATA DESA
 ===================================================== */
 
 async function loadPanulisan() {
 
     try {
 
-        /*
-         * Karena panulisan.html berada di:
-         * pages/desa/
-         *
-         * maka untuk kembali ke root:
-         * ../../
-         */
+        console.log("Membaca data/desa.json...");
 
-        var response =
-            await fetch("../../data/desa.json", {
+
+        const response =
+            await fetch("../data/desa.json", {
                 cache: "no-store"
             });
 
@@ -41,22 +34,24 @@ async function loadPanulisan() {
         if (!response.ok) {
 
             throw new Error(
-                "desa.json gagal dimuat. HTTP " +
+                "Gagal membaca desa.json. HTTP " +
                 response.status
             );
 
         }
 
 
-        var data =
+        const data =
             await response.json();
 
 
-        /*
-         * Cari desa berdasarkan slug
-         */
+        console.log(
+            "Jumlah data desa:",
+            data.length
+        );
 
-        var desa =
+
+        const desa =
             data.find(function (item) {
 
                 return item.slug === "panulisan";
@@ -67,7 +62,7 @@ async function loadPanulisan() {
         if (!desa) {
 
             throw new Error(
-                "Data Desa Panulisan tidak ditemukan."
+                "Data Panulisan tidak ditemukan."
             );
 
         }
@@ -81,15 +76,18 @@ async function loadPanulisan() {
 
         renderPanulisan(desa);
 
+    }
 
-    } catch (error) {
+    catch (error) {
 
         console.error(
-            "Gagal memuat Panulisan:",
+            "ERROR PANULISAN:",
             error
         );
 
-        showError(error.message);
+        showError(
+            error.message
+        );
 
     }
 
@@ -97,15 +95,10 @@ async function loadPanulisan() {
 
 
 /* =====================================================
-   RENDER PANULISAN
+   RENDER
 ===================================================== */
 
 function renderPanulisan(desa) {
-
-
-    /*
-     * NAMA DESA
-     */
 
     setText(
         "namaDesa",
@@ -113,19 +106,11 @@ function renderPanulisan(desa) {
     );
 
 
-    /*
-     * STATUS
-     */
-
     setText(
         "statusDesa",
         desa.status
     );
 
-
-    /*
-     * DESKRIPSI
-     */
 
     setText(
         "deskripsiDesa",
@@ -133,19 +118,11 @@ function renderPanulisan(desa) {
     );
 
 
-    /*
-     * PENDUDUK
-     */
-
     setText(
         "jumlahPenduduk",
         desa.penduduk
     );
 
-
-    /*
-     * UMKM
-     */
 
     setText(
         "jumlahUMKM",
@@ -153,19 +130,11 @@ function renderPanulisan(desa) {
     );
 
 
-    /*
-     * BUMDES
-     */
-
     setText(
         "namaBUMDes",
         desa.bumdes
     );
 
-
-    /*
-     * WISATA
-     */
 
     setText(
         "jumlahWisata",
@@ -173,32 +142,31 @@ function renderPanulisan(desa) {
     );
 
 
-    /*
-     * GAMBAR
-     */
-
-    var gambar =
+    const gambar =
         document.getElementById(
             "gambarDesa"
         );
 
 
-    if (gambar) {
+    if (gambar && desa.gambar) {
 
         gambar.src =
-            "../../" +
-            desa.gambar;
+            "../" + desa.gambar;
 
         gambar.alt =
             "Desa " +
             desa.nama;
 
+        gambar.onerror =
+            function () {
+
+                this.src =
+                    "../assets/images/desa/default.jpg";
+
+            };
+
     }
 
-
-    /*
-     * TITLE
-     */
 
     document.title =
         "Desa " +
@@ -207,23 +175,29 @@ function renderPanulisan(desa) {
 
 
     console.log(
-        "Halaman Panulisan berhasil dirender."
+        "Panulisan berhasil ditampilkan."
     );
 
 }
 
 
 /* =====================================================
-   HELPER SET TEXT
+   SET TEXT
 ===================================================== */
 
 function setText(id, value) {
 
-    var element =
+    const element =
         document.getElementById(id);
 
 
     if (!element) {
+
+        console.warn(
+            "Element #" +
+            id +
+            " tidak ditemukan."
+        );
 
         return;
 
@@ -242,33 +216,34 @@ function setText(id, value) {
 
 function showError(message) {
 
-    var container =
+    const container =
         document.getElementById(
             "desaDetailContainer"
         );
 
 
-    if (!container) {
+    if (container) {
 
-        return;
+        container.innerHTML = `
+
+            <div class="alert alert-danger text-center">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <strong>
+                    Data desa gagal dimuat.
+                </strong>
+
+                <br>
+
+                <small>
+                    ${message}
+                </small>
+
+            </div>
+
+        `;
 
     }
-
-
-    container.innerHTML =
-
-        '<div class="alert alert-danger text-center">' +
-
-            '<i class="fa-solid fa-triangle-exclamation me-2"></i>' +
-
-            '<strong>Data desa gagal dimuat.</strong>' +
-
-            '<br>' +
-
-            '<small>' +
-                message +
-            '</small>' +
-
-        '</div>';
 
 }
