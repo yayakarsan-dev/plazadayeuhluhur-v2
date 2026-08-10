@@ -1,24 +1,23 @@
 ```javascript
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   DESA DIRECTORY ENGINE
+   DESA DIRECTORY ENGINE V2
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("DESA DIRECTORY ENGINE");
+    console.log("DESA DIRECTORY ENGINE V2");
     console.log("====================================");
 
     loadDesa();
-    setupSearchDesa();
 
 });
 
 
 /* =====================================================
-   LOAD DATA DESA
+   LOAD DESA JSON
 ===================================================== */
 
 async function loadDesa() {
@@ -37,20 +36,20 @@ async function loadDesa() {
 
 
     console.log(
-        "Mencoba membaca: data/desa.json"
+        "Membaca data/desa.json..."
     );
 
 
     try {
 
         const response =
-            await fetch("data/desa.json", {
+            await fetch("./data/desa.json", {
                 cache: "no-store"
             });
 
 
         console.log(
-            "Status desa.json:",
+            "HTTP Status:",
             response.status
         );
 
@@ -58,10 +57,8 @@ async function loadDesa() {
         if (!response.ok) {
 
             throw new Error(
-                "HTTP " +
-                response.status +
-                " - " +
-                response.statusText
+                "File desa.json tidak ditemukan. HTTP " +
+                response.status
             );
 
         }
@@ -72,22 +69,23 @@ async function loadDesa() {
 
 
         console.log(
-            "Isi data desa:",
-            data
+            "Data desa berhasil dibaca:"
         );
+
+        console.log(data);
 
 
         if (!Array.isArray(data)) {
 
             throw new Error(
-                "desa.json harus berupa ARRAY."
+                "Format desa.json harus berupa ARRAY."
             );
 
         }
 
 
         console.log(
-            "Jumlah desa:",
+            "Jumlah data desa:",
             data.length
         );
 
@@ -98,45 +96,40 @@ async function loadDesa() {
 
         renderDesa(data);
 
-        updateStatistikDesa(data);
+
+        setupSearchDesa();
+
+
+        updateStatistik(data);
+
 
     }
-
 
     catch (error) {
 
         console.error(
-            "===================================="
+            "GAGAL MEMUAT DATA DESA:"
         );
 
-        console.error(
-            "GAGAL MEMBACA DATA DESA"
-        );
-
-        console.error(
-            error
-        );
-
-        console.error(
-            "===================================="
-        );
+        console.error(error);
 
 
         container.innerHTML = `
 
             <div class="col-12">
 
-                <div class="alert alert-danger text-center">
+                <div class="alert alert-danger text-center shadow-sm">
 
-                    <i class="fa-solid fa-triangle-exclamation fa-2x mb-3"></i>
+                    <i
+                        class="fa-solid fa-triangle-exclamation fa-2x mb-3">
+                    </i>
 
                     <h5>
                         Data Desa Tidak Dapat Dimuat
                     </h5>
 
                     <p class="mb-0">
-                        Silakan periksa file
-                        <strong>data/desa.json</strong>
+                        ${escapeHTML(error.message)}
                     </p>
 
                 </div>
@@ -170,41 +163,32 @@ function renderDesa(data) {
     let html = "";
 
 
-    data.forEach(function (item, index) {
+    data.forEach(function (item) {
+
+        const nama =
+            item.nama || "Nama Desa";
+
 
         const gambar =
             item.gambar ||
             "assets/images/desa/default.jpg";
 
 
-        const nama =
-            item.nama ||
-            "Desa";
-
-
         const status =
             item.status ||
-            "Aktif";
+            "Profil Desa";
 
 
-        const verified =
-            item.verified
-                ? `
-                    <i
-                        class="fa-solid fa-circle-check text-primary ms-1"
-                        title="Verified by PLAZA DAYEUHLUHUR">
-                    </i>
-                  `
-                : "";
+        const deskripsi =
+            item.deskripsi ||
+            "Informasi desa sedang dilengkapi.";
 
 
         html += `
 
-            <div
-                class="col-lg-4 col-md-6 mb-4 desa-item">
+            <div class="col-lg-4 col-md-6 mb-4 desa-item">
 
-                <div
-                    class="card desa-card shadow h-100 overflow-hidden">
+                <div class="card desa-card shadow h-100">
 
 
                     <!-- GAMBAR -->
@@ -214,8 +198,14 @@ function renderDesa(data) {
                         class="card-img-top"
                         alt="${escapeHTML(nama)}"
                         loading="lazy"
-                        onerror="this.src='assets/images/desa/default.jpg'">
+                        onerror="
+                            this.onerror=null;
+                            this.src='assets/images/desa/default.jpg';
+                        "
+                    >
 
+
+                    <!-- BODY -->
 
                     <div class="card-body d-flex flex-column">
 
@@ -223,7 +213,7 @@ function renderDesa(data) {
                         <!-- STATUS -->
 
                         <span
-                            class="badge bg-success mb-2 align-self-start">
+                            class="badge bg-success mb-3 align-self-start">
 
                             ${escapeHTML(status)}
 
@@ -236,27 +226,25 @@ function renderDesa(data) {
 
                             ${escapeHTML(nama)}
 
-                            ${verified}
-
                         </h4>
 
 
-                        <!-- POTENSI -->
+                        <!-- DESKRIPSI -->
 
                         <p class="text-success fw-semibold">
 
-                            ${escapeHTML(
-                                item.potensi || "-"
-                            )}
+                            ${escapeHTML(deskripsi)}
 
                         </p>
 
 
-                        <!-- PRODUK -->
+                        <!-- PRODUK / POTENSI -->
 
                         <p class="small text-muted">
 
-                            🎁 Produk Unggulan :
+                            <i class="fa-solid fa-gift"></i>
+
+                            Produk / Potensi :
 
                             <b>
                                 ${escapeHTML(
@@ -272,19 +260,23 @@ function renderDesa(data) {
                         <div class="row mt-3">
 
 
+                            <!-- PENDUDUK -->
+
                             <div class="col-6">
 
                                 <div class="stat-box">
 
-                                    👥
+                                    <div>
+                                        👥
+                                    </div>
 
-                                    <b>
+                                    <strong>
                                         ${escapeHTML(
-                                            item.penduduk || "0"
+                                            item.penduduk || "-"
                                         )}
-                                    </b>
+                                    </strong>
 
-                                    <small class="d-block">
+                                    <small>
                                         Penduduk
                                     </small>
 
@@ -293,19 +285,23 @@ function renderDesa(data) {
                             </div>
 
 
+                            <!-- UMKM -->
+
                             <div class="col-6">
 
                                 <div class="stat-box">
 
-                                    🛍️
+                                    <div>
+                                        🛍️
+                                    </div>
 
-                                    <b>
+                                    <strong>
                                         ${escapeHTML(
-                                            item.umkm || "0"
+                                            item.umkm || "-"
                                         )}
-                                    </b>
+                                    </strong>
 
-                                    <small class="d-block">
+                                    <small>
                                         UMKM
                                     </small>
 
@@ -314,19 +310,23 @@ function renderDesa(data) {
                             </div>
 
 
+                            <!-- BUMDES -->
+
                             <div class="col-6 mt-2">
 
                                 <div class="stat-box">
 
-                                    🏢
+                                    <div>
+                                        🏢
+                                    </div>
 
-                                    <b>
+                                    <strong>
                                         ${escapeHTML(
-                                            item.bumdes || "0"
+                                            item.bumdes || "-"
                                         )}
-                                    </b>
+                                    </strong>
 
-                                    <small class="d-block">
+                                    <small>
                                         BUMDes
                                     </small>
 
@@ -335,19 +335,23 @@ function renderDesa(data) {
                             </div>
 
 
+                            <!-- WISATA -->
+
                             <div class="col-6 mt-2">
 
                                 <div class="stat-box">
 
-                                    🌄
+                                    <div>
+                                        🌄
+                                    </div>
 
-                                    <b>
+                                    <strong>
                                         ${escapeHTML(
-                                            item.wisata || "0"
+                                            item.wisata || "-"
                                         )}
-                                    </b>
+                                    </strong>
 
-                                    <small class="d-block">
+                                    <small>
                                         Wisata
                                     </small>
 
@@ -392,16 +396,24 @@ function renderDesa(data) {
 
 
     console.log(
-        "Berhasil menampilkan " +
+        "===================================="
+    );
+
+    console.log(
+        "BERHASIL MENAMPILKAN " +
         data.length +
-        " kartu desa."
+        " DESA"
+    );
+
+    console.log(
+        "===================================="
     );
 
 }
 
 
 /* =====================================================
-   SEARCH
+   SEARCH DESA
 ===================================================== */
 
 function setupSearchDesa() {
@@ -413,7 +425,13 @@ function setupSearchDesa() {
 
 
     if (!search) {
+
+        console.log(
+            "Search Desa tidak ditemukan."
+        );
+
         return;
+
     }
 
 
@@ -427,21 +445,17 @@ function setupSearchDesa() {
                     .trim();
 
 
-            const items =
+            const cards =
                 document.querySelectorAll(
                     ".desa-item"
                 );
 
 
-            let jumlah =
-                0;
-
-
-            items.forEach(
-                function (item) {
+            cards.forEach(
+                function (card) {
 
                     const text =
-                        item.innerText
+                        card.innerText
                             .toLowerCase();
 
 
@@ -451,27 +465,19 @@ function setupSearchDesa() {
                         )
                     ) {
 
-                        item.style.display =
+                        card.style.display =
                             "";
-
-                        jumlah++;
 
                     }
 
                     else {
 
-                        item.style.display =
+                        card.style.display =
                             "none";
 
                     }
 
                 }
-            );
-
-
-            console.log(
-                "Hasil pencarian:",
-                jumlah
             );
 
         }
@@ -484,7 +490,7 @@ function setupSearchDesa() {
    STATISTIK
 ===================================================== */
 
-function updateStatistikDesa(data) {
+function updateStatistik(data) {
 
     setValue(
         "totalDesa",
@@ -492,57 +498,69 @@ function updateStatistikDesa(data) {
     );
 
 
-    let penduduk = 0;
-    let umkm = 0;
-    let bumdes = 0;
+    let totalPenduduk = 0;
+    let totalUmkm = 0;
 
 
-    data.forEach(
-        function (item) {
+    data.forEach(function (item) {
 
-            penduduk +=
-                parseNumber(
-                    item.penduduk
-                );
-
-
-            umkm +=
-                parseNumber(
-                    item.umkm
-                );
+        totalPenduduk +=
+            parseNumber(
+                item.penduduk
+            );
 
 
-            bumdes +=
-                parseNumber(
-                    item.bumdes
-                );
+        totalUmkm +=
+            parseNumber(
+                item.umkm
+            );
 
-        }
-    );
+    });
 
 
     setValue(
         "totalPenduduk",
-        penduduk
+        totalPenduduk
+            ? totalPenduduk.toLocaleString("id-ID")
+            : "0"
     );
 
 
     setValue(
         "totalUMKM",
-        umkm
+        totalUmkm
+            ? totalUmkm.toLocaleString("id-ID")
+            : "0"
     );
+
+
+    /*
+       Jumlah BUMDes berdasarkan
+       jumlah desa yang memiliki
+       data BUMDes.
+    */
+
+    const totalBumdes =
+        data.filter(function (item) {
+
+            return (
+                item.bumdes &&
+                item.bumdes !== "-"
+            );
+
+        }).length;
 
 
     setValue(
         "totalBUMDes",
-        bumdes
+        totalBumdes
     );
 
 }
 
 
 /* =====================================================
-   HELPER
+   SET VALUE
 ===================================================== */
 
 function setValue(
@@ -572,7 +590,8 @@ function parseNumber(value) {
 
     if (
         value === null ||
-        value === undefined
+        value === undefined ||
+        value === "-"
     ) {
 
         return 0;
@@ -580,25 +599,16 @@ function parseNumber(value) {
     }
 
 
-    const angka =
+    const number =
         String(value)
-            .replace(
-                /\./g,
-                ""
-            )
-            .replace(
-                /,/g,
-                ""
-            )
-            .replace(
-                /[^0-9]/g,
-                ""
-            );
+            .replace(/\./g, "")
+            .replace(/,/g, "")
+            .replace(/[^0-9]/g, "");
 
 
     return (
         parseInt(
-            angka,
+            number,
             10
         ) || 0
     );
@@ -613,33 +623,33 @@ function parseNumber(value) {
 function escapeHTML(value) {
 
     return String(
-        value || ""
+        value ?? ""
     )
 
-    .replace(
-        /&/g,
-        "&amp;"
-    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-    .replace(
-        /</g,
-        "&lt;"
-    )
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-    .replace(
-        />/g,
-        "&gt;"
-    )
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-    .replace(
-        /"/g,
-        "&quot;"
-    )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 ```
