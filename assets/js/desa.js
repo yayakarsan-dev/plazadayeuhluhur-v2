@@ -1,15 +1,14 @@
 ```javascript
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   DESA DIRECTORY ENGINE V2
-   Direktori 14 Desa Kecamatan Dayeuhluhur
+   DESA DIRECTORY ENGINE
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("DESA DIRECTORY ENGINE V2");
+    console.log("DESA DIRECTORY ENGINE");
     console.log("====================================");
 
     loadDesa();
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* =====================================================
-   DATABASE DESA
+   LOAD DATA DESA
 ===================================================== */
 
 async function loadDesa() {
@@ -27,32 +26,33 @@ async function loadDesa() {
     const container =
         document.getElementById("desaContainer");
 
-
     if (!container) {
 
         console.error(
-            "desaContainer tidak ditemukan."
+            "ERROR: desaContainer tidak ditemukan."
         );
 
         return;
-
     }
+
+
+    console.log(
+        "Mencoba membaca: data/desa.json"
+    );
 
 
     try {
 
-        console.log(
-            "Membaca database desa..."
-        );
-
-
         const response =
-            await fetch(
-                "data/desa.json",
-                {
-                    cache: "no-store"
-                }
-            );
+            await fetch("data/desa.json", {
+                cache: "no-store"
+            });
+
+
+        console.log(
+            "Status desa.json:",
+            response.status
+        );
 
 
         if (!response.ok) {
@@ -71,24 +71,29 @@ async function loadDesa() {
             await response.json();
 
 
+        console.log(
+            "Isi data desa:",
+            data
+        );
+
+
         if (!Array.isArray(data)) {
 
             throw new Error(
-                "Format desa.json harus berupa array."
+                "desa.json harus berupa ARRAY."
             );
 
         }
 
 
+        console.log(
+            "Jumlah desa:",
+            data.length
+        );
+
+
         window.plazaDesa =
             data;
-
-
-        console.log(
-            "Berhasil membaca " +
-            data.length +
-            " data desa."
-        );
 
 
         renderDesa(data);
@@ -97,27 +102,48 @@ async function loadDesa() {
 
     }
 
+
     catch (error) {
 
         console.error(
-            "Gagal membaca database desa:",
+            "===================================="
+        );
+
+        console.error(
+            "GAGAL MEMBACA DATA DESA"
+        );
+
+        console.error(
             error
         );
 
+        console.error(
+            "===================================="
+        );
 
-        container.innerHTML =
 
-            '<div class="col-12">' +
+        container.innerHTML = `
 
-                '<div class="alert alert-danger text-center">' +
+            <div class="col-12">
 
-                    '<i class="fa-solid fa-triangle-exclamation me-2"></i>' +
+                <div class="alert alert-danger text-center">
 
-                    'Gagal membaca data desa.' +
+                    <i class="fa-solid fa-triangle-exclamation fa-2x mb-3"></i>
 
-                '</div>' +
+                    <h5>
+                        Data Desa Tidak Dapat Dimuat
+                    </h5>
 
-            '</div>';
+                    <p class="mb-0">
+                        Silakan periksa file
+                        <strong>data/desa.json</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
 
     }
 
@@ -141,282 +167,222 @@ function renderDesa(data) {
     }
 
 
-    if (!data.length) {
-
-        container.innerHTML =
-
-            '<div class="col-12">' +
-
-                '<div class="text-center py-5 text-muted">' +
-
-                    '<i class="fa-solid fa-house-circle-xmark fa-3x mb-3"></i>' +
-
-                    '<h4>Data desa belum tersedia</h4>' +
-
-                    '<p>Belum ada data desa yang dapat ditampilkan.</p>' +
-
-                '</div>' +
-
-            '</div>';
-
-        return;
-
-    }
-
-
     let html = "";
 
 
-    data.forEach(function (item) {
+    data.forEach(function (item, index) {
 
         const gambar =
-            escapeHTML(
-                item.gambar ||
-                "assets/images/desa/default.jpg"
-            );
+            item.gambar ||
+            "assets/images/desa/default.jpg";
 
 
         const nama =
-            escapeHTML(
-                item.nama ||
-                "Nama Desa"
-            );
+            item.nama ||
+            "Desa";
 
 
         const status =
-            escapeHTML(
-                item.status ||
-                "Aktif"
-            );
-
-
-        const potensi =
-            escapeHTML(
-                item.potensi ||
-                "Potensi Desa"
-            );
-
-
-        const produk =
-            escapeHTML(
-                item.produk ||
-                "-"
-            );
-
-
-        const penduduk =
-            escapeHTML(
-                item.penduduk ||
-                "0"
-            );
-
-
-        const umkm =
-            escapeHTML(
-                item.umkm ||
-                "0"
-            );
-
-
-        const bumdes =
-            escapeHTML(
-                item.bumdes ||
-                "0"
-            );
-
-
-        const wisata =
-            escapeHTML(
-                item.wisata ||
-                "0"
-            );
-
-
-        const link =
-            escapeHTML(
-                item.link ||
-                "#"
-            );
+            item.status ||
+            "Aktif";
 
 
         const verified =
             item.verified
-                ?
+                ? `
+                    <i
+                        class="fa-solid fa-circle-check text-primary ms-1"
+                        title="Verified by PLAZA DAYEUHLUHUR">
+                    </i>
+                  `
+                : "";
 
-                '<i class="fa-solid fa-circle-check text-primary ms-1" ' +
-                'title="Verified by PLAZA DAYEUHLUHUR"></i>'
 
-                :
+        html += `
 
-                "";
+            <div
+                class="col-lg-4 col-md-6 mb-4 desa-item">
 
+                <div
+                    class="card desa-card shadow h-100 overflow-hidden">
 
-        html +=
 
-            '<div class="col-lg-4 col-md-6 mb-4 desa-item">' +
+                    <!-- GAMBAR -->
 
-                '<div class="card desa-card shadow h-100 overflow-hidden">' +
+                    <img
+                        src="${escapeHTML(gambar)}"
+                        class="card-img-top"
+                        alt="${escapeHTML(nama)}"
+                        loading="lazy"
+                        onerror="this.src='assets/images/desa/default.jpg'">
 
 
-                    '<img ' +
+                    <div class="card-body d-flex flex-column">
 
-                        'src="' +
-                        gambar +
-                        '" ' +
 
-                        'class="card-img-top" ' +
+                        <!-- STATUS -->
 
-                        'alt="' +
-                        nama +
-                        '" ' +
+                        <span
+                            class="badge bg-success mb-2 align-self-start">
 
-                        'loading="lazy" ' +
+                            ${escapeHTML(status)}
 
-                        'onerror="' +
-                        "this.src='assets/images/desa/default.jpg'" +
-                        '"' +
+                        </span>
 
-                    '>' +
 
+                        <!-- NAMA DESA -->
 
-                    '<div class="card-body d-flex flex-column">' +
+                        <h4 class="fw-bold">
 
+                            ${escapeHTML(nama)}
 
-                        '<span class="badge bg-success badge-status mb-2 align-self-start">' +
+                            ${verified}
 
-                            status +
+                        </h4>
 
-                        '</span>' +
 
+                        <!-- POTENSI -->
 
-                        '<h4 class="fw-bold">' +
+                        <p class="text-success fw-semibold">
 
-                            nama +
+                            ${escapeHTML(
+                                item.potensi || "-"
+                            )}
 
-                            verified +
+                        </p>
 
-                        '</h4>' +
 
+                        <!-- PRODUK -->
 
-                        '<p class="text-success fw-semibold mb-2">' +
+                        <p class="small text-muted">
 
-                            potensi +
+                            🎁 Produk Unggulan :
 
-                        '</p>' +
+                            <b>
+                                ${escapeHTML(
+                                    item.produk || "-"
+                                )}
+                            </b>
 
+                        </p>
 
-                        '<p class="small text-muted">' +
 
-                            '🎁 Produk Unggulan : ' +
+                        <!-- STATISTIK -->
 
-                            '<b>' +
-                            produk +
-                            '</b>' +
+                        <div class="row mt-3">
 
-                        '</p>' +
 
+                            <div class="col-6">
 
-                        '<div class="row mt-3">' +
+                                <div class="stat-box">
 
+                                    👥
 
-                            '<div class="col-6">' +
+                                    <b>
+                                        ${escapeHTML(
+                                            item.penduduk || "0"
+                                        )}
+                                    </b>
 
-                                '<div class="stat-box">' +
+                                    <small class="d-block">
+                                        Penduduk
+                                    </small>
 
-                                    '👥 ' +
+                                </div>
 
-                                    '<b>' +
-                                    penduduk +
-                                    '</b>' +
+                            </div>
 
-                                    '<small class="d-block">' +
-                                    'Penduduk' +
-                                    '</small>' +
 
-                                '</div>' +
+                            <div class="col-6">
 
-                            '</div>' +
+                                <div class="stat-box">
 
+                                    🛍️
 
-                            '<div class="col-6">' +
+                                    <b>
+                                        ${escapeHTML(
+                                            item.umkm || "0"
+                                        )}
+                                    </b>
 
-                                '<div class="stat-box">' +
+                                    <small class="d-block">
+                                        UMKM
+                                    </small>
 
-                                    '🛍️ ' +
+                                </div>
 
-                                    '<b>' +
-                                    umkm +
-                                    '</b>' +
+                            </div>
 
-                                    '<small class="d-block">' +
-                                    'UMKM' +
-                                    '</small>' +
 
-                                '</div>' +
+                            <div class="col-6 mt-2">
 
-                            '</div>' +
+                                <div class="stat-box">
 
+                                    🏢
 
-                            '<div class="col-6 mt-2">' +
+                                    <b>
+                                        ${escapeHTML(
+                                            item.bumdes || "0"
+                                        )}
+                                    </b>
 
-                                '<div class="stat-box">' +
+                                    <small class="d-block">
+                                        BUMDes
+                                    </small>
 
-                                    '🏢 ' +
+                                </div>
 
-                                    '<b>' +
-                                    bumdes +
-                                    '</b>' +
+                            </div>
 
-                                    '<small class="d-block">' +
-                                    'BUMDes' +
-                                    '</small>' +
 
-                                '</div>' +
+                            <div class="col-6 mt-2">
 
-                            '</div>' +
+                                <div class="stat-box">
 
+                                    🌄
 
-                            '<div class="col-6 mt-2">' +
+                                    <b>
+                                        ${escapeHTML(
+                                            item.wisata || "0"
+                                        )}
+                                    </b>
 
-                                '<div class="stat-box">' +
+                                    <small class="d-block">
+                                        Wisata
+                                    </small>
 
-                                    '🌄 ' +
+                                </div>
 
-                                    '<b>' +
-                                    wisata +
-                                    '</b>' +
+                            </div>
 
-                                    '<small class="d-block">' +
-                                    'Wisata' +
-                                    '</small>' +
 
-                                '</div>' +
+                        </div>
 
-                            '</div>' +
 
-                        '</div>' +
+                        <!-- TOMBOL -->
 
+                        <a
+                            href="${escapeHTML(
+                                item.link || "#"
+                            )}"
+                            class="btn btn-success w-100 mt-auto mt-4">
 
-                        '<a ' +
+                            <i
+                                class="fa-solid fa-compass me-1">
+                            </i>
 
-                            'href="' +
-                            link +
-                            '" ' +
+                            Jelajahi Desa
 
-                            'class="btn btn-success w-100 mt-auto pt-2 mt-4">' +
+                        </a>
 
-                            '<i class="fa-solid fa-compass me-1"></i>' +
 
-                            'Jelajahi Desa' +
+                    </div>
 
-                        '</a>' +
+                </div>
 
+            </div>
 
-                    '</div>' +
-
-                '</div>' +
-
-            '</div>';
+        `;
 
     });
 
@@ -426,14 +392,16 @@ function renderDesa(data) {
 
 
     console.log(
-        "Kartu desa berhasil ditampilkan."
+        "Berhasil menampilkan " +
+        data.length +
+        " kartu desa."
     );
 
 }
 
 
 /* =====================================================
-   SEARCH DESA
+   SEARCH
 ===================================================== */
 
 function setupSearchDesa() {
@@ -453,190 +421,70 @@ function setupSearchDesa() {
         "input",
         function () {
 
-            filterDesa(
+            const keyword =
                 this.value
-            );
-
-        }
-    );
-
-}
+                    .toLowerCase()
+                    .trim();
 
 
-/* =====================================================
-   FILTER DESA
-===================================================== */
-
-function filterDesa(keyword) {
-
-    const container =
-        document.getElementById(
-            "desaContainer"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    const items =
-        container.querySelectorAll(
-            ".desa-item"
-        );
-
-
-    const kataKunci =
-        String(
-            keyword || ""
-        )
-        .toLowerCase()
-        .trim();
-
-
-    let jumlahTampil =
-        0;
-
-
-    items.forEach(
-        function (item) {
-
-            const text =
-                item.textContent
-                    .toLowerCase();
-
-
-            if (
-                text.includes(
-                    kataKunci
-                )
-            ) {
-
-                item.style.display =
-                    "";
-
-                jumlahTampil++;
-
-            }
-
-            else {
-
-                item.style.display =
-                    "none";
-
-            }
-
-        }
-    );
-
-
-    tampilkanPesanPencarian(
-        jumlahTampil,
-        kataKunci
-    );
-
-}
-
-
-/* =====================================================
-   PESAN HASIL PENCARIAN
-===================================================== */
-
-function tampilkanPesanPencarian(
-    jumlah,
-    keyword
-) {
-
-    const container =
-        document.getElementById(
-            "desaContainer"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    let pesan =
-        document.getElementById(
-            "desaSearchEmpty"
-        );
-
-
-    if (
-        jumlah === 0 &&
-        keyword !== ""
-    ) {
-
-        if (!pesan) {
-
-            pesan =
-                document.createElement(
-                    "div"
+            const items =
+                document.querySelectorAll(
+                    ".desa-item"
                 );
 
-            pesan.id =
-                "desaSearchEmpty";
 
-            pesan.className =
-                "col-12 text-center py-5";
+            let jumlah =
+                0;
 
-            pesan.innerHTML =
 
-                '<i class="fa-solid fa-magnifying-glass fa-3x text-muted mb-3"></i>' +
+            items.forEach(
+                function (item) {
 
-                '<h4>Desa tidak ditemukan</h4>' +
+                    const text =
+                        item.innerText
+                            .toLowerCase();
 
-                '<p class="text-muted">' +
 
-                    'Tidak ada desa yang sesuai dengan pencarian "' +
+                    if (
+                        text.includes(
+                            keyword
+                        )
+                    ) {
 
-                    escapeHTML(keyword) +
+                        item.style.display =
+                            "";
 
-                    '".' +
+                        jumlah++;
 
-                '</p>';
+                    }
 
-            container.appendChild(
-                pesan
+                    else {
+
+                        item.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            console.log(
+                "Hasil pencarian:",
+                jumlah
             );
 
         }
-
-    }
-
-    else {
-
-        if (pesan) {
-
-            pesan.remove();
-
-        }
-
-    }
+    );
 
 }
 
 
 /* =====================================================
-   STATISTIK DESA
+   STATISTIK
 ===================================================== */
 
 function updateStatistikDesa(data) {
-
-    console.log(
-        "Statistik desa:",
-        data.length
-    );
-
-
-    /*
-       Jika nanti desa.html mempunyai
-       elemen statistik dengan ID berikut,
-       otomatis akan terisi.
-    */
-
 
     setValue(
         "totalDesa",
@@ -644,98 +492,57 @@ function updateStatistikDesa(data) {
     );
 
 
-    const totalPenduduk =
-        data.reduce(
-            function (total, item) {
+    let penduduk = 0;
+    let umkm = 0;
+    let bumdes = 0;
 
-                return (
-                    total +
-                    parseNumber(
-                        item.penduduk
-                    )
+
+    data.forEach(
+        function (item) {
+
+            penduduk +=
+                parseNumber(
+                    item.penduduk
                 );
 
-            },
-            0
-        );
 
-
-    const totalUMKM =
-        data.reduce(
-            function (total, item) {
-
-                return (
-                    total +
-                    parseNumber(
-                        item.umkm
-                    )
+            umkm +=
+                parseNumber(
+                    item.umkm
                 );
 
-            },
-            0
-        );
 
-
-    const totalBUMDes =
-        data.reduce(
-            function (total, item) {
-
-                return (
-                    total +
-                    parseNumber(
-                        item.bumdes
-                    )
+            bumdes +=
+                parseNumber(
+                    item.bumdes
                 );
 
-            },
-            0
-        );
-
-
-    const totalWisata =
-        data.reduce(
-            function (total, item) {
-
-                return (
-                    total +
-                    parseNumber(
-                        item.wisata
-                    )
-                );
-
-            },
-            0
-        );
+        }
+    );
 
 
     setValue(
         "totalPenduduk",
-        totalPenduduk
+        penduduk
     );
 
 
     setValue(
         "totalUMKM",
-        totalUMKM
+        umkm
     );
 
 
     setValue(
         "totalBUMDes",
-        totalBUMDes
-    );
-
-
-    setValue(
-        "totalWisata",
-        totalWisata
+        bumdes
     );
 
 }
 
 
 /* =====================================================
-   SET VALUE
+   HELPER
 ===================================================== */
 
 function setValue(
@@ -744,9 +551,7 @@ function setValue(
 ) {
 
     const element =
-        document.getElementById(
-            id
-        );
+        document.getElementById(id);
 
 
     if (element) {
@@ -775,17 +580,7 @@ function parseNumber(value) {
     }
 
 
-    /*
-       Mengubah:
-
-       "1.250"
-       "1,250"
-       "1250"
-
-       menjadi angka.
-    */
-
-    const clean =
+    const angka =
         String(value)
             .replace(
                 /\./g,
@@ -803,7 +598,7 @@ function parseNumber(value) {
 
     return (
         parseInt(
-            clean,
+            angka,
             10
         ) || 0
     );
