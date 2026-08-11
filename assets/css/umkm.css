@@ -1,478 +1,374 @@
 /* =========================================================
    PLAZA DAYEUHLUHUR
-   UMKM PAGE STYLE
-   VERSI CLEAN / STABIL
-========================================================= */
+   UMKM PAGE CSS
+   ========================================================= */
 
 
 /* =========================================================
    GLOBAL
-========================================================= */
+   ========================================================= */
 
 html {
     scroll-behavior: smooth;
 }
 
 body {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: "Poppins", sans-serif;
     background: #f8f9fa;
     color: #212529;
 }
 
 
 /* =========================================================
-   TOP NEWS FLASH
-========================================================= */
+   NEWSFLASH
+   ========================================================= */
 
 .top-news {
-    position: relative;
+    position: relative !important;
     z-index: 1050;
     width: 100%;
-}
-
-.news-wrapper {
-    min-height: 42px;
-    display: flex;
-    align-items: center;
-}
-
-.news-label {
-    white-space: nowrap;
-}
-
-.news-marquee {
-    overflow: hidden;
 }
 
 
 /* =========================================================
    NAVBAR
-========================================================= */
+   ========================================================= */
+
+/*
+   Bootstrap .fixed-top membuat navbar menutupi
+   bagian hero. Untuk halaman UMKM kita ubah
+   menjadi sticky sehingga header tetap rapi.
+*/
+
+.navbar.fixed-top {
+    position: sticky !important;
+    top: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100%;
+    z-index: 1040;
+}
+
+
+/* jika navbar menggunakan shadow */
 
 .navbar {
-    position: relative !important;
-    z-index: 1040;
-    min-height: 78px;
     background: #ffffff !important;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
 }
 
-.navbar .container {
-    min-height: 78px;
-}
+
+/* logo */
 
 .navbar-brand {
-    display: flex;
-    align-items: center;
     font-weight: 700;
-    color: #212529 !important;
-    font-size: 1.25rem;
-    white-space: nowrap;
 }
 
-.navbar-brand img {
-    max-height: 55px;
-    width: auto;
-    object-fit: contain;
-}
 
-.navbar-nav {
-    align-items: center;
-}
+/* menu */
 
-.navbar-nav .nav-link {
-    color: #212529 !important;
+.navbar .nav-link {
     font-weight: 600;
-    padding: 12px 18px !important;
-    transition: all 0.25s ease;
+    color: #222 !important;
+    padding: 18px 15px !important;
+    transition: 0.3s;
 }
 
-.navbar-nav .nav-link:hover {
+.navbar .nav-link:hover {
     color: #198754 !important;
 }
 
-.navbar-nav .nav-link.active {
+.navbar .nav-link.active {
     color: #198754 !important;
-    font-weight: 700;
 }
 
 
 /* =========================================================
-   JIKA NAVBAR STICKY
-========================================================= */
+   HERO UMKM
+   ========================================================= */
 
-.navbar.sticky-top {
-    top: 0;
-}
-
-
-/* =========================================================
-   UMKM HERO
-========================================================= */
-
-.umkm-hero,
 .hero-umkm {
     position: relative;
-    z-index: 1;
+    width: 100%;
+    min-height: 420px;
 
-    /* INI YANG PENTING:
-       memberikan ruang agar judul tidak tertutup navbar */
-    padding-top: 90px;
-    padding-bottom: 90px;
+    display: flex;
+    align-items: center;
+
+    padding: 70px 0;
 
     background:
         linear-gradient(
-            135deg,
-            #f8f9fa 0%,
-            #ffffff 50%,
-            #eef8f2 100%
+            90deg,
+            rgba(255,255,255,0.98),
+            rgba(255,255,255,0.82)
         );
 
     overflow: hidden;
 }
 
 
-/* Container hero */
+/* container hero */
 
-.umkm-hero .container,
 .hero-umkm .container {
     position: relative;
     z-index: 2;
 }
 
 
-/* Judul kecil */
+/* judul kecil */
 
-.umkm-hero h6,
-.hero-umkm h6 {
-    font-size: 0.95rem;
-    letter-spacing: 1.5px;
-    font-weight: 700;
+.hero-umkm .hero-label {
     color: #198754;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 12px;
 }
 
 
-/* Judul utama */
+/* judul utama */
 
-.umkm-hero h1,
-.umkm-hero h2,
-.hero-umkm h1,
-.hero-umkm h2 {
-    font-weight: 800;
+.hero-umkm h1 {
+    font-size: 48px;
     line-height: 1.15;
-    color: #212529;
-    margin-bottom: 20px;
-}
-
-
-/* Deskripsi */
-
-.umkm-hero p,
-.hero-umkm p {
-    color: #6c757d;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    max-width: 750px;
-}
-
-
-/* =========================================================
-   KOMPATIBILITAS JIKA HERO MENGGUNAKAN CLASS .hero
-========================================================= */
-
-body .hero {
-    position: relative;
-    z-index: 1;
-}
-
-body .hero:not(#hero) {
-    padding-top: 90px;
-    padding-bottom: 90px;
-}
-
-
-/* =========================================================
-   UMKM CONTENT
-========================================================= */
-
-#umkmContainer {
-    min-height: 100px;
-}
-
-
-/* =========================================================
-   SECTION UMKM
-========================================================= */
-
-.umkm-section,
-#umkm {
-    position: relative;
-    padding-top: 70px;
-    padding-bottom: 70px;
-    background: #ffffff;
-}
-
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
-
-.umkm-section .section-title,
-#umkm .section-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.umkm-section .section-title h2,
-#umkm .section-title h2 {
     font-weight: 800;
+    margin-bottom: 20px;
     color: #212529;
 }
 
-.umkm-section .section-title p,
-#umkm .section-title p {
-    color: #6c757d;
+
+/* deskripsi */
+
+.hero-umkm p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+    max-width: 700px;
 }
 
 
-/* =========================================================
-   UMKM CARD
-========================================================= */
+/* gambar hero */
 
-.umkm-card {
-    height: 100%;
-    background: #ffffff;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.umkm-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-}
-
-
-/* =========================================================
-   UMKM IMAGE
-========================================================= */
-
-.umkm-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+.hero-umkm img {
+    max-width: 100%;
+    height: auto;
     display: block;
-}
-
-.umkm-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+    margin: auto;
 }
 
 
 /* =========================================================
-   CARD CONTENT
-========================================================= */
+   JUDUL DIREKTORI
+   ========================================================= */
 
-.umkm-card .card-body {
-    padding: 22px;
+.umkm-section-title {
+    padding-top: 60px;
+    padding-bottom: 35px;
+    text-align: center;
 }
 
-.umkm-card h3,
-.umkm-card h4 {
+.umkm-section-title h6 {
+    color: #198754;
     font-weight: 700;
-    color: #212529;
+    letter-spacing: 1px;
+}
+
+.umkm-section-title h2 {
+    font-size: 36px;
+    font-weight: 800;
     margin-top: 10px;
-    margin-bottom: 12px;
 }
 
-
-/* =========================================================
-   KATEGORI
-========================================================= */
-
-.umkm-kategori,
-.umkm-category {
-    display: inline-block;
-    background: #e8f5ee;
-    color: #198754;
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 30px;
-}
-
-
-/* =========================================================
-   INFO UMKM
-========================================================= */
-
-.umkm-info {
+.umkm-section-title p {
     color: #6c757d;
-    font-size: 0.9rem;
-    margin-top: 8px;
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   RATING
-========================================================= */
-
-.umkm-rating {
-    margin-top: 12px;
-    font-weight: 600;
-}
-
-.umkm-rating i {
-    margin-right: 4px;
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.umkm-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.umkm-status.open {
-    color: #198754;
-}
-
-.umkm-status.closed {
-    color: #dc3545;
+    max-width: 700px;
+    margin: 10px auto;
 }
 
 
 /* =========================================================
    SEARCH
-========================================================= */
+   ========================================================= */
 
 .umkm-search {
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
     margin-bottom: 30px;
 }
 
-.umkm-search input,
-.umkm-search select {
+.umkm-search input {
+    min-height: 50px;
     border-radius: 10px;
-    min-height: 45px;
+    border: 1px solid #dee2e6;
+    padding: 10px 18px;
+}
+
+.umkm-search input:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.15);
 }
 
 
 /* =========================================================
-   BUTTON
-========================================================= */
+   FILTER
+   ========================================================= */
 
-.btn-success {
+.umkm-filter select {
+    min-height: 50px;
     border-radius: 10px;
-    font-weight: 600;
+}
+
+
+/* =========================================================
+   UMKM CARD
+   ========================================================= */
+
+.umkm-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    height: 100%;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.umkm-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.10);
+}
+
+
+/* kategori */
+
+.umkm-kategori {
+    display: inline-block;
+    background: #e8f5ee;
+    color: #198754;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+
+/* nama UMKM */
+
+.umkm-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #212529;
+}
+
+
+/* informasi */
+
+.umkm-info {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+
+/* rating */
+
+.umkm-rating {
+    margin-top: 15px;
+    font-weight: 700;
+    color: #f39c12;
+}
+
+
+/* =========================================================
+   GAMBAR UMKM
+   ========================================================= */
+
+.umkm-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   STATISTIK
+   ========================================================= */
+
+.umkm-statistik {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.umkm-stat-card {
+    background: #ffffff;
+    padding: 30px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.umkm-stat-card h3 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #198754;
+}
+
+.umkm-stat-card p {
+    margin: 0;
+    color: #777;
 }
 
 
 /* =========================================================
    EMPTY DATA
-========================================================= */
+   ========================================================= */
 
-.umkm-empty {
+.empty-umkm {
     text-align: center;
     padding: 60px 20px;
-    color: #6c757d;
+    color: #777;
 }
 
-.umkm-empty i {
-    font-size: 3rem;
+.empty-umkm i {
+    font-size: 50px;
     margin-bottom: 15px;
-    display: block;
-}
-
-
-/* =========================================================
-   STATISTICS
-========================================================= */
-
-.umkm-stat-card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 25px 15px;
-    height: 100%;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.umkm-stat-card h3 {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.umkm-stat-card p {
-    color: #6c757d;
-    margin-bottom: 0;
+    color: #adb5bd;
 }
 
 
 /* =========================================================
    FOOTER
-========================================================= */
+   ========================================================= */
 
 footer {
-    position: relative;
-    z-index: 1;
+    margin-top: 50px;
 }
 
 
 /* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 991px) {
 
-    .navbar {
-        min-height: 70px;
+    .navbar .nav-link {
+        padding: 10px 15px !important;
     }
 
-    .navbar .container {
-        min-height: 70px;
-    }
-
-    .navbar-nav {
-        align-items: flex-start;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    .navbar-nav .nav-link {
-        width: 100%;
-        padding: 10px 5px !important;
-    }
-
-    .umkm-hero,
     .hero-umkm {
-        padding-top: 70px;
-        padding-bottom: 70px;
+        min-height: auto;
+        padding: 60px 0;
     }
 
-    body .hero:not(#hero) {
-        padding-top: 70px;
-        padding-bottom: 70px;
+    .hero-umkm h1 {
+        font-size: 38px;
     }
 
 }
@@ -480,39 +376,24 @@ footer {
 
 @media (max-width: 767px) {
 
-    .navbar-brand {
-        font-size: 1rem;
+    .hero-umkm {
+        padding: 45px 0;
     }
 
-    .navbar-brand img {
-        max-height: 45px;
+    .hero-umkm h1 {
+        font-size: 32px;
     }
 
-    .umkm-hero h1,
-    .umkm-hero h2,
-    .hero-umkm h1,
-    .hero-umkm h2 {
-        font-size: 2rem;
-    }
-
-    .umkm-hero p,
     .hero-umkm p {
-        font-size: 0.95rem;
+        font-size: 16px;
     }
 
-    .umkm-card img,
-    .umkm-image {
-        height: 200px;
+    .umkm-section-title h2 {
+        font-size: 28px;
     }
 
-}
+    .umkm-card {
+        padding: 20px;
+    }
 
-
-/* =========================================================
-   EXTRA SAFETY
-   Agar anchor section tidak tertutup navbar
-========================================================= */
-
-[id] {
-    scroll-margin-top: 90px;
 }
