@@ -1,138 +1,86 @@
-/* =====================================================
+/* =========================================================
    PLAZA DAYEUHLUHUR
-   UMKM DIRECTORY ENGINE V2
-===================================================== */
+   DIREKTORI UMKM
+   UMKM.JS — FINAL FIX
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("UMKM DIRECTORY ENGINE V2");
+    console.log("DIREKTORI UMKM");
+    console.log("UMKM.JS FINAL");
     console.log("====================================");
 
     loadUMKM();
 
-    setupSearch();
-    setupFilter();
-
 });
 
 
-/* =====================================================
+/* =========================================================
    LOAD DATABASE UMKM
-===================================================== */
+========================================================= */
 
 async function loadUMKM() {
 
-    const container =
-        document.getElementById("umkmContainer");
+    const container = document.getElementById("umkmContainer");
 
     if (!container) {
-
-        console.error(
-            "umkmContainer tidak ditemukan."
-        );
-
+        console.error("umkmContainer tidak ditemukan.");
         return;
-
     }
-
-
-    container.innerHTML = `
-        <div class="col-12 text-center py-5">
-            <div class="spinner-border text-success"
-                 role="status"></div>
-
-            <p class="mt-3 text-muted">
-                Memuat data UMKM...
-            </p>
-        </div>
-    `;
-
 
     try {
 
-        const response =
-            await fetch(
-                "data/umkm.json",
-                {
-                    cache: "no-store"
-                }
-            );
-
+        const response = await fetch("data/umkm.json", {
+            cache: "no-store"
+        });
 
         if (!response.ok) {
-
             throw new Error(
-                "HTTP " +
-                response.status +
-                " - " +
-                response.statusText
+                "Gagal membaca umkm.json. HTTP " +
+                response.status
             );
-
         }
 
-
-        const data =
-            await response.json();
-
+        const data = await response.json();
 
         if (!Array.isArray(data)) {
-
             throw new Error(
-                "Format data/umkm.json harus berupa array."
+                "Format umkm.json harus berupa array."
             );
-
         }
 
+        window.plazaUmkm = data;
 
         console.log(
-            "Data UMKM berhasil dibaca:",
+            "UMKM berhasil dimuat:",
             data.length
         );
 
+        renderUMKM(data);
 
-        window.plazaUMKM =
-            data;
+        updateStatistics(data);
 
+        setupSearch(data);
 
-        updateStatistics(
-            data
-        );
-
-
-        renderUMKM(
-            data
-        );
-
+        setupFilter(data);
 
     }
 
     catch (error) {
 
         console.error(
-            "Gagal membaca database UMKM:",
+            "ERROR UMKM:",
             error
         );
 
-
         container.innerHTML = `
             <div class="col-12">
-
                 <div class="alert alert-danger text-center">
-
-                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
-
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                     Gagal memuat data UMKM.
-
-                    <br>
-
-                    <small>
-                        Periksa data/umkm.json
-                    </small>
-
                 </div>
-
             </div>
         `;
 
@@ -141,23 +89,242 @@ async function loadUMKM() {
 }
 
 
-/* =====================================================
-   STATISTIK
-===================================================== */
+/* =========================================================
+   RENDER UMKM
+========================================================= */
 
-function updateStatistics(
-    data
-) {
+function renderUMKM(data) {
+
+    const container =
+        document.getElementById("umkmContainer");
+
+    if (!container) return;
+
+
+    if (!data || data.length === 0) {
+
+        container.innerHTML = `
+            <div class="col-12 text-center py-5">
+
+                <i
+                    class="fa-solid fa-store-slash"
+                    style="font-size:50px;">
+                </i>
+
+                <h4 class="mt-3">
+                    Belum ada data UMKM
+                </h4>
+
+            </div>
+        `;
+
+        updateResultCount(0);
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    data.forEach(function (item) {
+
+        const status =
+            item.status || "Buka";
+
+
+        const statusLower =
+            String(status).toLowerCase();
+
+
+        const isOpen =
+            statusLower === "buka";
+
+
+        const statusClass =
+            isOpen
+                ? "open"
+                : "closed";
+
+
+        /*
+         * LINK DETAIL UMKM
+         *
+         * Karena umkm.html berada di ROOT,
+         * maka tujuan:
+         *
+         * pages/umkm/detail.html?id=ID
+         */
+
+        const detailLink =
+            "pages/umkm/detail.html?id=" +
+            encodeURIComponent(item.id);
+
+
+        html += `
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="umkm-card h-100">
+
+
+                    <!-- =========================
+                         GAMBAR
+                    ========================== -->
+
+                    <div class="umkm-card-image">
+
+                        <img
+                            src="${escapeHTML(
+                                item.gambar ||
+                                "assets/images/umkm/default.jpg"
+                            )}"
+                            alt="${escapeHTML(
+                                item.nama || "UMKM"
+                            )}"
+                            onerror="
+                                this.onerror=null;
+                                this.src='assets/images/umkm/default.jpg';
+                            "
+                        >
+
+
+                        <!-- KATEGORI -->
+
+                        <span class="umkm-kategori">
+
+                            ${escapeHTML(
+                                item.kategori || "Lainnya"
+                            )}
+
+                        </span>
+
+
+                        <!-- STATUS -->
+
+                        <span class="
+                            umkm-status
+                            ${statusClass}
+                        ">
+
+                            <span class="status-dot"></span>
+
+                            ${escapeHTML(status)}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- =========================
+                         BODY
+                    ========================== -->
+
+                    <div class="umkm-card-body">
+
+
+                        <h3>
+
+                            ${escapeHTML(
+                                item.nama || "-"
+                            )}
+
+                        </h3>
+
+
+                        <div class="umkm-produk">
+
+                            <i class="fa-solid fa-briefcase"></i>
+
+                            ${escapeHTML(
+                                item.produk || "-"
+                            )}
+
+                        </div>
+
+
+                        <div class="umkm-info">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            ${escapeHTML(
+                                item.desa || "-"
+                            )}
+
+                        </div>
+
+
+                        <div class="umkm-rating">
+
+                            <i class="fa-solid fa-star"></i>
+
+                            ${escapeHTML(
+                                item.rating || "0"
+                            )}
+
+                        </div>
+
+
+                        <div class="umkm-divider"></div>
+
+
+                        <!-- =========================
+                             TOMBOL DETAIL
+                        ========================== -->
+
+                        <a
+                            href="${detailLink}"
+                            class="btn-lihat-umkm"
+                        >
+
+                            <i class="fa-solid fa-eye"></i>
+
+                            Lihat UMKM
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    container.innerHTML = html;
+
+
+    updateResultCount(data.length);
+
+
+    console.log(
+        "Kartu UMKM berhasil ditampilkan:",
+        data.length
+    );
+
+}
+
+
+/* =========================================================
+   STATISTIK
+========================================================= */
+
+function updateStatistics(data) {
 
     const total =
         data.length;
 
 
-    const aktif =
+    const buka =
         data.filter(function (item) {
 
             return String(
-                item.status || "Buka"
+                item.status || ""
             ).toLowerCase() === "buka";
 
         }).length;
@@ -175,302 +342,45 @@ function updateStatistics(
 
     const desa =
         new Set(
-
             data.map(function (item) {
 
                 return item.desa;
 
             })
-
         ).size;
 
 
-    setValue(
-        "totalUmkm",
-        total
-    );
+    setText("totalUmkm", total);
 
+    setText("totalUmkmBuka", buka);
 
-    setValue(
-        "totalUmkmBuka",
-        aktif
-    );
+    setText("totalKuliner", kuliner);
 
-
-    setValue(
-        "totalKuliner",
-        kuliner
-    );
-
-
-    setValue(
-        "totalUmkmDesa",
-        desa
-    );
+    setText("totalUmkmDesa", desa);
 
 }
 
 
-/* =====================================================
-   RENDER UMKM
-===================================================== */
-
-function renderUMKM(
-    data
-) {
-
-    const container =
-        document.getElementById(
-            "umkmContainer"
-        );
-
-
-    if (!container) {
-
-        return;
-
-    }
-
-
-    if (!data.length) {
-
-        container.innerHTML = `
-
-            <div class="col-12 text-center py-5">
-
-                <i class="fa-solid fa-store-slash fa-3x text-muted mb-3"></i>
-
-                <h5>
-                    UMKM belum ditemukan
-                </h5>
-
-                <p class="text-muted">
-                    Silakan gunakan kata kunci atau kategori lain.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    let html = "";
-
-
-    data.forEach(function (
-        umkm
-    ) {
-
-        const gambar =
-            umkm.gambar ||
-            "assets/images/umkm/default.jpg";
-
-
-        const status =
-            umkm.status ||
-            "Buka";
-
-
-        const rating =
-            umkm.rating ||
-            "0";
-
-
-        html += `
-
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-
-                <div class="card umkm-card h-100 shadow-sm">
-
-                    <!-- FOTO -->
-
-                    <div class="umkm-image-wrapper">
-
-                        <img
-                            src="${escapeHTML(gambar)}"
-                            class="card-img-top umkm-image"
-                            alt="${escapeHTML(umkm.nama || "UMKM")}"
-
-                            onerror="
-                                this.onerror=null;
-                                this.src='assets/images/umkm/default.jpg';
-                            "
-                        >
-
-                        <!-- KATEGORI -->
-
-                        <span class="umkm-category">
-
-                            ${escapeHTML(
-                                umkm.kategori ||
-                                "Lainnya"
-                            )}
-
-                        </span>
-
-                    </div>
-
-
-                    <!-- BODY -->
-
-                    <div class="card-body d-flex flex-column">
-
-
-                        <!-- NAMA -->
-
-                        <h5 class="fw-bold mb-2">
-
-                            ${escapeHTML(
-                                umkm.nama ||
-                                "-"
-                            )}
-
-                        </h5>
-
-
-                        <!-- DESA -->
-
-                        <div class="umkm-info mb-2">
-
-                            <i class="fa-solid fa-location-dot text-success me-2"></i>
-
-                            ${escapeHTML(
-                                umkm.desa ||
-                                "-"
-                            )}
-
-                        </div>
-
-
-                        <!-- PRODUK -->
-
-                        <div class="umkm-info mb-2">
-
-                            <i class="fa-solid fa-basket-shopping text-success me-2"></i>
-
-                            ${escapeHTML(
-                                umkm.produk ||
-                                "-"
-                            )}
-
-                        </div>
-
-
-                        <!-- RATING -->
-
-                        <div class="mb-3">
-
-                            <span class="text-warning">
-
-                                <i class="fa-solid fa-star"></i>
-
-                            </span>
-
-                            <strong>
-
-                                ${escapeHTML(
-                                    rating
-                                )}
-
-                            </strong>
-
-                        </div>
-
-
-                        <!-- STATUS -->
-
-                        <div class="mb-3">
-
-                            <span class="badge ${
-                                String(status)
-                                .toLowerCase() === "buka"
-                                ? "bg-success"
-                                : "bg-secondary"
-                            }">
-
-                                <i class="fa-solid fa-circle me-1"></i>
-
-                                ${escapeHTML(
-                                    status
-                                )}
-
-                            </span>
-
-                        </div>
-
-
-                        <!-- TOMBOL -->
-
-                        <div class="mt-auto">
-
-                            <a
-                                href="pages/umkm/detail.html?id=${encodeURIComponent(
-                                    umkm.id
-                                )}"
-
-                                class="btn btn-success w-100"
-
-                            >
-
-                                <i class="fa-solid fa-store me-2"></i>
-
-                                Lihat UMKM
-
-                            </a>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
-
-
-    container.innerHTML =
-        html;
-
-
-    console.log(
-        "UMKM berhasil ditampilkan:",
-        data.length
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    SEARCH
-===================================================== */
+========================================================= */
 
-function setupSearch() {
+function setupSearch(data) {
 
-    const search =
-        document.getElementById(
-            "searchUmkm"
-        );
+    const searchInput =
+        document.getElementById("searchUmkm");
 
 
-    if (!search) {
-
+    if (!searchInput) {
         return;
-
     }
 
 
-    search.addEventListener(
+    searchInput.addEventListener(
         "input",
         function () {
 
-            filterUMKM();
+            applyFilter(data);
 
         }
     );
@@ -478,22 +388,18 @@ function setupSearch() {
 }
 
 
-/* =====================================================
-   FILTER
-===================================================== */
+/* =========================================================
+   FILTER KATEGORI
+========================================================= */
 
-function setupFilter() {
+function setupFilter(data) {
 
     const filter =
-        document.getElementById(
-            "filterKategori"
-        );
+        document.getElementById("filterKategori");
 
 
     if (!filter) {
-
         return;
-
     }
 
 
@@ -501,7 +407,7 @@ function setupFilter() {
         "change",
         function () {
 
-            filterUMKM();
+            applyFilter(data);
 
         }
     );
@@ -509,70 +415,58 @@ function setupFilter() {
 }
 
 
-/* =====================================================
-   FILTER ENGINE
-===================================================== */
+/* =========================================================
+   APPLY SEARCH + FILTER
+========================================================= */
 
-function filterUMKM() {
+function applyFilter(data) {
 
-    const search =
-        document.getElementById(
-            "searchUmkm"
-        );
+    const searchInput =
+        document.getElementById("searchUmkm");
 
 
     const filter =
-        document.getElementById(
-            "filterKategori"
-        );
+        document.getElementById("filterKategori");
 
 
     const keyword =
-        search
-        ? search.value
-            .toLowerCase()
-            .trim()
-        : "";
+        searchInput
+            ? searchInput.value
+                .toLowerCase()
+                .trim()
+            : "";
 
 
     const kategori =
         filter
-        ? filter.value
-        : "";
-
-
-    const data =
-        window.plazaUMKM ||
-        [];
+            ? filter.value
+            : "";
 
 
     const hasil =
-        data.filter(function (
-            umkm
-        ) {
+        data.filter(function (item) {
 
-            const teks = (
 
-                (umkm.nama || "") +
+            const text = (
+
+                (item.nama || "") +
                 " " +
-                (umkm.kategori || "") +
+                (item.kategori || "") +
                 " " +
-                (umkm.desa || "") +
+                (item.desa || "") +
                 " " +
-                (umkm.produk || "")
+                (item.produk || "")
 
             ).toLowerCase();
 
 
             const cocokKeyword =
-                teks.includes(
-                    keyword
-                );
+                text.includes(keyword);
 
 
             const cocokKategori =
                 kategori === "" ||
-                umkm.kategori === kategori;
+                item.kategori === kategori;
 
 
             return (
@@ -583,26 +477,44 @@ function filterUMKM() {
         });
 
 
-    renderUMKM(
-        hasil
-    );
+    renderUMKM(hasil);
 
 }
 
 
-/* =====================================================
-   HELPER SET VALUE
-===================================================== */
+/* =========================================================
+   RESULT COUNT
+========================================================= */
 
-function setValue(
-    id,
-    value
-) {
+function updateResultCount(total) {
 
     const element =
         document.getElementById(
-            id
+            "umkmResultCount"
         );
+
+
+    if (!element) {
+        return;
+    }
+
+
+    element.textContent =
+        "Menampilkan " +
+        total +
+        " UMKM";
+
+}
+
+
+/* =========================================================
+   HELPER TEXT
+========================================================= */
+
+function setText(id, value) {
+
+    const element =
+        document.getElementById(id);
 
 
     if (element) {
@@ -615,50 +527,37 @@ function setValue(
 }
 
 
-/* =====================================================
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
-function escapeHTML(
-    value
-) {
+function escapeHTML(value) {
 
-    return String(
-        value ?? ""
-    )
+    return String(value ?? "")
 
-    .replace(
-        /&/g,
-        "&amp;"
-    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-    .replace(
-        /</g,
-        "&lt;"
-    )
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-    .replace(
-        />/g,
-        "&gt;"
-    )
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-    .replace(
-        /"/g,
-        "&quot;"
-    )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
-
-
-/* =====================================================
-   SELESAI
-===================================================== */
-
-console.log(
-    "UMKM Directory Engine V2 siap digunakan."
-);
