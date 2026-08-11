@@ -469,3 +469,94 @@ section.hero-umkm,
     }
 
 }
+/* =====================================================
+   FINAL FIX - POSISI HERO UMKM
+===================================================== */
+
+/* Hero harus mulai setelah navbar */
+.hero-umkm {
+    position: relative !important;
+    margin-top: 0 !important;
+    padding-top: 70px !important;
+    padding-bottom: 80px !important;
+    min-height: 450px;
+    overflow: hidden;
+}
+
+/* Label EKOSISTEM DIGITAL UMKM */
+.hero-umkm .badge,
+.hero-umkm .hero-badge,
+.umkm-hero .badge,
+.umkm-hero .hero-badge {
+    position: static !important;
+    display: inline-block !important;
+    margin-bottom: 25px !important;
+    transform: none !important;
+}
+
+/* Jika label menggunakan class lain tetapi berupa span */
+.hero-umkm span:first-child {
+    position: static !important;
+}
+
+/* Judul hero */
+.hero-umkm h1,
+.umkm-hero h1 {
+    position: relative !important;
+    margin-top: 0 !important;
+    z-index: 2 !important;
+}
+
+/* Paragraf */
+.hero-umkm p,
+.umkm-hero p {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* Kolom teks hero */
+.hero-umkm .container,
+.umkm-hero .container {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+
+/* =====================================================
+   JIKA BADGE MASIH TERAPUNG
+===================================================== */
+
+.hero-umkm .hero-content,
+.umkm-hero .hero-content {
+    position: relative !important;
+    padding-top: 10px !important;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+header {
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+header .navbar {
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .hero-umkm {
+        padding-top: 50px !important;
+        padding-bottom: 60px !important;
+    }
+
+}
