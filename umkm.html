@@ -11,9 +11,9 @@
     <title>Direktori UMKM | PLAZA DAYEUHLUHUR</title>
 
     <meta name="description"
-          content="Direktori UMKM Kecamatan Dayeuhluhur - Temukan produk dan usaha lokal terbaik.">
+          content="Direktori UMKM Kecamatan Dayeuhluhur. Temukan kuliner, jasa, perdagangan, kerajinan dan produk lokal unggulan.">
 
-    <!-- Google Font -->
+    <!-- GOOGLE FONT -->
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
 
@@ -24,22 +24,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
-    <!-- Bootstrap -->
+
+    <!-- BOOTSTRAP -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Font Awesome -->
+
+    <!-- FONT AWESOME -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- CSS Utama -->
+
+    <!-- CSS UTAMA -->
     <link rel="stylesheet"
           href="assets/css/style.css">
 
-    <link rel="stylesheet"
-          href="assets/css/theme.css">
 
     <!-- CSS UMKM -->
     <link rel="stylesheet"
@@ -51,9 +52,9 @@
 <body>
 
 
-<!-- =====================================================
+<!-- ==================================================
      LIVE NEWS
-===================================================== -->
+================================================== -->
 
 <div class="top-news">
 
@@ -68,6 +69,7 @@
                 LIVE NEWS
 
             </div>
+
 
             <div class="news-marquee">
 
@@ -86,20 +88,21 @@
 </div>
 
 
-<!-- =====================================================
+
+<!-- ==================================================
      NAVBAR
-===================================================== -->
+================================================== -->
 
 <header>
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
 
     <div class="container">
 
 
         <!-- LOGO -->
 
-        <a class="navbar-brand"
+        <a class="navbar-brand d-flex align-items-center"
            href="index.html">
 
             <img
@@ -116,16 +119,13 @@
         </a>
 
 
-        <!-- MOBILE BUTTON -->
+        <!-- MOBILE -->
 
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+            data-bs-target="#navbarNav">
 
             <span class="navbar-toggler-icon"></span>
 
@@ -236,106 +236,91 @@
 </header>
 
 
-<!-- =====================================================
+
+<!-- ==================================================
      HERO UMKM
-===================================================== -->
+================================================== -->
 
 <section class="umkm-hero">
 
+
     <div class="container">
 
-        <div class="row align-items-center">
 
-            <div class="col-lg-8">
-
-                <span class="hero-badge">
-
-                    <i class="fa-solid fa-store"></i>
-
-                    EKOSISTEM DIGITAL UMKM
-
-                </span>
+        <div class="umkm-hero-content">
 
 
-                <h1>
+            <div class="umkm-badge">
 
-                    Direktori UMKM
+                <i class="fa-solid fa-store"></i>
 
-                    <br>
-
-                    <span>Dayeuhluhur</span>
-
-                </h1>
-
-
-                <p>
-
-                    Temukan berbagai produk, kuliner,
-                    jasa dan usaha lokal terbaik
-                    dari masyarakat Kecamatan Dayeuhluhur.
-
-                </p>
-
-
-                <div class="hero-buttons">
-
-                    <a href="#direktori"
-                       class="btn btn-primary">
-
-                        <i class="fa-solid fa-store"></i>
-
-                        Jelajahi UMKM
-
-                    </a>
-
-
-                    <a href="index.html#umkm"
-                       class="btn btn-outline-light">
-
-                        <i class="fa-solid fa-star"></i>
-
-                        UMKM Unggulan
-
-                    </a>
-
-                </div>
+                EKOSISTEM DIGITAL UMKM
 
             </div>
 
 
-            <div class="col-lg-4 d-none d-lg-block">
+            <h1>
 
-                <div class="hero-icon">
+                DIREKTORI UMKM
 
-                    <i class="fa-solid fa-shop"></i>
+                <br>
 
-                </div>
+                <span>DAYEUHLUHUR</span>
+
+            </h1>
+
+
+            <p>
+
+                Temukan berbagai usaha kuliner, jasa,
+                fashion, perdagangan, kerajinan dan
+                produk lokal unggulan dari 14 Desa
+                Kecamatan Dayeuhluhur.
+
+            </p>
+
+
+            <!-- SEARCH -->
+
+            <div class="umkm-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchUmkm"
+                    placeholder="Cari nama UMKM, produk, desa atau kategori...">
 
             </div>
+
 
         </div>
+
 
     </div>
 
 </section>
 
 
-<!-- =====================================================
-     STATISTIK
-===================================================== -->
 
-<section class="umkm-statistik">
+<!-- ==================================================
+     STATISTIK
+================================================== -->
+
+<section class="umkm-stat-section">
 
     <div class="container">
 
         <div class="row g-4">
 
 
-            <div class="col-md-3">
+            <!-- TOTAL -->
 
-                <div class="stat-card">
+            <div class="col-lg-3 col-md-6">
 
-                    <div class="stat-icon">
+                <div class="umkm-stat-card">
+
+                    <div class="stat-icon green">
 
                         <i class="fa-solid fa-store"></i>
 
@@ -349,42 +334,11 @@
 
                         </h3>
 
-                        <p>
+                        <span>
 
-                            Total UMKM
+                            UMKM
 
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-3">
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-
-                        <i class="fa-solid fa-circle-check"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h3 id="totalUmkmBuka">
-
-                            0
-
-                        </h3>
-
-                        <p>
-
-                            UMKM Aktif
-
-                        </p>
+                        </span>
 
                     </div>
 
@@ -393,11 +347,13 @@
             </div>
 
 
-            <div class="col-md-3">
+            <!-- KULINER -->
 
-                <div class="stat-card">
+            <div class="col-lg-3 col-md-6">
 
-                    <div class="stat-icon">
+                <div class="umkm-stat-card">
+
+                    <div class="stat-icon orange">
 
                         <i class="fa-solid fa-utensils"></i>
 
@@ -411,11 +367,11 @@
 
                         </h3>
 
-                        <p>
+                        <span>
 
                             Kuliner
 
-                        </p>
+                        </span>
 
                     </div>
 
@@ -424,11 +380,46 @@
             </div>
 
 
-            <div class="col-md-3">
+            <!-- JASA -->
 
-                <div class="stat-card">
+            <div class="col-lg-3 col-md-6">
 
-                    <div class="stat-icon">
+                <div class="umkm-stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3 id="totalJasa">
+
+                            0
+
+                        </h3>
+
+                        <span>
+
+                            Jasa
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESA -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="umkm-stat-card">
+
+                    <div class="stat-icon red">
 
                         <i class="fa-solid fa-map-location-dot"></i>
 
@@ -436,17 +427,17 @@
 
                     <div>
 
-                        <h3 id="totalUmkmDesa">
+                        <h3 id="totalDesa">
 
                             0
 
                         </h3>
 
-                        <p>
+                        <span>
 
-                            Desa Terdata
+                            Desa
 
-                        </p>
+                        </span>
 
                     </div>
 
@@ -462,89 +453,73 @@
 </section>
 
 
-<!-- =====================================================
-     DIREKTORI
-===================================================== -->
 
-<section id="direktori"
-         class="umkm-directory py-5">
+<!-- ==================================================
+     DIREKTORI
+================================================== -->
+
+<section class="umkm-directory">
+
 
     <div class="container">
 
 
-        <!-- JUDUL -->
+        <!-- SECTION TITLE -->
 
-        <div class="section-heading text-center mb-5">
+        <div class="section-heading text-center">
 
-            <span>
+
+            <div class="section-label">
 
                 DIREKTORI UMKM
 
-            </span>
+            </div>
+
 
             <h2>
 
-                Temukan Usaha Lokal Dayeuhluhur
+                Jelajahi UMKM Dayeuhluhur
 
             </h2>
 
+
             <p>
 
-                Jelajahi UMKM berdasarkan nama,
-                kategori, desa dan produk.
+                Temukan produk dan usaha lokal
+                terbaik dari masyarakat Kecamatan Dayeuhluhur.
 
             </p>
+
 
         </div>
 
 
-        <!-- =================================================
-             SEARCH & FILTER
-        ================================================== -->
 
-        <div class="filter-panel mb-5">
+        <!-- FILTER -->
+
+        <div class="umkm-filter-box">
+
 
             <div class="row g-3">
 
 
-                <!-- SEARCH -->
+                <div class="col-lg-5">
 
-                <div class="col-lg-6">
-
-                    <label class="form-label">
+                    <div class="filter-input">
 
                         <i class="fa-solid fa-magnifying-glass"></i>
 
-                        Cari UMKM
-
-                    </label>
-
-                    <div class="search-input">
-
-                        <i class="fa-solid fa-search"></i>
-
                         <input
                             type="text"
-                            id="searchUmkm"
-                            class="form-control"
-                            placeholder="Cari nama UMKM, produk, atau desa...">
+                            id="searchUmkm2"
+                            placeholder="Cari UMKM...">
 
                     </div>
 
                 </div>
 
 
-                <!-- KATEGORI -->
-
                 <div class="col-lg-3">
-
-                    <label class="form-label">
-
-                        <i class="fa-solid fa-layer-group"></i>
-
-                        Kategori
-
-                    </label>
 
                     <select
                         id="filterKategori"
@@ -562,27 +537,15 @@
 
                         </option>
 
-                        <option value="Toko">
-
-                            Toko
-
-                        </option>
-
                         <option value="Jasa">
 
                             Jasa
 
                         </option>
 
-                        <option value="Fashion">
+                        <option value="Perdagangan">
 
-                            Fashion
-
-                        </option>
-
-                        <option value="Pertanian">
-
-                            Pertanian
+                            Perdagangan
 
                         </option>
 
@@ -592,30 +555,9 @@
 
                         </option>
 
-                    </select>
+                        <option value="Fashion">
 
-                </div>
-
-
-                <!-- DESA -->
-
-                <div class="col-lg-3">
-
-                    <label class="form-label">
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        Desa
-
-                    </label>
-
-                    <select
-                        id="filterDesa"
-                        class="form-select">
-
-                        <option value="">
-
-                            Semua Desa
+                            Fashion
 
                         </option>
 
@@ -623,74 +565,108 @@
 
                 </div>
 
-            </div>
+
+                <div class="col-lg-2">
+
+                    <select
+                        id="filterStatus"
+                        class="form-select">
+
+                        <option value="">
+
+                            Semua Status
+
+                        </option>
+
+                        <option value="Buka">
+
+                            Buka
+
+                        </option>
+
+                        <option value="Tutup">
+
+                            Tutup
+
+                        </option>
+
+                    </select>
+
+                </div>
 
 
-            <!-- HASIL -->
+                <div class="col-lg-2">
 
-            <div class="filter-result mt-3">
+                    <button
+                        type="button"
+                        id="resetFilter"
+                        class="btn btn-reset w-100">
 
-                <span id="jumlahHasil">
+                        <i class="fa-solid fa-rotate-left"></i>
 
-                    Memuat data...
+                        Reset
 
-                </span>
+                    </button>
+
+                </div>
+
 
             </div>
 
         </div>
 
 
-        <!-- =================================================
-             CONTAINER KARTU
-        ================================================== -->
 
-        <div class="row g-4"
-             id="umkmContainer">
+        <!-- HASIL -->
 
-            <!-- UMKM DIBUAT OTOMATIS OLEH umkm.js -->
+        <div class="result-info">
+
+            Menampilkan
+
+            <strong id="jumlahHasil">
+
+                0
+
+            </strong>
+
+            UMKM
 
         </div>
 
 
-        <!-- =================================================
-             EMPTY STATE
-        ================================================== -->
 
-        <div id="emptyUMKM"
-             class="empty-umkm"
-             style="display:none;">
+        <!-- CARD -->
 
-            <div class="empty-icon">
+        <div
+            class="row g-4"
+            id="umkmContainer">
 
-                <i class="fa-solid fa-store-slash"></i>
 
-            </div>
+        </div>
 
-            <h3>
+
+
+        <!-- EMPTY -->
+
+        <div
+            id="emptyUmkm"
+            class="empty-umkm"
+            style="display:none;">
+
+            <i class="fa-solid fa-store-slash"></i>
+
+            <h4>
 
                 UMKM tidak ditemukan
 
-            </h3>
+            </h4>
 
             <p>
 
-                Coba gunakan kata kunci
-                atau filter yang berbeda.
+                Coba gunakan kata kunci atau kategori lain.
 
             </p>
 
-            <button
-                type="button"
-                class="btn btn-outline-primary"
-                onclick="resetUmkmFilter()">
-
-                <i class="fa-solid fa-rotate-left"></i>
-
-                Reset Filter
-
-            </button>
-
         </div>
 
 
@@ -699,52 +675,71 @@
 </section>
 
 
-<!-- =====================================================
+
+<!-- ==================================================
      CTA
-===================================================== -->
+================================================== -->
 
 <section class="umkm-cta">
 
-    <div class="container text-center">
+    <div class="container">
 
-        <div class="cta-icon">
+        <div class="row align-items-center">
 
-            <i class="fa-solid fa-handshake"></i>
+
+            <div class="col-lg-8">
+
+                <span>
+
+                    PELUANG DIGITAL UMKM
+
+                </span>
+
+                <h2>
+
+                    UMKM Lokal, Naik Kelas Bersama
+
+                </h2>
+
+                <p>
+
+                    Mari bersama-sama memperkenalkan
+                    produk lokal Dayeuhluhur kepada
+                    masyarakat yang lebih luas.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-lg-4 text-lg-end">
+
+                <a
+                    href="#"
+                    class="btn btn-light btn-lg">
+
+                    <i class="fa-solid fa-store"></i>
+
+                    Daftarkan UMKM
+
+                </a>
+
+            </div>
+
 
         </div>
-
-        <h2>
-
-            Punya Usaha di Dayeuhluhur?
-
-        </h2>
-
-        <p>
-
-            Mari bergabung dalam ekosistem digital
-            UMKM PLAZA DAYEUHLUHUR.
-
-        </p>
-
-        <a href="kontak.html"
-           class="btn btn-light btn-lg">
-
-            <i class="fa-solid fa-user-plus"></i>
-
-            Daftarkan UMKM
-
-        </a>
 
     </div>
 
 </section>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
 
-<footer class="footer">
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer class="umkm-footer">
 
     <div class="container">
 
@@ -758,7 +753,7 @@
                     height="65"
                     alt="PLAZA DAYEUHLUHUR">
 
-                <h4 class="mt-3">
+                <h4>
 
                     PLAZA DAYEUHLUHUR
 
@@ -770,107 +765,49 @@
 
                 </p>
 
-                <p class="small">
-
-                    Menghubungkan masyarakat,
-                    desa, UMKM, BUMDes,
-                    wisata dan potensi lokal
-                    dalam satu ekosistem digital.
-
-                </p>
-
             </div>
 
 
-            <div class="col-lg-2 mb-4">
+            <div class="col-lg-3 mb-4">
 
                 <h5>
 
-                    Menu
+                    Ekosistem
 
                 </h5>
 
-                <ul class="list-unstyled">
+                <a href="desa.html">
 
-                    <li>
-                        <a href="index.html">
-                            Beranda
-                        </a>
-                    </li>
+                    Desa
 
-                    <li>
-                        <a href="desa.html">
-                            Desa
-                        </a>
-                    </li>
+                </a>
 
-                    <li>
-                        <a href="bumdes.html">
-                            BUMDes
-                        </a>
-                    </li>
+                <a href="bumdes.html">
 
-                    <li>
-                        <a href="umkm.html">
-                            UMKM
-                        </a>
-                    </li>
+                    BUMDes
 
-                    <li>
-                        <a href="wisata.html">
-                            Wisata
-                        </a>
-                    </li>
+                </a>
 
-                </ul>
+                <a href="umkm.html">
+
+                    UMKM
+
+                </a>
+
+                <a href="wisata.html">
+
+                    Wisata
+
+                </a>
 
             </div>
 
 
-            <div class="col-lg-2 mb-4">
+            <div class="col-lg-4">
 
                 <h5>
 
-                    Direktori
-
-                </h5>
-
-                <ul class="list-unstyled">
-
-                    <li>
-                        <a href="#direktori">
-                            Semua UMKM
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#direktori">
-                            Kuliner
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#direktori">
-                            Jasa
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#direktori">
-                            Produk Lokal
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="col-lg-3">
-
-                <h5>
-
-                    Kontak
+                    Hubungi Kami
 
                 </h5>
 
@@ -890,34 +827,6 @@
 
                 </p>
 
-                <div class="social-icons">
-
-                    <a href="#">
-
-                        <i class="fab fa-facebook"></i>
-
-                    </a>
-
-                    <a href="#">
-
-                        <i class="fab fa-instagram"></i>
-
-                    </a>
-
-                    <a href="#">
-
-                        <i class="fab fa-youtube"></i>
-
-                    </a>
-
-                    <a href="#">
-
-                        <i class="fab fa-tiktok"></i>
-
-                    </a>
-
-                </div>
-
             </div>
 
 
@@ -933,7 +842,8 @@
 
             <br>
 
-            Gerbang Digital Kecamatan Dayeuhluhur
+            Gerbang Informasi, Bisnis dan Potensi
+            Kecamatan Dayeuhluhur
 
         </div>
 
@@ -942,18 +852,30 @@
 </footer>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+
+<!-- ==================================================
+     BOOTSTRAP
+================================================== -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
 </script>
 
 
-<script src="assets/js/umkm.js"></script>
+
+<!-- ==================================================
+     NEWSFLASH
+================================================== -->
 
 <script src="assets/js/newsflash.js"></script>
+
+
+
+<!-- ==================================================
+     UMKM PUBLIC DIRECTORY
+================================================== -->
+
+<script src="assets/js/umkm-public.js"></script>
 
 
 </body>
