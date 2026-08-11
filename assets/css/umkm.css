@@ -1,143 +1,58 @@
-```css
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   UMKM MANAGEMENT - V2
+   UMKM PAGE
 ===================================================== */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f8;
-    color: #1f2937;
-    padding: 25px;
+    padding-top: 85px;
 }
 
+
 /* =====================================================
-   HEADER
+   HERO UMKM
 ===================================================== */
 
-.page-header {
+.umkm-hero {
+    min-height: calc(100vh - 85px);
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
-}
 
-.page-header h1 {
-    font-size: 30px;
-    margin-bottom: 6px;
-}
-
-.page-header p {
-    color: #6b7280;
+    padding-top: 70px;
+    padding-bottom: 70px;
 }
 
 
 /* =====================================================
-   BUTTON
+   HERO IMAGE
 ===================================================== */
 
-button {
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-}
-
-.btn-primary {
-    background: #0f766e;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.btn-primary:hover {
-    background: #115e59;
-}
-
-.btn-secondary {
-    background: #e5e7eb;
-    color: #374151;
-    padding: 12px 20px;
-    border-radius: 8px;
-}
-
-.btn-secondary:hover {
-    background: #d1d5db;
+.hero-image {
+    max-height: 420px;
+    object-fit: contain;
 }
 
 
 /* =====================================================
-   STATISTIK
+   STAT CARD
 ===================================================== */
-
-.umkm-statistik {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
-}
 
 .stat-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 25px;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    height: 100%;
 }
 
-.stat-card span {
-    display: block;
-    color: #6b7280;
-    font-size: 14px;
-    margin-bottom: 8px;
+.stat-card h2 {
+    font-weight: 700;
+    margin-bottom: 5px;
 }
 
-.stat-card strong {
-    font-size: 28px;
-    color: #0f766e;
-}
-
-
-/* =====================================================
-   FILTER
-===================================================== */
-
-.filter-area {
-    background: white;
-    padding: 18px;
-    border-radius: 12px;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.filter-area input,
-.filter-area select,
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    border: 1px solid #d1d5db;
-    border-radius: 7px;
-    padding: 11px 12px;
-    font-size: 14px;
-    outline: none;
-}
-
-.filter-area input:focus,
-.filter-area select:focus,
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: #0f766e;
+.stat-card p {
+    margin-bottom: 0;
+    color: #666;
 }
 
 
@@ -145,162 +60,17 @@ button {
    UMKM CARD
 ===================================================== */
 
-.umkm-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
 .umkm-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
-    transition: 0.2s ease;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
 }
 
 .umkm-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
-
-.umkm-card h3 {
-    font-size: 19px;
-    margin-bottom: 8px;
-}
-
-.umkm-kategori {
-    display: inline-block;
-    background: #ccfbf1;
-    color: #115e59;
-    padding: 5px 9px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-.umkm-info {
-    margin-bottom: 7px;
-    color: #4b5563;
-    font-size: 14px;
-}
-
-.umkm-rating {
-    color: #d97706;
-    font-weight: bold;
-    margin-top: 12px;
-}
-
-
-/* =====================================================
-   EMPTY STATE
-===================================================== */
-
-.empty-state {
-    display: none;
-    background: white;
-    padding: 45px 20px;
-    text-align: center;
-    border-radius: 12px;
-    color: #6b7280;
-}
-
-.empty-state h3 {
-    color: #374151;
-    margin-bottom: 8px;
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 9999;
-    padding: 30px 15px;
-    overflow-y: auto;
-}
-
-.modal.active {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.modal-content {
-    background: white;
-    width: 100%;
-    max-width: 650px;
-    border-radius: 14px;
-    margin-top: 30px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 25px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.modal-header h2 {
-    font-size: 22px;
-}
-
-.btn-close {
-    background: transparent;
-    font-size: 28px;
-    color: #6b7280;
-}
-
-.btn-close:hover {
-    color: #111827;
-}
-
-
-/* =====================================================
-   FORM
-===================================================== */
-
-#formUMKM {
-    padding: 25px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 7px;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #e5e7eb;
+    transform: translateY(-5px);
 }
 
 
@@ -308,44 +78,17 @@ button {
    RESPONSIVE
 ===================================================== */
 
-@media (max-width: 900px) {
-
-    .umkm-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .umkm-statistik {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media (max-width: 600px) {
+@media (max-width: 991px) {
 
     body {
-        padding: 15px;
+        padding-top: 75px;
     }
 
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .filter-area {
-        grid-template-columns: 1fr;
-    }
-
-    .umkm-container {
-        grid-template-columns: 1fr;
-    }
-
-    .umkm-statistik {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
+    .umkm-hero {
+        min-height: auto;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        text-align: center;
     }
 
 }
-```
