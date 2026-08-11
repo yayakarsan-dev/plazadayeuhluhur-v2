@@ -8,12 +8,12 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>UMKM Dayeuhluhur | PLAZA DAYEUHLUHUR</title>
+    <title>Direktori UMKM | PLAZA DAYEUHLUHUR</title>
 
     <meta name="description"
-          content="Direktori UMKM dan Produk Lokal Kecamatan Dayeuhluhur">
+          content="Direktori UMKM Kecamatan Dayeuhluhur - Temukan produk dan usaha lokal terbaik.">
 
-    <!-- GOOGLE FONT -->
+    <!-- Google Font -->
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
 
@@ -24,404 +24,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
-
-    <!-- BOOTSTRAP -->
+    <!-- Bootstrap -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-
-    <!-- FONT AWESOME -->
+    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-
-    <!-- WEBSITE CSS -->
+    <!-- CSS Utama -->
     <link rel="stylesheet"
           href="assets/css/style.css">
 
     <link rel="stylesheet"
           href="assets/css/theme.css">
 
-    <link rel="stylesheet"
-          href="assets/css/animation.css">
-
-    <link rel="stylesheet"
-          href="assets/css/responsive.css">
-
-    <!-- UMKM CSS -->
+    <!-- CSS UMKM -->
     <link rel="stylesheet"
           href="assets/css/umkm.css">
-
-
-    <!-- FIX KHUSUS HALAMAN UMKM -->
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0 !important;
-            font-family: "Poppins", sans-serif;
-            background: #f8f9fa;
-        }
-
-
-        /* =================================================
-           NEWSFLASH
-        ================================================= */
-
-        .top-news {
-            position: relative !important;
-            width: 100%;
-            z-index: 100;
-        }
-
-
-        /* =================================================
-           HEADER
-        ================================================= */
-
-        header {
-            position: relative !important;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .umkm-navbar {
-            position: relative !important;
-            width: 100%;
-            background: #ffffff;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-            min-height: 82px;
-        }
-
-
-        .umkm-navbar .navbar-brand {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #222;
-            font-weight: 700;
-            font-size: 1.15rem;
-        }
-
-
-        .umkm-navbar .navbar-brand img {
-            width: auto;
-            height: 55px;
-            object-fit: contain;
-        }
-
-
-        .umkm-navbar .nav-link {
-            color: #222 !important;
-            font-weight: 600;
-            padding: 28px 18px !important;
-            transition: 0.3s;
-        }
-
-
-        .umkm-navbar .nav-link:hover {
-            color: #198754 !important;
-        }
-
-
-        .umkm-navbar .nav-link.active {
-            color: #198754 !important;
-        }
-
-
-        /* =================================================
-           HERO UMKM
-        ================================================= */
-
-        .hero-umkm {
-            position: relative !important;
-            display: block !important;
-            width: 100%;
-            margin: 0 !important;
-            padding: 85px 0 90px !important;
-            min-height: 470px;
-            overflow: hidden;
-            background:
-                linear-gradient(
-                    135deg,
-                    #f4f8f5 0%,
-                    #ffffff 100%
-                );
-        }
-
-
-        .hero-umkm .container {
-            position: relative !important;
-            z-index: 2;
-        }
-
-
-        .hero-umkm-content {
-            padding-top: 0;
-        }
-
-
-        /* BADGE */
-
-        .umkm-badge {
-            position: static !important;
-            display: inline-block !important;
-            margin: 0 0 25px 0 !important;
-            padding: 9px 18px;
-            border-radius: 30px;
-            background: #ffc107;
-            color: #222;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-        }
-
-
-        /* JUDUL */
-
-        .hero-umkm h1 {
-            position: static !important;
-            margin: 0 0 20px 0 !important;
-            font-size: clamp(2.8rem, 5vw, 4.8rem);
-            line-height: 1.05;
-            font-weight: 800;
-            color: #212529;
-        }
-
-
-        .hero-umkm h1 span {
-            color: #198754;
-        }
-
-
-        .hero-umkm p {
-            position: static !important;
-            max-width: 780px;
-            margin: 0 0 30px 0;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
-
-        /* GAMBAR HERO */
-
-        .hero-umkm-image {
-            width: 100%;
-            max-width: 460px;
-            height: 330px;
-            object-fit: cover;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-        }
-
-
-        /* =================================================
-           SEARCH & FILTER
-        ================================================= */
-
-        .umkm-search-section {
-            background: #ffffff;
-            padding: 35px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-
-        .umkm-search-box {
-            max-width: 850px;
-            margin: auto;
-        }
-
-
-        .umkm-search-box input,
-        .umkm-search-box select {
-            min-height: 52px;
-            border-radius: 12px;
-        }
-
-
-        /* =================================================
-           DIREKTORI
-        ================================================= */
-
-        .umkm-directory {
-            padding: 70px 0;
-        }
-
-
-        .umkm-section-label {
-            color: #198754;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-
-        .umkm-directory h2 {
-            font-weight: 800;
-        }
-
-
-        /* CONTAINER PRODUK */
-
-        #umkmContainer {
-            min-height: 150px;
-        }
-
-
-        /* =================================================
-           CARD UMKM
-        ================================================= */
-
-        .umkm-card {
-            height: 100%;
-            padding: 25px;
-            background: #ffffff;
-            border-radius: 18px;
-            border: 1px solid #eeeeee;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-            transition: 0.3s;
-        }
-
-
-        .umkm-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.10);
-        }
-
-
-        .umkm-card img {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-            border-radius: 14px;
-            margin-bottom: 18px;
-        }
-
-
-        .umkm-kategori {
-            display: inline-block;
-            padding: 5px 12px;
-            margin-bottom: 10px;
-            border-radius: 20px;
-            background: #e8f5ed;
-            color: #198754;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
-
-
-        .umkm-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-
-        .umkm-info {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 7px;
-        }
-
-
-        .umkm-rating {
-            margin-top: 12px;
-            font-weight: 600;
-        }
-
-
-        /* =================================================
-           EMPTY
-        ================================================= */
-
-        #emptyUMKM {
-            display: none;
-            padding: 60px 20px;
-            text-align: center;
-            color: #777;
-        }
-
-
-        /* =================================================
-           FOOTER
-        ================================================= */
-
-        .umkm-footer {
-            background: #212529;
-            color: #ffffff;
-            padding: 55px 0 25px;
-        }
-
-
-        .umkm-footer h4 {
-            font-weight: 700;
-        }
-
-
-        .umkm-footer p {
-            color: #cccccc;
-        }
-
-
-        /* =================================================
-           MOBILE
-        ================================================= */
-
-        @media (max-width: 991px) {
-
-            .umkm-navbar .nav-link {
-                padding: 12px 0 !important;
-            }
-
-
-            .hero-umkm {
-                padding: 60px 0 70px !important;
-            }
-
-
-            .hero-umkm h1 {
-                font-size: 3rem;
-            }
-
-
-            .hero-umkm-image {
-                margin-top: 35px;
-                height: 280px;
-            }
-
-        }
-
-
-        @media (max-width: 576px) {
-
-            .umkm-navbar .navbar-brand span {
-                font-size: 0.95rem;
-            }
-
-
-            .hero-umkm h1 {
-                font-size: 2.4rem;
-            }
-
-
-            .hero-umkm p {
-                font-size: 1rem;
-            }
-
-        }
-
-    </style>
 
 </head>
 
@@ -430,7 +52,7 @@
 
 
 <!-- =====================================================
-     NEWSFLASH
+     LIVE NEWS
 ===================================================== -->
 
 <div class="top-news">
@@ -446,7 +68,6 @@
                 LIVE NEWS
 
             </div>
-
 
             <div class="news-marquee">
 
@@ -465,184 +86,181 @@
 </div>
 
 
-
 <!-- =====================================================
-     HEADER
+     NAVBAR
 ===================================================== -->
 
 <header>
 
-    <nav class="navbar navbar-expand-lg umkm-navbar">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
 
-        <div class="container">
-
-
-            <!-- LOGO -->
-
-            <a class="navbar-brand"
-               href="index.html">
-
-                <img
-                    src="assets/images/logo.png"
-                    height="55"
-                    alt="PLAZA DAYEUHLUHUR">
-
-                <span class="ms-2">
-
-                    PLAZA DAYEUHLUHUR
-
-                </span>
-
-            </a>
+    <div class="container">
 
 
-            <!-- MOBILE BUTTON -->
+        <!-- LOGO -->
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+        <a class="navbar-brand"
+           href="index.html">
 
-                <span class="navbar-toggler-icon"></span>
+            <img
+                src="assets/images/logo.png"
+                height="55"
+                alt="PLAZA DAYEUHLUHUR">
 
-            </button>
+            <span class="fw-bold ms-2">
 
+                PLAZA DAYEUHLUHUR
 
-            <!-- MENU -->
+            </span>
 
-            <div
-                class="collapse navbar-collapse"
-                id="navbarNav">
-
-                <ul class="navbar-nav ms-auto">
+        </a>
 
 
-                    <li class="nav-item">
+        <!-- MOBILE BUTTON -->
 
-                        <a class="nav-link"
-                           href="index.html">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
 
-                            Beranda
+            <span class="navbar-toggler-icon"></span>
 
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                           href="desa.html">
-
-                            Desa
-
-                        </a>
-
-                    </li>
+        </button>
 
 
-                    <li class="nav-item">
+        <!-- MENU -->
 
-                        <a class="nav-link"
-                           href="bumdes.html">
+        <div
+            class="collapse navbar-collapse"
+            id="navbarNav">
 
-                            BUMDes
-
-                        </a>
-
-                    </li>
+            <ul class="navbar-nav ms-auto">
 
 
-                    <li class="nav-item">
+                <li class="nav-item">
 
-                        <a class="nav-link active"
-                           href="umkm.html">
+                    <a class="nav-link"
+                       href="index.html">
 
-                            UMKM
+                        Beranda
 
-                        </a>
+                    </a>
 
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                           href="wisata.html">
-
-                            Wisata
-
-                        </a>
-
-                    </li>
+                </li>
 
 
-                    <li class="nav-item">
+                <li class="nav-item">
 
-                        <a class="nav-link"
-                           href="berita.html">
+                    <a class="nav-link"
+                       href="desa.html">
 
-                            Berita
+                        Desa
 
-                        </a>
+                    </a>
 
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                           href="kontak.html">
-
-                            Kontak
-
-                        </a>
-
-                    </li>
+                </li>
 
 
-                </ul>
+                <li class="nav-item">
 
-            </div>
+                    <a class="nav-link"
+                       href="bumdes.html">
+
+                        BUMDes
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link active"
+                       href="umkm.html">
+
+                        UMKM
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="wisata.html">
+
+                        Wisata
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="berita.html">
+
+                        Berita
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="kontak.html">
+
+                        Kontak
+
+                    </a>
+
+                </li>
+
+
+            </ul>
 
         </div>
 
-    </nav>
+    </div>
+
+</nav>
 
 </header>
-
 
 
 <!-- =====================================================
      HERO UMKM
 ===================================================== -->
 
-<section class="hero-umkm">
+<section class="umkm-hero">
 
     <div class="container">
 
         <div class="row align-items-center">
 
+            <div class="col-lg-8">
 
-            <!-- TEKS -->
+                <span class="hero-badge">
 
-            <div class="col-lg-7 hero-umkm-content">
-
-
-                <div class="umkm-badge">
+                    <i class="fa-solid fa-store"></i>
 
                     EKOSISTEM DIGITAL UMKM
 
-                </div>
+                </span>
 
 
                 <h1>
 
                     Direktori UMKM
+
                     <br>
 
                     <span>Dayeuhluhur</span>
@@ -652,36 +270,187 @@
 
                 <p>
 
-                    Temukan berbagai usaha kuliner, jasa,
-                    fashion, perdagangan, kerajinan dan
-                    produk lokal unggulan dari 14 Desa
-                    Kecamatan Dayeuhluhur.
+                    Temukan berbagai produk, kuliner,
+                    jasa dan usaha lokal terbaik
+                    dari masyarakat Kecamatan Dayeuhluhur.
 
                 </p>
 
 
-                <a href="#direktori"
-                   class="btn btn-success btn-lg">
+                <div class="hero-buttons">
 
-                    <i class="fa-solid fa-store me-2"></i>
+                    <a href="#direktori"
+                       class="btn btn-primary">
 
-                    Jelajahi UMKM
+                        <i class="fa-solid fa-store"></i>
 
-                </a>
+                        Jelajahi UMKM
 
+                    </a>
+
+
+                    <a href="index.html#umkm"
+                       class="btn btn-outline-light">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        UMKM Unggulan
+
+                    </a>
+
+                </div>
 
             </div>
 
 
-            <!-- GAMBAR -->
+            <div class="col-lg-4 d-none d-lg-block">
 
-            <div class="col-lg-5 text-center">
+                <div class="hero-icon">
 
-                <img
-                    src="assets/images/umkm/umkm-dayeuhluhur.jpg"
-                    class="hero-umkm-image"
-                    alt="UMKM Dayeuhluhur"
-                    onerror="this.style.display='none';">
+                    <i class="fa-solid fa-shop"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATISTIK
+===================================================== -->
+
+<section class="umkm-statistik">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-store"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3 id="totalUmkm">
+
+                            0
+
+                        </h3>
+
+                        <p>
+
+                            Total UMKM
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3 id="totalUmkmBuka">
+
+                            0
+
+                        </h3>
+
+                        <p>
+
+                            UMKM Aktif
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-utensils"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3 id="totalKuliner">
+
+                            0
+
+                        </h3>
+
+                        <p>
+
+                            Kuliner
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-map-location-dot"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3 id="totalUmkmDesa">
+
+                            0
+
+                        </h3>
+
+                        <p>
+
+                            Desa Terdata
+
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -693,68 +462,161 @@
 </section>
 
 
-
 <!-- =====================================================
-     SEARCH
+     DIREKTORI
 ===================================================== -->
 
-<section class="umkm-search-section">
+<section id="direktori"
+         class="umkm-directory py-5">
 
     <div class="container">
 
-        <div class="umkm-search-box">
+
+        <!-- JUDUL -->
+
+        <div class="section-heading text-center mb-5">
+
+            <span>
+
+                DIREKTORI UMKM
+
+            </span>
+
+            <h2>
+
+                Temukan Usaha Lokal Dayeuhluhur
+
+            </h2>
+
+            <p>
+
+                Jelajahi UMKM berdasarkan nama,
+                kategori, desa dan produk.
+
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             SEARCH & FILTER
+        ================================================== -->
+
+        <div class="filter-panel mb-5">
 
             <div class="row g-3">
 
-                <div class="col-md-8">
 
-                    <div class="input-group">
+                <!-- SEARCH -->
 
-                        <span class="input-group-text">
+                <div class="col-lg-6">
 
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                    <label class="form-label">
 
-                        </span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Cari UMKM
+
+                    </label>
+
+                    <div class="search-input">
+
+                        <i class="fa-solid fa-search"></i>
 
                         <input
                             type="text"
                             id="searchUmkm"
                             class="form-control"
-                            placeholder="Cari UMKM, produk atau desa...">
+                            placeholder="Cari nama UMKM, produk, atau desa...">
 
                     </div>
 
                 </div>
 
 
-                <div class="col-md-4">
+                <!-- KATEGORI -->
+
+                <div class="col-lg-3">
+
+                    <label class="form-label">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                        Kategori
+
+                    </label>
 
                     <select
                         id="filterKategori"
                         class="form-select">
 
                         <option value="">
+
                             Semua Kategori
+
                         </option>
 
                         <option value="Kuliner">
+
                             Kuliner
+
+                        </option>
+
+                        <option value="Toko">
+
+                            Toko
+
                         </option>
 
                         <option value="Jasa">
-                            Jasa
-                        </option>
 
-                        <option value="Perdagangan">
-                            Perdagangan
+                            Jasa
+
                         </option>
 
                         <option value="Fashion">
+
                             Fashion
+
+                        </option>
+
+                        <option value="Pertanian">
+
+                            Pertanian
+
                         </option>
 
                         <option value="Kerajinan">
+
                             Kerajinan
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESA -->
+
+                <div class="col-lg-3">
+
+                    <label class="form-label">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Desa
+
+                    </label>
+
+                    <select
+                        id="filterDesa"
+                        class="form-select">
+
+                        <option value="">
+
+                            Semua Desa
+
                         </option>
 
                     </select>
@@ -763,102 +625,140 @@
 
             </div>
 
-        </div>
 
-    </div>
+            <!-- HASIL -->
 
-</section>
+            <div class="filter-result mt-3">
 
+                <span id="jumlahHasil">
 
+                    Memuat data...
 
-<!-- =====================================================
-     DIREKTORI UMKM
-===================================================== -->
-
-<section
-    id="direktori"
-    class="umkm-directory">
-
-    <div class="container">
-
-
-        <div class="text-center mb-5">
-
-            <div class="umkm-section-label">
-
-                DIREKTORI UMKM
+                </span>
 
             </div>
 
-
-            <h2 class="mt-2">
-
-                Produk & Usaha Lokal
-                Dayeuhluhur
-
-            </h2>
+        </div>
 
 
-            <p class="text-muted">
+        <!-- =================================================
+             CONTAINER KARTU
+        ================================================== -->
 
-                Jelajahi produk dan usaha masyarakat
-                dari berbagai desa di Kecamatan Dayeuhluhur.
+        <div class="row g-4"
+             id="umkmContainer">
 
-            </p>
+            <!-- UMKM DIBUAT OTOMATIS OLEH umkm.js -->
 
         </div>
 
 
-        <!-- DATA UMKM -->
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
 
-        <div
-            class="row g-4"
-            id="umkmContainer">
+        <div id="emptyUMKM"
+             class="empty-umkm"
+             style="display:none;">
 
-        </div>
+            <div class="empty-icon">
 
+                <i class="fa-solid fa-store-slash"></i>
 
-        <!-- EMPTY -->
+            </div>
 
-        <div id="emptyUMKM">
+            <h3>
 
-            <i class="fa-solid fa-store-slash fa-3x mb-3"></i>
+                UMKM tidak ditemukan
 
-            <h4>
-
-                UMKM belum ditemukan
-
-            </h4>
+            </h3>
 
             <p>
 
-                Coba gunakan kata kunci pencarian
-                yang berbeda.
+                Coba gunakan kata kunci
+                atau filter yang berbeda.
 
             </p>
 
+            <button
+                type="button"
+                class="btn btn-outline-primary"
+                onclick="resetUmkmFilter()">
+
+                <i class="fa-solid fa-rotate-left"></i>
+
+                Reset Filter
+
+            </button>
+
         </div>
+
 
     </div>
 
 </section>
 
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="umkm-cta">
+
+    <div class="container text-center">
+
+        <div class="cta-icon">
+
+            <i class="fa-solid fa-handshake"></i>
+
+        </div>
+
+        <h2>
+
+            Punya Usaha di Dayeuhluhur?
+
+        </h2>
+
+        <p>
+
+            Mari bergabung dalam ekosistem digital
+            UMKM PLAZA DAYEUHLUHUR.
+
+        </p>
+
+        <a href="kontak.html"
+           class="btn btn-light btn-lg">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+            Daftarkan UMKM
+
+        </a>
+
+    </div>
+
+</section>
 
 
 <!-- =====================================================
      FOOTER
 ===================================================== -->
 
-<footer class="umkm-footer">
+<footer class="footer">
 
     <div class="container">
 
         <div class="row">
 
 
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-5 mb-4">
 
-                <h4>
+                <img
+                    src="assets/images/logo.png"
+                    height="65"
+                    alt="PLAZA DAYEUHLUHUR">
+
+                <h4 class="mt-3">
 
                     PLAZA DAYEUHLUHUR
 
@@ -870,19 +770,156 @@
 
                 </p>
 
-            </div>
+                <p class="small">
 
-
-            <div class="col-lg-6 text-lg-end">
-
-                <p>
-
-                    Gerbang Informasi, Bisnis
-                    dan Potensi Kecamatan Dayeuhluhur
+                    Menghubungkan masyarakat,
+                    desa, UMKM, BUMDes,
+                    wisata dan potensi lokal
+                    dalam satu ekosistem digital.
 
                 </p>
 
             </div>
+
+
+            <div class="col-lg-2 mb-4">
+
+                <h5>
+
+                    Menu
+
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li>
+                        <a href="index.html">
+                            Beranda
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="desa.html">
+                            Desa
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="bumdes.html">
+                            BUMDes
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="umkm.html">
+                            UMKM
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="wisata.html">
+                            Wisata
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-lg-2 mb-4">
+
+                <h5>
+
+                    Direktori
+
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li>
+                        <a href="#direktori">
+                            Semua UMKM
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#direktori">
+                            Kuliner
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#direktori">
+                            Jasa
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#direktori">
+                            Produk Lokal
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-lg-3">
+
+                <h5>
+
+                    Kontak
+
+                </h5>
+
+                <p>
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    Kecamatan Dayeuhluhur
+
+                </p>
+
+                <p>
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    info@plazadayeuhluhur.com
+
+                </p>
+
+                <div class="social-icons">
+
+                    <a href="#">
+
+                        <i class="fab fa-facebook"></i>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fab fa-youtube"></i>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fab fa-tiktok"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
 
         </div>
 
@@ -892,18 +929,17 @@
 
         <div class="text-center">
 
-            <small>
+            © 2026 PLAZA DAYEUHLUHUR
 
-                © 2026 PLAZA DAYEUHLUHUR
+            <br>
 
-            </small>
+            Gerbang Digital Kecamatan Dayeuhluhur
 
         </div>
 
     </div>
 
 </footer>
-
 
 
 <!-- =====================================================
@@ -915,14 +951,9 @@
 </script>
 
 
-<!-- NEWSFLASH -->
+<script src="assets/js/umkm.js"></script>
 
 <script src="assets/js/newsflash.js"></script>
-
-
-<!-- UMKM -->
-
-<script src="assets/js/umkm.js"></script>
 
 
 </body>
