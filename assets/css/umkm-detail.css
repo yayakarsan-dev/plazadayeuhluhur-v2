@@ -1,0 +1,388 @@
+/* =====================================================
+   PLAZA DAYEUHLUHUR
+   UMKM DETAIL PAGE
+===================================================== */
+
+:root {
+    --umkm-primary: #198754;
+    --umkm-dark: #12372a;
+    --umkm-light: #f4faf6;
+    --umkm-border: #e5e7eb;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f8faf9;
+    color: #333;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.umkm-detail-hero {
+    min-height: 330px;
+    padding-top: 150px;
+    padding-bottom: 70px;
+
+    background:
+        linear-gradient(
+            rgba(18, 55, 42, 0.88),
+            rgba(25, 135, 84, 0.78)
+        );
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.umkm-detail-hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+
+.umkm-detail-hero p {
+    font-size: 17px;
+    opacity: 0.9;
+}
+
+
+/* =====================================================
+   FOTO UMKM
+===================================================== */
+
+.umkm-detail-photo {
+    height: 100%;
+    min-height: 460px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+
+.umkm-detail-photo img {
+    width: 100%;
+    height: 100%;
+
+    min-height: 460px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =====================================================
+   DETAIL CARD
+===================================================== */
+
+.umkm-detail-card {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    border: 1px solid var(--umkm-border);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.07);
+}
+
+
+.umkm-detail-category {
+    display: inline-block;
+
+    background: #e8f7ef;
+
+    color: var(--umkm-primary);
+
+    padding: 7px 15px;
+
+    border-radius: 50px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 15px;
+}
+
+
+.umkm-detail-card h2 {
+    font-size: 32px;
+
+    font-weight: 800;
+
+    color: var(--umkm-dark);
+
+    margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.detail-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 18px;
+
+    margin-bottom: 15px;
+}
+
+
+.detail-rating i {
+    color: #ffc107;
+}
+
+
+.detail-rating strong {
+    color: #555;
+}
+
+
+/* =====================================================
+   INFORMASI
+===================================================== */
+
+.detail-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin-top: 20px;
+}
+
+
+.detail-info > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.detail-info > div > i {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #eaf7ef;
+
+    color: var(--umkm-primary);
+
+    font-size: 18px;
+}
+
+
+.detail-info small {
+    display: block;
+
+    color: #888;
+
+    font-size: 12px;
+
+    margin-bottom: 2px;
+}
+
+
+.detail-info strong {
+    display: block;
+
+    color: #333;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   DESKRIPSI
+===================================================== */
+
+.umkm-detail-card h5 {
+    font-weight: 700;
+
+    color: var(--umkm-dark);
+
+    margin-bottom: 10px;
+}
+
+
+#deskripsiUMKM {
+    color: #666;
+
+    line-height: 1.8;
+
+    margin-bottom: 0;
+}
+
+
+/* =====================================================
+   ACTION BUTTON
+===================================================== */
+
+.detail-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+
+.detail-actions .btn {
+    border-radius: 10px;
+
+    padding: 11px 18px;
+
+    font-weight: 600;
+}
+
+
+.detail-actions .btn-success {
+    background: var(--umkm-primary);
+
+    border-color: var(--umkm-primary);
+}
+
+
+/* =====================================================
+   PLAZA BADGE
+===================================================== */
+
+.plaza-badge {
+    display: inline-block;
+
+    padding: 18px 30px;
+
+    background: white;
+
+    border: 1px solid var(--umkm-border);
+
+    border-radius: 15px;
+
+    color: #666;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+
+.plaza-badge i {
+    color: var(--umkm-primary);
+
+    margin-right: 5px;
+}
+
+
+.plaza-badge strong {
+    color: var(--umkm-primary);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    margin-top: 30px;
+}
+
+
+footer h4 {
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 991px) {
+
+    .umkm-detail-hero {
+        padding-top: 145px;
+    }
+
+    .umkm-detail-hero h1 {
+        font-size: 34px;
+    }
+
+    .umkm-detail-photo {
+        min-height: 350px;
+    }
+
+    .umkm-detail-photo img {
+        min-height: 350px;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .umkm-detail-hero {
+        min-height: 280px;
+
+        padding-top: 135px;
+        padding-bottom: 50px;
+    }
+
+    .umkm-detail-hero h1 {
+        font-size: 28px;
+    }
+
+    .umkm-detail-hero p {
+        font-size: 14px;
+    }
+
+    .umkm-detail-card {
+        padding: 25px 20px;
+    }
+
+    .umkm-detail-card h2 {
+        font-size: 25px;
+    }
+
+    .detail-actions {
+        flex-direction: column;
+    }
+
+    .detail-actions .btn {
+        width: 100%;
+    }
+
+}
