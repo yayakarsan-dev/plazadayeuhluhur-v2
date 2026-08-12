@@ -3,36 +3,68 @@
 
 <head>
 
+    <!-- =====================================================
+         META
+    ===================================================== -->
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Berita | PLAZA DAYEUHLUHUR</title>
+    <meta
+        name="description"
+        content="Berita dan informasi terbaru Kecamatan Dayeuhluhur melalui PLAZA DAYEUHLUHUR.">
 
-    <meta name="description"
-          content="Berita dan Informasi Kecamatan Dayeuhluhur - PLAZA DAYEUHLUHUR">
+    <meta
+        name="keywords"
+        content="berita Dayeuhluhur, berita Cilacap, informasi Dayeuhluhur, PLAZA DAYEUHLUHUR">
+
+    <meta
+        name="author"
+        content="PLAZA DAYEUHLUHUR">
+
+
+    <!-- =====================================================
+         TITLE
+    ===================================================== -->
+
+    <title>
+        Berita | PLAZA DAYEUHLUHUR
+    </title>
+
+
+    <!-- =====================================================
+         FAVICON
+    ===================================================== -->
+
+    <link
+        rel="icon"
+        href="assets/images/logo.png">
 
 
     <!-- =====================================================
          GOOGLE FONT
-    ====================================================== -->
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    ===================================================== -->
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
 
     <!-- =====================================================
          BOOTSTRAP
-    ====================================================== -->
+    ===================================================== -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -41,29 +73,25 @@
 
     <!-- =====================================================
          FONT AWESOME
-    ====================================================== -->
+    ===================================================== -->
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
     <!-- =====================================================
-         HEADER & FOOTER GLOBAL
-    ====================================================== -->
+         AOS
+    ===================================================== -->
 
     <link
-        rel="stylesheet"
-        href="assets/css/header.css">
-
-    <link
-        rel="stylesheet"
-        href="assets/css/footer.css">
+        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+        rel="stylesheet">
 
 
     <!-- =====================================================
-         CSS BERITA
-    ====================================================== -->
+         BERITA CSS
+    ===================================================== -->
 
     <link
         rel="stylesheet"
@@ -75,60 +103,66 @@
 <body>
 
 
-<!-- =====================================================
-     TOP NEWS / LIVE NEWS
-===================================================== -->
+    <!-- =====================================================
+         NEWSFLASH
+    ===================================================== -->
 
-<div class="plaza-live-news">
+    <div class="newsflash-bar">
 
-    <div class="plaza-live-label">
+        <div class="container-fluid">
 
-        <span class="plaza-live-dot"></span>
+            <div class="news-wrapper">
 
-        LIVE NEWS
+                <div class="news-label">
 
-    </div>
+                    <span class="live-dot"></span>
+
+                    LIVE NEWS
+
+                </div>
 
 
-    <div class="plaza-news-content">
+                <div class="news-marquee">
 
-        <div class="plaza-news-track"
-             id="newsFlashContent">
+                    <div id="newsFlashContent">
 
-            Memuat informasi terbaru...
+                        Memuat informasi terbaru...
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
 
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+    <nav
+        class="navbar navbar-expand-lg navbar-dark sticky-top">
 
-<header class="plaza-header">
-
-    <div class="container">
-
-        <nav class="plaza-navbar">
+        <div class="container">
 
 
-            <!-- =================================================
-                 BRAND
-            ================================================== -->
+            <!-- LOGO -->
 
-            <a href="index.html"
-               class="plaza-brand">
+            <a
+                class="navbar-brand d-flex align-items-center"
+                href="index.html">
 
                 <img
                     src="assets/images/logo.png"
+                    height="55"
                     alt="PLAZA DAYEUHLUHUR">
 
-
-                <span class="plaza-brand-name">
+                <span
+                    class="fw-bold ms-2">
 
                     PLAZA DAYEUHLUHUR
 
@@ -137,461 +171,41 @@
             </a>
 
 
-            <!-- =================================================
-                 MOBILE BUTTON
-            ================================================== -->
+            <!-- MOBILE BUTTON -->
 
             <button
-                class="plaza-mobile-button"
+                class="navbar-toggler"
                 type="button"
-                onclick="togglePlazaMenu()"
-                aria-label="Buka menu">
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-                <i class="fa-solid fa-bars"></i>
+                <span
+                    class="navbar-toggler-icon">
+                </span>
 
             </button>
 
 
-            <!-- =================================================
-                 NAVIGATION
-            ================================================== -->
+            <!-- MENU -->
 
-            <ul
-                class="plaza-menu"
-                id="plazaMenu">
+            <div
+                class="collapse navbar-collapse"
+                id="navbarNav">
 
+                <ul
+                    class="navbar-nav ms-auto">
 
-                <li>
 
-                    <a href="index.html">
+                    <!-- BERANDA -->
 
-                        Beranda
+                    <li class="nav-item">
 
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a href="desa.html">
-
-                        Desa
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a href="bumdes.html">
-
-                        BUMDes
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a href="umkm.html">
-
-                        UMKM
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a href="wisata.html">
-
-                        Wisata
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a href="berita.html"
-                       class="active">
-
-                        Berita
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a href="kontak.html">
-
-                        Kontak
-
-                    </a>
-
-                </li>
-
-
-            </ul>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-
-<!-- =====================================================
-     HERO BERITA
-===================================================== -->
-
-<section class="berita-hero">
-
-
-    <div class="container">
-
-        <div class="berita-hero-content">
-
-
-            <!-- BADGE -->
-
-            <div class="berita-hero-badge">
-
-                <i class="fa-solid fa-newspaper"></i>
-
-                PUSAT INFORMASI
-
-            </div>
-
-
-            <!-- TITLE -->
-
-            <h1>
-
-                Berita &
-
-                <span>
-                    Informasi Dayeuhluhur
-                </span>
-
-            </h1>
-
-
-            <!-- DESCRIPTION -->
-
-            <p>
-
-                Ikuti berbagai informasi, kegiatan,
-                perkembangan, potensi, dan cerita inspiratif
-                dari Kecamatan Dayeuhluhur.
-
-            </p>
-
-
-        </div>
-
-
-        <!-- HERO ICON -->
-
-        <div class="berita-hero-icon">
-
-            <i class="fa-solid fa-newspaper"></i>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     KONTEN BERITA
-===================================================== -->
-
-<section class="berita-content">
-
-
-    <div class="container">
-
-
-        <!-- =================================================
-             HEADER SECTION
-        ================================================== -->
-
-        <div class="berita-section-heading">
-
-
-            <div>
-
-                <span class="berita-section-label">
-
-                    INFORMASI TERKINI
-
-                </span>
-
-
-                <h2>
-
-                    Berita Terbaru
-
-                </h2>
-
-
-                <p>
-
-                    Informasi terbaru seputar kegiatan,
-                    masyarakat, pemerintahan, ekonomi,
-                    pendidikan, budaya, dan potensi
-                    Kecamatan Dayeuhluhur.
-
-                </p>
-
-            </div>
-
-
-            <!-- JUMLAH BERITA -->
-
-            <div class="berita-count-box">
-
-                <strong id="jumlahBerita">
-
-                    0
-
-                </strong>
-
-                <span>
-
-                    Berita
-
-                </span>
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- =================================================
-             SEARCH & FILTER
-        ================================================== -->
-
-        <div class="berita-toolbar">
-
-
-            <!-- SEARCH -->
-
-            <div class="berita-search">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    id="searchBerita"
-                    placeholder="Cari berita...">
-
-            </div>
-
-
-            <!-- FILTER KATEGORI -->
-
-            <select
-                id="kategoriBerita"
-                class="berita-category-filter">
-
-                <option value="">
-
-                    Semua Kategori
-
-                </option>
-
-            </select>
-
-
-        </div>
-
-
-
-        <!-- =================================================
-             BERITA CONTAINER
-        ================================================== -->
-
-        <div
-            class="row g-4"
-            id="beritaContainer">
-
-            <!--
-
-                DATA BERITA AKAN
-                DIMUAT OTOMATIS OLEH berita.js
-
-            -->
-
-        </div>
-
-
-
-        <!-- =================================================
-             EMPTY STATE
-        ================================================== -->
-
-        <div
-            id="beritaEmpty"
-            class="berita-empty"
-            style="display:none;">
-
-
-            <div class="berita-empty-icon">
-
-                <i class="fa-solid fa-newspaper"></i>
-
-            </div>
-
-
-            <h3>
-
-                Berita tidak ditemukan
-
-            </h3>
-
-
-            <p>
-
-                Silakan coba kata kunci atau
-                kategori lainnya.
-
-            </p>
-
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     INFORMASI / AJAKAN
-===================================================== -->
-
-<section class="berita-info">
-
-    <div class="container">
-
-
-        <div class="berita-info-box">
-
-
-            <div class="berita-info-icon">
-
-                <i class="fa-solid fa-circle-info"></i>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-
-                    Pusat Informasi Dayeuhluhur
-
-                </h3>
-
-
-                <p>
-
-                    PLAZA DAYEUHLUHUR menjadi ruang digital
-                    untuk mengenalkan berbagai kegiatan,
-                    potensi, perkembangan, dan cerita positif
-                    masyarakat Kecamatan Dayeuhluhur.
-
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="plaza-footer">
-
-    <div class="container">
-
-
-        <div class="plaza-footer-grid">
-
-
-            <!-- =================================================
-                 BRAND
-            ================================================== -->
-
-            <div class="plaza-footer-brand">
-
-
-                <img
-                    src="assets/images/logo.png"
-                    alt="PLAZA DAYEUHLUHUR">
-
-
-                <div class="plaza-footer-brand-name">
-
-                    PLAZA DAYEUHLUHUR
-
-                </div>
-
-
-                <p class="plaza-footer-description">
-
-                    Gerbang Digital Kecamatan Dayeuhluhur
-
-                </p>
-
-
-            </div>
-
-
-
-            <!-- =================================================
-                 MENU
-            ================================================== -->
-
-            <div>
-
-
-                <h3 class="plaza-footer-title">
-
-                    Menu
-
-                </h3>
-
-
-                <ul class="plaza-footer-links">
-
-
-                    <li>
-
-                        <a href="index.html">
+                        <a
+                            class="nav-link"
+                            href="index.html">
 
                             Beranda
 
@@ -600,9 +214,13 @@
                     </li>
 
 
-                    <li>
+                    <!-- DESA -->
 
-                        <a href="desa.html">
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="desa.html">
 
                             Desa
 
@@ -611,9 +229,13 @@
                     </li>
 
 
-                    <li>
+                    <!-- BUMDES -->
 
-                        <a href="bumdes.html">
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="bumdes.html">
 
                             BUMDes
 
@@ -622,9 +244,13 @@
                     </li>
 
 
-                    <li>
+                    <!-- UMKM -->
 
-                        <a href="umkm.html">
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="umkm.html">
 
                             UMKM
 
@@ -633,9 +259,13 @@
                     </li>
 
 
-                    <li>
+                    <!-- WISATA -->
 
-                        <a href="wisata.html">
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="wisata.html">
 
                             Wisata
 
@@ -644,9 +274,14 @@
                     </li>
 
 
-                    <li>
+                    <!-- BERITA -->
 
-                        <a href="berita.html">
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            aria-current="page"
+                            href="berita.html">
 
                             Berita
 
@@ -655,7 +290,539 @@
                     </li>
 
 
+                    <!-- KONTAK -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="kontak.html">
+
+                            Kontak
+
+                        </a>
+
+                    </li>
+
+
                 </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         HERO BERITA
+    ===================================================== -->
+
+    <header
+        class="berita-hero">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+
+                <!-- TEXT -->
+
+                <div
+                    class="col-lg-8"
+                    data-aos="fade-right">
+
+
+                    <div
+                        class="berita-badge">
+
+                        <i
+                            class="fa-solid fa-newspaper">
+                        </i>
+
+                        PUSAT INFORMASI
+
+                    </div>
+
+
+                    <h1>
+
+                        Berita &
+                        <span>Informasi Dayeuhluhur</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Ikuti berbagai informasi,
+                        kegiatan, perkembangan,
+                        potensi, dan cerita inspiratif
+                        dari Kecamatan Dayeuhluhur.
+
+                    </p>
+
+                </div>
+
+
+                <!-- ICON -->
+
+                <div
+                    class="col-lg-4"
+                    data-aos="fade-left">
+
+                    <div
+                        class="berita-hero-icon">
+
+                        <i
+                            class="fa-solid fa-newspaper">
+                        </i>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         STATISTIK
+    ===================================================== -->
+
+    <section
+        class="berita-statistik">
+
+        <div class="container">
+
+            <div class="row g-4">
+
+
+                <!-- TOTAL BERITA -->
+
+                <div
+                    class="col-6 col-lg-3">
+
+                    <div
+                        class="berita-stat-card">
+
+                        <div
+                            class="berita-stat-icon">
+
+                            <i
+                                class="fa-solid fa-newspaper">
+                            </i>
+
+                        </div>
+
+                        <div>
+
+                            <strong
+                                id="totalBerita">
+
+                                0
+
+                            </strong>
+
+                            <span>
+
+                                Total Berita
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERBARU -->
+
+                <div
+                    class="col-6 col-lg-3">
+
+                    <div
+                        class="berita-stat-card">
+
+                        <div
+                            class="berita-stat-icon">
+
+                            <i
+                                class="fa-solid fa-bolt">
+                            </i>
+
+                        </div>
+
+                        <div>
+
+                            <strong
+                                id="totalTerbaru">
+
+                                0
+
+                            </strong>
+
+                            <span>
+
+                                Berita Terbaru
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- KATEGORI -->
+
+                <div
+                    class="col-6 col-lg-3">
+
+                    <div
+                        class="berita-stat-card">
+
+                        <div
+                            class="berita-stat-icon">
+
+                            <i
+                                class="fa-solid fa-layer-group">
+                            </i>
+
+                        </div>
+
+                        <div>
+
+                            <strong
+                                id="totalKategoriBerita">
+
+                                0
+
+                            </strong>
+
+                            <span>
+
+                                Kategori
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESA -->
+
+                <div
+                    class="col-6 col-lg-3">
+
+                    <div
+                        class="berita-stat-card">
+
+                        <div
+                            class="berita-stat-icon">
+
+                            <i
+                                class="fa-solid fa-location-dot">
+                            </i>
+
+                        </div>
+
+                        <div>
+
+                            <strong
+                                id="totalDesaBerita">
+
+                                0
+
+                            </strong>
+
+                            <span>
+
+                                Desa Terlibat
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DIREKTORI BERITA
+    ===================================================== -->
+
+    <main
+        class="berita-directory">
+
+        <div class="container">
+
+
+            <!-- SECTION HEADING -->
+
+            <div
+                class="section-heading text-center"
+                data-aos="fade-up">
+
+
+                <span
+                    class="section-kicker">
+
+                    BERITA DAYEUHLUHUR
+
+                </span>
+
+
+                <h2>
+
+                    Informasi Terkini
+                    dari Dayeuhluhur
+
+                </h2>
+
+
+                <p>
+
+                    Temukan berita, kegiatan,
+                    perkembangan desa, potensi daerah,
+                    serta berbagai informasi menarik
+                    dari Kecamatan Dayeuhluhur.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SEARCH & FILTER
+            ================================================= -->
+
+            <div
+                class="berita-search-wrapper"
+                data-aos="fade-up">
+
+
+                <div class="row g-3">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="col-lg-8">
+
+                        <div
+                            class="search-box">
+
+                            <i
+                                class="fa-solid fa-magnifying-glass">
+                            </i>
+
+                            <input
+                                type="text"
+                                id="searchBerita"
+                                class="form-control"
+                                placeholder="Cari berita, kegiatan, desa, atau informasi...">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- KATEGORI SELECT -->
+
+                    <div class="col-lg-4">
+
+                        <select
+                            id="kategoriFilter"
+                            class="form-select">
+
+                            <option value="">
+
+                                Semua Kategori
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 KATEGORI BUTTON
+            ================================================= -->
+
+            <div
+                class="kategori-berita-section"
+                data-aos="fade-up">
+
+
+                <div
+                    class="kategori-heading">
+
+                    <i
+                        class="fa-solid fa-filter">
+                    </i>
+
+                    Jelajahi Berdasarkan Kategori
+
+                </div>
+
+
+                <div
+                    id="kategoriBeritaContainer"
+                    class="kategori-berita-container">
+
+                    <!-- Diisi oleh berita.js -->
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BERITA UNGGULAN
+            ================================================= -->
+
+            <section
+                class="mb-5"
+                data-aos="fade-up">
+
+
+                <div
+                    class="section-kicker">
+
+                    HIGHLIGHT
+
+                </div>
+
+
+                <h2
+                    class="mb-4"
+                    style="
+                        color:#12372a;
+                        font-weight:800;
+                    ">
+
+                    Berita Unggulan
+
+                </h2>
+
+
+                <div
+                    id="beritaUnggulan">
+
+                    <!-- Diisi berita.js -->
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 HASIL FILTER
+            ================================================= -->
+
+            <div
+                class="filter-result">
+
+                <div>
+
+                    Menampilkan
+
+                    <strong
+                        id="jumlahHasilBerita">
+
+                        0
+
+                    </strong>
+
+                    berita
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="resetFilterBerita"
+                    class="btn btn-outline-success btn-sm">
+
+                    <i
+                        class="fa-solid fa-rotate-left me-1">
+                    </i>
+
+                    Reset Filter
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 GRID BERITA
+            ================================================= -->
+
+            <div
+                id="beritaContainer"
+                class="row g-4">
+
+
+                <!-- =================================================
+                     DATA BERITA AKAN DIMUAT DARI berita.js
+                ================================================= -->
+
+
+                <div
+                    class="col-12 text-center py-5">
+
+                    <div
+                        class="spinner-border text-success"
+                        role="status">
+
+                        <span class="visually-hidden">
+
+                            Memuat...
+
+                        </span>
+
+                    </div>
+
+
+                    <p class="mt-3 text-muted">
+
+                        Memuat berita...
+
+                    </p>
+
+                </div>
 
 
             </div>
@@ -663,119 +830,340 @@
 
 
             <!-- =================================================
-                 KONTAK
-            ================================================== -->
+                 EMPTY STATE
+            ================================================= -->
 
-            <div>
-
-
-                <h3 class="plaza-footer-title">
-
-                    Kontak
-
-                </h3>
+            <div
+                id="emptyBerita"
+                class="empty-berita d-none">
 
 
-                <ul class="plaza-footer-contact">
+                <div
+                    class="empty-icon">
+
+                    <i
+                        class="fa-solid fa-newspaper">
+                    </i>
+
+                </div>
 
 
-                    <li>
+                <h4>
 
-                        <i class="fa-solid fa-location-dot"></i>
+                    Berita Tidak Ditemukan
 
-                        <span>
-
-                            Kecamatan Dayeuhluhur
-
-                        </span>
-
-                    </li>
+                </h4>
 
 
-                    <li>
+                <p>
 
-                        <i class="fa-solid fa-envelope"></i>
+                    Belum ada berita yang sesuai
+                    dengan pencarian atau filter Anda.
 
-                        <span>
-
-                            info@plazadayeuhluhur.com
-
-                        </span>
-
-                    </li>
+                </p>
 
 
-                    <li>
+                <button
+                    type="button"
+                    id="resetFilterEmpty"
+                    class="btn btn-success rounded-pill px-4">
 
-                        <i class="fa-solid fa-phone"></i>
+                    <i
+                        class="fa-solid fa-rotate-left me-2">
+                    </i>
 
-                        <span>
+                    Tampilkan Semua Berita
 
-                            (0280) xxxx
-
-                        </span>
-
-                    </li>
-
-
-                </ul>
+                </button>
 
 
             </div>
 
 
+        </div>
 
-            <!-- =================================================
-                 MEDIA SOSIAL
-            ================================================== -->
-
-            <div>
+    </main>
 
 
-                <h3 class="plaza-footer-title">
 
-                    Media Sosial
+    <!-- =====================================================
+         CTA
+    ===================================================== -->
 
-                </h3>
+    <section
+        class="berita-cta">
 
+        <div class="container">
 
-                <div class="plaza-footer-social">
-
-
-                    <a
-                        href="#"
-                        aria-label="Facebook">
-
-                        <i class="fa-brands fa-facebook-f"></i>
-
-                    </a>
+            <div
+                class="berita-cta-box"
+                data-aos="fade-up">
 
 
-                    <a
-                        href="#"
-                        aria-label="Instagram">
-
-                        <i class="fa-brands fa-instagram"></i>
-
-                    </a>
+                <div class="row align-items-center">
 
 
-                    <a
-                        href="#"
-                        aria-label="YouTube">
-
-                        <i class="fa-brands fa-youtube"></i>
-
-                    </a>
+                    <div class="col-lg-8">
 
 
-                    <a
-                        href="#"
-                        aria-label="TikTok">
+                        <span
+                            class="cta-kicker">
 
-                        <i class="fa-brands fa-tiktok"></i>
+                            PLAZA DAYEUHLUHUR
 
-                    </a>
+                        </span>
+
+
+                        <h2>
+
+                            Punya Informasi
+                            untuk Dibagikan?
+
+                        </h2>
+
+
+                        <p>
+
+                            Mari ikut membangun ekosistem
+                            informasi digital Dayeuhluhur
+                            dengan berbagi kegiatan,
+                            potensi, dan cerita inspiratif
+                            dari masyarakat.
+
+                        </p>
+
+
+                    </div>
+
+
+                    <div
+                        class="col-lg-4 text-lg-end">
+
+
+                        <a
+                            href="kontak.html"
+                            class="btn btn-light rounded-pill">
+
+                            Hubungi Kami
+
+                            <i
+                                class="fa-solid fa-arrow-right ms-2">
+                            </i>
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer
+        class="site-footer">
+
+        <div class="container">
+
+
+            <div class="row g-4">
+
+
+                <!-- BRAND -->
+
+                <div class="col-lg-5">
+
+
+                    <div
+                        class="footer-brand">
+
+                        <img
+                            src="assets/images/logo.png"
+                            height="55"
+                            alt="PLAZA DAYEUHLUHUR">
+
+
+                        <h5>
+
+                            PLAZA DAYEUHLUHUR
+
+                        </h5>
+
+                    </div>
+
+
+                    <p
+                        class="footer-description">
+
+                        Gerbang Digital Kecamatan
+                        Dayeuhluhur. Menjadi ruang
+                        informasi, promosi, dan
+                        pengembangan potensi masyarakat
+                        Dayeuhluhur.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- MENU -->
+
+                <div
+                    class="col-6 col-lg-3">
+
+
+                    <h6
+                        class="footer-title">
+
+                        MENU
+
+                    </h6>
+
+
+                    <ul
+                        class="footer-links">
+
+
+                        <li>
+
+                            <a
+                                href="index.html">
+
+                                Beranda
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="desa.html">
+
+                                Desa
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="bumdes.html">
+
+                                BUMDes
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="umkm.html">
+
+                                UMKM
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="wisata.html">
+
+                                Wisata
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="berita.html">
+
+                                Berita
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="kontak.html">
+
+                                Kontak
+
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- CONTACT -->
+
+                <div
+                    class="col-6 col-lg-4">
+
+
+                    <h6
+                        class="footer-title">
+
+                        PLAZA DAYEUHLUHUR
+
+                    </h6>
+
+
+                    <p
+                        class="footer-contact">
+
+                        <i
+                            class="fa-solid fa-location-dot">
+                        </i>
+
+                        Kecamatan Dayeuhluhur,
+                        Kabupaten Cilacap,
+                        Jawa Tengah
+
+                    </p>
+
+
+                    <p
+                        class="footer-contact">
+
+                        <i
+                            class="fa-solid fa-globe">
+                        </i>
+
+                        plazadayeuhluhur.com
+
+                    </p>
 
 
                 </div>
@@ -784,90 +1172,86 @@
             </div>
 
 
+
+            <!-- FOOTER LINE -->
+
+            <hr
+                class="footer-line">
+
+
+
+            <!-- COPYRIGHT -->
+
+            <div
+                class="footer-bottom">
+
+
+                <span>
+
+                    © 2026 PLAZA DAYEUHLUHUR
+
+                </span>
+
+
+                <span>
+
+                    Gerbang Digital
+                    Kecamatan Dayeuhluhur
+
+                </span>
+
+
+            </div>
+
+
         </div>
 
-
-
-        <!-- =================================================
-             FOOTER BOTTOM
-        ================================================== -->
-
-        <div class="plaza-footer-bottom">
-
-
-            <p class="plaza-footer-copyright">
-
-                © 2026 PLAZA DAYEUHLUHUR
-
-            </p>
-
-
-            <p class="plaza-footer-tagline">
-
-                Gerbang Digital Kecamatan Dayeuhluhur
-
-            </p>
-
-
-        </div>
-
-
-    </div>
-
-</footer>
+    </footer>
 
 
 
-<!-- =====================================================
-     MOBILE MENU
-===================================================== -->
+    <!-- =====================================================
+         BOOTSTRAP JS
+    ===================================================== -->
 
-<script>
-
-function togglePlazaMenu() {
-
-    const menu =
-        document.getElementById("plazaMenu");
-
-    if (menu) {
-
-        menu.classList.toggle("show");
-
-    }
-
-}
-
-</script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
 
 
 
-<!-- =====================================================
-     BERITA JS
-===================================================== -->
+    <!-- =====================================================
+         AOS JS
+    ===================================================== -->
 
-<script
-    src="assets/js/berita.js">
-</script>
-
-
-
-<!-- =====================================================
-     NEWSFLASH JS
-===================================================== -->
-
-<script
-    src="assets/js/newsflash.js">
-</script>
+    <script
+        src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+    </script>
 
 
+    <script>
 
-<!-- =====================================================
-     BOOTSTRAP JS
-===================================================== -->
+        AOS.init({
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-</script>
+            duration: 700,
+
+            once: true,
+
+            offset: 60
+
+        });
+
+    </script>
+
+
+
+    <!-- =====================================================
+         BERITA JS
+    ===================================================== -->
+
+    <script
+        src="assets/js/berita.js">
+    </script>
 
 
 </body>
