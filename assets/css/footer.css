@@ -1,29 +1,22 @@
 /* =========================================================
    PLAZA DAYEUHLUHUR
-   FOOTER GLOBAL
-   Version 1.0
+   FOOTER MASTER / GLOBAL
 ========================================================= */
 
 
 /* =========================================================
-   FOOTER
+   FOOTER UTAMA
 ========================================================= */
 
 .plaza-footer {
 
-    width: 100%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #102b50 0%,
-            #123c61 100%
-        );
+    background: #0f172a;
 
     color: #ffffff;
 
-    padding:
-        55px 0 20px;
+    padding: 64px 0 0;
+
+    font-family: 'Poppins', sans-serif;
 
 }
 
@@ -34,13 +27,13 @@
 
 .plaza-footer .container {
 
-    max-width: 1280px;
+    max-width: 1400px;
 
 }
 
 
 /* =========================================================
-   GRID
+   GRID FOOTER
 ========================================================= */
 
 .plaza-footer-grid {
@@ -48,12 +41,14 @@
     display: grid;
 
     grid-template-columns:
-        1.5fr
-        1fr
-        1fr
-        1fr;
+        1.6fr
+        0.9fr
+        1.2fr
+        1.2fr;
 
-    gap: 40px;
+    gap: 55px;
+
+    align-items: start;
 
 }
 
@@ -66,136 +61,120 @@
 
     display: flex;
 
-    align-items: center;
+    flex-direction: column;
 
-    gap: 12px;
-
-    margin-bottom: 15px;
-
-}
-
-
-.plaza-footer-brand img {
-
-    width: auto;
-
-    height: 50px;
-
-    object-fit: contain;
-
-}
-
-
-.plaza-footer-brand-name {
-
-    color: #ffffff;
-
-    font-size: 21px;
-
-    font-weight: 800;
+    align-items: flex-start;
 
 }
 
 
 /* =========================================================
-   DESKRIPSI
+   LOGO
+========================================================= */
+
+.plaza-footer-brand img {
+
+    width: 90px;
+
+    height: 84px;
+
+    object-fit: contain;
+
+    background: #ffffff;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================================================
+   NAMA BRAND
+========================================================= */
+
+.plaza-footer-brand-name {
+
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 27px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* =========================================================
+   TAGLINE
 ========================================================= */
 
 .plaza-footer-description {
 
-    max-width: 430px;
-
     margin: 0;
 
-    color:
-        rgba(255,255,255,.72);
+    max-width: 390px;
 
-    font-size: 11px;
+    color: #ffffff;
 
-    line-height: 1.9;
+    font-size: 16px;
+
+    line-height: 1.6;
 
 }
 
 
 /* =========================================================
-   JUDUL
+   JUDUL KOLOM
 ========================================================= */
 
 .plaza-footer-title {
 
-    position: relative;
-
-    margin-bottom: 18px;
-
-    padding-bottom: 9px;
+    margin: 0 0 22px;
 
     color: #ffffff;
 
-    font-size: 13px;
+    font-size: 24px;
 
     font-weight: 700;
 
-}
-
-
-/* GARIS JUDUL */
-
-.plaza-footer-title::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: 0;
-
-    width: 35px;
-
-    height: 3px;
-
-    border-radius: 4px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #138a62,
-            #1478d4
-        );
+    line-height: 1.3;
 
 }
 
 
 /* =========================================================
-   LINKS
+   MENU FOOTER
 ========================================================= */
 
 .plaza-footer-links {
 
-    margin: 0;
+    list-style: none;
 
     padding: 0;
 
-    list-style: none;
+    margin: 0;
 
 }
 
 
 .plaza-footer-links li {
 
-    margin-bottom: 9px;
+    margin-bottom: 13px;
 
 }
 
 
 .plaza-footer-links a {
 
-    color:
-        rgba(255,255,255,.70);
+    color: #ffffff;
 
     text-decoration: none;
 
-    font-size: 10px;
+    font-size: 18px;
 
     transition:
         color .25s ease,
@@ -206,7 +185,7 @@
 
 .plaza-footer-links a:hover {
 
-    color: #ffffff;
+    color: #20b486;
 
     padding-left: 4px;
 
@@ -219,11 +198,11 @@
 
 .plaza-footer-contact {
 
-    margin: 0;
+    list-style: none;
 
     padding: 0;
 
-    list-style: none;
+    margin: 0;
 
 }
 
@@ -236,51 +215,50 @@
 
     gap: 10px;
 
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 
-    color:
-        rgba(255,255,255,.72);
+    color: #ffffff;
 
-    font-size: 10px;
+    font-size: 17px;
 
-    line-height: 1.6;
+    line-height: 1.5;
 
 }
 
 
 .plaza-footer-contact i {
 
-    width: 25px;
+    width: 20px;
 
     flex-shrink: 0;
 
-    color: #50c79a;
+    margin-top: 4px;
 
-    font-size: 12px;
+    color: #ffffff;
 
 }
 
 
 /* =========================================================
-   SOCIAL MEDIA
+   MEDIA SOSIAL
 ========================================================= */
 
 .plaza-footer-social {
 
     display: flex;
 
-    gap: 8px;
+    align-items: center;
 
-    margin-top: 15px;
+    gap: 14px;
 
 }
 
 
 .plaza-footer-social a {
 
-    width: 32px;
+    width: 54px;
 
-    height: 32px;
+    height: 54px;
 
     display: flex;
 
@@ -290,27 +268,26 @@
 
     border-radius: 50%;
 
-    background:
-        rgba(255,255,255,.10);
+    background: #1e293b;
 
     color: #ffffff;
 
     text-decoration: none;
 
-    font-size: 13px;
+    font-size: 22px;
 
     transition:
-        all .25s ease;
+        transform .25s ease,
+        background .25s ease;
 
 }
 
 
 .plaza-footer-social a:hover {
 
-    background: #138a62;
+    transform: translateY(-4px);
 
-    transform:
-        translateY(-3px);
+    background: #148a63;
 
 }
 
@@ -321,59 +298,64 @@
 
 .plaza-footer-bottom {
 
-    margin-top: 40px;
-
-    padding-top: 18px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.12);
-
     display: flex;
+
+    flex-direction: column;
 
     align-items: center;
 
-    justify-content: space-between;
+    justify-content: center;
 
-    gap: 20px;
+    gap: 5px;
+
+    margin-top: 70px;
+
+    padding:
+        25px 0 10px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    text-align: center;
 
 }
 
+
+/* =========================================================
+   COPYRIGHT
+========================================================= */
 
 .plaza-footer-copyright {
 
     margin: 0;
 
-    color:
-        rgba(255,255,255,.55);
+    color: #ffffff;
 
-    font-size: 9px;
+    font-size: 17px;
+
+    line-height: 1.5;
 
 }
 
 
 .plaza-footer-copyright strong {
 
-    color:
-        rgba(255,255,255,.82);
+    color: #ffffff;
 
 }
 
 
 /* =========================================================
-   TAGLINE
+   TAGLINE FOOTER
 ========================================================= */
 
 .plaza-footer-tagline {
 
-    margin: 0;
+    margin: 0 0 8px;
 
-    color:
-        rgba(255,255,255,.50);
+    color: #ffffff;
 
-    font-size: 9px;
-
-    text-align: right;
+    font-size: 17px;
 
 }
 
@@ -386,8 +368,7 @@
 
     .plaza-footer {
 
-        padding:
-            45px 0 20px;
+        padding-top: 50px;
 
     }
 
@@ -397,7 +378,21 @@
         grid-template-columns:
             repeat(2, 1fr);
 
-        gap: 30px;
+        gap: 45px;
+
+    }
+
+
+    .plaza-footer-brand-name {
+
+        font-size: 24px;
+
+    }
+
+
+    .plaza-footer-title {
+
+        font-size: 21px;
 
     }
 
@@ -405,7 +400,7 @@
 
 
 /* =========================================================
-   RESPONSIVE HP
+   RESPONSIVE MOBILE
 ========================================================= */
 
 @media (max-width: 576px) {
@@ -413,7 +408,7 @@
     .plaza-footer {
 
         padding:
-            40px 0 18px;
+            45px 20px 0;
 
     }
 
@@ -422,39 +417,81 @@
 
         grid-template-columns: 1fr;
 
-        gap: 28px;
-
-    }
-
-
-    .plaza-footer-brand-name {
-
-        font-size: 18px;
+        gap: 35px;
 
     }
 
 
     .plaza-footer-brand img {
 
-        height: 43px;
+        width: 78px;
+
+        height: 73px;
+
+    }
+
+
+    .plaza-footer-brand-name {
+
+        font-size: 22px;
+
+    }
+
+
+    .plaza-footer-description {
+
+        font-size: 14px;
+
+    }
+
+
+    .plaza-footer-title {
+
+        font-size: 20px;
+
+        margin-bottom: 16px;
+
+    }
+
+
+    .plaza-footer-links a {
+
+        font-size: 15px;
+
+    }
+
+
+    .plaza-footer-contact li {
+
+        font-size: 14px;
+
+    }
+
+
+    .plaza-footer-social a {
+
+        width: 46px;
+
+        height: 46px;
+
+        font-size: 18px;
 
     }
 
 
     .plaza-footer-bottom {
 
-        flex-direction: column;
+        margin-top: 45px;
 
-        align-items: flex-start;
-
-        margin-top: 30px;
+        padding-top: 20px;
 
     }
 
 
+    .plaza-footer-copyright,
     .plaza-footer-tagline {
 
-        text-align: left;
+        font-size: 13px;
 
     }
 
