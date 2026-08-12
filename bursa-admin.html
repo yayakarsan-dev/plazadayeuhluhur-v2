@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <!-- =========================================
+         CEK LOGIN ADMIN
+    ========================================== -->
+
+    <script>
+        if (
+            sessionStorage.getItem("plazaAdminLogin")
+            !== "true"
+        ) {
+            window.location.href = "login.html";
+        }
+    </script>
+
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+
+    <title>
+        Manajemen Bursa | Plaza Dayeuhluhur
+    </title>
+
+
+    <!-- BOOTSTRAP -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- DASHBOARD CSS -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/dashboard.css"
+    >
+
+
+    <!-- BURSA ADMIN CSS -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/bursa-admin.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-wrapper">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-leaf"></i>
+
+            </div>
+
+            <div>
+
+                <h5>PLAZA</h5>
+
+                <span>DAYEUHLUHUR</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+
+            <div class="menu-title">
+                UTAMA
+            </div>
+
+
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-gauge-high"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <div class="menu-title">
+                EKOSISTEM
+            </div>
+
+
+            <a
+                href="desa.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Desa</span>
+
+            </a>
+
+
+            <a
+                href="bumdes.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-building"></i>
+
+                <span>BUMDes</span>
+
+            </a>
+
+
+            <a
+                href="umkm.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-store"></i>
+
+                <span>UMKM</span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-briefcase"></i>
+
+                <span>Bisnis</span>
+
+            </a>
+
+
+            <a
+                href="bursa-admin.html"
+                class="menu-item active"
+            >
+
+                <i class="fa-solid fa-arrows-rotate"></i>
+
+                <span>Bursa Lokal</span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-mountain-sun"></i>
+
+                <span>Wisata</span>
+
+            </a>
+
+
+            <div class="menu-title">
+                INFORMASI
+            </div>
+
+
+            <a
+                href="#"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-newspaper"></i>
+
+                <span>Berita</span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>Agenda</span>
+
+            </a>
+
+
+            <div class="menu-title">
+                SISTEM
+            </div>
+
+
+            <a
+                href="pengguna.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>Pengguna</span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>Pengaturan</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- SIDEBAR FOOTER -->
+
+        <div class="sidebar-footer">
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                Kembali ke Plaza Dayeuhluhur
+
+            </a>
+
+
+            <a
+                href="#"
+                class="back-home logout-button"
+                id="logoutButton"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Keluar dari Dashboard
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MOBILE OVERLAY -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div class="header-left">
+
+                <button
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="header-title">
+
+                    <span class="header-label">
+                        PLAZA DAYEUHLUHUR
+                    </span>
+
+                    <h1>
+                        Manajemen Bursa
+                    </h1>
+
+                    <p>
+                        Kelola listing jual, beli,
+                        cari dan tawaran masyarakat
+                        Dayeuhluhur.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-profile">
+
+                <div class="profile-icon">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <span>
+                        Pengelola Platform
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================================
+             WELCOME
+        ========================================== -->
+
+        <section class="bursa-welcome">
+
+            <div>
+
+                <span>
+                    BURSA LOKAL DAYEUHLUHUR
+                </span>
+
+                <h2>
+                    Jual • Beli • Cari • Tawarkan
+                </h2>
+
+                <p>
+                    Tambahkan dan kelola berbagai
+                    listing masyarakat Dayeuhluhur
+                    dalam satu tempat.
+                </p>
+
+            </div>
+
+
+            <div class="bursa-welcome-icon">
+
+                <i class="fa-solid fa-tags"></i>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             STATISTIK
+        ========================================== -->
+
+        <section class="bursa-stats">
+
+            <div class="bursa-stat">
+
+                <div class="stat-icon-box blue">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Listing
+                    </span>
+
+                    <strong id="totalBursa">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="bursa-stat">
+
+                <div class="stat-icon-box green">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Aktif
+                    </span>
+
+                    <strong id="totalAktif">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="bursa-stat">
+
+                <div class="stat-icon-box orange">
+
+                    <i class="fa-solid fa-tags"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Dijual
+                    </span>
+
+                    <strong id="totalDijual">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="bursa-stat">
+
+                <div class="stat-icon-box purple">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Dicari
+                    </span>
+
+                    <strong id="totalDicari">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             TOOLBAR
+        ========================================== -->
+
+        <section class="bursa-panel">
+
+            <div class="bursa-toolbar">
+
+                <div>
+
+                    <span class="panel-kicker">
+                        DATA BURSA
+                    </span>
+
+                    <h3>
+                        Daftar Listing Lokal
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="btnTambahBursa"
+                    class="btn btn-primary rounded-pill px-4"
+                >
+
+                    <i class="fa-solid fa-plus me-2"></i>
+
+                    Tambah Bursa
+
+                </button>
+
+            </div>
+
+
+            <!-- FILTER -->
+
+            <div class="row g-3 mb-4">
+
+                <div class="col-lg-5">
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+
+                            <i class="fa-solid fa-search"></i>
+
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchBursa"
+                            class="form-control"
+                            placeholder="Cari judul, penjual, produk..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-3">
+
+                    <select
+                        id="filterJenis"
+                        class="form-select"
+                    >
+
+                        <option value="">
+                            Semua Jenis
+                        </option>
+
+                        <option value="Dijual">
+                            Dijual
+                        </option>
+
+                        <option value="Dicari">
+                            Dicari
+                        </option>
+
+                        <option value="Ditawarkan">
+                            Ditawarkan
+                        </option>
+
+                        <option value="Jasa">
+                            Jasa
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-lg-3">
+
+                    <select
+                        id="filterDesa"
+                        class="form-select"
+                    >
+
+                        <option value="">
+                            Semua Desa
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-lg-1">
+
+                    <button
+                        type="button"
+                        id="btnReset"
+                        class="btn btn-outline-secondary w-100"
+                        title="Reset Filter"
+                    >
+
+                        <i class="fa-solid fa-rotate"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-responsive">
+
+                <table class="table bursa-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th width="60">
+                                #
+                            </th>
+
+                            <th>
+                                Listing
+                            </th>
+
+                            <th>
+                                Jenis
+                            </th>
+
+                            <th>
+                                Desa
+                            </th>
+
+                            <th>
+                                Harga
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th width="130">
+                                Aksi
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="bursaTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- EMPTY -->
+
+            <div
+                id="emptyBursa"
+                class="empty-bursa"
+            >
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-tags"></i>
+
+                </div>
+
+                <h4>
+                    Belum Ada Listing Bursa
+                </h4>
+
+                <p>
+                    Tambahkan listing pertama
+                    untuk Bursa Lokal Dayeuhluhur.
+                </p>
+
+                <button
+                    type="button"
+                    id="btnTambahBursaEmpty"
+                    class="btn btn-primary rounded-pill px-4"
+                >
+
+                    <i class="fa-solid fa-plus me-2"></i>
+
+                    Tambah Bursa
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================
+     MODAL TAMBAH / EDIT
+========================================== -->
+
+<div
+    class="modal fade"
+    id="modalBursa"
+    tabindex="-1"
+>
+
+    <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+    >
+
+        <div class="modal-content bursa-modal">
+
+
+            <!-- HEADER -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-kicker">
+                        BURSA LOKAL
+                    </span>
+
+                    <h4
+                        class="modal-title"
+                        id="modalTitle"
+                    >
+                        Tambah Listing Bursa
+                    </h4>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="formBursa">
+
+                <div class="modal-body">
+
+                    <input
+                        type="hidden"
+                        id="bursaId"
+                    >
+
+
+                    <div class="row g-3">
+
+
+                        <!-- JUDUL -->
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Judul Listing
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="judulBursa"
+                                class="form-control"
+                                placeholder="Contoh: Dijual Motor Honda Beat 2022"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- JENIS -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Jenis Listing
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="jenisBursa"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Pilih Jenis
+                                </option>
+
+                                <option value="Dijual">
+                                    Dijual
+                                </option>
+
+                                <option value="Dicari">
+                                    Dicari
+                                </option>
+
+                                <option value="Ditawarkan">
+                                    Ditawarkan
+                                </option>
+
+                                <option value="Jasa">
+                                    Jasa
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- KATEGORI -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Kategori
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="kategoriBursa"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Pilih Kategori
+                                </option>
+
+                                <option value="Kendaraan">
+                                    Kendaraan
+                                </option>
+
+                                <option value="Properti">
+                                    Properti
+                                </option>
+
+                                <option value="Elektronik">
+                                    Elektronik
+                                </option>
+
+                                <option value="Pertanian">
+                                    Pertanian
+                                </option>
+
+                                <option value="Peternakan">
+                                    Peternakan
+                                </option>
+
+                                <option value="Rumah Tangga">
+                                    Rumah Tangga
+                                </option>
+
+                                <option value="Jasa">
+                                    Jasa
+                                </option>
+
+                                <option value="Lainnya">
+                                    Lainnya
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- DESA -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Desa
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="desaBursa"
+                                class="form-control"
+                                placeholder="Contoh: Dayeuhluhur"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- HARGA -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Harga
+                            </label>
+
+                            <input
+                                type="text"
+                                id="hargaBursa"
+                                class="form-control"
+                                placeholder="Contoh: Rp15.000.000"
+                            >
+
+                        </div>
+
+
+                        <!-- NAMA PENJUAL -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Nama Penjual / Pemilik
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="penjualBursa"
+                                class="form-control"
+                                placeholder="Nama pemilik"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- WHATSAPP -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                WhatsApp
+                            </label>
+
+                            <input
+                                type="text"
+                                id="whatsappBursa"
+                                class="form-control"
+                                placeholder="08xxxxxxxxxx"
+                            >
+
+                        </div>
+
+
+                        <!-- FOTO -->
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                URL / Lokasi Foto
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fotoBursa"
+                                class="form-control"
+                                placeholder="assets/images/bursa/nama-foto.jpg"
+                            >
+
+                            <small class="text-muted">
+                                Kosongkan jika belum memiliki foto.
+                            </small>
+
+                        </div>
+
+
+                        <!-- DESKRIPSI -->
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Deskripsi Listing
+                                <span>*</span>
+                            </label>
+
+                            <textarea
+                                id="deskripsiBursa"
+                                class="form-control"
+                                rows="5"
+                                placeholder="Jelaskan kondisi barang, spesifikasi, lokasi, dan informasi lainnya..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Status
+                            </label>
+
+                            <select
+                                id="statusBursa"
+                                class="form-select"
+                            >
+
+                                <option value="Aktif">
+                                    Aktif
+                                </option>
+
+                                <option value="Nonaktif">
+                                    Nonaktif
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOOTER -->
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-light rounded-pill px-4"
+                        data-bs-dismiss="modal"
+                    >
+
+                        Batal
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary rounded-pill px-4"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+
+                        Simpan Bursa
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BOOTSTRAP -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<!-- BURSA ADMIN JS -->
+
+<script
+    src="assets/js/bursa-admin.js"
+></script>
+
+
+</body>
+
+</html>
