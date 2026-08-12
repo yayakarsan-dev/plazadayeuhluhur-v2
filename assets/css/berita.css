@@ -1,0 +1,1926 @@
+/* =====================================================
+   PLAZA DAYEUHLUHUR
+   BERITA.CSS — FINAL
+===================================================== */
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+:root {
+
+    --berita-primary: #198754;
+    --berita-primary-dark: #146c43;
+
+    --berita-secondary: #20c997;
+
+    --berita-dark: #12372a;
+
+    --berita-text: #344054;
+
+    --berita-muted: #667085;
+
+    --berita-light: #f5f9f7;
+
+    --berita-border: #e4ebe7;
+
+    --berita-shadow:
+        0 10px 30px rgba(18, 55, 42, .08);
+
+    --berita-radius: 18px;
+
+}
+
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    color: var(--berita-text);
+
+    background: #ffffff;
+
+    overflow-x: hidden;
+
+}
+
+
+a {
+
+    text-decoration: none;
+
+}
+
+
+img {
+
+    max-width: 100%;
+
+}
+
+
+
+/* =====================================================
+   NEWSFLASH
+===================================================== */
+
+.newsflash-bar {
+
+    background:
+        linear-gradient(
+            90deg,
+            #12372a,
+            #198754
+        );
+
+    color: #ffffff;
+
+}
+
+
+.news-wrapper {
+
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+}
+
+
+.news-label {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        9px 18px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: .8px;
+
+    background:
+        rgba(0, 0, 0, .18);
+
+}
+
+
+.live-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #ff4d4d;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(255, 77, 77, .15);
+
+}
+
+
+.news-marquee {
+
+    flex: 1;
+
+    overflow: hidden;
+
+    padding-left: 15px;
+
+}
+
+
+#newsFlashContent {
+
+    white-space: nowrap;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+}
+
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+
+    background:
+        rgba(18, 55, 42, .98);
+
+    box-shadow:
+        0 4px 18px
+        rgba(0, 0, 0, .08);
+
+}
+
+
+.navbar-brand {
+
+    font-size: 18px;
+
+    letter-spacing: .2px;
+
+}
+
+
+.navbar-brand img {
+
+    object-fit: contain;
+
+}
+
+
+.navbar .nav-link {
+
+    color:
+        rgba(255,255,255,.85);
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    padding:
+        10px 14px !important;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.navbar .nav-link:hover {
+
+    color: #ffffff;
+
+}
+
+
+.navbar .nav-link.active {
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+}
+
+
+.navbar .nav-link.active::after {
+
+    content: "";
+
+    display: block;
+
+    height: 3px;
+
+    width: 24px;
+
+    margin:
+        4px auto 0;
+
+    border-radius: 10px;
+
+    background:
+        var(--berita-secondary);
+
+}
+
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.berita-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        85px 0 90px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f3d2e 0%,
+            #198754 60%,
+            #20c997 100%
+        );
+
+    color: #ffffff;
+
+}
+
+
+.berita-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.06);
+
+    right: -120px;
+
+    top: -150px;
+
+}
+
+
+.berita-hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+
+    height: 260px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.05);
+
+    left: -100px;
+
+    bottom: -150px;
+
+}
+
+
+.berita-hero .container {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.berita-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding:
+        8px 16px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.berita-hero h1 {
+
+    font-size:
+        clamp(38px, 5vw, 64px);
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    margin-bottom: 22px;
+
+}
+
+
+.berita-hero h1 span {
+
+    display: block;
+
+    color: #b8f5dc;
+
+}
+
+
+.berita-hero p {
+
+    max-width: 700px;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    color:
+        rgba(255,255,255,.88);
+
+    margin: 0;
+
+}
+
+
+.berita-hero-icon {
+
+    width: 190px;
+
+    height: 190px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.12);
+
+}
+
+
+.berita-hero-icon i {
+
+    font-size: 80px;
+
+    color: #ffffff;
+
+}
+
+
+
+/* =====================================================
+   STATISTIK
+===================================================== */
+
+.berita-statistik {
+
+    position: relative;
+
+    margin-top: -35px;
+
+    z-index: 5;
+
+}
+
+
+.berita-stat-card {
+
+    min-height: 105px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        var(--berita-border);
+
+    border-radius:
+        var(--berita-radius);
+
+    box-shadow:
+        var(--berita-shadow);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+.berita-stat-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 18px 35px
+        rgba(18,55,42,.12);
+
+}
+
+
+.berita-stat-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 15px;
+
+    color:
+        var(--berita-primary);
+
+    background:
+        #e8f7ef;
+
+}
+
+
+.berita-stat-icon i {
+
+    font-size: 22px;
+
+}
+
+
+.berita-stat-card strong {
+
+    display: block;
+
+    color:
+        var(--berita-dark);
+
+    font-size: 28px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+}
+
+
+.berita-stat-card span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        var(--berita-muted);
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+}
+
+
+
+/* =====================================================
+   DIRECTORY
+===================================================== */
+
+.berita-directory {
+
+    padding:
+        90px 0 70px;
+
+    background:
+        var(--berita-light);
+
+}
+
+
+.section-heading {
+
+    max-width: 750px;
+
+    margin:
+        0 auto 45px;
+
+}
+
+
+.section-kicker {
+
+    display: inline-block;
+
+    color:
+        var(--berita-primary);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.section-heading h2 {
+
+    color:
+        var(--berita-dark);
+
+    font-size:
+        clamp(30px, 4vw, 44px);
+
+    font-weight: 800;
+
+    margin-bottom: 12px;
+
+}
+
+
+.section-heading p {
+
+    color:
+        var(--berita-muted);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+}
+
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.berita-search-wrapper {
+
+    margin-bottom: 30px;
+
+}
+
+
+.search-box {
+
+    position: relative;
+
+}
+
+
+.search-box i {
+
+    position: absolute;
+
+    left: 18px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        var(--berita-primary);
+
+    z-index: 2;
+
+}
+
+
+.search-box .form-control {
+
+    height: 52px;
+
+    padding-left: 48px;
+
+    border:
+        1px solid
+        var(--berita-border);
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(18,55,42,.04);
+
+}
+
+
+.search-box .form-control:focus {
+
+    border-color:
+        var(--berita-primary);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(25,135,84,.10);
+
+}
+
+
+.form-select {
+
+    height: 52px;
+
+    border:
+        1px solid
+        var(--berita-border);
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(18,55,42,.04);
+
+}
+
+
+.form-select:focus {
+
+    border-color:
+        var(--berita-primary);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(25,135,84,.10);
+
+}
+
+
+
+/* =====================================================
+   KATEGORI
+===================================================== */
+
+.kategori-berita-section {
+
+    margin-bottom: 40px;
+
+}
+
+
+.kategori-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color:
+        var(--berita-dark);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 15px;
+
+}
+
+
+.kategori-heading i {
+
+    color:
+        var(--berita-primary);
+
+}
+
+
+.kategori-berita-container {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+
+.kategori-berita-btn {
+
+    border:
+        1px solid
+        var(--berita-border);
+
+    background: #ffffff;
+
+    color:
+        var(--berita-text);
+
+    border-radius: 50px;
+
+    padding:
+        9px 16px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.kategori-berita-btn:hover {
+
+    border-color:
+        var(--berita-primary);
+
+    color:
+        var(--berita-primary);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.kategori-berita-btn.active {
+
+    background:
+        var(--berita-primary);
+
+    border-color:
+        var(--berita-primary);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 7px 18px
+        rgba(25,135,84,.20);
+
+}
+
+
+.kategori-icon {
+
+    width: 24px;
+
+    height: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(25,135,84,.10);
+
+}
+
+
+.kategori-berita-btn.active
+.kategori-icon {
+
+    background:
+        rgba(255,255,255,.16);
+
+}
+
+
+
+/* =====================================================
+   BERITA UNGGULAN
+===================================================== */
+
+.berita-featured {
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        var(--berita-border);
+
+    border-radius: 24px;
+
+    box-shadow:
+        var(--berita-shadow);
+
+}
+
+
+.berita-featured-image {
+
+    height: 100%;
+
+    min-height: 360px;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.berita-featured-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 360px;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+.berita-featured:hover
+.berita-featured-image img {
+
+    transform:
+        scale(1.04);
+
+}
+
+
+.featured-badge {
+
+    position: absolute;
+
+    left: 20px;
+
+    top: 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        8px 13px;
+
+    background:
+        var(--berita-primary);
+
+    color: #ffffff;
+
+    border-radius: 50px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.15);
+
+}
+
+
+.berita-featured-content {
+
+    height: 100%;
+
+    min-height: 360px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding:
+        45px;
+
+}
+
+
+.featured-meta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.featured-meta span {
+
+    padding:
+        6px 11px;
+
+    border-radius: 50px;
+
+    background:
+        #e8f7ef;
+
+    color:
+        var(--berita-primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.berita-featured-content h2 {
+
+    color:
+        var(--berita-dark);
+
+    font-size:
+        clamp(25px, 3vw, 38px);
+
+    line-height: 1.25;
+
+    font-weight: 800;
+
+    margin-bottom: 16px;
+
+}
+
+
+.berita-featured-content p {
+
+    color:
+        var(--berita-muted);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+/* =====================================================
+   FILTER RESULT
+===================================================== */
+
+.filter-result {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+    color:
+        var(--berita-muted);
+
+    font-size: 13px;
+
+}
+
+
+.filter-result strong {
+
+    color:
+        var(--berita-primary);
+
+    font-weight: 800;
+
+}
+
+
+.filter-result .btn {
+
+    border-radius: 50px;
+
+    font-size: 12px;
+
+}
+
+
+
+/* =====================================================
+   BERITA CARD
+===================================================== */
+
+.berita-card {
+
+    height: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        var(--berita-border);
+
+    border-radius:
+        var(--berita-radius);
+
+    box-shadow:
+        0 7px 25px
+        rgba(18,55,42,.06);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.berita-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(18,55,42,.12);
+
+}
+
+
+.berita-card-image {
+
+    height: 220px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        #e9f1ed;
+
+}
+
+
+.berita-card-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+.berita-card:hover
+.berita-card-image img {
+
+    transform:
+        scale(1.06);
+
+}
+
+
+.berita-card-category {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 15px;
+
+    padding:
+        6px 11px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(25,135,84,.95);
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.12);
+
+}
+
+
+.berita-card-body {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 22px;
+
+}
+
+
+.berita-card-meta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    color:
+        #7a8a82;
+
+    font-size: 10px;
+
+    margin-bottom: 11px;
+
+}
+
+
+.berita-card-meta span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+
+.berita-card-meta i {
+
+    color:
+        var(--berita-primary);
+
+}
+
+
+.berita-card h3 {
+
+    color:
+        var(--berita-dark);
+
+    font-size: 18px;
+
+    line-height: 1.45;
+
+    font-weight: 700;
+
+    margin-bottom: 11px;
+
+}
+
+
+.berita-card p {
+
+    color:
+        var(--berita-muted);
+
+    font-size: 12px;
+
+    line-height: 1.75;
+
+    margin-bottom: 18px;
+
+}
+
+
+.berita-read-more {
+
+    margin-top: auto;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color:
+        var(--berita-primary);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition:
+        gap .25s ease;
+
+}
+
+
+.berita-read-more:hover {
+
+    color:
+        var(--berita-primary-dark);
+
+    gap: 13px;
+
+}
+
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-berita {
+
+    text-align: center;
+
+    padding:
+        70px 20px;
+
+}
+
+
+.empty-icon {
+
+    width: 80px;
+
+    height: 80px;
+
+    margin:
+        0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #e8f7ef;
+
+    color:
+        var(--berita-primary);
+
+}
+
+
+.empty-icon i {
+
+    font-size: 30px;
+
+}
+
+
+.empty-berita h4 {
+
+    color:
+        var(--berita-dark);
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.empty-berita p {
+
+    color:
+        var(--berita-muted);
+
+    font-size: 13px;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.berita-cta {
+
+    padding:
+        25px 0 80px;
+
+    background:
+        var(--berita-light);
+
+}
+
+
+.berita-cta-box {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        45px 50px;
+
+    border-radius: 24px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #12372a,
+            #198754
+        );
+
+    box-shadow:
+        0 15px 40px
+        rgba(18,55,42,.15);
+
+}
+
+
+.berita-cta-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+
+    height: 230px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.06);
+
+    right: -70px;
+
+    bottom: -120px;
+
+}
+
+
+.cta-kicker {
+
+    display: inline-block;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color:
+        #a7f3d0;
+
+    margin-bottom: 8px;
+
+}
+
+
+.berita-cta-box h2 {
+
+    font-size:
+        clamp(25px, 3vw, 36px);
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+
+}
+
+
+.berita-cta-box p {
+
+    max-width: 700px;
+
+    color:
+        rgba(255,255,255,.82);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+}
+
+
+.berita-cta-box .btn {
+
+    position: relative;
+
+    z-index: 2;
+
+    color:
+        var(--berita-primary);
+
+    font-weight: 700;
+
+    padding:
+        12px 22px;
+
+}
+
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.berita-footer {
+
+    padding:
+        25px 0;
+
+    background:
+        #0c2c20;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 11px;
+
+}
+
+
+.berita-footer strong {
+
+    color: #ffffff;
+
+}
+
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.berita-directory
+.spinner-border {
+
+    width: 35px;
+
+    height: 35px;
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE TABLET
+===================================================== */
+
+@media (max-width: 991px) {
+
+    .berita-hero {
+
+        padding:
+            70px 0 80px;
+
+    }
+
+
+    .berita-hero-icon {
+
+        width: 150px;
+
+        height: 150px;
+
+        margin-top: 35px;
+
+    }
+
+
+    .berita-hero-icon i {
+
+        font-size: 65px;
+
+    }
+
+
+    .berita-statistik {
+
+        margin-top: -25px;
+
+    }
+
+
+    .berita-featured-content {
+
+        min-height: auto;
+
+        padding: 35px;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .news-label {
+
+        padding:
+            8px 12px;
+
+        font-size: 10px;
+
+    }
+
+
+    .news-marquee {
+
+        padding-left: 10px;
+
+    }
+
+
+    .navbar-brand {
+
+        font-size: 15px;
+
+    }
+
+
+    .navbar-brand img {
+
+        height: 45px;
+
+    }
+
+
+    .berita-hero {
+
+        padding:
+            55px 0 70px;
+
+    }
+
+
+    .berita-hero h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .berita-hero p {
+
+        font-size: 14px;
+
+    }
+
+
+    .berita-hero-icon {
+
+        width: 125px;
+
+        height: 125px;
+
+        margin-top: 30px;
+
+    }
+
+
+    .berita-hero-icon i {
+
+        font-size: 52px;
+
+    }
+
+
+    .berita-statistik {
+
+        margin-top: -20px;
+
+    }
+
+
+    .berita-stat-card {
+
+        min-height: 92px;
+
+        padding: 15px;
+
+        gap: 11px;
+
+    }
+
+
+    .berita-stat-icon {
+
+        width: 45px;
+
+        height: 45px;
+
+        border-radius: 12px;
+
+    }
+
+
+    .berita-stat-card strong {
+
+        font-size: 23px;
+
+    }
+
+
+    .berita-stat-card span {
+
+        font-size: 10px;
+
+    }
+
+
+    .berita-directory {
+
+        padding:
+            65px 0 50px;
+
+    }
+
+
+    .section-heading {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 31px;
+
+    }
+
+
+    .kategori-berita-container {
+
+        gap: 7px;
+
+    }
+
+
+    .kategori-berita-btn {
+
+        padding:
+            7px 11px;
+
+        font-size: 10px;
+
+    }
+
+
+    .kategori-icon {
+
+        width: 20px;
+
+        height: 20px;
+
+    }
+
+
+    .berita-featured-image,
+    .berita-featured-image img {
+
+        min-height: 250px;
+
+        height: 250px;
+
+    }
+
+
+    .berita-featured-content {
+
+        padding: 27px;
+
+    }
+
+
+    .berita-featured-content h2 {
+
+        font-size: 25px;
+
+    }
+
+
+    .berita-card-image {
+
+        height: 200px;
+
+    }
+
+
+    .berita-card-body {
+
+        padding: 19px;
+
+    }
+
+
+    .filter-result {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .berita-cta {
+
+        padding-bottom: 60px;
+
+    }
+
+
+    .berita-cta-box {
+
+        padding:
+            32px 25px;
+
+    }
+
+
+    .berita-cta-box .btn {
+
+        margin-top: 20px;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   EXTRA SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .berita-hero h1 {
+
+        font-size: 33px;
+
+    }
+
+
+    .berita-stat-card {
+
+        padding: 12px;
+
+    }
+
+
+    .berita-stat-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .berita-stat-card strong {
+
+        font-size: 20px;
+
+    }
+
+
+    .berita-card h3 {
+
+        font-size: 16px;
+
+    }
+
+}
