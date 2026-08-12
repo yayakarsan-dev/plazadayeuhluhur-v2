@@ -1,195 +1,99 @@
-/* =====================================================
+/* =========================================================
    PLAZA DAYEUHLUHUR
    BUMDes DIRECTORY
-===================================================== */
+   PREMIUM V2.1
+========================================================= */
 
 
-/* =====================================================
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --bumdes-primary: #087f5b;
+    --bumdes-primary-dark: #056247;
+    --bumdes-secondary: #0d8b8b;
+
+    --bumdes-accent: #f4c430;
+
+    --bumdes-dark: #102a2f;
+    --bumdes-text: #334155;
+    --bumdes-muted: #64748b;
+
+    --bumdes-light: #f5f8f9;
+    --bumdes-white: #ffffff;
+
+    --bumdes-border: #e2e8f0;
+
+    --bumdes-radius: 22px;
+
+    --bumdes-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.08);
+
+    --bumdes-shadow-hover:
+        0 22px 50px rgba(15, 23, 42, 0.15);
+
+}
+
+
+/* =========================================================
    GLOBAL
-===================================================== */
+========================================================= */
 
 body {
 
-    background: #f5f7f8;
+    font-family:
+        "Poppins",
+        sans-serif;
 
-    color: #172033;
+    background:
+        #f5f8f9;
 
-}
-
-
-/* =====================================================
-   NEWSFLASH
-===================================================== */
-
-.newsflash {
-
-    height: 46px;
-
-    display: flex;
-
-    background: #e4002b;
-
-    color: white;
-
-    overflow: hidden;
-
-    position: relative;
-
-    z-index: 1100;
+    color:
+        var(--bumdes-text);
 
 }
 
 
-.newsflash-label {
+button,
+input {
 
-    min-width: 122px;
-
-    background: #050505;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: 700;
-
-    font-size: 14px;
-
-    gap: 8px;
+    font-family:
+        inherit;
 
 }
 
 
-.live-dot {
-
-    width: 9px;
-
-    height: 9px;
-
-    border-radius: 50%;
-
-    background: #ff1e3c;
-
-    display: inline-block;
-
-}
-
-
-.newsflash-content {
-
-    flex: 1;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    white-space: nowrap;
-
-    font-weight: 600;
-
-}
-
-
-
-/* =====================================================
-   NAVBAR
-===================================================== */
-
-#mainNavbar {
-
-    min-height: 96px;
-
-    z-index: 1000;
-
-}
-
-
-.navbar-brand {
-
-    font-size: 24px;
-
-    color: #18202d !important;
-
-}
-
-
-.navbar-brand img {
-
-    object-fit: contain;
-
-}
-
-
-.navbar-nav {
-
-    gap: 12px;
-
-}
-
-
-.nav-link {
-
-    font-weight: 600;
-
-    font-size: 17px;
-
-    padding: 12px 15px !important;
-
-    color: #1c1c1c !important;
-
-    border-radius: 8px;
-
-    transition: .25s;
-
-}
-
-
-.nav-link:hover {
-
-    color: #138a67 !important;
-
-    background: #effaf5;
-
-}
-
-
-.nav-link.active {
-
-    color: #138a67 !important;
-
-}
-
-
-
-/* =====================================================
+/* =========================================================
    HERO
-===================================================== */
+========================================================= */
 
 .bumdes-hero {
 
     position: relative;
 
-    padding: 75px 20px 90px;
-
-    text-align: center;
-
-    color: white;
+    padding:
+        95px 0
+        85px;
 
     overflow: hidden;
 
     background:
         linear-gradient(
             120deg,
-            #087f5b,
-            #168c70 42%,
-            #0879d9
+            #087f5b 0%,
+            #0a896c 42%,
+            #087fa8 100%
         );
+
+    color:
+        white;
 
 }
 
+
+/* dekorasi */
 
 .bumdes-hero::before {
 
@@ -197,17 +101,16 @@ body {
 
     position: absolute;
 
-    width: 500px;
-
-    height: 500px;
+    width: 420px;
+    height: 420px;
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,0.07);
 
-    top: -260px;
-
-    left: -100px;
+    top: -220px;
+    left: -120px;
 
 }
 
@@ -218,17 +121,16 @@ body {
 
     position: absolute;
 
-    width: 450px;
-
-    height: 450px;
+    width: 500px;
+    height: 500px;
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,.07);
+    background:
+        rgba(255,255,255,0.06);
 
-    bottom: -260px;
-
-    right: -100px;
+    bottom: -300px;
+    right: -150px;
 
 }
 
@@ -242,923 +144,2328 @@ body {
 }
 
 
-.hero-badge {
+.bumdes-hero-content {
 
-    display: inline-flex;
+    max-width:
+        900px;
 
-    align-items: center;
+    margin:
+        auto;
 
-    gap: 8px;
-
-    padding: 9px 20px;
-
-    border-radius: 30px;
-
-    background: rgba(255,255,255,.16);
-
-    border: 1px solid rgba(255,255,255,.25);
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    margin-bottom: 22px;
+    text-align:
+        center;
 
 }
 
 
+/* =========================================================
+   HERO BADGE
+========================================================= */
+
+.bumdes-hero-badge {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    padding:
+        8px 18px;
+
+    margin-bottom:
+        18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.3);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    backdrop-filter:
+        blur(10px);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        1px;
+
+}
+
+
+.bumdes-hero-badge i {
+
+    color:
+        #ffe45c;
+
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
 .bumdes-hero h1 {
 
-    font-size: clamp(38px, 5vw, 68px);
+    margin:
+        0;
 
-    line-height: 1.05;
+    font-size:
+        clamp(38px, 5vw, 64px);
 
-    font-weight: 800;
+    line-height:
+        1.08;
 
-    margin-bottom: 20px;
+    font-weight:
+        800;
+
+    letter-spacing:
+        -1.5px;
 
 }
 
 
 .bumdes-hero h1 span {
 
-    display: block;
+    display:
+        block;
+
+    color:
+        #ffe45c;
 
 }
 
 
-.hero-subtitle {
+.bumdes-hero p {
 
-    font-size: 23px;
+    max-width:
+        760px;
 
-    margin: 0 auto 10px;
+    margin:
+        22px auto 30px;
 
-    max-width: 800px;
+    font-size:
+        15px;
 
-}
+    line-height:
+        1.8;
 
-
-.hero-description {
-
-    font-size: 17px;
-
-    opacity: .92;
-
-    max-width: 750px;
-
-    margin: auto;
+    color:
+        rgba(255,255,255,0.9);
 
 }
 
 
-
-/* =====================================================
+/* =========================================================
    SEARCH
-===================================================== */
+========================================================= */
 
 .bumdes-search {
 
-    max-width: 780px;
+    position:
+        relative;
 
-    height: 64px;
+    max-width:
+        680px;
 
-    background: white;
-
-    border-radius: 15px;
-
-    margin: 35px auto 0;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 0 24px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.15);
+    margin:
+        0 auto;
 
 }
 
 
 .bumdes-search i {
 
-    color: #138a67;
+    position:
+        absolute;
 
-    font-size: 21px;
+    left:
+        22px;
 
-    margin-right: 15px;
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        16px;
+
+    z-index:
+        2;
 
 }
 
 
 .bumdes-search input {
 
-    flex: 1;
+    width:
+        100%;
 
-    border: none;
+    height:
+        58px;
 
-    outline: none;
+    padding:
+        0 24px 0 54px;
 
-    font-size: 18px;
+    border:
+        none;
 
-    color: #222;
+    border-radius:
+        16px;
+
+    outline:
+        none;
+
+    background:
+        white;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        14px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,0.16);
 
 }
 
 
 .bumdes-search input::placeholder {
 
-    color: #8a9098;
+    color:
+        #94a3b8;
 
 }
 
 
-.search-info {
-
-    margin-top: 15px;
-
-    font-size: 14px;
-
-    opacity: .9;
-
-}
-
-
-
-/* =====================================================
-   STATISTICS
-===================================================== */
-
-.bumdes-stat-section {
-
-    background: #f5f7f8;
-
-    padding: 0 0 20px;
-
-}
-
-
-.bumdes-stat-section .container {
-
-    margin-top: -45px;
-
-    position: relative;
-
-    z-index: 5;
-
-}
-
-
-.stat-card {
-
-    min-height: 145px;
-
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 25px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
+.bumdes-search input:focus {
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.08);
-
-    transition: .3s;
+        0 0 0 4px
+        rgba(255,255,255,0.22),
+        0 15px 35px
+        rgba(0,0,0,0.16);
 
 }
 
 
-.stat-card:hover {
+/* =========================================================
+   STATISTIK
+========================================================= */
 
-    transform: translateY(-6px);
+.bumdes-statistik {
+
+    position:
+        relative;
+
+    margin-top:
+        -42px;
+
+    z-index:
+        5;
+
+}
+
+
+.bumdes-statistik .container {
+
+    position:
+        relative;
+
+}
+
+
+.bumdes-stat-card {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        16px;
+
+    min-height:
+        112px;
+
+    padding:
+        22px;
+
+    background:
+        white;
+
+    border:
+        1px solid
+        rgba(226,232,240,0.8);
+
+    border-radius:
+        18px;
 
     box-shadow:
-        0 15px 30px rgba(0,0,0,.12);
+        var(--bumdes-shadow);
+
+    transition:
+        all .3s ease;
 
 }
 
 
-.stat-icon {
+.bumdes-stat-card:hover {
 
-    width: 64px;
+    transform:
+        translateY(-5px);
 
-    height: 64px;
-
-    border-radius: 18px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 27px;
+    box-shadow:
+        var(--bumdes-shadow-hover);
 
 }
 
 
-.stat-icon.green {
+.bumdes-stat-icon {
 
-    background: #e1f7ee;
+    width:
+        55px;
 
-    color: #0b8a62;
+    height:
+        55px;
 
-}
+    flex:
+        0 0 55px;
 
+    display:
+        flex;
 
-.stat-icon.blue {
+    align-items:
+        center;
 
-    background: #e5f0ff;
+    justify-content:
+        center;
 
-    color: #146be0;
+    border-radius:
+        15px;
 
-}
+    background:
+        linear-gradient(
+            135deg,
+            #e8f7f1,
+            #d8f1e8
+        );
 
+    color:
+        var(--bumdes-primary);
 
-.stat-icon.orange {
-
-    background: #fff0d7;
-
-    color: #f09a00;
-
-}
-
-
-.stat-icon.red {
-
-    background: #ffe5e8;
-
-    color: #df334e;
-
-}
-
-
-.stat-card strong {
-
-    display: block;
-
-    font-size: 32px;
-
-    line-height: 1;
+    font-size:
+        21px;
 
 }
 
 
-.stat-card span {
+.bumdes-stat-card strong {
 
-    display: block;
+    display:
+        block;
 
-    color: #667085;
+    color:
+        var(--bumdes-dark);
 
-    margin-top: 8px;
+    font-size:
+        27px;
+
+    line-height:
+        1.1;
+
+    font-weight:
+        800;
 
 }
 
 
+.bumdes-stat-card span {
 
-/* =====================================================
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        12px;
+
+    font-weight:
+        500;
+
+}
+
+
+/* =========================================================
    DIRECTORY
-===================================================== */
+========================================================= */
 
 .bumdes-directory {
 
-    padding: 75px 0 100px;
+    padding:
+        85px 0
+        70px;
 
 }
 
 
-.section-heading {
+.bumdes-section-heading {
 
-    text-align: center;
+    display:
+        flex;
 
-    margin-bottom: 45px;
+    align-items:
+        flex-end;
 
-}
+    justify-content:
+        space-between;
 
+    gap:
+        30px;
 
-.section-heading span {
-
-    color: #07885f;
-
-    font-size: 15px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
+    margin-bottom:
+        28px;
 
 }
 
 
-.section-heading h2 {
+.bumdes-section-label {
 
-    font-size: clamp(30px, 4vw, 45px);
+    display:
+        inline-block;
 
-    font-weight: 800;
+    margin-bottom:
+        9px;
 
-    margin: 10px 0;
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.5px;
 
 }
 
 
-.section-heading p {
+.bumdes-section-heading h2 {
 
-    color: #6c757d;
+    margin:
+        0;
 
-    font-size: 17px;
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        clamp(26px, 3vw, 38px);
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        -0.6px;
 
 }
 
 
+.bumdes-section-heading p {
 
-/* =====================================================
-   BUMDES CARD
-===================================================== */
+    max-width:
+        700px;
+
+    margin:
+        10px 0 0;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   COUNT
+========================================================= */
+
+.bumdes-count-box {
+
+    flex:
+        0 0 auto;
+
+    min-width:
+        145px;
+
+    padding:
+        17px 22px;
+
+    border-radius:
+        16px;
+
+    background:
+        white;
+
+    border:
+        1px solid
+        var(--bumdes-border);
+
+    box-shadow:
+        0 7px 22px
+        rgba(15,23,42,0.05);
+
+    text-align:
+        center;
+
+}
+
+
+.bumdes-count-box strong {
+
+    display:
+        block;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        28px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1;
+
+}
+
+
+.bumdes-count-box span {
+
+    display:
+        block;
+
+    margin-top:
+        7px;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        11px;
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.bumdes-filter-bar {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        9px;
+
+    margin-bottom:
+        30px;
+
+}
+
+
+.bumdes-filter {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    padding:
+        10px 17px;
+
+    border:
+        1px solid
+        var(--bumdes-border);
+
+    border-radius:
+        999px;
+
+    background:
+        white;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.bumdes-filter:hover {
+
+    border-color:
+        var(--bumdes-primary);
+
+    color:
+        var(--bumdes-primary);
+
+}
+
+
+.bumdes-filter.active {
+
+    background:
+        var(--bumdes-primary);
+
+    border-color:
+        var(--bumdes-primary);
+
+    color:
+        white;
+
+    box-shadow:
+        0 6px 18px
+        rgba(8,127,91,0.22);
+
+}
+
+
+/* =========================================================
+   SEARCH INFO
+========================================================= */
+
+.bumdes-search-info {
+
+    min-height:
+        20px;
+
+    margin-bottom:
+        17px;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        12px;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .bumdes-card {
 
-    height: 100%;
+    height:
+        100%;
 
-    background: white;
+    overflow:
+        hidden;
 
-    border-radius: 22px;
+    background:
+        white;
 
-    overflow: hidden;
+    border:
+        1px solid
+        rgba(226,232,240,0.9);
 
-    border: 1px solid #edf0f2;
+    border-radius:
+        var(--bumdes-radius);
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.07);
+        var(--bumdes-shadow);
 
     transition:
-        transform .3s,
-        box-shadow .3s;
+        transform .35s ease,
+        box-shadow .35s ease;
 
 }
 
 
 .bumdes-card:hover {
 
-    transform: translateY(-8px);
+    transform:
+        translateY(-9px);
 
     box-shadow:
-        0 18px 40px rgba(0,0,0,.13);
+        var(--bumdes-shadow-hover);
 
 }
 
 
-.bumdes-image {
+/* =========================================================
+   CARD IMAGE
+========================================================= */
 
-    height: 230px;
+.bumdes-card-image {
 
-    position: relative;
+    position:
+        relative;
+
+    height:
+        265px;
+
+    overflow:
+        hidden;
 
     background:
         linear-gradient(
             135deg,
-            #e5f6ef,
-            #dcecff
+            #087f5b,
+            #0d9a72
         );
-
-    overflow: hidden;
 
 }
 
 
-.bumdes-image img {
+.bumdes-card-image img {
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 100%;
+    height:
+        100%;
 
-    object-fit: cover;
+    display:
+        block;
 
-    transition: .4s;
+    object-fit:
+        cover;
+
+    transition:
+        transform .6s ease;
 
 }
 
 
 .bumdes-card:hover
-.bumdes-image img {
+.bumdes-card-image img {
 
-    transform: scale(1.05);
-
-}
-
-
-.image-placeholder {
-
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #15906b;
-
-    font-size: 65px;
+    transform:
+        scale(1.06);
 
 }
 
 
-.status-badge {
+.bumdes-image-placeholder {
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 15px;
+    inset:
+        0;
 
-    left: 15px;
+    display:
+        flex;
 
-    padding: 8px 14px;
+    align-items:
+        center;
 
-    border-radius: 30px;
+    justify-content:
+        center;
 
-    background: white;
+    color:
+        rgba(255,255,255,0.8);
 
-    font-size: 13px;
-
-    font-weight: 700;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.12);
-
-}
-
-
-.status-badge.active {
-
-    color: #087f5b;
-
-}
-
-
-.status-badge.pending {
-
-    color: #b26b00;
-
-}
-
-
-.verified-badge {
-
-    position: absolute;
-
-    top: 15px;
-
-    right: 15px;
-
-    width: 36px;
-
-    height: 36px;
-
-    background: white;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #1681e8;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.12);
-
-}
-
-
-.bumdes-body {
-
-    padding: 25px;
-
-}
-
-
-.bumdes-category {
-
-    color: #07885f;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-}
-
-
-.bumdes-name {
-
-    font-size: 25px;
-
-    font-weight: 800;
-
-    margin: 7px 0 10px;
-
-}
-
-
-.bumdes-description {
-
-    color: #697386;
-
-    line-height: 1.6;
-
-    min-height: 50px;
-
-}
-
-
-.bumdes-meta {
-
-    border-top: 1px solid #edf0f2;
-
-    margin-top: 18px;
-
-    padding-top: 16px;
-
-}
-
-
-.bumdes-meta-item {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 10px;
-
-    color: #555e6d;
-
-}
-
-
-.bumdes-meta-item i {
-
-    width: 20px;
-
-    color: #118d68;
-
-}
-
-
-.bumdes-button {
-
-    width: 100%;
-
-    border: none;
-
-    padding: 13px 20px;
-
-    border-radius: 30px;
-
-    margin-top: 10px;
-
-    background: #138f6b;
-
-    color: white;
-
-    font-weight: 700;
-
-    transition: .25s;
-
-}
-
-
-.bumdes-button:hover {
-
-    background: #087354;
-
-    transform: translateY(-2px);
-
-}
-
-
-
-/* =====================================================
-   LOADING / EMPTY / ERROR
-===================================================== */
-
-.loading-box,
-.empty-box,
-.error-box {
-
-    text-align: center;
-
-    padding: 60px 20px;
-
-}
-
-
-.loading-box p {
-
-    margin-top: 15px;
-
-    color: #6c757d;
-
-}
-
-
-.empty-box i,
-.error-box i {
-
-    font-size: 55px;
-
-    color: #138f6b;
-
-    margin-bottom: 20px;
-
-}
-
-
-.empty-box p,
-.error-box p {
-
-    color: #6c757d;
-
-}
-
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal-content {
-
-    border: none;
-
-    border-radius: 22px;
-
-    overflow: hidden;
-
-}
-
-
-.modal-header {
+    font-size:
+        70px;
 
     background:
         linear-gradient(
-            120deg,
+            135deg,
             #087f5b,
-            #0879d9
+            #0d8b8b
         );
 
-    color: white;
+}
 
-    border: none;
+
+.bumdes-image-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.42),
+            transparent 55%
+        );
+
+    pointer-events:
+        none;
 
 }
 
 
-.modal-header .btn-close {
+/* =========================================================
+   ACTIVE BADGE
+========================================================= */
 
-    filter: brightness(0) invert(1);
+.bumdes-active-badge {
 
-}
+    position:
+        absolute;
 
+    top:
+        16px;
 
-.modal-body {
+    right:
+        16px;
 
-    padding: 30px;
+    display:
+        inline-flex;
 
-}
+    align-items:
+        center;
 
+    gap:
+        6px;
 
-.modal-detail-icon {
+    padding:
+        7px 12px;
 
-    width: 80px;
+    border-radius:
+        999px;
 
-    height: 80px;
+    background:
+        rgba(255,255,255,0.95);
 
-    border-radius: 20px;
+    color:
+        #087f5b;
 
-    background: #e5f7ef;
+    font-size:
+        10px;
 
-    color: #108c67;
+    font-weight:
+        800;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 35px;
-
-    margin-bottom: 20px;
-
-}
-
-
-.modal-detail-item {
-
-    padding: 15px 0;
-
-    border-bottom: 1px solid #edf0f2;
-
-}
-
-
-.modal-detail-item strong {
-
-    display: block;
-
-    margin-bottom: 5px;
-
-    color: #172033;
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.12);
 
 }
 
 
-.modal-detail-item span {
+.bumdes-active-badge i {
 
-    color: #667085;
-
-}
-
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.bumdes-footer {
-
-    background: #101827;
-
-    color: white;
-
-    padding: 55px 0;
+    font-size:
+        10px;
 
 }
 
 
-.footer-logo {
+/* =========================================================
+   CARD BODY
+========================================================= */
 
-    font-size: 25px;
+.bumdes-card-body {
 
-    font-weight: 800;
+    display:
+        flex;
 
-}
+    flex-direction:
+        column;
 
+    padding:
+        24px;
 
-.bumdes-footer p {
-
-    color: #aeb7c5;
-
-    margin-top: 10px;
-
-}
-
-
-.footer-links {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 25px;
-
-    flex-wrap: wrap;
-
-    margin: 25px 0;
+    min-height:
+        340px;
 
 }
 
 
-.footer-links a {
+/* =========================================================
+   CARD LABEL
+========================================================= */
 
-    color: #d9dee7;
+.bumdes-card-label {
 
-    text-decoration: none;
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    margin-bottom:
+        10px;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .8px;
 
 }
 
 
-.footer-links a:hover {
+.bumdes-card-label i {
 
-    color: #52c49a;
-
-}
-
-
-.bumdes-footer hr {
-
-    border-color: #293344;
+    font-size:
+        11px;
 
 }
 
 
+/* =========================================================
+   CARD TITLE
+========================================================= */
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+.bumdes-card-title {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        22px;
+
+    line-height:
+        1.25;
+
+    font-weight:
+        800;
+
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.bumdes-location {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    margin-bottom:
+        15px;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        12px;
+
+}
+
+
+.bumdes-location i {
+
+    color:
+        var(--bumdes-primary);
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.bumdes-card-description {
+
+    margin:
+        0 0 20px;
+
+    color:
+        #64748b;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.75;
+
+    display:
+        -webkit-box;
+
+    -webkit-line-clamp:
+        3;
+
+    -webkit-box-orient:
+        vertical;
+
+    overflow:
+        hidden;
+
+}
+
+
+/* =========================================================
+   INFO GRID
+========================================================= */
+
+.bumdes-info-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        9px;
+
+    margin-top:
+        auto;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.bumdes-info-item {
+
+    min-width:
+        0;
+
+    padding:
+        11px;
+
+    border:
+        1px solid
+        #edf1f3;
+
+    border-radius:
+        13px;
+
+    background:
+        #f8fafb;
+
+}
+
+
+.bumdes-info-icon {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        27px;
+
+    height:
+        27px;
+
+    margin-bottom:
+        7px;
+
+    border-radius:
+        8px;
+
+    background:
+        #e4f5ee;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        11px;
+
+}
+
+
+.bumdes-info-item small {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        #94a3b8;
+
+    font-size:
+        9px;
+
+}
+
+
+.bumdes-info-item strong {
+
+    display:
+        block;
+
+    overflow:
+        hidden;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* =========================================================
+   DETAIL BUTTON
+========================================================= */
+
+.bumdes-detail-button {
+
+    width:
+        100%;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        13px 17px;
+
+    border:
+        none;
+
+    border-radius:
+        12px;
+
+    background:
+        var(--bumdes-primary);
+
+    color:
+        white;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    transition:
+        all .3s ease;
+
+}
+
+
+.bumdes-detail-button i {
+
+    transition:
+        transform .3s ease;
+
+}
+
+
+.bumdes-detail-button:hover {
+
+    background:
+        var(--bumdes-primary-dark);
+
+    box-shadow:
+        0 8px 20px
+        rgba(8,127,91,0.25);
+
+}
+
+
+.bumdes-detail-button:hover i {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.bumdes-empty {
+
+    padding:
+        80px 20px;
+
+    text-align:
+        center;
+
+}
+
+
+.bumdes-empty-icon {
+
+    width:
+        80px;
+
+    height:
+        80px;
+
+    margin:
+        0 auto 20px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        #e9f4f0;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        30px;
+
+}
+
+
+.bumdes-empty h3 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        21px;
+
+    font-weight:
+        700;
+
+}
+
+
+.bumdes-empty p {
+
+    margin:
+        0;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        13px;
+
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.bumdes-info {
+
+    padding:
+        10px 0 80px;
+
+}
+
+
+.bumdes-info-box {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        20px;
+
+    padding:
+        30px;
+
+    border:
+        1px solid
+        #dceee7;
+
+    border-radius:
+        22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eefaf5,
+            #f7fbfa
+        );
+
+}
+
+
+.bumdes-info-icon {
+
+    width:
+        58px;
+
+    height:
+        58px;
+
+    flex:
+        0 0 58px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        16px;
+
+    background:
+        #d8f1e7;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        22px;
+
+}
+
+
+.bumdes-info-box h3 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        20px;
+
+    font-weight:
+        800;
+
+}
+
+
+.bumdes-info-box p {
+
+    margin:
+        0;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   PREMIUM MODAL
+========================================================= */
+
+.bumdes-premium-modal {
+
+    overflow:
+        hidden;
+
+    border:
+        none;
+
+    border-radius:
+        24px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(15,23,42,0.25);
+
+}
+
+
+.bumdes-modal-close {
+
+    position:
+        absolute;
+
+    top:
+        18px;
+
+    right:
+        18px;
+
+    z-index:
+        10;
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    padding:
+        0;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.95);
+
+    opacity:
+        1;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.1);
+
+}
+
+
+.bumdes-modal-header {
+
+    padding:
+        28px 32px 18px;
+
+    border:
+        none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f5b,
+            #0b8c72
+        );
+
+    color:
+        white;
+
+}
+
+
+.bumdes-modal-label {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+    color:
+        #dff9ed;
+
+}
+
+
+.bumdes-modal-header h2 {
+
+    margin:
+        0;
+
+    font-size:
+        28px;
+
+    font-weight:
+        800;
+
+}
+
+
+.bumdes-modal-body {
+
+    padding:
+        30px;
+
+}
+
+
+/* =========================================================
+   MODAL IMAGE
+========================================================= */
+
+.modal-bumdes-image {
+
+    position:
+        relative;
+
+    height:
+        280px;
+
+    margin-bottom:
+        25px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        18px;
+
+    background:
+        #eaf5f0;
+
+}
+
+
+.modal-bumdes-image img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+}
+
+
+.modal-bumdes-placeholder {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f5b,
+            #0d8b8b
+        );
+
+    color:
+        white;
+
+    font-size:
+        70px;
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.modal-bumdes-header {
+
+    margin-bottom:
+        25px;
+
+}
+
+
+.modal-bumdes-label {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    margin-bottom:
+        8px;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+}
+
+
+.modal-bumdes-header h3 {
+
+    margin:
+        0 0 7px;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        26px;
+
+    font-weight:
+        800;
+
+}
+
+
+.modal-bumdes-location {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        12px;
+
+}
+
+
+.modal-bumdes-location i {
+
+    color:
+        var(--bumdes-primary);
+
+}
+
+
+/* =========================================================
+   MODAL STATS
+========================================================= */
+
+.modal-bumdes-stats {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        12px;
+
+    margin-bottom:
+        28px;
+
+}
+
+
+.modal-bumdes-stats > div {
+
+    padding:
+        17px;
+
+    border:
+        1px solid
+        var(--bumdes-border);
+
+    border-radius:
+        15px;
+
+    background:
+        #f8fafb;
+
+}
+
+
+.modal-bumdes-stats i {
+
+    display:
+        block;
+
+    margin-bottom:
+        8px;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        18px;
+
+}
+
+
+.modal-bumdes-stats small {
+
+    display:
+        block;
+
+    margin-bottom:
+        4px;
+
+    color:
+        #94a3b8;
+
+    font-size:
+        10px;
+
+}
+
+
+.modal-bumdes-stats strong {
+
+    display:
+        block;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+}
+
+
+/* =========================================================
+   MODAL SECTION
+========================================================= */
+
+.modal-bumdes-section {
+
+    margin-bottom:
+        25px;
+
+}
+
+
+.modal-bumdes-section h4 {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin:
+        0 0 10px;
+
+    color:
+        var(--bumdes-dark);
+
+    font-size:
+        15px;
+
+    font-weight:
+        800;
+
+}
+
+
+.modal-bumdes-section h4 i {
+
+    color:
+        var(--bumdes-primary);
+
+}
+
+
+.modal-bumdes-section p {
+
+    margin:
+        0;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.modal-contact-list {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        9px;
+
+}
+
+
+.modal-contact-item {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        10px 13px;
+
+    border:
+        1px solid
+        var(--bumdes-border);
+
+    border-radius:
+        11px;
+
+    color:
+        var(--bumdes-dark);
+
+    background:
+        white;
+
+    font-size:
+        11px;
+
+    text-decoration:
+        none;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.modal-contact-item:hover {
+
+    color:
+        var(--bumdes-primary);
+
+    border-color:
+        var(--bumdes-primary);
+
+}
+
+
+.modal-contact-item i {
+
+    color:
+        var(--bumdes-primary);
+
+}
+
+
+/* =========================================================
+   MAP BUTTON
+========================================================= */
+
+.bumdes-map-button {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    width:
+        100%;
+
+    padding:
+        13px 18px;
+
+    border-radius:
+        12px;
+
+    background:
+        #eef8f4;
+
+    color:
+        var(--bumdes-primary);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    text-decoration:
+        none;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.bumdes-map-button:hover {
+
+    background:
+        var(--bumdes-primary);
+
+    color:
+        white;
+
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.bumdes-modal-footer {
+
+    padding:
+        15px 30px 25px;
+
+    border:
+        none;
+
+}
+
+
+.bumdes-modal-button {
+
+    padding:
+        10px 20px;
+
+    border:
+        1px solid
+        var(--bumdes-border);
+
+    border-radius:
+        10px;
+
+    color:
+        var(--bumdes-muted);
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+}
+
+
+.bumdes-modal-button:hover {
+
+    background:
+        #f1f5f9;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
 
 @media (max-width: 991px) {
 
-    #mainNavbar {
-
-        min-height: 75px;
-
-    }
-
-
-    .navbar-nav {
-
-        padding-top: 15px;
-
-    }
-
-
     .bumdes-hero {
 
-        padding-top: 55px;
+        padding:
+            75px 0
+            70px;
+
+    }
+
+
+    .bumdes-statistik {
+
+        margin-top:
+            -30px;
+
+    }
+
+
+    .bumdes-section-heading {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .bumdes-count-box {
+
+        min-width:
+            125px;
 
     }
 
 }
 
 
-@media (max-width: 576px) {
+/* =========================================================
+   RESPONSIVE MOBILE
+========================================================= */
 
-    .newsflash {
-
-        height: 42px;
-
-    }
-
-
-    .newsflash-label {
-
-        min-width: 95px;
-
-        font-size: 12px;
-
-    }
-
+@media (max-width: 767px) {
 
     .bumdes-hero {
 
-        padding: 50px 15px 75px;
+        padding:
+            60px 0;
 
     }
 
 
     .bumdes-hero h1 {
 
-        font-size: 38px;
+        font-size:
+            34px;
 
     }
 
 
-    .hero-subtitle {
+    .bumdes-hero p {
 
-        font-size: 18px;
-
-    }
-
-
-    .bumdes-search {
-
-        height: 58px;
-
-        padding: 0 17px;
+        font-size:
+            13px;
 
     }
 
 
     .bumdes-search input {
 
-        font-size: 15px;
+        height:
+            53px;
+
+        font-size:
+            12px;
 
     }
 
 
-    .bumdes-stat-section .container {
+    .bumdes-statistik {
 
-        margin-top: -30px;
+        margin-top:
+            -20px;
 
     }
 
 
-    .stat-card {
+    .bumdes-stat-card {
 
-        min-height: 110px;
+        min-height:
+            95px;
+
+        padding:
+            16px;
+
+    }
+
+
+    .bumdes-stat-icon {
+
+        width:
+            45px;
+
+        height:
+            45px;
+
+        flex-basis:
+            45px;
+
+        font-size:
+            17px;
+
+    }
+
+
+    .bumdes-stat-card strong {
+
+        font-size:
+            22px;
 
     }
 
 
     .bumdes-directory {
 
-        padding-top: 55px;
+        padding:
+            60px 0;
+
+    }
+
+
+    .bumdes-section-heading {
+
+        display:
+            block;
+
+    }
+
+
+    .bumdes-count-box {
+
+        margin-top:
+            20px;
+
+        display:
+            inline-block;
+
+    }
+
+
+    .bumdes-card-image {
+
+        height:
+            250px;
+
+    }
+
+
+    .bumdes-card-body {
+
+        padding:
+            20px;
+
+    }
+
+
+    .bumdes-info-grid {
+
+        gap:
+            7px;
+
+    }
+
+
+    .bumdes-info-item {
+
+        padding:
+            9px;
+
+    }
+
+
+    .bumdes-info-item strong {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .bumdes-info-box {
+
+        padding:
+            22px;
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .modal-bumdes-image {
+
+        height:
+            220px;
+
+    }
+
+
+    .modal-bumdes-stats {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .bumdes-modal-body {
+
+        padding:
+            22px;
+
+    }
+
+
+    .bumdes-modal-header {
+
+        padding:
+            25px 22px 18px;
+
+    }
+
+
+    .bumdes-modal-header h2 {
+
+        font-size:
+            22px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .bumdes-hero h1 {
+
+        font-size:
+            30px;
+
+    }
+
+
+    .bumdes-stat-card {
+
+        gap:
+            10px;
+
+    }
+
+
+    .bumdes-stat-card span {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .bumdes-info-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .bumdes-card-image {
+
+        height:
+            230px;
 
     }
 
