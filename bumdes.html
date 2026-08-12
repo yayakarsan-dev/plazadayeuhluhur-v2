@@ -5,44 +5,59 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        Direktori BUMDes | PLAZA DAYEUHLUHUR
-    </title>
+    <title>BUMDes | PLAZA DAYEUHLUHUR</title>
 
+    <meta name="description"
+        content="Direktori BUMDes Kecamatan Dayeuhluhur - PLAZA DAYEUHLUHUR">
 
-    <!-- BOOTSTRAP -->
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
 
-    <!-- FONT AWESOME -->
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-
-    <!-- STYLE UTAMA -->
-
-    <link
-        rel="stylesheet"
-        href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
 
-    <link
-        rel="stylesheet"
-        href="assets/css/theme.css">
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
-    <!-- STYLE BUMDES -->
+    <!-- =====================================================
+         GLOBAL CSS
+    ====================================================== -->
 
-    <link
-        rel="stylesheet"
+    <link rel="stylesheet"
+        href="assets/css/header.css">
+
+    <link rel="stylesheet"
+        href="assets/css/footer.css">
+
+
+    <!-- =====================================================
+         CSS BUMDes
+    ====================================================== -->
+
+    <link rel="stylesheet"
         href="assets/css/bumdes.css">
 
 </head>
@@ -52,27 +67,48 @@
 
 
 <!-- =====================================================
-     NEWSFLASH
+     GARIS ATAS
 ===================================================== -->
 
-<div class="newsflash">
+<div class="plaza-top-line"></div>
 
-    <div class="newsflash-label">
 
-        <span class="live-dot"></span>
+<!-- =====================================================
+     LIVE NEWS
+===================================================== -->
+
+<div class="plaza-live-news">
+
+    <div class="plaza-live-label">
+
+        <span class="plaza-live-dot"></span>
 
         LIVE NEWS
 
     </div>
 
 
-    <div class="newsflash-content">
+    <div class="plaza-news-content">
 
-        <div id="newsFlashContent">
+        <div class="plaza-news-track">
 
-            Selamat datang di PLAZA DAYEUHLUHUR
-            | Gerbang Informasi, Bisnis dan Potensi
-            Kecamatan Dayeuhluhur
+            <strong style="color:#ffe500;">
+                INFO
+            </strong>
+
+            &nbsp;&nbsp;
+
+            Selamat Datang di Portal Digital Kecamatan Dayeuhluhur
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <strong style="color:#ffe500;">
+                UMKM
+            </strong>
+
+            &nbsp;&nbsp;
+
+            Jelajahi potensi usaha masyarakat Dayeuhluhur
 
         </div>
 
@@ -81,230 +117,151 @@
 </div>
 
 
-
 <!-- =====================================================
-     NAVBAR
+     HEADER
 ===================================================== -->
 
-<nav
-    class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top"
-    id="mainNavbar">
+<header class="plaza-header">
 
     <div class="container">
 
-
-        <!-- LOGO -->
-
-        <a
-            class="navbar-brand d-flex align-items-center"
-            href="index.html">
-
-            <img
-                src="assets/images/logo.png"
-                height="55"
-                alt="PLAZA DAYEUHLUHUR">
-
-            <span class="fw-bold ms-2">
-
-                PLAZA DAYEUHLUHUR
-
-            </span>
-
-        </a>
+        <nav class="plaza-navbar">
 
 
+            <!-- LOGO -->
 
-        <!-- MOBILE -->
+            <a href="index.html"
+                class="plaza-brand">
 
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+                <img
+                    src="assets/images/logo.png"
+                    alt="PLAZA DAYEUHLUHUR">
 
-            <span class="navbar-toggler-icon"></span>
+                <span class="plaza-brand-name">
+                    PLAZA DAYEUHLUHUR
+                </span>
 
-        </button>
-
+            </a>
 
 
-        <!-- MENU -->
+            <!-- MOBILE MENU -->
 
-        <div
-            class="collapse navbar-collapse"
-            id="navbarNav">
+            <button
+                class="plaza-mobile-button"
+                onclick="togglePlazaMenu()"
+                aria-label="Buka menu">
 
-            <ul class="navbar-nav ms-auto">
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
 
 
-                <li class="nav-item">
+            <!-- MENU -->
 
-                    <a
-                        class="nav-link"
-                        href="index.html">
+            <ul class="plaza-menu"
+                id="plazaMenu">
 
+                <li>
+                    <a href="index.html">
                         Beranda
-
                     </a>
-
                 </li>
 
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="desa.html">
-
+                <li>
+                    <a href="desa.html">
                         Desa
-
                     </a>
-
                 </li>
 
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link active"
-                        href="bumdes.html">
-
+                <li>
+                    <a href="bumdes.html"
+                        class="active">
                         BUMDes
-
                     </a>
-
                 </li>
 
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="umkm.html">
-
+                <li>
+                    <a href="umkm.html">
                         UMKM
-
                     </a>
-
                 </li>
 
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="wisata.html">
-
+                <li>
+                    <a href="wisata.html">
                         Wisata
-
                     </a>
-
                 </li>
 
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="berita.html">
-
+                <li>
+                    <a href="berita.html">
                         Berita
-
                     </a>
-
                 </li>
 
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="kontak.html">
-
+                <li>
+                    <a href="kontak.html">
                         Kontak
-
                     </a>
-
                 </li>
-
 
             </ul>
 
-        </div>
+        </nav>
 
     </div>
 
-</nav>
-
+</header>
 
 
 <!-- =====================================================
-     HERO BUMDES
+     HERO BUMDes
 ===================================================== -->
 
 <section class="bumdes-hero">
 
     <div class="container">
 
-        <div class="hero-badge">
-
-            <i class="fa-solid fa-building"></i>
-
-            EKOSISTEM EKONOMI DESA
-
-        </div>
+        <div class="bumdes-hero-content">
 
 
-        <h1>
+            <div class="bumdes-hero-badge">
 
-            🏢 DIREKTORI BUMDes
+                <i class="fa-solid fa-building"></i>
 
-            <span>
-                DAYEUHLUHUR
-            </span>
+                EKONOMI DESA
 
-        </h1>
+            </div>
 
 
-        <p class="hero-subtitle">
+            <h1>
 
-            Gerbang informasi Badan Usaha Milik Desa
-            Kecamatan Dayeuhluhur.
+                Direktori BUMDes
+                <span>Kecamatan Dayeuhluhur</span>
 
-        </p>
-
-
-        <p class="hero-description">
-
-            Kenali BUMDes, unit usaha, produk dan
-            potensi ekonomi desa yang tumbuh
-            bersama masyarakat.
-
-        </p>
+            </h1>
 
 
-        <!-- SEARCH -->
+            <p>
 
-        <div class="bumdes-search">
+                Mengenal badan usaha milik desa dan
+                berbagai potensi ekonomi yang dikembangkan
+                untuk mendukung kemandirian masyarakat.
 
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-                type="text"
-                id="searchBumdes"
-                placeholder="Cari BUMDes, desa, unit usaha...">
-
-        </div>
+            </p>
 
 
-        <div
-            id="searchInfo"
-            class="search-info">
+            <!-- SEARCH -->
 
-            Menampilkan seluruh BUMDes
+            <div class="bumdes-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchBumdes"
+                    placeholder="Cari nama BUMDes, desa, atau usaha...">
+
+            </div>
 
         </div>
 
@@ -313,25 +270,24 @@
 </section>
 
 
-
 <!-- =====================================================
      STATISTIK
 ===================================================== -->
 
-<section class="bumdes-stat-section">
+<section class="bumdes-statistik">
 
     <div class="container">
 
         <div class="row g-4">
 
 
-            <!-- JUMLAH BUMDES -->
+            <!-- TOTAL BUMDes -->
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-lg-3">
 
-                <div class="stat-card">
+                <div class="bumdes-stat-card">
 
-                    <div class="stat-icon green">
+                    <div class="bumdes-stat-icon">
 
                         <i class="fa-solid fa-building"></i>
 
@@ -354,82 +310,21 @@
             </div>
 
 
-
-            <!-- DESA -->
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="stat-card">
-
-                    <div class="stat-icon blue">
-
-                        <i class="fa-solid fa-house"></i>
-
-                    </div>
-
-                    <div>
-
-                        <strong id="totalDesa">
-                            0
-                        </strong>
-
-                        <span>
-                            Desa
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- UNIT USAHA -->
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="stat-card">
-
-                    <div class="stat-icon orange">
-
-                        <i class="fa-solid fa-store"></i>
-
-                    </div>
-
-                    <div>
-
-                        <strong id="totalUnit">
-                            0
-                        </strong>
-
-                        <span>
-                            Unit Usaha
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
             <!-- AKTIF -->
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-lg-3">
 
-                <div class="stat-card">
+                <div class="bumdes-stat-card">
 
-                    <div class="stat-icon red">
+                    <div class="bumdes-stat-icon">
 
-                        <i class="fa-solid fa-chart-line"></i>
+                        <i class="fa-solid fa-circle-check"></i>
 
                     </div>
 
                     <div>
 
-                        <strong id="totalAktif">
+                        <strong id="bumdesAktif">
                             0
                         </strong>
 
@@ -444,6 +339,63 @@
             </div>
 
 
+            <!-- DESA -->
+
+            <div class="col-6 col-lg-3">
+
+                <div class="bumdes-stat-card">
+
+                    <div class="bumdes-stat-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong id="desaBumdes">
+                            0
+                        </strong>
+
+                        <span>
+                            Desa
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- USAHA -->
+
+            <div class="col-6 col-lg-3">
+
+                <div class="bumdes-stat-card">
+
+                    <div class="bumdes-stat-icon">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong id="totalUsaha">
+                            0
+                        </strong>
+
+                        <span>
+                            Bidang Usaha
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -451,9 +403,8 @@
 </section>
 
 
-
 <!-- =====================================================
-     DIREKTORI
+     DIREKTORI BUMDes
 ===================================================== -->
 
 <section class="bumdes-directory">
@@ -461,95 +412,136 @@
     <div class="container">
 
 
-        <div class="section-heading">
+        <!-- JUDUL -->
 
-            <span>
+        <div class="bumdes-section-heading">
 
-                DIREKTORI BUMDes
+            <div>
 
-            </span>
+                <span class="bumdes-section-label">
 
+                    POTENSI EKONOMI DESA
 
-            <h2>
-
-                BUMDes Kecamatan Dayeuhluhur
-
-            </h2>
+                </span>
 
 
-            <p>
+                <h2>
 
-                Jelajahi badan usaha milik desa
-                dan potensi ekonomi lokal.
+                    BUMDes Kecamatan Dayeuhluhur
 
-            </p>
+                </h2>
+
+
+                <p>
+
+                    Jelajahi profil dan potensi Badan Usaha
+                    Milik Desa yang berkembang di wilayah
+                    Kecamatan Dayeuhluhur.
+
+                </p>
+
+            </div>
+
+
+            <!-- JUMLAH -->
+
+            <div class="bumdes-count-box">
+
+                <strong id="jumlahBumdes">
+
+                    0
+
+                </strong>
+
+                <span>
+                    BUMDes ditemukan
+                </span>
+
+            </div>
 
         </div>
 
 
+        <!-- FILTER -->
 
-        <!-- LOADING -->
+        <div class="bumdes-filter-bar">
+
+
+            <button
+                class="bumdes-filter active"
+                data-filter="semua">
+
+                Semua
+
+            </button>
+
+
+            <button
+                class="bumdes-filter"
+                data-filter="Aktif">
+
+                Aktif
+
+            </button>
+
+
+            <button
+                class="bumdes-filter"
+                data-filter="Segera Hadir">
+
+                Segera Hadir
+
+            </button>
+
+
+        </div>
+
+
+        <!-- =================================================
+             CONTAINER DATA
+        ================================================== -->
 
         <div
-            id="bumdesLoading"
-            class="loading-box">
+            id="bumdesContainer"
+            class="row g-4">
 
-            <div class="spinner-border text-success"></div>
+            <!--
 
-            <p>
-                Memuat data BUMDes...
-            </p>
+                DATA BUMDes DIISI OTOMATIS
+                OLEH bumdes.js
 
-        </div>
-
-
-
-        <!-- ERROR -->
-
-        <div
-            id="bumdesError"
-            class="error-box d-none">
-
-            <i class="fa-solid fa-triangle-exclamation"></i>
-
-            <h4>
-                Data BUMDes belum dapat dimuat
-            </h4>
-
-            <p>
-                Silakan periksa kembali file
-                data/bumdes.json.
-            </p>
+            -->
 
         </div>
 
 
-
-        <!-- EMPTY -->
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
 
         <div
             id="bumdesEmpty"
-            class="empty-box d-none">
+            class="bumdes-empty"
+            style="display:none;">
 
-            <i class="fa-solid fa-building-circle-xmark"></i>
+            <div class="bumdes-empty-icon">
 
-            <h4>
-                BUMDes tidak ditemukan
-            </h4>
+                <i class="fa-solid fa-building-circle-exclamation"></i>
+
+            </div>
+
+
+            <h3>
+                Data BUMDes tidak ditemukan
+            </h3>
+
 
             <p>
-                Coba gunakan kata pencarian lainnya.
+
+                Silakan coba kata kunci pencarian
+                atau filter yang berbeda.
+
             </p>
-
-        </div>
-
-
-
-        <!-- CONTAINER -->
-
-        <div
-            class="row g-4"
-            id="bumdesContainer">
 
         </div>
 
@@ -559,132 +551,294 @@
 </section>
 
 
-
 <!-- =====================================================
-     MODAL DETAIL
+     INFORMASI
 ===================================================== -->
 
-<div
-    class="modal fade"
-    id="bumdesModal"
-    tabindex="-1"
-    aria-hidden="true">
+<section class="bumdes-info">
 
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="container">
 
-        <div class="modal-content">
+        <div class="bumdes-info-box">
 
 
-            <div class="modal-header">
+            <div class="bumdes-info-icon">
 
-                <h5
-                    class="modal-title"
-                    id="modalBumdesNama">
-
-                    Detail BUMDes
-
-                </h5>
-
-
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close">
-                </button>
+                <i class="fa-solid fa-lightbulb"></i>
 
             </div>
 
 
-            <div
-                class="modal-body"
-                id="modalBumdesContent">
+            <div>
+
+                <h3>
+
+                    BUMDes sebagai Penggerak Ekonomi Desa
+
+                </h3>
+
+
+                <p>
+
+                    BUMDes merupakan salah satu instrumen
+                    penting dalam mengembangkan potensi ekonomi
+                    desa, membuka peluang usaha, serta
+                    meningkatkan manfaat ekonomi bagi masyarakat.
+
+                </p>
 
             </div>
-
 
         </div>
 
     </div>
 
-</div>
-
+</section>
 
 
 <!-- =====================================================
      FOOTER
 ===================================================== -->
 
-<footer class="bumdes-footer">
+<footer class="plaza-footer">
 
-    <div class="container text-center">
+    <div class="container">
 
-        <div class="footer-logo">
+        <div class="plaza-footer-grid">
 
-            PLAZA DAYEUHLUHUR
+
+            <!-- BRAND -->
+
+            <div class="plaza-footer-brand">
+
+                <img
+                    src="assets/images/logo.png"
+                    alt="PLAZA DAYEUHLUHUR">
+
+
+                <div class="plaza-footer-brand-name">
+
+                    PLAZA DAYEUHLUHUR
+
+                </div>
+
+
+                <p class="plaza-footer-description">
+
+                    Gerbang Digital Kecamatan Dayeuhluhur
+
+                </p>
+
+            </div>
+
+
+            <!-- MENU -->
+
+            <div>
+
+                <h3 class="plaza-footer-title">
+                    Menu
+                </h3>
+
+
+                <ul class="plaza-footer-links">
+
+                    <li>
+                        <a href="index.html">
+                            Beranda
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="desa.html">
+                            Desa
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="bumdes.html">
+                            BUMDes
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="umkm.html">
+                            UMKM
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="wisata.html">
+                            Wisata
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="berita.html">
+                            Berita
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- KONTAK -->
+
+            <div>
+
+                <h3 class="plaza-footer-title">
+                    Kontak
+                </h3>
+
+
+                <ul class="plaza-footer-contact">
+
+                    <li>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <span>
+                            Kecamatan Dayeuhluhur
+                        </span>
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <span>
+                            info@plazadayeuhluhur.com
+                        </span>
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <span>
+                            (0280) xxxx
+                        </span>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- MEDIA SOSIAL -->
+
+            <div>
+
+                <h3 class="plaza-footer-title">
+                    Media Sosial
+                </h3>
+
+
+                <div class="plaza-footer-social">
+
+                    <a href="#"
+                        aria-label="Facebook">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a href="#"
+                        aria-label="Instagram">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <a href="#"
+                        aria-label="YouTube">
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </a>
+
+
+                    <a href="#"
+                        aria-label="TikTok">
+
+                        <i class="fa-brands fa-tiktok"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
 
-        <p>
+        <!-- FOOTER BOTTOM -->
 
-            Gerbang Informasi, Bisnis dan Potensi
-            Kecamatan Dayeuhluhur
+        <div class="plaza-footer-bottom">
 
-        </p>
+            <p class="plaza-footer-copyright">
+
+                © 2026 PLAZA DAYEUHLUHUR
+
+            </p>
 
 
-        <div class="footer-links">
+            <p class="plaza-footer-tagline">
 
-            <a href="index.html">
-                Beranda
-            </a>
+                Gerbang Digital Kecamatan Dayeuhluhur
 
-            <a href="desa.html">
-                Desa
-            </a>
-
-            <a href="bumdes.html">
-                BUMDes
-            </a>
-
-            <a href="umkm.html">
-                UMKM
-            </a>
-
-            <a href="wisata.html">
-                Wisata
-            </a>
+            </p>
 
         </div>
-
-
-        <hr>
-
-
-        <small>
-
-            © 2026 PLAZA DAYEUHLUHUR
-
-        </small>
 
     </div>
 
 </footer>
 
 
+<!-- =====================================================
+     MOBILE MENU
+===================================================== -->
 
-<!-- BOOTSTRAP -->
+<script>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+function togglePlazaMenu() {
+
+    const menu =
+        document.getElementById("plazaMenu");
+
+    if (menu) {
+
+        menu.classList.toggle("show");
+
+    }
+
+}
+
 </script>
 
 
-<!-- BUMDES JS -->
+<!-- =====================================================
+     BUMDes JS
+===================================================== -->
 
-<script
-    src="assets/js/bumdes.js">
+<script src="assets/js/bumdes.js"></script>
+
+
+<!-- =====================================================
+     BOOTSTRAP JS
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
 
