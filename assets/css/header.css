@@ -1,0 +1,582 @@
+/* =========================================================
+   PLAZA DAYEUHLUHUR
+   HEADER GLOBAL
+   Version 1.0
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* =========================================================
+   GARIS IDENTITAS ATAS
+========================================================= */
+
+.plaza-top-line {
+
+    width: 100%;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #138a62 0%,
+            #138a62 50%,
+            #1478d4 100%
+        );
+}
+
+
+/* =========================================================
+   LIVE NEWS
+========================================================= */
+
+.plaza-live-news {
+
+    width: 100%;
+
+    height: 47px;
+
+    display: flex;
+
+    overflow: hidden;
+
+    background: #e5002b;
+
+    color: #ffffff;
+}
+
+
+/* LABEL */
+
+.plaza-live-label {
+
+    min-width: 205px;
+
+    height: 47px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    background: #050505;
+
+    color: #ffffff;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* TITIK LIVE */
+
+.plaza-live-dot {
+
+    width: 15px;
+
+    height: 15px;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #d90000;
+
+}
+
+
+/* AREA TEKS */
+
+.plaza-news-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    padding-left: 30px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+}
+
+
+/* TEKS BERJALAN */
+
+.plaza-news-track {
+
+    display: inline-block;
+
+    white-space: nowrap;
+
+    animation:
+        plazaNewsMove 28s linear infinite;
+}
+
+
+/* ANIMASI */
+
+@keyframes plazaNewsMove {
+
+    0% {
+
+        transform:
+            translateX(100%);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-100%);
+
+    }
+
+}
+
+
+/* =========================================================
+   HEADER UTAMA
+========================================================= */
+
+.plaza-header {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border-bottom:
+        3px solid #e7e7e7;
+
+    position: relative;
+
+    z-index: 1000;
+}
+
+
+/* CONTAINER */
+
+.plaza-header .container {
+
+    max-width: 1280px;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.plaza-navbar {
+
+    min-height: 142px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+        15px 0;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.plaza-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    color: #252525 !important;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+.plaza-brand img {
+
+    width: auto;
+
+    height: 70px;
+
+    object-fit: contain;
+}
+
+
+.plaza-brand-name {
+
+    color: #252525;
+
+    font-size: 29px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.plaza-menu {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    margin-left: auto;
+
+    list-style: none;
+
+    padding: 0;
+
+    margin-bottom: 0;
+}
+
+
+.plaza-menu li {
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+.plaza-menu a {
+
+    position: relative;
+
+    display: block;
+
+    padding:
+        15px 16px;
+
+    color: #252525;
+
+    text-decoration: none;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    transition:
+        color .25s ease;
+}
+
+
+/* HOVER */
+
+.plaza-menu a:hover {
+
+    color: #138a62;
+}
+
+
+/* =========================================================
+   MENU AKTIF
+========================================================= */
+
+.plaza-menu a.active {
+
+    color: #138a62;
+
+    font-weight: 700;
+}
+
+
+/* GARIS AKTIF */
+
+.plaza-menu a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 16px;
+
+    right: 16px;
+
+    bottom: 1px;
+
+    height: 4px;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #138a62,
+            #1478d4
+        );
+}
+
+
+/* =========================================================
+   MOBILE TOGGLE
+========================================================= */
+
+.plaza-mobile-button {
+
+    display: none;
+
+    border: 0;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    color: #222;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .plaza-brand-name {
+
+        font-size: 23px;
+
+    }
+
+
+    .plaza-menu a {
+
+        padding:
+            13px 10px;
+
+        font-size: 16px;
+
+    }
+
+
+    .plaza-menu a.active::after {
+
+        left: 10px;
+
+        right: 10px;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .plaza-navbar {
+
+        min-height: 82px;
+
+        padding:
+            12px 0;
+
+    }
+
+
+    .plaza-brand img {
+
+        height: 52px;
+
+    }
+
+
+    .plaza-brand-name {
+
+        font-size: 19px;
+
+    }
+
+
+    .plaza-mobile-button {
+
+        display: block;
+
+        margin-left: auto;
+
+    }
+
+
+    .plaza-menu {
+
+        display: none;
+
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        margin-top: 15px;
+
+        padding-bottom: 10px;
+
+        gap: 0;
+
+    }
+
+
+    .plaza-menu.show {
+
+        display: flex;
+
+    }
+
+
+    .plaza-menu a {
+
+        width: 100%;
+
+        padding:
+            11px 5px;
+
+        font-size: 15px;
+
+    }
+
+
+    .plaza-menu a.active::after {
+
+        left: 5px;
+
+        right: auto;
+
+        width: 38px;
+
+        bottom: 3px;
+
+    }
+
+}
+
+
+/* =========================================================
+   HP
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .plaza-top-line {
+
+        height: 3px;
+
+    }
+
+
+    .plaza-live-news {
+
+        height: 40px;
+
+    }
+
+
+    .plaza-live-label {
+
+        min-width: 110px;
+
+        height: 40px;
+
+        gap: 7px;
+
+        font-size: 12px;
+
+    }
+
+
+    .plaza-live-dot {
+
+        width: 9px;
+
+        height: 9px;
+
+    }
+
+
+    .plaza-news-content {
+
+        padding-left: 15px;
+
+        font-size: 11px;
+
+    }
+
+
+    .plaza-navbar {
+
+        min-height: 70px;
+
+    }
+
+
+    .plaza-brand {
+
+        gap: 8px;
+
+    }
+
+
+    .plaza-brand img {
+
+        height: 43px;
+
+    }
+
+
+    .plaza-brand-name {
+
+        font-size: 15px;
+
+    }
+
+}

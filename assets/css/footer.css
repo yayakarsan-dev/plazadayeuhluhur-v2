@@ -1,0 +1,461 @@
+/* =========================================================
+   PLAZA DAYEUHLUHUR
+   FOOTER GLOBAL
+   Version 1.0
+========================================================= */
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.plaza-footer {
+
+    width: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #102b50 0%,
+            #123c61 100%
+        );
+
+    color: #ffffff;
+
+    padding:
+        55px 0 20px;
+
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.plaza-footer .container {
+
+    max-width: 1280px;
+
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.plaza-footer-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        1fr;
+
+    gap: 40px;
+
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.plaza-footer-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.plaza-footer-brand img {
+
+    width: auto;
+
+    height: 50px;
+
+    object-fit: contain;
+
+}
+
+
+.plaza-footer-brand-name {
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   DESKRIPSI
+========================================================= */
+
+.plaza-footer-description {
+
+    max-width: 430px;
+
+    margin: 0;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 11px;
+
+    line-height: 1.9;
+
+}
+
+
+/* =========================================================
+   JUDUL
+========================================================= */
+
+.plaza-footer-title {
+
+    position: relative;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 9px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+/* GARIS JUDUL */
+
+.plaza-footer-title::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 35px;
+
+    height: 3px;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #138a62,
+            #1478d4
+        );
+
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.plaza-footer-links {
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+
+}
+
+
+.plaza-footer-links li {
+
+    margin-bottom: 9px;
+
+}
+
+
+.plaza-footer-links a {
+
+    color:
+        rgba(255,255,255,.70);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    transition:
+        color .25s ease,
+        padding-left .25s ease;
+
+}
+
+
+.plaza-footer-links a:hover {
+
+    color: #ffffff;
+
+    padding-left: 4px;
+
+}
+
+
+/* =========================================================
+   KONTAK
+========================================================= */
+
+.plaza-footer-contact {
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+
+}
+
+
+.plaza-footer-contact li {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+}
+
+
+.plaza-footer-contact i {
+
+    width: 25px;
+
+    flex-shrink: 0;
+
+    color: #50c79a;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   SOCIAL MEDIA
+========================================================= */
+
+.plaza-footer-social {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+}
+
+
+.plaza-footer-social a {
+
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.10);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.plaza-footer-social a:hover {
+
+    background: #138a62;
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.plaza-footer-bottom {
+
+    margin-top: 40px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.12);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+}
+
+
+.plaza-footer-copyright {
+
+    margin: 0;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size: 9px;
+
+}
+
+
+.plaza-footer-copyright strong {
+
+    color:
+        rgba(255,255,255,.82);
+
+}
+
+
+/* =========================================================
+   TAGLINE
+========================================================= */
+
+.plaza-footer-tagline {
+
+    margin: 0;
+
+    color:
+        rgba(255,255,255,.50);
+
+    font-size: 9px;
+
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .plaza-footer {
+
+        padding:
+            45px 0 20px;
+
+    }
+
+
+    .plaza-footer-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 30px;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE HP
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .plaza-footer {
+
+        padding:
+            40px 0 18px;
+
+    }
+
+
+    .plaza-footer-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 28px;
+
+    }
+
+
+    .plaza-footer-brand-name {
+
+        font-size: 18px;
+
+    }
+
+
+    .plaza-footer-brand img {
+
+        height: 43px;
+
+    }
+
+
+    .plaza-footer-bottom {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        margin-top: 30px;
+
+    }
+
+
+    .plaza-footer-tagline {
+
+        text-align: left;
+
+    }
+
+}
