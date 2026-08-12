@@ -5,42 +5,50 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Kontak & Tentang PLAZA DAYEUHLUHUR</title>
+    <title>
+        Kontak | PLAZA DAYEUHLUHUR
+    </title>
 
-    <meta
-        name="description"
-        content="PLAZA DAYEUHLUHUR - Gerakan kolaborasi lokal dan ekosistem digital Kecamatan Dayeuhluhur, Cilacap.">
+    <meta name="description"
+          content="PLAZA DAYEUHLUHUR - Gerbang Digital Kecamatan Dayeuhluhur">
 
-    <!-- GOOGLE FONT -->
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-
-    <!-- BOOTSTRAP -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
 
-    <!-- FONT AWESOME -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =====================================================
+         STYLE
+    ====================================================== -->
 
     <style>
 
@@ -53,9 +61,9 @@
 
             margin: 0;
 
-            background: #f5f8fc;
-
             font-family: "Poppins", sans-serif;
+
+            background: #f5f8fc;
 
             color: #102a56;
 
@@ -70,29 +78,97 @@
 
             height: 4px;
 
-            background: linear-gradient(
-                90deg,
-                #0f7f5f,
-                #0d8b6b,
-                #1769d1
-            );
+            background:
+                linear-gradient(
+                    90deg,
+                    #11875f,
+                    #168a69,
+                    #1976d2
+                );
 
         }
 
 
         /* =====================================================
-           CONTAINER
+           LIVE NEWS
         ===================================================== */
 
-        .contact-container {
+        .news-wrapper {
+
+            display: flex;
 
             width: 100%;
 
-            max-width: 1120px;
+            height: 42px;
 
-            margin: 0 auto;
+            overflow: hidden;
 
-            padding: 0 20px;
+            background: #087f5b;
+
+            color: #fff;
+
+        }
+
+
+        .news-label {
+
+            min-width: 125px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            background: #101010;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .live-dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #ff3b30;
+
+            box-shadow:
+                0 0 0 3px rgba(255, 59, 48, .15);
+
+        }
+
+
+        .news-marquee {
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            overflow: hidden;
+
+            padding-left: 18px;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+        }
+
+
+        #newsFlashContent {
+
+            white-space: nowrap;
 
         }
 
@@ -101,11 +177,172 @@
            HEADER
         ===================================================== */
 
-        .contact-header {
+        .main-header {
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e8edf3;
+
+            position: relative;
+
+            z-index: 10;
+
+        }
+
+
+        .navbar {
+
+            min-height: 88px;
+
+        }
+
+
+        .navbar-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            color: #202020 !important;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+        }
+
+
+        .navbar-brand img {
+
+            width: auto;
+
+            height: 55px;
+
+            object-fit: contain;
+
+        }
+
+
+        .navbar-nav {
+
+            gap: 8px;
+
+        }
+
+
+        .navbar-nav .nav-link {
+
+            position: relative;
+
+            padding:
+                12px 13px !important;
+
+            color: #242424;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            transition: .25s ease;
+
+        }
+
+
+        .navbar-nav .nav-link:hover {
+
+            color: #138a62;
+
+        }
+
+
+        /* MENU AKTIF */
+
+        .navbar-nav .nav-link.active {
+
+            color: #138a62;
+
+            font-weight: 700;
+
+        }
+
+
+        .navbar-nav .nav-link.active::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 13px;
+
+            right: 13px;
+
+            bottom: 3px;
+
+            height: 3px;
+
+            border-radius: 5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #138a62,
+                    #1875d1
+                );
+
+        }
+
+
+        .navbar-toggler {
+
+            border: 0;
+
+            padding: 8px;
+
+        }
+
+
+        .navbar-toggler:focus {
+
+            box-shadow: none;
+
+        }
+
+
+        /* =====================================================
+           PAGE CONTENT
+        ===================================================== */
+
+        .contact-page {
+
+            padding:
+                35px 0 55px;
+
+        }
+
+
+        .contact-container {
+
+            max-width: 1120px;
+
+            margin: auto;
+
+            padding:
+                0 20px;
+
+        }
+
+
+        /* =====================================================
+           INTRO
+        ===================================================== */
+
+        .contact-intro {
 
             text-align: center;
 
-            padding: 28px 0 30px;
+            margin-bottom: 28px;
 
         }
 
@@ -116,15 +353,14 @@
 
             align-items: center;
 
-            justify-content: center;
-
-            padding: 7px 15px;
+            padding:
+                7px 15px;
 
             border-radius: 30px;
 
-            background: #eef6ff;
+            background: #edf6ff;
 
-            border: 1px solid #d7e8ff;
+            border: 1px solid #d5e8ff;
 
             color: #1769d1;
 
@@ -132,35 +368,35 @@
 
             font-weight: 700;
 
-            letter-spacing: 1.3px;
-
-            text-transform: uppercase;
+            letter-spacing: 1.2px;
 
         }
 
 
-        .contact-header h1 {
+        .contact-intro h1 {
 
-            margin: 13px 0 8px;
+            margin:
+                13px 0 8px;
 
             color: #102b61;
 
-            font-size: 28px;
+            font-size: 29px;
 
             font-weight: 800;
 
         }
 
 
-        .contact-header p {
+        .contact-intro p {
 
-            max-width: 600px;
+            max-width: 620px;
 
-            margin: 0 auto;
+            margin:
+                0 auto;
 
-            color: #60718c;
+            color: #63748c;
 
-            font-size: 13px;
+            font-size: 12px;
 
             line-height: 1.7;
 
@@ -179,26 +415,28 @@
 
             gap: 15px;
 
-            background: #fffbed;
-
-            border: 1px solid #f5df9b;
-
-            border-radius: 18px;
-
             padding: 18px;
 
-            margin-bottom: 30px;
+            margin-bottom: 28px;
+
+            background: #fffbed;
+
+            border:
+                1px solid #f3df9c;
+
+            border-radius: 18px;
 
         }
 
 
         .award-icon {
 
-            flex: 0 0 43px;
+            flex:
+                0 0 44px;
 
-            width: 43px;
+            width: 44px;
 
-            height: 43px;
+            height: 44px;
 
             display: flex;
 
@@ -206,11 +444,9 @@
 
             justify-content: center;
 
+            background: #ffbd20;
+
             border-radius: 11px;
-
-            background: #ffbf22;
-
-            color: white;
 
             font-size: 19px;
 
@@ -228,13 +464,14 @@
 
             display: inline-block;
 
-            padding: 4px 9px;
+            padding:
+                4px 9px;
 
             margin-bottom: 5px;
 
             border-radius: 20px;
 
-            background: #f04444;
+            background: #ef4242;
 
             color: white;
 
@@ -242,14 +479,13 @@
 
             font-weight: 700;
 
-            text-transform: uppercase;
-
         }
 
 
         .award-content h2 {
 
-            margin: 0 0 4px;
+            margin:
+                0 0 5px;
 
             color: #12274e;
 
@@ -264,18 +500,11 @@
 
             margin: 0;
 
-            color: #566982;
+            color: #596c85;
 
             font-size: 11px;
 
-            line-height: 1.65;
-
-        }
-
-
-        .award-content strong {
-
-            color: #142a50;
+            line-height: 1.7;
 
         }
 
@@ -286,23 +515,26 @@
 
         .main-card {
 
-            background: #ffffff;
+            background: #fff;
 
-            border: 1px solid #e5ebf3;
+            border:
+                1px solid #e5ebf3;
 
             border-radius: 20px;
 
             padding: 30px;
 
             box-shadow:
-                0 8px 25px rgba(25, 54, 91, 0.06);
+                0 8px 28px
+                rgba(20, 50, 90, .06);
 
         }
 
 
         .main-card h2 {
 
-            margin: 0 0 14px;
+            margin:
+                0 0 14px;
 
             color: #102a56;
 
@@ -317,18 +549,18 @@
 
             margin-bottom: 13px;
 
-            color: #5a6d87;
+            color: #5b6d85;
 
             font-size: 11px;
 
-            line-height: 1.8;
+            line-height: 1.85;
 
         }
 
 
         .main-card strong {
 
-            color: #122a55;
+            color: #102a56;
 
         }
 
@@ -339,17 +571,20 @@
 
         .divider {
 
+            width: 100%;
+
             height: 1px;
 
-            background: #e8edf3;
+            margin:
+                25px 0;
 
-            margin: 25px 0;
+            background: #e8edf3;
 
         }
 
 
         /* =====================================================
-           FEATURE CARDS
+           FEATURE
         ===================================================== */
 
         .feature-grid {
@@ -366,53 +601,30 @@
 
         .feature-card {
 
+            min-height: 120px;
+
+            padding: 17px;
+
             background: #f7f9fc;
 
             border-radius: 13px;
 
-            padding: 17px;
-
-            min-height: 120px;
-
         }
 
 
         .feature-icon {
-
-            font-size: 17px;
 
             margin-bottom: 8px;
 
-        }
-
-
-        .feature-card:nth-child(1)
-        .feature-icon {
-
-            color: #f0a800;
-
-        }
-
-
-        .feature-card:nth-child(2)
-        .feature-icon {
-
-            color: #1598d5;
-
-        }
-
-
-        .feature-card:nth-child(3)
-        .feature-icon {
-
-            color: #e6a300;
+            font-size: 17px;
 
         }
 
 
         .feature-card h3 {
 
-            margin: 0 0 5px;
+            margin:
+                0 0 5px;
 
             color: #122a55;
 
@@ -427,7 +639,7 @@
 
             margin: 0;
 
-            color: #66768d;
+            color: #687991;
 
             font-size: 9px;
 
@@ -437,12 +649,10 @@
 
 
         /* =====================================================
-           CONTACT AREA
+           CONTACT INFO
         ===================================================== */
 
         .contact-info {
-
-            margin-top: 25px;
 
             display: grid;
 
@@ -473,9 +683,12 @@
 
         .contact-item i {
 
-            width: 32px;
+            flex:
+                0 0 33px;
 
-            height: 32px;
+            width: 33px;
+
+            height: 33px;
 
             display: flex;
 
@@ -498,7 +711,7 @@
 
             display: block;
 
-            color: #60718c;
+            color: #7a899d;
 
             font-size: 9px;
 
@@ -522,22 +735,139 @@
            FOOTER
         ===================================================== */
 
-        .contact-footer {
+        .main-footer {
 
-            text-align: center;
+            background: #102b50;
 
-            padding: 25px 15px 30px;
+            color: rgba(255,255,255,.8);
 
-            color: #8390a4;
-
-            font-size: 9px;
+            padding:
+                35px 0 20px;
 
         }
 
 
-        .contact-footer strong {
+        .footer-container {
 
-            color: #1a3465;
+            max-width: 1120px;
+
+            margin: auto;
+
+            padding:
+                0 20px;
+
+        }
+
+
+        .footer-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.4fr 1fr 1fr;
+
+            gap: 30px;
+
+        }
+
+
+        .footer-brand {
+
+            color: white;
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .footer-description {
+
+            max-width: 400px;
+
+            margin: 0;
+
+            color:
+                rgba(255,255,255,.68);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .footer-title {
+
+            margin-bottom: 10px;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .footer-links {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+
+        }
+
+
+        .footer-links li {
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .footer-links a {
+
+            color:
+                rgba(255,255,255,.68);
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            transition: .2s;
+
+        }
+
+
+        .footer-links a:hover {
+
+            color: white;
+
+        }
+
+
+        .footer-bottom {
+
+            margin-top: 25px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.12);
+
+            text-align: center;
+
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 9px;
 
         }
 
@@ -546,16 +876,86 @@
            RESPONSIVE
         ===================================================== */
 
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
 
-            .contact-header {
+            .navbar-nav {
 
-                padding-top: 20px;
+                padding-top: 15px;
+
+                gap: 0;
 
             }
 
 
-            .contact-header h1 {
+            .navbar-nav .nav-link {
+
+                padding:
+                    10px 5px !important;
+
+            }
+
+
+            .navbar-nav .nav-link.active::after {
+
+                left: 5px;
+
+                right: auto;
+
+                width: 35px;
+
+            }
+
+
+            .footer-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .news-label {
+
+                min-width: 105px;
+
+                font-size: 11px;
+
+            }
+
+
+            .news-marquee {
+
+                font-size: 11px;
+
+            }
+
+
+            .navbar {
+
+                min-height: 72px;
+
+            }
+
+
+            .navbar-brand {
+
+                font-size: 17px;
+
+            }
+
+
+            .navbar-brand img {
+
+                height: 45px;
+
+            }
+
+
+            .contact-intro h1 {
 
                 font-size: 24px;
 
@@ -589,21 +989,44 @@
 
             }
 
+
+            .footer-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+
+            }
+
         }
 
 
         @media (max-width: 480px) {
 
-            .contact-header h1 {
+            .contact-page {
+
+                padding-top: 25px;
+
+            }
+
+
+            .contact-intro h1 {
 
                 font-size: 21px;
 
             }
 
 
-            .contact-header p {
+            .contact-intro p {
 
-                font-size: 11px;
+                font-size: 10px;
+
+            }
+
+
+            .award-card {
+
+                flex-direction: column;
 
             }
 
@@ -631,43 +1054,193 @@
 <body>
 
 
-    <!-- TOP LINE -->
+    <!-- =====================================================
+         TOP LINE
+    ====================================================== -->
 
     <div class="top-line"></div>
 
 
     <!-- =====================================================
-         HEADER
-    ===================================================== -->
+         LIVE NEWS
+    ====================================================== -->
 
-    <header class="contact-header">
+    <div class="news-wrapper">
 
-        <div class="contact-container">
+        <div class="news-label">
+
+            <span class="live-dot"></span>
+
+            LIVE NEWS
+
+        </div>
 
 
-            <div class="contact-badge">
+        <div class="news-marquee">
 
-                GERAKAN KOLABORASI LOKAL
+            <div id="newsFlashContent">
+
+                Memuat informasi terbaru...
 
             </div>
 
-
-            <h1>
-
-                PLAZA DAYEUHLUHUR
-
-            </h1>
-
-
-            <p>
-
-                Membangun kemandirian ekonomi digital terpadu
-                untuk wilayah Kecamatan Dayeuhluhur, Cilacap.
-
-            </p>
-
-
         </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="main-header">
+
+        <nav class="navbar navbar-expand-lg">
+
+            <div class="container">
+
+
+                <!-- LOGO -->
+
+                <a class="navbar-brand"
+                   href="index.html">
+
+                    <img
+                        src="assets/images/logo.png"
+                        alt="PLAZA DAYEUHLUHUR">
+
+                    <span class="ms-2">
+
+                        PLAZA DAYEUHLUHUR
+
+                    </span>
+
+                </a>
+
+
+                <!-- MOBILE BUTTON -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+
+                <!-- MENU -->
+
+                <div
+                    class="collapse navbar-collapse"
+                    id="navbarNav">
+
+                    <ul class="navbar-nav ms-auto">
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="index.html">
+
+                                Beranda
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="desa.html">
+
+                                Desa
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="bumdes.html">
+
+                                BUMDes
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="umkm.html">
+
+                                UMKM
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="wisata.html">
+
+                                Wisata
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="berita.html">
+
+                                Berita
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link active"
+                                href="kontak.html">
+
+                                Kontak
+
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
 
     </header>
 
@@ -675,244 +1248,241 @@
 
     <!-- =====================================================
          CONTENT
-    ===================================================== -->
+    ====================================================== -->
 
-    <main class="contact-container">
+    <main class="contact-page">
 
-
-        <!-- PENGHARGAAN -->
-
-        <section class="award-card">
+        <div class="contact-container">
 
 
-            <div class="award-icon">
+            <!-- INTRO -->
 
-                🏆
+            <section class="contact-intro">
 
-            </div>
+                <div class="contact-badge">
 
-
-            <div class="award-content">
-
-
-                <div class="award-label">
-
-                    APRESIASI KEMENTERIAN RI
+                    GERAKAN KOLABORASI LOKAL
 
                 </div>
 
 
+                <h1>
+
+                    PLAZA DAYEUHLUHUR
+
+                </h1>
+
+
+                <p>
+
+                    Membangun kemandirian ekonomi digital terpadu
+                    untuk wilayah Kecamatan Dayeuhluhur, Cilacap.
+
+                </p>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 AWARD
+            ================================================== -->
+
+            <section class="award-card">
+
+
+                <div class="award-icon">
+
+                    🏆
+
+                </div>
+
+
+                <div class="award-content">
+
+
+                    <div class="award-label">
+
+                        APRESIASI KEMENTERIAN RI
+
+                    </div>
+
+
+                    <h2>
+
+                        Penerima Penghargaan 20 Inovator Pahlawan
+                        Digital UMKM
+
+                    </h2>
+
+
+                    <p>
+
+                        Konsep pemberdayaan dan platform ekosistem
+                        digital ini bangga diakui secara nasional
+                        dengan meraih penghargaan sebagai salah satu
+                        dari
+
+                        <strong>
+                            20 Inovator Pahlawan Digital UMKM
+                        </strong>
+
+                        langsung oleh
+
+                        <strong>
+                            Menteri Koperasi dan UKM Republik Indonesia.
+                        </strong>
+
+                    </p>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MAIN INFORMATION
+            ================================================== -->
+
+            <section class="main-card">
+
+
                 <h2>
 
-                    Penerima Penghargaan 20 Inovator Pahlawan Digital UMKM
+                    Pengembangan & Kepengurusan
 
                 </h2>
 
 
                 <p>
 
-                    Konsep pemberdayaan dan platform ekosistem digital
-                    ini bangga diakui secara nasional dengan meraih
-                    penghargaan sebagai salah satu dari
+                    Situs PLAZA DAYEUHLUHUR ini dikembangkan,
+                    dirawat, dan dikelola sepenuhnya secara profesional
+                    oleh UMKM Lokal Cilacap, yaitu
+
                     <strong>
-                        20 Inovator Pahlawan Digital UMKM
+                        RUMAH INTERNET PANULISAN.
                     </strong>
-                    langsung oleh
-                    <strong>
-                        Menteri Koperasi dan UKM Republik Indonesia.
-                    </strong>
+
+                    Sebagai motor penggerak digitalisasi di daerah
+                    perbatasan, kami bertekad menghadirkan solusi
+                    teknologi tepat guna yang berdampak nyata.
 
                 </p>
 
 
-            </div>
+                <p>
+
+                    Kecamatan Dayeuhluhur dikaruniai kekayaan
+                    perkebunan yang subur, seni budaya bernilai tinggi,
+                    dan produk kuliner khas yang otentik. Namun,
+                    keterbatasan akses teknologi pemasaran digital
+                    sering kali menjadi kendala bagi produsen lokal
+                    untuk melebarkan jangkauan pasarnya.
+
+                </p>
 
 
-        </section>
+                <p>
+
+                    Melalui dedikasi digitalisasi, kami bertekad
+                    membantu menaikkelaskan ratusan pelaku usaha mikro
+                    setempat dengan menghubungkan langsung pemesanan
+                    pembeli ke WhatsApp pribadi produsen tanpa
+                    membebankan potongan komisi apa pun.
+
+                </p>
 
 
-
-        <!-- =================================================
-             TENTANG & PENGELOLAAN
-        ================================================= -->
-
-        <section class="main-card">
+                <div class="divider"></div>
 
 
-            <h2>
+                <!-- =================================================
+                     FEATURE
+                ================================================== -->
 
-                Pengembangan & Kepengurusan
-
-            </h2>
-
-
-            <p>
-
-                Situs PLAZA DAYEUHLUHUR ini dikembangkan,
-                dirawat, dan dikelola sepenuhnya secara profesional
-                oleh UMKM Lokal Cilacap, yaitu
-                <strong>
-                    RUMAH INTERNET PANULISAN.
-                </strong>
-
-                Sebagai motor penggerak digitalisasi di daerah
-                perbatasan, kami bertekad menghadirkan solusi
-                teknologi tepat guna yang berdampak nyata.
-
-            </p>
+                <div class="feature-grid">
 
 
-            <p>
+                    <div class="feature-card">
 
-                Kecamatan Dayeuhluhur dikaruniai kekayaan perkebunan
-                yang subur, seni budaya bernilai tinggi, dan produk
-                kuliner khas yang otentik. Namun, keterbatasan akses
-                teknologi pemasaran digital sering kali menjadi
-                kendala bagi produsen lokal untuk melebarkan
-                jangkauan pasarnya.
+                        <div class="feature-icon">
 
-            </p>
+                            🤝
+
+                        </div>
 
 
-            <p>
+                        <h3>
 
-                Melalui dedikasi digitalisasi, kami bertekad membantu
-                menaikkelaskan ratusan pelaku usaha mikro setempat
-                dengan menghubungkan langsung pemesanan pembeli
-                ke WhatsApp pribadi produsen tanpa membebankan
-                potongan komisi apa pun.
+                            Tanpa Komisi
 
-            </p>
+                        </h3>
 
 
-            <div class="divider"></div>
+                        <p>
 
+                            Pembeli terhubung langsung ke WhatsApp
+                            produsen tanpa potongan apa pun.
 
-
-            <!-- FEATURE -->
-
-            <div class="feature-grid">
-
-
-                <div class="feature-card">
-
-
-                    <div class="feature-icon">
-
-                        🤝
+                        </p>
 
                     </div>
 
 
-                    <h3>
 
-                        Tanpa Komisi
+                    <div class="feature-card">
 
-                    </h3>
+                        <div class="feature-icon">
 
+                            🌐
 
-                    <p>
-
-                        Pembeli terhubung langsung ke WhatsApp
-                        produsen tanpa potongan apa pun.
-
-                    </p>
+                        </div>
 
 
-                </div>
+                        <h3>
+
+                            Ekosistem Digital
+
+                        </h3>
 
 
+                        <p>
 
-                <div class="feature-card">
+                            Katalog produk, direktori UMKM, dan promosi
+                            dalam satu platform.
 
-
-                    <div class="feature-icon">
-
-                        🌐
+                        </p>
 
                     </div>
 
 
-                    <h3>
 
-                        Ekosistem Digital
+                    <div class="feature-card">
 
-                    </h3>
+                        <div class="feature-icon">
 
+                            🏆
 
-                    <p>
-
-                        Katalog produk, direktori UMKM, dan promosi
-                        dalam satu platform.
-
-                    </p>
+                        </div>
 
 
-                </div>
+                        <h3>
+
+                            Diakui Nasional
+
+                        </h3>
 
 
+                        <p>
 
-                <div class="feature-card">
+                            Salah satu dari 20 Inovator Pahlawan
+                            Digital UMKM versi Kemenkop RI.
 
-
-                    <div class="feature-icon">
-
-                        🏆
-
-                    </div>
-
-
-                    <h3>
-
-                        Diakui Nasional
-
-                    </h3>
-
-
-                    <p>
-
-                        Salah satu dari 20 Inovator Pahlawan
-                        Digital UMKM versi Kemenkop RI.
-
-                    </p>
-
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- =================================================
-                 KONTAK
-            ================================================= -->
-
-            <div class="divider"></div>
-
-
-            <div class="contact-info">
-
-
-                <div class="contact-item">
-
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-
-                    <div>
-
-                        <span>
-
-                            Wilayah
-
-                        </span>
-
-                        <strong>
-
-                            Kecamatan Dayeuhluhur, Cilacap
-
-                        </strong>
+                        </p>
 
                     </div>
 
@@ -920,26 +1490,71 @@
                 </div>
 
 
-
-                <div class="contact-item">
-
-
-                    <i class="fa-brands fa-whatsapp"></i>
+                <div class="divider"></div>
 
 
-                    <div>
+                <!-- =================================================
+                     CONTACT INFO
+                ================================================== -->
 
-                        <span>
+                <div class="contact-info">
 
-                            Layanan Informasi
 
-                        </span>
+                    <div class="contact-item">
 
-                        <strong>
+                        <i class="fa-solid fa-location-dot"></i>
 
-                            WhatsApp PLAZA DAYEUHLUHUR
+                        <div>
 
-                        </strong>
+                            <span>
+                                Wilayah
+                            </span>
+
+                            <strong>
+                                Kecamatan Dayeuhluhur, Cilacap
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="contact-item">
+
+                        <i class="fa-brands fa-whatsapp"></i>
+
+                        <div>
+
+                            <span>
+                                Layanan Informasi
+                            </span>
+
+                            <strong>
+                                WhatsApp PLAZA DAYEUHLUHUR
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="contact-item">
+
+                        <i class="fa-solid fa-globe"></i>
+
+                        <div>
+
+                            <span>
+                                Platform Digital
+                            </span>
+
+                            <strong>
+                                PLAZA DAYEUHLUHUR
+                            </strong>
+
+                        </div>
 
                     </div>
 
@@ -947,38 +1562,10 @@
                 </div>
 
 
-
-                <div class="contact-item">
-
-
-                    <i class="fa-solid fa-globe"></i>
+            </section>
 
 
-                    <div>
-
-                        <span>
-
-                            Platform Digital
-
-                        </span>
-
-                        <strong>
-
-                            PLAZA DAYEUHLUHUR
-
-                        </strong>
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
+        </div>
 
     </main>
 
@@ -986,28 +1573,235 @@
 
     <!-- =====================================================
          FOOTER
-    ===================================================== -->
+    ====================================================== -->
 
-    <footer class="contact-footer">
+    <footer class="main-footer">
 
-        <strong>
+        <div class="footer-container">
 
-            © 2026 PLAZA DAYEUHLUHUR
 
-        </strong>
+            <div class="footer-grid">
 
-        <br>
 
-        Gerbang Digital Kecamatan Dayeuhluhur
+                <!-- BRAND -->
+
+                <div>
+
+                    <div class="footer-brand">
+
+                        PLAZA DAYEUHLUHUR
+
+                    </div>
+
+
+                    <p class="footer-description">
+
+                        Gerbang Digital Kecamatan Dayeuhluhur.
+                        Menghubungkan potensi desa, UMKM, BUMDes,
+                        wisata, berita, dan berbagai informasi lokal
+                        dalam satu ekosistem digital.
+
+                    </p>
+
+                </div>
+
+
+                <!-- NAVIGASI -->
+
+                <div>
+
+                    <div class="footer-title">
+
+                        NAVIGASI
+
+                    </div>
+
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="index.html">
+                                Beranda
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="desa.html">
+                                Desa
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="bumdes.html">
+                                BUMDes
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="umkm.html">
+                                UMKM
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="wisata.html">
+                                Wisata
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="berita.html">
+                                Berita
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- INFORMASI -->
+
+                <div>
+
+                    <div class="footer-title">
+
+                        INFORMASI
+
+                    </div>
+
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="kontak.html">
+                                Tentang PLAZA DAYEUHLUHUR
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="umkm.html">
+                                Direktori UMKM
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="bumdes.html">
+                                Direktori BUMDes
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="wisata.html">
+                                Destinasi Wisata
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FOOTER BOTTOM -->
+
+            <div class="footer-bottom">
+
+                © 2026
+                <strong>
+                    PLAZA DAYEUHLUHUR
+                </strong>
+
+                · Gerbang Digital Kecamatan Dayeuhluhur
+
+            </div>
+
+
+        </div>
 
     </footer>
 
 
 
-    <!-- BOOTSTRAP JS -->
+    <!-- =====================================================
+         BOOTSTRAP JS
+    ====================================================== -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <!-- =====================================================
+         LIVE NEWS
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const news =
+                    document.getElementById(
+                        "newsFlashContent"
+                    );
+
+                if (!news) return;
+
+                fetch("data/newsflash.json")
+
+                    .then(response => {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Gagal memuat newsflash"
+                            );
+
+                        }
+
+                        return response.json();
+
+                    })
+
+                    .then(data => {
+
+                        if (
+                            Array.isArray(data) &&
+                            data.length > 0
+                        ) {
+
+                            const item = data[0];
+
+                            news.textContent =
+                                item.judul ||
+                                item.title ||
+                                item.text ||
+                                "Informasi terbaru PLAZA DAYEUHLUHUR";
+
+                        }
+
+                    })
+
+                    .catch(error => {
+
+                        console.log(
+                            "Newsflash:",
+                            error.message
+                        );
+
+                        news.textContent =
+                            "Informasi terbaru PLAZA DAYEUHLUHUR";
+
+                    });
+
+            }
+
+        );
+
     </script>
 
 
