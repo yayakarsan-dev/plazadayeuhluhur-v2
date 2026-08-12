@@ -1,26 +1,67 @@
 [
-{
-"nama":"Curug Cimandala",
-"desa":"Hanum",
-"kategori":"Air Terjun",
-"rating":"4.9",
-"gambar":"assets/images/wisata/cimandala.jpg",
-"maps":"https://maps.google.com"
-},
-{
-"nama":"Bukit Dayeuhluhur",
-"desa":"Panulisan",
-"kategori":"Perbukitan",
-"rating":"4.8",
-"gambar":"assets/images/wisata/bukit.jpg",
-"maps":"https://maps.google.com"
-},
-{
-"nama":"Camping Ground",
-"desa":"Bolang",
-"kategori":"Camping",
-"rating":"4.7",
-"gambar":"assets/images/wisata/camping.jpg",
-"maps":"https://maps.google.com"
-}
+    {
+        "id": 1,
+        "nama": "Curug Cimandaway",
+        "slug": "curug-cimandaway",
+        "kategori": "Curug",
+        "ikon": "💦",
+        "desa": "Datar",
+        "jenis": "Wisata Alam",
+        "status": "Destinasi Unggulan",
+        "deskripsi": "Air terjun yang menjadi salah satu ikon wisata Kecamatan Dayeuhluhur dengan panorama alam perbukitan yang menarik.",
+        "gambar": "assets/images/wisata/cimandaway.jpg",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Curug+Cimandaway+Dayeuhluhur+Cilacap"
+    },
+    {
+        "id": 2,
+        "nama": "Bukit Panenjoan",
+        "slug": "bukit-panenjoan",
+        "kategori": "Bukit",
+        "ikon": "⛰️",
+        "desa": "Panulisan Barat",
+        "jenis": "Wisata Alam",
+        "status": "Potensi Wisata",
+        "deskripsi": "Panorama perbukitan dan lanskap alam Dayeuhluhur yang cocok untuk menikmati pemandangan dari ketinggian.",
+        "gambar": "assets/images/wisata/panenjoan.jpg",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Bukit+Panenjoan+Panulisan+Barat+Dayeuhluhur"
+    },
+    {
+        "id": 3,
+        "nama": "Ketapang Indah",
+        "slug": "ketapang-indah",
+        "kategori": "Alam",
+        "ikon": "🌳",
+        "desa": "Matenggeng",
+        "jenis": "Wisata Alam",
+        "status": "Potensi Wisata",
+        "deskripsi": "Destinasi wisata alam di kawasan Dusun Kamuning, Desa Matenggeng dengan suasana perbukitan yang asri.",
+        "gambar": "assets/images/wisata/ketapang-indah.jpg",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Ketapang+Indah+Matenggeng+Dayeuhluhur"
+    },
+    {
+        "id": 4,
+        "nama": "Cidayeuh Canyon",
+        "slug": "cidayeuh-canyon",
+        "kategori": "Alam",
+        "ikon": "🏞️",
+        "desa": "Dayeuhluhur",
+        "jenis": "Wisata Alam",
+        "status": "Potensi Wisata",
+        "deskripsi": "Potensi wisata alam berupa bentang alam dan aliran sungai yang menjadi bagian dari kekayaan alam Dayeuhluhur.",
+        "gambar": "assets/images/wisata/cidayeuh-canyon.jpg",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Cidayeuh+Canyon+Dayeuhluhur+Cilacap"
+    },
+    {
+        "id": 5,
+        "nama": "Curug Seeng Kutaagung",
+        "slug": "curug-seeng-kutaagung",
+        "kategori": "Curug",
+        "ikon": "💧",
+        "desa": "Kutaagung",
+        "jenis": "Wisata Alam",
+        "status": "Potensi Wisata",
+        "deskripsi": "Destinasi air terjun dengan suasana alam yang asri di Desa Kutaagung, Kecamatan Dayeuhluhur.",
+        "gambar": "assets/images/wisata/curug-seeng.jpg",
+        "maps": "https://www.google.com/maps/search/?api=1&query=Curug+Seeng+Kutaagung+Dayeuhluhur"
+    }
 ]
