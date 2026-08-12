@@ -1,11 +1,10 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   DIREKTORI WISATA
+   WISATA.JS
    FINAL VERSION
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
-
 
     /* =====================================================
        ELEMENT HTML
@@ -14,36 +13,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const container =
         document.getElementById("wisataContainer");
 
-
     const searchInput =
         document.getElementById("searchWisata");
-
 
     const kategoriFilter =
         document.getElementById("kategoriWisata");
 
-
     const totalWisata =
         document.getElementById("totalWisata");
-
 
     const totalDesa =
         document.getElementById("totalDesaWisata");
 
-
     const wisataAlam =
         document.getElementById("wisataAlam");
 
-
     const wisataBudaya =
         document.getElementById("wisataBudaya");
-
-
-    /*
-       ID statistik Curug.
-       Kita dukung beberapa kemungkinan ID
-       agar tidak mudah error.
-    */
 
     const wisataCurug =
         document.getElementById("wisataCurug") ||
@@ -58,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!container) {
 
         console.error(
-            "ERROR: wisataContainer tidak ditemukan."
+            "ERROR: #wisataContainer tidak ditemukan."
         );
 
         return;
@@ -74,19 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       LOAD DATA WISATA
+       LOAD DATA JSON
     ===================================================== */
 
     fetch("data/wisata.json")
 
         .then(function (response) {
-
-
-            console.log(
-                "Status wisata.json:",
-                response.status
-            );
-
 
             if (!response.ok) {
 
@@ -97,14 +76,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
 
-
             return response.json();
 
         })
 
-
         .then(function (data) {
-
 
             console.log(
                 "Data wisata berhasil dimuat:",
@@ -115,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!Array.isArray(data)) {
 
                 throw new Error(
-                    "Format wisata.json harus berupa ARRAY."
+                    "Format wisata.json harus berupa array."
                 );
 
             }
@@ -124,31 +100,23 @@ document.addEventListener("DOMContentLoaded", function () {
             semuaWisata = data;
 
 
-            /* =================================================
-               UPDATE STATISTIK
-            ================================================= */
+            /* UPDATE STATISTIK */
 
             updateStatistik(semuaWisata);
 
 
-            /* =================================================
-               ISI FILTER KATEGORI
-            ================================================= */
+            /* ISI FILTER */
 
             isiKategori(semuaWisata);
 
 
-            /* =================================================
-               RENDER SEMUA WISATA
-            ================================================= */
+            /* TAMPILKAN DATA */
 
             renderWisata(semuaWisata);
 
         })
 
-
         .catch(function (error) {
-
 
             console.error(
                 "WISATA ERROR:",
@@ -160,38 +128,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="col-12">
 
-                    <div
-                        class="alert alert-danger text-center">
+                    <div class="alert alert-danger text-center">
 
-                        <i
-                            class="fa-solid fa-triangle-exclamation
-                                   me-2">
-                        </i>
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i>
 
                         <strong>
                             Data wisata belum dapat dimuat.
                         </strong>
 
-                        <br>
-
-                        <small>
-
-                            ${escapeHTML(error.message)}
-
-                        </small>
-
                         <br><br>
 
                         <small>
-
-                            Pastikan file:
-
-                            <b>
-                                data/wisata.json
-                            </b>
-
-                            tersedia.
-
+                            ${escapeHTML(error.message)}
                         </small>
 
                     </div>
@@ -209,13 +157,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderWisata(data) {
 
-
         if (!data || data.length === 0) {
 
             container.innerHTML = `
 
-                <div
-                    class="col-12 text-center py-5">
+                <div class="col-12 text-center py-5">
 
                     <i
                         class="fa-solid fa-map-location-dot
@@ -224,25 +170,18 @@ document.addEventListener("DOMContentLoaded", function () {
                                mb-3">
                     </i>
 
-
                     <h4 class="fw-bold">
-
                         Wisata tidak ditemukan
-
                     </h4>
 
-
                     <p class="text-muted">
-
                         Coba gunakan kata kunci
-                        pencarian lain.
-
+                        atau kategori lainnya.
                     </p>
 
                 </div>
 
             `;
-
 
             return;
 
@@ -254,50 +193,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         data.forEach(function (item) {
 
-
-            /* =================================================
-               DATA DASAR
-            ================================================= */
-
             const nama =
-                item.nama ||
-                "Nama wisata";
-
+                item.nama || "Nama wisata";
 
             const slug =
-                item.slug ||
-                buatSlug(nama);
-
+                item.slug || buatSlug(nama);
 
             const desa =
-                item.desa ||
-                "Dayeuhluhur";
-
+                item.desa || "Dayeuhluhur";
 
             const kategori =
-                item.kategori ||
-                "Wisata";
+                item.kategori || "Wisata";
 
+            const ikon =
+                item.ikon || "🌿";
 
             const deskripsi =
                 item.deskripsi ||
                 "Informasi destinasi wisata segera dilengkapi.";
 
-
             const gambar =
                 item.gambar ||
                 "assets/images/wisata/default.jpg";
 
-
             const maps =
-                item.maps ||
-                item.google_maps ||
-                "#";
+                item.maps || "";
 
-
-            /* =================================================
-               KARTU WISATA
-            ================================================= */
 
             html += `
 
@@ -323,10 +244,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div
                             class="wisata-image-wrapper">
 
+
                             <img
                                 src="${escapeAttribute(gambar)}"
-                                class="card-img-top
-                                       wisata-image"
+                                class="card-img-top wisata-image"
                                 alt="${escapeHTML(nama)}"
                                 loading="lazy"
 
@@ -339,9 +260,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span
                                 class="wisata-category">
 
+                                ${escapeHTML(ikon)}
                                 ${escapeHTML(kategori)}
 
                             </span>
+
 
                         </div>
 
@@ -357,8 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                             <h4
-                                class="fw-bold
-                                       wisata-title">
+                                class="fw-bold wisata-title">
 
                                 ${escapeHTML(nama)}
 
@@ -392,15 +314,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                             <!-- =================================
-                                 BUTTON
+                                 BUTTON DETAIL
                             ================================== -->
 
                             <div
-                                class="mt-auto
-                                       pt-3">
+                                class="mt-auto pt-3">
 
-
-                                <!-- DETAIL -->
 
                                 <a
                                     href="detail-wisata.html?slug=${encodeURIComponent(slug)}"
@@ -410,22 +329,26 @@ document.addEventListener("DOMContentLoaded", function () {
                                            w-100
                                            mb-2">
 
+
                                     <i
                                         class="fa-solid
                                                fa-arrow-right
                                                me-1">
                                     </i>
 
+
                                     Lihat Detail
+
 
                                 </a>
 
 
-                                <!-- MAPS -->
+                                <!-- =================================
+                                     BUTTON MAPS
+                                ================================== -->
 
                                 ${
-                                    maps &&
-                                    maps !== "#"
+                                    maps
 
                                     ?
 
@@ -440,13 +363,16 @@ document.addEventListener("DOMContentLoaded", function () {
                                                rounded-pill
                                                w-100">
 
+
                                         <i
                                             class="fa-solid
                                                    fa-location-arrow
                                                    me-1">
                                         </i>
 
+
                                         Lihat Lokasi
+
 
                                     </a>
 
@@ -464,13 +390,16 @@ document.addEventListener("DOMContentLoaded", function () {
                                                w-100"
                                         disabled>
 
+
                                         <i
                                             class="fa-solid
                                                    fa-location-dot
                                                    me-1">
                                         </i>
 
+
                                         Lokasi Belum Tersedia
+
 
                                     </button>
 
@@ -480,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                             </div>
+
 
                         </div>
 
@@ -498,14 +428,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       STATISTIK
+       UPDATE STATISTIK
     ===================================================== */
 
     function updateStatistik(data) {
 
 
         /* =================================================
-           TOTAL WISATA
+           TOTAL DESTINASI
         ================================================= */
 
         if (totalWisata) {
@@ -520,25 +450,23 @@ document.addEventListener("DOMContentLoaded", function () {
            TOTAL DESA
         ================================================= */
 
-        const desaUnik =
-            new Set(
+        const desaUnik = new Set(
 
-                data
+            data
 
-                    .map(function (item) {
+                .map(function (item) {
 
-                        return String(
-                            item.desa || ""
-                        )
-                        .trim()
-                        .toLowerCase();
+                    return String(
+                        item.desa || ""
+                    )
+                    .trim()
+                    .toLowerCase();
 
-                    })
+                })
 
+                .filter(Boolean)
 
-                    .filter(Boolean)
-
-            );
+        );
 
 
         if (totalDesa) {
@@ -550,180 +478,103 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =================================================
-           WISATA ALAM
+           TOTAL CURUG
+           
+           Berdasarkan:
+           kategori = Curug
+           atau nama mengandung Curug
         ================================================= */
 
-        const alam =
-            data.filter(function (item) {
+        const curug = data.filter(function (item) {
 
-                const kategori =
-                    normalisasi(
-                        item.kategori
-                    );
-
-
-                const nama =
-                    normalisasi(
-                        item.nama
-                    );
+            const kategori =
+                String(
+                    item.kategori || ""
+                )
+                .trim()
+                .toLowerCase();
 
 
-                return (
+            const nama =
+                String(
+                    item.nama || ""
+                )
+                .trim()
+                .toLowerCase();
 
-                    kategori.includes("alam")
 
-                    ||
+            return (
 
-                    kategori.includes("curug")
+                kategori === "curug" ||
 
-                    ||
+                kategori.includes("curug") ||
 
-                    kategori.includes("air terjun")
+                nama.includes("curug")
 
-                    ||
+            );
 
-                    nama.includes("curug")
-
-                );
-
-            }).length;
+        }).length;
 
 
         /* =================================================
-           WISATA BUDAYA
+           TOTAL WISATA ALAM
+           
+           PENTING:
+           Menggunakan FIELD "jenis"
+
+           Karena wisata.json kita berisi:
+
+           "jenis": "Wisata Alam"
         ================================================= */
 
-        const budaya =
-            data.filter(function (item) {
+        const alam = data.filter(function (item) {
 
-                const kategori =
-                    normalisasi(
-                        item.kategori
-                    );
-
-
-                const nama =
-                    normalisasi(
-                        item.nama
-                    );
+            const jenis =
+                String(
+                    item.jenis || ""
+                )
+                .trim()
+                .toLowerCase();
 
 
-                return (
+            return (
 
-                    kategori.includes("budaya")
+                jenis === "wisata alam" ||
 
-                    ||
+                jenis.includes("wisata alam")
 
-                    kategori.includes("sejarah")
+            );
 
-                    ||
-
-                    kategori.includes("tradisi")
-
-                    ||
-
-                    nama.includes("budaya")
-
-                );
-
-            }).length;
+        }).length;
 
 
         /* =================================================
-           CURUG / AIR TERJUN
+           TOTAL WISATA BUDAYA
         ================================================= */
 
-        const curug =
-            data.filter(function (item) {
+        const budaya = data.filter(function (item) {
+
+            const jenis =
+                String(
+                    item.jenis || ""
+                )
+                .trim()
+                .toLowerCase();
 
 
-                const kategori =
-                    normalisasi(
-                        item.kategori
-                    );
+            return (
 
+                jenis === "wisata budaya" ||
 
-                const nama =
-                    normalisasi(
-                        item.nama
-                    );
+                jenis.includes("wisata budaya")
 
+            );
 
-                const jenis =
-                    normalisasi(
-                        item.jenis
-                    );
-
-
-                const tipe =
-                    normalisasi(
-                        item.tipe
-                    );
-
-
-                return (
-
-                    kategori.includes("curug")
-
-                    ||
-
-                    kategori.includes("air terjun")
-
-                    ||
-
-                    nama.includes("curug")
-
-                    ||
-
-                    nama.includes("air terjun")
-
-                    ||
-
-                    jenis.includes("curug")
-
-                    ||
-
-                    jenis.includes("air terjun")
-
-                    ||
-
-                    tipe.includes("curug")
-
-                    ||
-
-                    tipe.includes("air terjun")
-
-                );
-
-            }).length;
+        }).length;
 
 
         /* =================================================
-           TAMPILKAN STATISTIK ALAM
-        ================================================= */
-
-        if (wisataAlam) {
-
-            wisataAlam.textContent =
-                alam;
-
-        }
-
-
-        /* =================================================
-           TAMPILKAN STATISTIK BUDAYA
-        ================================================= */
-
-        if (wisataBudaya) {
-
-            wisataBudaya.textContent =
-                budaya;
-
-        }
-
-
-        /* =================================================
-           TAMPILKAN STATISTIK CURUG
+           TAMPILKAN CURUG
         ================================================= */
 
         if (wisataCurug) {
@@ -735,17 +586,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =================================================
+           TAMPILKAN WISATA ALAM
+        ================================================= */
+
+        if (wisataAlam) {
+
+            wisataAlam.textContent =
+                alam;
+
+        }
+
+
+        /* =================================================
+           TAMPILKAN WISATA BUDAYA
+        ================================================= */
+
+        if (wisataBudaya) {
+
+            wisataBudaya.textContent =
+                budaya;
+
+        }
+
+
+        /* =================================================
            DEBUG CONSOLE
         ================================================= */
 
         console.log(
             "STATISTIK WISATA:",
             {
-                total: data.length,
-                desa: desaUnik.size,
-                alam: alam,
-                budaya: budaya,
-                curug: curug
+                totalDestinasi: data.length,
+                curug: curug,
+                wisataAlam: alam,
+                wisataBudaya: budaya,
+                desa: desaUnik.size
             }
         );
 
@@ -758,7 +633,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function isiKategori(data) {
 
-
         if (!kategoriFilter) {
 
             return;
@@ -766,46 +640,42 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        const kategori =
-            [
-                ...new Set(
+        const kategoriUnik = [
 
-                    data
+            ...new Set(
 
-                        .map(function (item) {
+                data
 
-                            return item.kategori;
+                    .map(function (item) {
 
-                        })
+                        return item.kategori;
 
+                    })
 
-                        .filter(Boolean)
+                    .filter(Boolean)
 
-                )
+            )
 
-            ].sort();
+        ].sort();
 
 
         kategoriFilter.innerHTML = `
 
             <option value="">
-
                 Semua Kategori
-
             </option>
 
         `;
 
 
-        kategori.forEach(function (item) {
-
+        kategoriUnik.forEach(function (kategori) {
 
             kategoriFilter.innerHTML += `
 
                 <option
-                    value="${escapeAttribute(item)}">
+                    value="${escapeAttribute(kategori)}">
 
-                    ${escapeHTML(item)}
+                    ${escapeHTML(kategori)}
 
                 </option>
 
@@ -817,11 +687,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       FILTER DATA
+       FILTER WISATA
     ===================================================== */
 
     function filterWisata() {
-
 
         const keyword =
 
@@ -853,54 +722,55 @@ document.addEventListener("DOMContentLoaded", function () {
             "";
 
 
-        const hasil =
-
-            semuaWisata.filter(function (item) {
+        const hasil = semuaWisata.filter(function (item) {
 
 
-                const text = (
+            const text = (
 
-                    (item.nama || "") +
-                    " " +
-                    (item.desa || "") +
-                    " " +
-                    (item.kategori || "") +
-                    " " +
-                    (item.deskripsi || "")
+                (item.nama || "") +
+                " " +
+                (item.desa || "") +
+                " " +
+                (item.kategori || "") +
+                " " +
+                (item.jenis || "") +
+                " " +
+                (item.deskripsi || "")
 
-                ).toLowerCase();
-
-
-                const cocokKeyword =
-
-                    !keyword ||
-
-                    text.includes(keyword);
+            )
+            .toLowerCase();
 
 
-                const cocokKategori =
+            const cocokKeyword =
 
-                    !kategori ||
+                !keyword ||
 
-                    normalisasi(
-                        item.kategori
-                    )
-
-                    ===
-
-                    normalisasi(
-                        kategori
-                    );
+                text.includes(keyword);
 
 
-                return (
+            const cocokKategori =
 
-                    cocokKeyword &&
-                    cocokKategori
+                !kategori ||
 
-                );
+                String(
+                    item.kategori || ""
+                )
+                .toLowerCase()
+                .trim()
 
-            });
+                ===
+
+                kategori;
+
+
+            return (
+
+                cocokKeyword &&
+                cocokKategori
+
+            );
+
+        });
 
 
         renderWisata(hasil);
@@ -909,7 +779,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       SEARCH
+       EVENT SEARCH
     ===================================================== */
 
     if (searchInput) {
@@ -923,7 +793,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       FILTER KATEGORI
+       EVENT FILTER
     ===================================================== */
 
     if (kategoriFilter) {
@@ -932,23 +802,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "change",
             filterWisata
         );
-
-    }
-
-
-    /* =====================================================
-       HELPER NORMALISASI
-    ===================================================== */
-
-    function normalisasi(value) {
-
-        return String(value || "")
-
-            .toLowerCase()
-
-            .trim()
-
-            .replace(/\s+/g, " ");
 
     }
 
