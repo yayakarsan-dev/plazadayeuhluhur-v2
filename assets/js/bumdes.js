@@ -1,29 +1,34 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
    BUMDes DIRECTORY
+   FINAL VERSION
+===================================================== */
+
+let bumdesData = [];
+let currentFilter = "semua";
+
+
+/* =====================================================
+   DOCUMENT READY
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     loadBumdes();
 
+    setupFilter();
+
 });
 
 
 /* =====================================================
-   LOAD DATA
+   LOAD DATA BUMDES
 ===================================================== */
 
 async function loadBumdes() {
 
     const container =
         document.getElementById("bumdesContainer");
-
-    const loading =
-        document.getElementById("bumdesLoading");
-
-    const errorBox =
-        document.getElementById("bumdesError");
 
     const emptyBox =
         document.getElementById("bumdesEmpty");
@@ -53,6 +58,8 @@ async function loadBumdes() {
             await response.json();
 
 
+        /* CEK FORMAT DATA */
+
         if (!Array.isArray(data)) {
 
             throw new Error(
@@ -62,19 +69,32 @@ async function loadBumdes() {
         }
 
 
+        /* SIMPAN DATA GLOBAL */
+
+        bumdesData = data;
+
         window.bumdesData = data;
 
 
-        loading.classList.add("d-none");
+        console.log(
+            "BUMDes berhasil dimuat:",
+            data
+        );
 
+
+        /* UPDATE STATISTIK */
 
         updateStatistics(data);
 
 
+        /* TAMPILKAN DATA */
+
         renderBumdes(data);
 
 
-        setupSearch(data);
+        /* SEARCH */
+
+        setupSearch();
 
 
     }
@@ -87,21 +107,52 @@ async function loadBumdes() {
         );
 
 
-        loading.classList.add("d-none");
+        if (container) {
 
-        errorBox.classList.remove("d-none");
+            container.innerHTML = "";
+
+        }
+
+
+        if (emptyBox) {
+
+            emptyBox.style.display = "block";
+
+            emptyBox.innerHTML = `
+
+                <div class="bumdes-empty-icon">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                </div>
+
+                <h3>
+                    Data BUMDes gagal dimuat
+                </h3>
+
+                <p>
+                    Periksa file
+                    <strong>data/bumdes.json</strong>
+                    dan koneksi website.
+                </p>
+
+            `;
+
+        }
 
     }
 
 }
 
 
-
 /* =====================================================
-   STATISTIK
+   UPDATE STATISTICS
 ===================================================== */
 
 function updateStatistics(data) {
+
+
+    /* TOTAL BUMDES */
 
     const totalBumdes =
         document.getElementById(
@@ -109,31 +160,23 @@ function updateStatistics(data) {
         );
 
 
-    const totalDesa =
+    if (totalBumdes) {
+
+        totalBumdes.textContent =
+            data.length;
+
+    }
+
+
+    /* =================================================
+       DESA UNIK
+    ================================================= */
+
+    const desaBumdes =
         document.getElementById(
-            "totalDesa"
+            "desaBumdes"
         );
 
-
-    const totalUnit =
-        document.getElementById(
-            "totalUnit"
-        );
-
-
-    const totalAktif =
-        document.getElementById(
-            "totalAktif"
-        );
-
-
-    /* JUMLAH BUMDES */
-
-    totalBumdes.textContent =
-        data.length;
-
-
-    /* DESA UNIK */
 
     const desaSet =
         new Set();
@@ -149,7 +192,8 @@ function updateStatistics(data) {
                     "nama_desa",
                     "desaNama",
                     "wilayah"
-                ]
+                ],
+                ""
             );
 
 
@@ -167,11 +211,23 @@ function updateStatistics(data) {
     });
 
 
-    totalDesa.textContent =
-        desaSet.size;
+    if (desaBumdes) {
+
+        desaBumdes.textContent =
+            desaSet.size;
+
+    }
 
 
-    /* UNIT USAHA */
+    /* =================================================
+       TOTAL UNIT / BIDANG USAHA
+    ================================================= */
+
+    const totalUsaha =
+        document.getElementById(
+            "totalUsaha"
+        );
+
 
     let unitCount = 0;
 
@@ -187,23 +243,34 @@ function updateStatistics(data) {
                     "unit",
                     "usaha",
                     "jumlah_unit"
-                ]
+                ],
+                ""
             );
 
 
+        /* ARRAY */
+
         if (Array.isArray(unit)) {
 
-            unitCount += unit.length;
+            unitCount +=
+                unit.length;
 
         }
+
+
+        /* NUMBER */
 
         else if (
             typeof unit === "number"
         ) {
 
-            unitCount += unit;
+            unitCount +=
+                unit;
 
         }
+
+
+        /* ANGKA STRING */
 
         else if (
             unit &&
@@ -215,6 +282,9 @@ function updateStatistics(data) {
 
         }
 
+
+        /* TEXT */
+
         else if (unit) {
 
             unitCount += 1;
@@ -224,11 +294,23 @@ function updateStatistics(data) {
     });
 
 
-    totalUnit.textContent =
-        unitCount;
+    if (totalUsaha) {
+
+        totalUsaha.textContent =
+            unitCount;
+
+    }
 
 
-    /* BUMDES AKTIF */
+    /* =================================================
+       BUMDES AKTIF
+    ================================================= */
+
+    const bumdesAktif =
+        document.getElementById(
+            "bumdesAktif"
+        );
+
 
     let aktif = 0;
 
@@ -246,14 +328,15 @@ function updateStatistics(data) {
             );
 
 
-        if (
+        const statusText =
             String(status)
                 .toLowerCase()
-                .includes("aktif") ||
+                .trim();
 
-            String(status)
-                .toLowerCase()
-                .includes("active")
+
+        if (
+            statusText.includes("aktif") ||
+            statusText.includes("active")
         ) {
 
             aktif++;
@@ -263,11 +346,14 @@ function updateStatistics(data) {
     });
 
 
-    totalAktif.textContent =
-        aktif;
+    if (bumdesAktif) {
+
+        bumdesAktif.textContent =
+            aktif;
+
+    }
 
 }
-
 
 
 /* =====================================================
@@ -275,6 +361,7 @@ function updateStatistics(data) {
 ===================================================== */
 
 function renderBumdes(data) {
+
 
     const container =
         document.getElementById(
@@ -288,37 +375,71 @@ function renderBumdes(data) {
         );
 
 
-    const searchInfo =
+    const jumlahBumdes =
         document.getElementById(
-            "searchInfo"
+            "jumlahBumdes"
         );
 
 
-    if (!data.length) {
+    if (!container) {
 
-        container.innerHTML = "";
-
-        emptyBox.classList.remove(
-            "d-none"
+        console.error(
+            "Element #bumdesContainer tidak ditemukan."
         );
-
-        searchInfo.textContent =
-            "Tidak ada BUMDes ditemukan.";
 
         return;
 
     }
 
 
-    emptyBox.classList.add(
-        "d-none"
-    );
+    /* UPDATE JUMLAH */
+
+    if (jumlahBumdes) {
+
+        jumlahBumdes.textContent =
+            data.length;
+
+    }
+
+
+    /* DATA KOSONG */
+
+    if (!data.length) {
+
+        container.innerHTML = "";
+
+
+        if (emptyBox) {
+
+            emptyBox.style.display =
+                "block";
+
+        }
+
+        return;
+
+    }
+
+
+    /* SEMBUNYIKAN EMPTY STATE */
+
+    if (emptyBox) {
+
+        emptyBox.style.display =
+            "none";
+
+    }
 
 
     let html = "";
 
 
     data.forEach(function (item) {
+
+
+        /* =================================================
+           IDENTITAS
+        ================================================= */
 
         const id =
             item.id ?? "";
@@ -404,13 +525,19 @@ function renderBumdes(data) {
             item.verifikasi === true;
 
 
+        /* =================================================
+           STATUS
+        ================================================= */
+
+        const statusText =
+            String(status)
+                .toLowerCase()
+                .trim();
+
+
         const active =
-            String(status)
-                .toLowerCase()
-                .includes("aktif") ||
-            String(status)
-                .toLowerCase()
-                .includes("active");
+            statusText.includes("aktif") ||
+            statusText.includes("active");
 
 
         const statusClass =
@@ -418,6 +545,10 @@ function renderBumdes(data) {
                 ? "active"
                 : "pending";
 
+
+        /* =================================================
+           IMAGE
+        ================================================= */
 
         let imageHTML = "";
 
@@ -431,7 +562,9 @@ function renderBumdes(data) {
                     alt="${escapeHTML(nama)}"
                     onerror="
                         this.style.display='none';
-                        this.nextElementSibling.style.display='flex';
+                        if(this.nextElementSibling){
+                            this.nextElementSibling.style.display='flex';
+                        }
                     "
                 >
 
@@ -462,6 +595,10 @@ function renderBumdes(data) {
         }
 
 
+        /* =================================================
+           CARD
+        ================================================= */
+
         html += `
 
             <div class="col-xl-4 col-lg-6">
@@ -476,6 +613,8 @@ function renderBumdes(data) {
                         ${imageHTML}
 
 
+                        <!-- STATUS -->
+
                         <span
                             class="status-badge ${statusClass}">
 
@@ -484,19 +623,23 @@ function renderBumdes(data) {
                         </span>
 
 
+                        <!-- VERIFIED -->
+
                         ${
                             verified
                             ?
                             `
+
                             <span
                                 class="verified-badge"
-                                title="Verified">
+                                title="BUMDes Terverifikasi">
 
                                 <i
                                     class="fa-solid fa-circle-check">
                                 </i>
 
                             </span>
+
                             `
                             :
                             ""
@@ -505,20 +648,25 @@ function renderBumdes(data) {
                     </div>
 
 
-
                     <!-- BODY -->
 
                     <div class="bumdes-body">
 
 
+                        <!-- CATEGORY -->
+
                         <div class="bumdes-category">
 
-                            <i class="fa-solid fa-building"></i>
+                            <i
+                                class="fa-solid fa-building">
+                            </i>
 
                             BADAN USAHA MILIK DESA
 
                         </div>
 
+
+                        <!-- NAME -->
 
                         <h3 class="bumdes-name">
 
@@ -527,6 +675,8 @@ function renderBumdes(data) {
                         </h3>
 
 
+                        <!-- DESCRIPTION -->
+
                         <p class="bumdes-description">
 
                             ${escapeHTML(deskripsi)}
@@ -534,8 +684,12 @@ function renderBumdes(data) {
                         </p>
 
 
+                        <!-- META -->
+
                         <div class="bumdes-meta">
 
+
+                            <!-- DESA -->
 
                             <div
                                 class="bumdes-meta-item">
@@ -553,10 +707,13 @@ function renderBumdes(data) {
                             </div>
 
 
+                            <!-- UNIT USAHA -->
+
                             ${
                                 unit
                                 ?
                                 `
+
                                 <div
                                     class="bumdes-meta-item">
 
@@ -571,6 +728,7 @@ function renderBumdes(data) {
                                     </span>
 
                                 </div>
+
                                 `
                                 :
                                 ""
@@ -580,7 +738,10 @@ function renderBumdes(data) {
                         </div>
 
 
+                        <!-- BUTTON -->
+
                         <button
+                            type="button"
                             class="bumdes-button"
                             onclick="showBumdesDetail('${escapeHTML(String(id))}')">
 
@@ -607,21 +768,15 @@ function renderBumdes(data) {
     container.innerHTML =
         html;
 
-
-    searchInfo.textContent =
-        "Menampilkan " +
-        data.length +
-        " BUMDes";
-
 }
-
 
 
 /* =====================================================
    SEARCH
 ===================================================== */
 
-function setupSearch(data) {
+function setupSearch() {
+
 
     const search =
         document.getElementById(
@@ -630,13 +785,31 @@ function setupSearch(data) {
 
 
     if (!search) {
+
         return;
+
     }
+
+
+    /* CEGAH EVENT DOBEL */
+
+    if (
+        search.dataset.initialized === "true"
+    ) {
+
+        return;
+
+    }
+
+
+    search.dataset.initialized =
+        "true";
 
 
     search.addEventListener(
         "input",
         function () {
+
 
             const keyword =
                 this.value
@@ -644,18 +817,19 @@ function setupSearch(data) {
                     .trim();
 
 
-            if (!keyword) {
+            /* FILTER DATA */
 
-                renderBumdes(data);
-
-                return;
-
-            }
-
-
-            const hasil =
-                data.filter(
+            let hasil =
+                bumdesData.filter(
                     function (item) {
+
+
+                        if (!keyword) {
+
+                            return true;
+
+                        }
+
 
                         return JSON.stringify(
                             item
@@ -667,7 +841,17 @@ function setupSearch(data) {
                 );
 
 
-            renderBumdes(hasil);
+            /* TERAPKAN FILTER STATUS */
+
+            hasil =
+                applyStatusFilter(
+                    hasil
+                );
+
+
+            renderBumdes(
+                hasil
+            );
 
         }
     );
@@ -675,12 +859,203 @@ function setupSearch(data) {
 }
 
 
+/* =====================================================
+   FILTER STATUS
+===================================================== */
+
+function setupFilter() {
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".bumdes-filter"
+        );
+
+
+    buttons.forEach(function (button) {
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+
+                /* HAPUS ACTIVE */
+
+                buttons.forEach(
+                    function (btn) {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                /* AKTIFKAN BUTTON */
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                /* SIMPAN FILTER */
+
+                currentFilter =
+                    this.dataset.filter ||
+                    "semua";
+
+
+                /* AMBIL KEYWORD */
+
+                const search =
+                    document.getElementById(
+                        "searchBumdes"
+                    );
+
+
+                const keyword =
+                    search
+                    ?
+                    search.value
+                        .toLowerCase()
+                        .trim()
+                    :
+                    "";
+
+
+                /* FILTER DATA */
+
+                let hasil =
+                    bumdesData.filter(
+                        function (item) {
+
+
+                            /* SEARCH */
+
+                            if (
+                                keyword &&
+                                !JSON.stringify(item)
+                                    .toLowerCase()
+                                    .includes(keyword)
+                            ) {
+
+                                return false;
+
+                            }
+
+
+                            return true;
+
+                        }
+                    );
+
+
+                /* STATUS */
+
+                hasil =
+                    applyStatusFilter(
+                        hasil
+                    );
+
+
+                renderBumdes(
+                    hasil
+                );
+
+            }
+        );
+
+    });
+
+}
+
 
 /* =====================================================
-   DETAIL MODAL
+   APPLY STATUS FILTER
+===================================================== */
+
+function applyStatusFilter(data) {
+
+
+    if (
+        currentFilter === "semua"
+    ) {
+
+        return data;
+
+    }
+
+
+    return data.filter(
+        function (item) {
+
+
+            const status =
+                getField(
+                    item,
+                    [
+                        "status",
+                        "keadaan"
+                    ],
+                    ""
+                );
+
+
+            const statusText =
+                String(status)
+                    .toLowerCase()
+                    .trim();
+
+
+            if (
+                currentFilter === "Aktif"
+            ) {
+
+                return (
+                    statusText.includes(
+                        "aktif"
+                    ) ||
+                    statusText.includes(
+                        "active"
+                    )
+                );
+
+            }
+
+
+            if (
+                currentFilter === "Segera Hadir"
+            ) {
+
+                return (
+                    statusText.includes(
+                        "segera"
+                    ) ||
+                    statusText.includes(
+                        "hadir"
+                    ) ||
+                    statusText === ""
+                );
+
+            }
+
+
+            return true;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   DETAIL BUMDES
 ===================================================== */
 
 function showBumdesDetail(id) {
+
 
     const data =
         window.bumdesData || [];
@@ -708,6 +1083,10 @@ function showBumdesDetail(id) {
 
     }
 
+
+    /* =================================================
+       FIELD
+    ================================================= */
 
     const nama =
         getField(
@@ -776,11 +1155,16 @@ function showBumdesDetail(id) {
             item,
             [
                 "produk",
-                "produk_unggulan"
+                "produk_unggulan",
+                "potensi"
             ],
             "-"
         );
 
+
+    /* =================================================
+       MODAL
+    ================================================= */
 
     const modalTitle =
         document.getElementById(
@@ -792,6 +1176,39 @@ function showBumdesDetail(id) {
         document.getElementById(
             "modalBumdesContent"
         );
+
+
+    /* =================================================
+       CEK MODAL
+    ================================================= */
+
+    if (
+        !modalTitle ||
+        !modalContent
+    ) {
+
+        console.warn(
+            "Elemen modal BUMDes belum tersedia di HTML."
+        );
+
+        /*
+         * Jika modal belum dibuat,
+         * tampilkan informasi melalui alert
+         */
+
+        alert(
+            nama +
+            "\n\n" +
+            "Desa: " +
+            desa +
+            "\n" +
+            "Status: " +
+            status
+        );
+
+        return;
+
+    }
 
 
     modalTitle.textContent =
@@ -818,7 +1235,9 @@ function showBumdesDetail(id) {
 
             <strong>
 
-                <i class="fa-solid fa-location-dot text-success"></i>
+                <i
+                    class="fa-solid fa-location-dot text-success">
+                </i>
 
                 Desa
 
@@ -837,7 +1256,9 @@ function showBumdesDetail(id) {
 
             <strong>
 
-                <i class="fa-solid fa-circle-check text-success"></i>
+                <i
+                    class="fa-solid fa-circle-check text-success">
+                </i>
 
                 Status
 
@@ -856,7 +1277,9 @@ function showBumdesDetail(id) {
 
             <strong>
 
-                <i class="fa-solid fa-store text-success"></i>
+                <i
+                    class="fa-solid fa-store text-success">
+                </i>
 
                 Unit Usaha
 
@@ -875,7 +1298,9 @@ function showBumdesDetail(id) {
 
             <strong>
 
-                <i class="fa-solid fa-box-open text-success"></i>
+                <i
+                    class="fa-solid fa-box-open text-success">
+                </i>
 
                 Produk / Potensi
 
@@ -894,7 +1319,9 @@ function showBumdesDetail(id) {
 
             <strong>
 
-                <i class="fa-solid fa-circle-info text-success"></i>
+                <i
+                    class="fa-solid fa-circle-info text-success">
+                </i>
 
                 Tentang BUMDes
 
@@ -911,10 +1338,34 @@ function showBumdesDetail(id) {
     `;
 
 
+    /* =================================================
+       BOOTSTRAP MODAL
+    ================================================= */
+
     const modalElement =
         document.getElementById(
             "bumdesModal"
         );
+
+
+    if (!modalElement) {
+
+        return;
+
+    }
+
+
+    if (
+        typeof bootstrap === "undefined"
+    ) {
+
+        console.warn(
+            "Bootstrap JS belum tersedia."
+        );
+
+        return;
+
+    }
 
 
     const modal =
@@ -928,7 +1379,6 @@ function showBumdesDetail(id) {
 }
 
 
-
 /* =====================================================
    HELPER FIELD
 ===================================================== */
@@ -939,11 +1389,13 @@ function getField(
     fallback = "-"
 ) {
 
+
     for (
         let i = 0;
         i < fields.length;
         i++
     ) {
+
 
         const field =
             fields[i];
@@ -967,12 +1419,12 @@ function getField(
 }
 
 
-
 /* =====================================================
    FORMAT UNIT USAHA
 ===================================================== */
 
 function formatUnit(value) {
+
 
     if (
         Array.isArray(value)
@@ -1003,12 +1455,12 @@ function formatUnit(value) {
 }
 
 
-
 /* =====================================================
    ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value) {
+
 
     return String(
         value ?? ""
