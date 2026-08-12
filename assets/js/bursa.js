@@ -649,7 +649,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                         class="fa-brands fa-whatsapp me-1"
                                     ></i>
 
-                                    Hubungi Penjual
+                                    Hubungi By WA
 
                                 </a>
                                 `
