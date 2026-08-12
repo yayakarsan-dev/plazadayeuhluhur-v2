@@ -1,2256 +1,1259 @@
-/* =========================================================
-   PLAZA DAYEUHLUHUR
-   BERITA.CSS — FINAL VERSION
-========================================================= */
+<!DOCTYPE html>
+<html lang="id">
 
+<head>
 
-/* =========================================================
-   1. ROOT / GLOBAL
-========================================================= */
+    <!-- =====================================================
+         META
+    ===================================================== -->
 
-:root {
+    <meta charset="UTF-8">
 
-    --plaza-green: #198754;
-    --plaza-green-dark: #116b43;
-    --plaza-green-light: #35b779;
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    --plaza-blue: #0d6efd;
-    --plaza-blue-dark: #0757b8;
+    <meta
+        name="description"
+        content="Berita dan informasi terbaru Kecamatan Dayeuhluhur melalui PLAZA DAYEUHLUHUR.">
 
-    --plaza-red: #e4002b;
+    <meta
+        name="keywords"
+        content="berita Dayeuhluhur, berita Cilacap, informasi Dayeuhluhur, PLAZA DAYEUHLUHUR">
 
-    --dark: #172033;
-    --text: #343a40;
-    --muted: #6c757d;
+    <meta
+        name="author"
+        content="PLAZA DAYEUHLUHUR">
 
-    --light: #f7f8fa;
-    --white: #ffffff;
 
-    --border: #e7e9ed;
+    <!-- =====================================================
+         TITLE
+    ===================================================== -->
 
-    --shadow-sm:
-        0 5px 18px rgba(0, 0, 0, .06);
+    <title>
+        Berita | PLAZA DAYEUHLUHUR
+    </title>
 
-    --shadow:
-        0 10px 30px rgba(0, 0, 0, .08);
 
-    --shadow-lg:
-        0 18px 45px rgba(0, 0, 0, .12);
+    <!-- =====================================================
+         FAVICON
+    ===================================================== -->
 
-    --radius:
-        18px;
-}
+    <link
+        rel="icon"
+        href="assets/images/logo.png">
 
 
-/* =========================================================
-   2. RESET
-========================================================= */
+    <!-- =====================================================
+         GOOGLE FONT
+    ===================================================== -->
 
-* {
-    box-sizing: border-box;
-}
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-html {
-    scroll-behavior: smooth;
-}
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
-body {
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-    margin: 0;
 
-    font-family:
-        "Poppins",
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    <!-- =====================================================
+         BOOTSTRAP
+    ===================================================== -->
 
-    color: var(--text);
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
-    background:
-        #ffffff;
 
-    line-height: 1.7;
-}
+    <!-- =====================================================
+         FONT AWESOME
+    ===================================================== -->
 
-img {
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    max-width: 100%;
 
-    display: block;
-}
+    <!-- =====================================================
+         AOS
+    ===================================================== -->
 
-a {
-    text-decoration: none;
-}
+    <link
+        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+        rel="stylesheet">
 
 
-/* =========================================================
-   3. NEWSFLASH
-========================================================= */
+    <!-- =====================================================
+         BERITA CSS
+    ===================================================== -->
 
-.news-wrapper {
+    <link
+        rel="stylesheet"
+        href="assets/css/berita.css">
 
-    width: 100%;
+</head>
 
-    min-height: 46px;
 
-    display: flex;
+<body>
 
-    align-items: stretch;
 
-    overflow: hidden;
+    <!-- =====================================================
+         NEWSFLASH
+    ===================================================== -->
 
-    background:
-        var(--plaza-red);
-}
+    <div class="newsflash-bar">
 
-.news-label {
+        <div class="container-fluid">
 
-    min-width: 125px;
+            <div class="news-wrapper">
 
-    padding:
-        0 18px;
+                <div class="news-label">
 
-    display: flex;
+                    <span class="live-dot"></span>
 
-    align-items: center;
+                    LIVE NEWS
 
-    justify-content: center;
+                </div>
 
-    gap: 7px;
 
-    background:
-        #050505;
+                <div class="news-marquee">
 
-    color:
-        #ffffff;
+                    <div id="newsFlashContent">
 
-    font-size:
-        14px;
+                        Memuat informasi terbaru...
 
-    font-weight:
-        700;
+                    </div>
 
-    white-space:
-        nowrap;
-}
+                </div>
 
-.live-dot {
+            </div>
 
-    width: 9px;
+        </div>
 
-    height: 9px;
+    </div>
 
-    border-radius: 50%;
 
-    background:
-        #ff405f;
 
-    box-shadow:
-        0 0 0 3px rgba(255,255,255,.08);
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
-    animation:
-        livePulse 1.5s infinite;
-}
+    <nav
+        class="navbar navbar-expand-lg navbar-dark sticky-top">
 
-@keyframes livePulse {
+        <div class="container">
 
-    0% {
-        opacity: 1;
-    }
 
-    50% {
-        opacity: .45;
-    }
+            <!-- LOGO -->
 
-    100% {
-        opacity: 1;
-    }
-}
+            <a
+                class="navbar-brand d-flex align-items-center"
+                href="index.html">
 
-.news-marquee {
+                <img
+                    src="assets/images/logo.png"
+                    height="55"
+                    alt="PLAZA DAYEUHLUHUR">
 
-    flex: 1;
+                <span
+                    class="fw-bold ms-2">
 
-    display: flex;
+                    PLAZA DAYEUHLUHUR
 
-    align-items: center;
+                </span>
 
-    overflow: hidden;
+            </a>
 
-    background:
-        var(--plaza-red);
 
-    color:
-        #ffffff;
+            <!-- MOBILE BUTTON -->
 
-    font-size:
-        14px;
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-    font-weight:
-        600;
-}
+                <span
+                    class="navbar-toggler-icon">
+                </span>
 
-#newsFlashContent {
+            </button>
 
-    padding:
-        0 20px;
 
-    white-space:
-        nowrap;
-}
+            <!-- MENU -->
 
+            <div
+                class="collapse navbar-collapse"
+                id="navbarNav">
 
-/* =========================================================
-   4. NAVBAR
-========================================================= */
+                <ul
+                    class="navbar-nav ms-auto">
 
-.navbar {
 
-    position: relative;
+                    <!-- BERANDA -->
 
-    background:
-        #ffffff !important;
+                    <li class="nav-item">
 
-    min-height:
-        92px;
+                        <a
+                            class="nav-link"
+                            href="index.html">
 
-    border-top:
-        4px solid transparent;
+                            Beranda
 
-    border-image:
-        linear-gradient(
-            90deg,
-            var(--plaza-green),
-            var(--plaza-blue)
-        ) 1;
+                        </a>
 
-    box-shadow:
-        0 4px 18px rgba(0,0,0,.07);
+                    </li>
 
-    z-index:
-        1000;
-}
 
-.navbar .container {
+                    <!-- DESA -->
 
-    min-height:
-        88px;
+                    <li class="nav-item">
 
-    display:
-        flex;
+                        <a
+                            class="nav-link"
+                            href="desa.html">
 
-    align-items:
-        center;
-}
+                            Desa
 
+                        </a>
 
-/* =========================================================
-   5. LOGO
-========================================================= */
+                    </li>
 
-.navbar-brand {
 
-    display:
-        flex;
+                    <!-- BUMDES -->
 
-    align-items:
-        center;
+                    <li class="nav-item">
 
-    color:
-        #161616 !important;
+                        <a
+                            class="nav-link"
+                            href="bumdes.html">
 
-    font-size:
-        22px;
+                            BUMDes
 
-    font-weight:
-        700;
+                        </a>
 
-    letter-spacing:
-        -.4px;
-}
+                    </li>
 
-.navbar-brand img {
 
-    width:
-        auto;
+                    <!-- UMKM -->
 
-    height:
-        55px;
+                    <li class="nav-item">
 
-    object-fit:
-        contain;
-}
+                        <a
+                            class="nav-link"
+                            href="umkm.html">
 
-.navbar-brand span {
+                            UMKM
 
-    color:
-        #161616 !important;
-}
+                        </a>
 
+                    </li>
 
-/* =========================================================
-   6. MENU
-========================================================= */
 
-.navbar-nav {
+                    <!-- WISATA -->
 
-    align-items:
-        center;
-}
+                    <li class="nav-item">
 
-.navbar .nav-link {
+                        <a
+                            class="nav-link"
+                            href="wisata.html">
 
-    position:
-        relative;
+                            Wisata
 
-    padding:
-        1.8rem 1rem !important;
+                        </a>
 
-    color:
-        #171717 !important;
+                    </li>
 
-    font-size:
-        16px;
 
-    font-weight:
-        600;
+                    <!-- BERITA -->
 
-    transition:
-        color .25s ease;
-}
+                    <li class="nav-item">
 
-.navbar .nav-link:hover {
+                        <a
+                            class="nav-link active"
+                            aria-current="page"
+                            href="berita.html">
 
-    color:
-        var(--plaza-green) !important;
-}
+                            Berita
 
-.navbar .nav-link.active {
+                        </a>
 
-    color:
-        var(--plaza-green) !important;
-}
+                    </li>
 
 
-/* GARIS MENU AKTIF */
+                    <!-- KONTAK -->
 
-.navbar .nav-link.active::after {
+                    <li class="nav-item">
 
-    content:
-        "";
+                        <a
+                            class="nav-link"
+                            href="kontak.html">
 
-    position:
-        absolute;
+                            Kontak
 
-    left:
-        15px;
+                        </a>
 
-    right:
-        15px;
+                    </li>
 
-    bottom:
-        12px;
 
-    height:
-        3px;
+                </ul>
 
-    border-radius:
-        20px;
+            </div>
 
-    background:
-        linear-gradient(
-            90deg,
-            var(--plaza-green),
-            var(--plaza-blue)
-        );
-}
+        </div>
 
+    </nav>
 
-/* MOBILE TOGGLE */
 
-.navbar-toggler {
 
-    border:
-        1px solid
-        var(--plaza-green) !important;
+    <!-- =====================================================
+         HERO BERITA
+    ===================================================== -->
 
-    border-radius:
-        10px;
+    <header
+        class="berita-hero">
 
-    padding:
-        7px 10px;
-}
+        <div class="container">
 
-.navbar-toggler:focus {
+            <div class="row align-items-center">
 
-    box-shadow:
-        0 0 0 .2rem
-        rgba(25,135,84,.15);
-}
 
+                <!-- TEXT -->
 
-/* =========================================================
-   7. HERO BERITA
-========================================================= */
+                <div
+                    class="col-lg-8"
+                    data-aos="fade-right">
 
-.berita-hero {
 
-    position:
-        relative;
+                    <div
+                        class="berita-badge">
 
-    min-height:
-        500px;
+                        <i
+                            class="fa-solid fa-newspaper">
+                        </i>
 
-    display:
-        flex;
+                        PUSAT INFORMASI
 
-    align-items:
-        center;
+                    </div>
 
-    overflow:
-        hidden;
 
-    background:
-        linear-gradient(
-            135deg,
-            #145a3b 0%,
-            #198754 45%,
-            #0d6efd 100%
-        );
+                    <h1>
 
-    color:
-        #ffffff;
-}
+                        Berita &
+                        <span>Informasi Dayeuhluhur</span>
 
-.berita-hero::before {
+                    </h1>
 
-    content:
-        "";
 
-    position:
-        absolute;
+                    <p>
 
-    width:
-        500px;
+                        Ikuti berbagai informasi,
+                        kegiatan, perkembangan,
+                        potensi, dan cerita inspiratif
+                        dari Kecamatan Dayeuhluhur.
 
-    height:
-        500px;
+                    </p>
 
-    right:
-        -160px;
+                </div>
 
-    top:
-        -190px;
 
-    border-radius:
-        50%;
+                <!-- ICON -->
 
-    background:
-        rgba(255,255,255,.07);
-}
+                <div
+                    class="col-lg-4"
+                    data-aos="fade-left">
 
-.berita-hero::after {
+                    <div
+                        class="berita-hero-icon">
 
-    content:
-        "";
+                        <i
+                            class="fa-solid fa-newspaper">
+                        </i>
 
-    position:
-        absolute;
+                    </div>
 
-    width:
-        360px;
+                </div>
 
-    height:
-        360px;
 
-    left:
-        -170px;
+            </div>
 
-    bottom:
-        -210px;
+        </div>
 
-    border-radius:
-        50%;
+    </header>
 
-    background:
-        rgba(255,255,255,.06);
-}
 
-.berita-hero .container {
 
-    position:
-        relative;
+    <!-- =====================================================
+         STATISTIK
+    ===================================================== -->
 
-    z-index:
-        2;
-}
+    <section
+        class="berita-statistik">
 
+        <div class="container">
 
-/* =========================================================
-   8. HERO BADGE
-========================================================= */
+            <div class="row g-4">
 
-.berita-badge {
 
-    display:
-        inline-flex;
+                <!-- TOTAL BERITA -->
 
-    align-items:
-        center;
+                <div
+                    class="col-6 col-lg-3">
 
-    gap:
-        8px;
+                    <div
+                        class="berita-stat-card">
 
-    padding:
-        9px 18px;
+                        <div
+                            class="berita-stat-icon">
 
-    border-radius:
-        50px;
+                            <i
+                                class="fa-solid fa-newspaper">
+                            </i>
 
-    background:
-        rgba(255,255,255,.14);
+                        </div>
 
-    border:
-        1px solid
-        rgba(255,255,255,.3);
+                        <div>
 
-    color:
-        #ffffff;
+                            <strong
+                                id="totalBerita">
 
-    font-size:
-        14px;
+                                0
 
-    font-weight:
-        700;
+                            </strong>
 
-    letter-spacing:
-        .3px;
+                            <span>
 
-    margin-bottom:
-        22px;
-}
+                                Total Berita
 
+                            </span>
 
-/* =========================================================
-   9. HERO TITLE
-========================================================= */
+                        </div>
 
-.berita-hero h1 {
+                    </div>
 
-    margin:
-        0 0 20px;
+                </div>
 
-    max-width:
-        850px;
 
-    font-size:
-        clamp(42px, 6vw, 76px);
+                <!-- TERBARU -->
 
-    line-height:
-        1.05;
+                <div
+                    class="col-6 col-lg-3">
 
-    font-weight:
-        800;
+                    <div
+                        class="berita-stat-card">
 
-    letter-spacing:
-        -2px;
-}
+                        <div
+                            class="berita-stat-icon">
 
-.berita-hero h1 span {
+                            <i
+                                class="fa-solid fa-bolt">
+                            </i>
 
-    color:
-        #a7f3d0;
-}
+                        </div>
 
-.berita-hero p {
+                        <div>
 
-    max-width:
-        760px;
+                            <strong
+                                id="totalTerbaru">
 
-    margin:
-        0;
+                                0
 
-    color:
-        rgba(255,255,255,.9);
+                            </strong>
 
-    font-size:
-        18px;
+                            <span>
 
-    line-height:
-        1.8;
-}
+                                Berita Terbaru
 
+                            </span>
 
-/* =========================================================
-   10. HERO ICON
-========================================================= */
+                        </div>
 
-.berita-hero-icon {
+                    </div>
 
-    width:
-        215px;
+                </div>
 
-    height:
-        215px;
 
-    display:
-        flex;
+                <!-- KATEGORI -->
 
-    align-items:
-        center;
+                <div
+                    class="col-6 col-lg-3">
 
-    justify-content:
-        center;
+                    <div
+                        class="berita-stat-card">
 
-    border-radius:
-        50%;
+                        <div
+                            class="berita-stat-icon">
 
-    background:
-        rgba(255,255,255,.10);
+                            <i
+                                class="fa-solid fa-layer-group">
+                            </i>
 
-    border:
-        1px solid
-        rgba(255,255,255,.22);
+                        </div>
 
-    color:
-        #ffffff;
+                        <div>
 
-    font-size:
-        90px;
+                            <strong
+                                id="totalKategoriBerita">
 
-    backdrop-filter:
-        blur(5px);
+                                0
 
-    margin:
-        auto;
-}
+                            </strong>
 
+                            <span>
 
-/* =========================================================
-   11. STATISTIK
-========================================================= */
+                                Kategori
 
-.berita-statistik {
+                            </span>
 
-    padding:
-        45px 0;
+                        </div>
 
-    background:
-        #f7f8fa;
-}
+                    </div>
 
-.berita-stat-card {
+                </div>
 
-    height:
-        100%;
 
-    padding:
-        25px;
+                <!-- DESA -->
 
-    display:
-        flex;
+                <div
+                    class="col-6 col-lg-3">
 
-    align-items:
-        center;
+                    <div
+                        class="berita-stat-card">
 
-    gap:
-        18px;
+                        <div
+                            class="berita-stat-icon">
 
-    background:
-        #ffffff;
+                            <i
+                                class="fa-solid fa-location-dot">
+                            </i>
 
-    border:
-        1px solid
-        rgba(0,0,0,.05);
+                        </div>
 
-    border-radius:
-        var(--radius);
+                        <div>
 
-    box-shadow:
-        var(--shadow-sm);
+                            <strong
+                                id="totalDesaBerita">
 
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
+                                0
 
-.berita-stat-card:hover {
+                            </strong>
 
-    transform:
-        translateY(-5px);
+                            <span>
 
-    box-shadow:
-        var(--shadow);
-}
+                                Desa Terlibat
 
-.berita-stat-icon {
+                            </span>
 
-    width:
-        60px;
+                        </div>
 
-    height:
-        60px;
+                    </div>
 
-    flex:
-        0 0 60px;
+                </div>
 
-    display:
-        flex;
 
-    align-items:
-        center;
+            </div>
 
-    justify-content:
-        center;
+        </div>
 
-    border-radius:
-        15px;
+    </section>
 
-    background:
-        rgba(25,135,84,.10);
 
-    color:
-        var(--plaza-green);
 
-    font-size:
-        25px;
-}
+    <!-- =====================================================
+         DIREKTORI BERITA
+    ===================================================== -->
 
-.berita-stat-card strong {
+    <main
+        class="berita-directory">
 
-    display:
-        block;
+        <div class="container">
 
-    color:
-        var(--dark);
 
-    font-size:
-        30px;
+            <!-- SECTION HEADING -->
 
-    line-height:
-        1.2;
+            <div
+                class="section-heading text-center"
+                data-aos="fade-up">
 
-    font-weight:
-        800;
-}
 
-.berita-stat-card span {
+                <span
+                    class="section-kicker">
 
-    display:
-        block;
+                    BERITA DAYEUHLUHUR
 
-    margin-top:
-        3px;
+                </span>
 
-    color:
-        var(--muted);
 
-    font-size:
-        14px;
-}
+                <h2>
 
+                    Informasi Terkini
+                    dari Dayeuhluhur
 
-/* =========================================================
-   12. MAIN CONTENT
-========================================================= */
+                </h2>
 
-.berita-content {
 
-    padding:
-        80px 0;
+                <p>
 
-    background:
-        #ffffff;
-}
+                    Temukan berita, kegiatan,
+                    perkembangan desa, potensi daerah,
+                    serta berbagai informasi menarik
+                    dari Kecamatan Dayeuhluhur.
 
+                </p>
 
-/* =========================================================
-   13. SECTION HEADING
-========================================================= */
+            </div>
 
-.section-heading {
 
-    margin-bottom:
-        40px;
-}
 
-.section-kicker {
+            <!-- =================================================
+                 SEARCH & FILTER
+            ================================================= -->
 
-    display:
-        inline-block;
+            <div
+                class="berita-search-wrapper"
+                data-aos="fade-up">
 
-    margin-bottom:
-        8px;
 
-    color:
-        var(--plaza-green);
+                <div class="row g-3">
 
-    font-size:
-        14px;
 
-    font-weight:
-        800;
+                    <!-- SEARCH -->
 
-    letter-spacing:
-        .8px;
+                    <div class="col-lg-8">
 
-    text-transform:
-        uppercase;
-}
+                        <div
+                            class="search-box">
 
-.section-heading h2 {
+                            <i
+                                class="fa-solid fa-magnifying-glass">
+                            </i>
 
-    margin:
-        0 0 10px;
+                            <input
+                                type="text"
+                                id="searchBerita"
+                                class="form-control"
+                                placeholder="Cari berita, kegiatan, desa, atau informasi...">
 
-    color:
-        var(--dark);
+                        </div>
 
-    font-size:
-        clamp(30px, 4vw, 44px);
+                    </div>
 
-    line-height:
-        1.2;
 
-    font-weight:
-        800;
-}
+                    <!-- KATEGORI SELECT -->
 
-.section-heading p {
+                    <div class="col-lg-4">
 
-    margin:
-        0;
+                        <select
+                            id="kategoriFilter"
+                            class="form-select">
 
-    max-width:
-        700px;
+                            <option value="">
 
-    color:
-        var(--muted);
+                                Semua Kategori
 
-    font-size:
-        16px;
-}
+                            </option>
 
+                        </select>
 
-/* =========================================================
-   14. SEARCH
-========================================================= */
+                    </div>
 
-.berita-search-wrapper {
 
-    margin-bottom:
-        30px;
+                </div>
 
-    padding:
-        18px;
+            </div>
 
-    background:
-        #ffffff;
 
-    border:
-        1px solid
-        var(--border);
 
-    border-radius:
-        16px;
+            <!-- =================================================
+                 KATEGORI BUTTON
+            ================================================= -->
 
-    box-shadow:
-        var(--shadow-sm);
-}
+            <div
+                class="kategori-berita-section"
+                data-aos="fade-up">
 
-.search-box {
 
-    position:
-        relative;
-}
+                <div
+                    class="kategori-heading">
 
-.search-box i {
+                    <i
+                        class="fa-solid fa-filter">
+                    </i>
 
-    position:
-        absolute;
+                    Jelajahi Berdasarkan Kategori
 
-    left:
-        18px;
+                </div>
 
-    top:
-        50%;
 
-    transform:
-        translateY(-50%);
+                <div
+                    id="kategoriBeritaContainer"
+                    class="kategori-berita-container">
 
-    color:
-        var(--plaza-green);
+                    <!-- Diisi oleh berita.js -->
 
-    font-size:
-        17px;
+                </div>
 
-    z-index:
-        2;
-}
+            </div>
 
-.search-box input {
 
-    width:
-        100%;
 
-    min-height:
-        52px;
+            <!-- =================================================
+                 BERITA UNGGULAN
+            ================================================= -->
 
-    padding:
-        10px 18px 10px 48px;
+            <section
+                class="mb-5"
+                data-aos="fade-up">
 
-    border:
-        1px solid
-        var(--border);
 
-    border-radius:
-        12px;
+                <div
+                    class="section-kicker">
 
-    outline:
-        none;
+                    HIGHLIGHT
 
-    color:
-        var(--dark);
+                </div>
 
-    font-size:
-        15px;
 
-    background:
-        #ffffff;
+                <h2
+                    class="mb-4"
+                    style="
+                        color:#12372a;
+                        font-weight:800;
+                    ">
 
-    transition:
-        .2s ease;
-}
+                    Berita Unggulan
 
-.search-box input:focus {
+                </h2>
 
-    border-color:
-        var(--plaza-green);
 
-    box-shadow:
-        0 0 0 .2rem
-        rgba(25,135,84,.10);
-}
+                <div
+                    id="beritaUnggulan">
 
+                    <!-- Diisi berita.js -->
 
-/* SELECT */
+                </div>
 
-.berita-search-wrapper select {
+            </section>
 
-    width:
-        100%;
 
-    min-height:
-        52px;
 
-    padding:
-        10px 15px;
+            <!-- =================================================
+                 HASIL FILTER
+            ================================================= -->
 
-    border:
-        1px solid
-        var(--border);
+            <div
+                class="filter-result">
 
-    border-radius:
-        12px;
+                <div>
 
-    outline:
-        none;
+                    Menampilkan
 
-    color:
-        var(--dark);
+                    <strong
+                        id="jumlahHasilBerita">
 
-    background:
-        #ffffff;
-}
+                        0
 
-.berita-search-wrapper select:focus {
+                    </strong>
 
-    border-color:
-        var(--plaza-green);
+                    berita
 
-    box-shadow:
-        0 0 0 .2rem
-        rgba(25,135,84,.10);
-}
+                </div>
 
 
-/* =========================================================
-   15. KATEGORI
-========================================================= */
+                <button
+                    type="button"
+                    id="resetFilterBerita"
+                    class="btn btn-outline-success btn-sm">
 
-.kategori-heading {
+                    <i
+                        class="fa-solid fa-rotate-left me-1">
+                    </i>
 
-    margin:
-        0 0 15px;
+                    Reset Filter
 
-    color:
-        var(--dark);
+                </button>
 
-    font-size:
-        18px;
+            </div>
 
-    font-weight:
-        700;
-}
 
-.kategori-berita-container {
 
-    display:
-        flex;
+            <!-- =================================================
+                 GRID BERITA
+            ================================================= -->
 
-    flex-wrap:
-        wrap;
+            <div
+                id="beritaContainer"
+                class="row g-4">
 
-    gap:
-        10px;
 
-    margin-bottom:
-        35px;
-}
+                <!-- =================================================
+                     DATA BERITA AKAN DIMUAT DARI berita.js
+                ================================================= -->
 
-.kategori-berita-container button {
 
-    padding:
-        8px 17px;
+                <div
+                    class="col-12 text-center py-5">
 
-    border:
-        1px solid
-        var(--plaza-green);
+                    <div
+                        class="spinner-border text-success"
+                        role="status">
 
-    border-radius:
-        50px;
+                        <span class="visually-hidden">
 
-    background:
-        #ffffff;
+                            Memuat...
 
-    color:
-        var(--plaza-green);
+                        </span>
 
-    font-size:
-        14px;
+                    </div>
 
-    font-weight:
-        600;
 
-    cursor:
-        pointer;
+                    <p class="mt-3 text-muted">
 
-    transition:
-        all .2s ease;
-}
+                        Memuat berita...
 
-.kategori-berita-container button:hover {
+                    </p>
 
-    background:
-        var(--plaza-green);
+                </div>
 
-    color:
-        #ffffff;
 
-    transform:
-        translateY(-2px);
-}
+            </div>
 
-.kategori-berita-container button.active {
 
-    background:
-        var(--plaza-green);
 
-    color:
-        #ffffff;
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================= -->
 
-    box-shadow:
-        0 5px 15px
-        rgba(25,135,84,.18);
-}
+            <div
+                id="emptyBerita"
+                class="empty-berita d-none">
 
 
-/* =========================================================
-   16. FILTER RESULT
-========================================================= */
+                <div
+                    class="empty-icon">
 
-.filter-result {
+                    <i
+                        class="fa-solid fa-newspaper">
+                    </i>
 
-    margin-bottom:
-        25px;
+                </div>
 
-    padding-bottom:
-        15px;
 
-    border-bottom:
-        1px solid
-        var(--border);
+                <h4>
 
-    color:
-        var(--muted);
+                    Berita Tidak Ditemukan
 
-    font-size:
-        14px;
-}
+                </h4>
 
-.filter-result strong {
 
-    color:
-        var(--plaza-green);
+                <p>
 
-    font-weight:
-        700;
-}
+                    Belum ada berita yang sesuai
+                    dengan pencarian atau filter Anda.
 
+                </p>
 
-/* =========================================================
-   17. BERITA CARD
-========================================================= */
 
-.berita-card {
+                <button
+                    type="button"
+                    id="resetFilterEmpty"
+                    class="btn btn-success rounded-pill px-4">
 
-    height:
-        100%;
+                    <i
+                        class="fa-solid fa-rotate-left me-2">
+                    </i>
 
-    overflow:
-        hidden;
+                    Tampilkan Semua Berita
 
-    background:
-        #ffffff;
+                </button>
 
-    border:
-        1px solid
-        var(--border);
 
-    border-radius:
-        18px;
+            </div>
 
-    box-shadow:
-        var(--shadow-sm);
 
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-}
+        </div>
 
-.berita-card:hover {
+    </main>
 
-    transform:
-        translateY(-7px);
 
-    box-shadow:
-        var(--shadow-lg);
-}
 
+    <!-- =====================================================
+         CTA
+    ===================================================== -->
 
-/* =========================================================
-   18. GAMBAR BERITA
-========================================================= */
+    <section
+        class="berita-cta">
 
-.berita-card-image {
+        <div class="container">
 
-    position:
-        relative;
+            <div
+                class="berita-cta-box"
+                data-aos="fade-up">
 
-    width:
-        100%;
 
-    height:
-        230px;
+                <div class="row align-items-center">
 
-    overflow:
-        hidden;
 
-    background:
-        linear-gradient(
-            135deg,
-            #d9f3e7,
-            #dcecff
-        );
-}
+                    <div class="col-lg-8">
 
-.berita-card-image img {
 
-    width:
-        100%;
+                        <span
+                            class="cta-kicker">
 
-    height:
-        100%;
+                            PLAZA DAYEUHLUHUR
 
-    object-fit:
-        cover;
+                        </span>
 
-    transition:
-        transform .5s ease;
-}
 
-.berita-card:hover
-.berita-card-image img {
+                        <h2>
 
-    transform:
-        scale(1.06);
-}
+                            Punya Informasi
+                            untuk Dibagikan?
 
+                        </h2>
 
-/* =========================================================
-   19. CATEGORY BADGE
-========================================================= */
 
-.berita-card-category {
+                        <p>
 
-    position:
-        absolute;
+                            Mari ikut membangun ekosistem
+                            informasi digital Dayeuhluhur
+                            dengan berbagi kegiatan,
+                            potensi, dan cerita inspiratif
+                            dari masyarakat.
 
-    left:
-        15px;
+                        </p>
 
-    top:
-        15px;
 
-    padding:
-        6px 12px;
+                    </div>
 
-    border-radius:
-        50px;
 
-    background:
-        rgba(255,255,255,.95);
+                    <div
+                        class="col-lg-4 text-lg-end">
 
-    color:
-        var(--plaza-green);
 
-    font-size:
-        12px;
+                        <a
+                            href="kontak.html"
+                            class="btn btn-light rounded-pill">
 
-    font-weight:
-        700;
+                            Hubungi Kami
 
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.08);
-}
+                            <i
+                                class="fa-solid fa-arrow-right ms-2">
+                            </i>
 
+                        </a>
 
-/* =========================================================
-   20. BERITA CARD BODY
-========================================================= */
 
-.berita-card-body {
+                    </div>
 
-    padding:
-        22px;
-}
 
-.berita-card-meta {
+                </div>
 
-    display:
-        flex;
+            </div>
 
-    flex-wrap:
-        wrap;
+        </div>
 
-    gap:
-        12px;
+    </section>
 
-    margin-bottom:
-        10px;
 
-    color:
-        var(--muted);
 
-    font-size:
-        12px;
-}
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
-.berita-card-meta i {
+    <footer
+        class="site-footer">
 
-    color:
-        var(--plaza-green);
+        <div class="container">
 
-    margin-right:
-        4px;
-}
 
-.berita-card-title {
+            <div class="row g-4">
 
-    margin:
-        0 0 10px;
 
-    color:
-        var(--dark);
+                <!-- BRAND -->
 
-    font-size:
-        20px;
+                <div class="col-lg-5">
 
-    line-height:
-        1.35;
 
-    font-weight:
-        750;
-}
+                    <div
+                        class="footer-brand">
 
-.berita-card-description {
+                        <img
+                            src="assets/images/logo.png"
+                            height="55"
+                            alt="PLAZA DAYEUHLUHUR">
 
-    margin:
-        0 0 18px;
 
-    color:
-        var(--muted);
+                        <h5>
 
-    font-size:
-        14px;
+                            PLAZA DAYEUHLUHUR
 
-    line-height:
-        1.7;
+                        </h5>
 
-    display:
-        -webkit-box;
+                    </div>
 
-    -webkit-line-clamp:
-        3;
 
-    -webkit-box-orient:
-        vertical;
+                    <p
+                        class="footer-description">
 
-    overflow:
-        hidden;
-}
+                        Gerbang Digital Kecamatan
+                        Dayeuhluhur. Menjadi ruang
+                        informasi, promosi, dan
+                        pengembangan potensi masyarakat
+                        Dayeuhluhur.
 
+                    </p>
 
-/* =========================================================
-   21. DETAIL BUTTON
-========================================================= */
 
-.btn-berita-detail {
+                </div>
 
-    display:
-        inline-flex;
 
-    align-items:
-        center;
 
-    gap:
-        7px;
+                <!-- MENU -->
 
-    padding:
-        9px 17px;
+                <div
+                    class="col-6 col-lg-3">
 
-    border-radius:
-        50px;
 
-    background:
-        var(--plaza-green);
+                    <h6
+                        class="footer-title">
 
-    color:
-        #ffffff !important;
+                        MENU
 
-    font-size:
-        13px;
+                    </h6>
 
-    font-weight:
-        700;
 
-    transition:
-        all .2s ease;
-}
+                    <ul
+                        class="footer-links">
 
-.btn-berita-detail:hover {
 
-    background:
-        var(--plaza-green-dark);
+                        <li>
 
-    color:
-        #ffffff !important;
+                            <a
+                                href="index.html">
 
-    transform:
-        translateX(3px);
-}
+                                Beranda
 
+                            </a>
 
-/* =========================================================
-   22. EMPTY STATE
-========================================================= */
+                        </li>
 
-.berita-empty {
 
-    padding:
-        70px 20px;
+                        <li>
 
-    text-align:
-        center;
+                            <a
+                                href="desa.html">
 
-    border:
-        1px dashed
-        #d8dce3;
+                                Desa
 
-    border-radius:
-        18px;
+                            </a>
 
-    background:
-        #fafbfc;
-}
+                        </li>
 
-.berita-empty i {
 
-    margin-bottom:
-        15px;
+                        <li>
 
-    color:
-        var(--plaza-green);
+                            <a
+                                href="bumdes.html">
 
-    font-size:
-        45px;
-}
+                                BUMDes
 
-.berita-empty h3 {
+                            </a>
 
-    margin:
-        0 0 8px;
+                        </li>
 
-    color:
-        var(--dark);
 
-    font-size:
-        22px;
-}
+                        <li>
 
-.berita-empty p {
+                            <a
+                                href="umkm.html">
 
-    margin:
-        0;
+                                UMKM
 
-    color:
-        var(--muted);
-}
+                            </a>
 
+                        </li>
 
-/* =========================================================
-   23. PAGINATION
-========================================================= */
 
-.berita-pagination {
+                        <li>
 
-    display:
-        flex;
+                            <a
+                                href="wisata.html">
 
-    align-items:
-        center;
+                                Wisata
 
-    justify-content:
-        center;
+                            </a>
 
-    gap:
-        8px;
+                        </li>
 
-    margin-top:
-        45px;
-}
 
-.berita-pagination button {
+                        <li>
 
-    min-width:
-        40px;
+                            <a
+                                href="berita.html">
 
-    height:
-        40px;
+                                Berita
 
-    padding:
-        0 12px;
+                            </a>
 
-    border:
-        1px solid
-        var(--border);
+                        </li>
 
-    border-radius:
-        10px;
 
-    background:
-        #ffffff;
+                        <li>
 
-    color:
-        var(--dark);
+                            <a
+                                href="kontak.html">
 
-    cursor:
-        pointer;
+                                Kontak
 
-    transition:
-        .2s ease;
-}
+                            </a>
 
-.berita-pagination button:hover,
-.berita-pagination button.active {
+                        </li>
 
-    border-color:
-        var(--plaza-green);
 
-    background:
-        var(--plaza-green);
+                    </ul>
 
-    color:
-        #ffffff;
-}
+                </div>
 
 
-/* =========================================================
-   24. CTA
-========================================================= */
 
-.berita-cta {
+                <!-- CONTACT -->
 
-    padding:
-        70px 0;
+                <div
+                    class="col-6 col-lg-4">
 
-    background:
-        #f7f8fa;
-}
 
-.berita-cta-box {
+                    <h6
+                        class="footer-title">
 
-    position:
-        relative;
+                        PLAZA DAYEUHLUHUR
 
-    overflow:
-        hidden;
+                    </h6>
 
-    padding:
-        55px;
 
-    border-radius:
-        25px;
+                    <p
+                        class="footer-contact">
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--plaza-green),
-            var(--plaza-blue)
-        );
+                        <i
+                            class="fa-solid fa-location-dot">
+                        </i>
 
-    color:
-        #ffffff;
+                        Kecamatan Dayeuhluhur,
+                        Kabupaten Cilacap,
+                        Jawa Tengah
 
-    box-shadow:
-        var(--shadow-lg);
-}
+                    </p>
 
-.berita-cta-box::before {
 
-    content:
-        "";
+                    <p
+                        class="footer-contact">
 
-    position:
-        absolute;
+                        <i
+                            class="fa-solid fa-globe">
+                        </i>
 
-    width:
-        300px;
+                        plazadayeuhluhur.com
 
-    height:
-        300px;
+                    </p>
 
-    right:
-        -100px;
 
-    top:
-        -150px;
+                </div>
 
-    border-radius:
-        50%;
 
-    background:
-        rgba(255,255,255,.08);
-}
+            </div>
 
-.berita-cta-box::after {
 
-    content:
-        "";
 
-    position:
-        absolute;
+            <!-- FOOTER LINE -->
 
-    width:
-        200px;
+            <hr
+                class="footer-line">
 
-    height:
-        200px;
 
-    left:
-        -100px;
 
-    bottom:
-        -100px;
+            <!-- COPYRIGHT -->
 
-    border-radius:
-        50%;
+            <div
+                class="footer-bottom">
 
-    background:
-        rgba(255,255,255,.06);
-}
 
-.berita-cta-box > * {
+                <span>
 
-    position:
-        relative;
+                    © 2026 PLAZA DAYEUHLUHUR
 
-    z-index:
-        2;
-}
+                </span>
 
-.berita-cta-box h2 {
 
-    margin:
-        0 0 12px;
+                <span>
 
-    color:
-        #ffffff;
+                    Gerbang Digital
+                    Kecamatan Dayeuhluhur
 
-    font-size:
-        clamp(28px, 4vw, 40px);
+                </span>
 
-    font-weight:
-        800;
-}
 
-.berita-cta-box p {
+            </div>
 
-    max-width:
-        700px;
 
-    margin:
-        0;
+        </div>
 
-    color:
-        rgba(255,255,255,.88);
-}
+    </footer>
 
 
-/* CTA BUTTON */
 
-.btn-berita-cta {
+    <!-- =====================================================
+         BOOTSTRAP JS
+    ===================================================== -->
 
-    display:
-        inline-flex;
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
 
-    align-items:
-        center;
 
-    gap:
-        8px;
 
-    margin-top:
-        25px;
+    <!-- =====================================================
+         AOS JS
+    ===================================================== -->
 
-    padding:
-        12px 22px;
+    <script
+        src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+    </script>
 
-    border-radius:
-        50px;
 
-    background:
-        #ffffff;
+    <script>
 
-    color:
-        var(--plaza-green);
+        AOS.init({
 
-    font-weight:
-        700;
+            duration: 700,
 
-    transition:
-        .25s ease;
-}
+            once: true,
 
-.btn-berita-cta:hover {
+            offset: 60
 
-    transform:
-        translateY(-3px);
+        });
 
-    background:
-        #f8f9fa;
+    </script>
 
-    color:
-        var(--plaza-green-dark);
-}
 
 
-/* =========================================================
-   25. FOOTER
-========================================================= */
+    <!-- =====================================================
+         BERITA JS
+    ===================================================== -->
 
-.site-footer {
+    <script
+        src="assets/js/berita.js">
+    </script>
 
-    padding:
-        65px 0 0;
 
-    background:
-        #111827;
+</body>
 
-    color:
-        #ffffff;
-}
-
-.site-footer h5,
-.footer-title {
-
-    margin-bottom:
-        18px;
-
-    color:
-        #ffffff;
-
-    font-size:
-        17px;
-
-    font-weight:
-        700;
-}
-
-.site-footer p {
-
-    color:
-        #cbd5e1;
-
-    font-size:
-        14px;
-
-    line-height:
-        1.8;
-}
-
-
-/* FOOTER LINKS */
-
-.footer-links {
-
-    padding:
-        0;
-
-    margin:
-        0;
-
-    list-style:
-        none;
-}
-
-.footer-links li {
-
-    margin-bottom:
-        9px;
-}
-
-.footer-links a {
-
-    color:
-        #cbd5e1;
-
-    font-size:
-        14px;
-
-    transition:
-        all .2s ease;
-}
-
-.footer-links a:hover {
-
-    padding-left:
-        4px;
-
-    color:
-        #35b779;
-}
-
-
-/* FOOTER CONTACT */
-
-.footer-contact {
-
-    display:
-        flex;
-
-    align-items:
-        flex-start;
-
-    gap:
-        10px;
-
-    margin-bottom:
-        12px;
-
-    color:
-        #cbd5e1;
-
-    font-size:
-        14px;
-}
-
-.footer-contact i {
-
-    width:
-        20px;
-
-    color:
-        #35b779;
-
-    margin-top:
-        4px;
-}
-
-
-/* SOCIAL */
-
-.footer-social {
-
-    display:
-        flex;
-
-    gap:
-        9px;
-
-    margin-top:
-        18px;
-}
-
-.footer-social a {
-
-    width:
-        38px;
-
-    height:
-        38px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(255,255,255,.08);
-
-    color:
-        #ffffff;
-
-    transition:
-        .2s ease;
-}
-
-.footer-social a:hover {
-
-    background:
-        var(--plaza-green);
-
-    transform:
-        translateY(-3px);
-}
-
-
-/* FOOTER LINE */
-
-.footer-line {
-
-    margin-top:
-        45px;
-
-    border:
-        0;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.10);
-}
-
-
-/* FOOTER BOTTOM */
-
-.footer-bottom {
-
-    padding:
-        20px 0;
-
-    color:
-        #94a3b8;
-
-    font-size:
-        13px;
-}
-
-
-/* =========================================================
-   26. LOADING
-========================================================= */
-
-.berita-loading {
-
-    padding:
-        70px 20px;
-
-    text-align:
-        center;
-
-    color:
-        var(--muted);
-}
-
-.berita-loading-spinner {
-
-    width:
-        45px;
-
-    height:
-        45px;
-
-    margin:
-        0 auto 15px;
-
-    border:
-        4px solid
-        rgba(25,135,84,.15);
-
-    border-top-color:
-        var(--plaza-green);
-
-    border-radius:
-        50%;
-
-    animation:
-        beritaSpin .8s linear infinite;
-}
-
-@keyframes beritaSpin {
-
-    to {
-        transform:
-            rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   27. BUTTON SUCCESS OVERRIDE
-========================================================= */
-
-.btn-success {
-
-    background:
-        var(--plaza-green) !important;
-
-    border-color:
-        var(--plaza-green) !important;
-}
-
-.btn-success:hover {
-
-    background:
-        var(--plaza-green-dark) !important;
-
-    border-color:
-        var(--plaza-green-dark) !important;
-}
-
-
-/* =========================================================
-   28. RESPONSIVE TABLET
-========================================================= */
-
-@media (max-width: 991px) {
-
-    .navbar {
-
-        min-height:
-            75px;
-    }
-
-    .navbar .container {
-
-        min-height:
-            71px;
-    }
-
-    .navbar-brand {
-
-        font-size:
-            19px;
-    }
-
-    .navbar-brand img {
-
-        height:
-            48px;
-    }
-
-    .navbar .nav-link {
-
-        padding:
-            .75rem 1rem !important;
-    }
-
-    .navbar .nav-link.active::after {
-
-        left:
-            10px;
-
-        right:
-            auto;
-
-        width:
-            45px;
-
-        bottom:
-            5px;
-    }
-
-    .berita-hero {
-
-        min-height:
-            440px;
-    }
-
-    .berita-hero-icon {
-
-        width:
-            160px;
-
-        height:
-            160px;
-
-        font-size:
-            65px;
-    }
-
-    .berita-cta-box {
-
-        padding:
-            40px 30px;
-    }
-}
-
-
-/* =========================================================
-   29. RESPONSIVE MOBILE
-========================================================= */
-
-@media (max-width: 767px) {
-
-    .news-label {
-
-        min-width:
-            105px;
-
-        padding:
-            0 10px;
-
-        font-size:
-            12px;
-    }
-
-    .news-marquee {
-
-        font-size:
-            12px;
-    }
-
-    .navbar-brand {
-
-        font-size:
-            17px;
-    }
-
-    .navbar-brand img {
-
-        height:
-            44px;
-    }
-
-    .berita-hero {
-
-        min-height:
-            500px;
-
-        padding:
-            70px 0;
-    }
-
-    .berita-hero h1 {
-
-        font-size:
-            43px;
-
-        letter-spacing:
-            -1px;
-    }
-
-    .berita-hero p {
-
-        font-size:
-            15px;
-    }
-
-    .berita-hero-icon {
-
-        width:
-            130px;
-
-        height:
-            130px;
-
-        margin-top:
-            35px;
-
-        font-size:
-            50px;
-    }
-
-    .berita-statistik {
-
-        padding:
-            30px 0;
-    }
-
-    .berita-stat-card {
-
-        padding:
-            18px;
-    }
-
-    .berita-stat-icon {
-
-        width:
-            50px;
-
-        height:
-            50px;
-
-        flex-basis:
-            50px;
-
-        font-size:
-            20px;
-    }
-
-    .berita-stat-card strong {
-
-        font-size:
-            25px;
-    }
-
-    .berita-content {
-
-        padding:
-            55px 0;
-    }
-
-    .section-heading {
-
-        margin-bottom:
-            30px;
-    }
-
-    .section-heading h2 {
-
-        font-size:
-            30px;
-    }
-
-    .berita-card-image {
-
-        height:
-            210px;
-    }
-
-    .berita-card-body {
-
-        padding:
-            18px;
-    }
-
-    .berita-cta {
-
-        padding:
-            45px 0;
-    }
-
-    .berita-cta-box {
-
-        padding:
-            35px 22px;
-
-        border-radius:
-            20px;
-    }
-
-    .site-footer {
-
-        padding-top:
-            45px;
-    }
-}
-
-
-/* =========================================================
-   30. EXTRA SMALL DEVICES
-========================================================= */
-
-@media (max-width: 480px) {
-
-    .news-label {
-
-        min-width:
-            92px;
-
-        font-size:
-            11px;
-    }
-
-    .news-label .live-dot {
-
-        width:
-            7px;
-
-        height:
-            7px;
-    }
-
-    .navbar-brand span {
-
-        font-size:
-            15px;
-    }
-
-    .berita-hero h1 {
-
-        font-size:
-            36px;
-    }
-
-    .berita-hero p {
-
-        font-size:
-            14px;
-    }
-
-    .berita-card-title {
-
-        font-size:
-            18px;
-    }
-
-    .kategori-berita-container {
-
-        gap:
-            7px;
-    }
-
-    .kategori-berita-container button {
-
-        padding:
-            7px 13px;
-
-        font-size:
-            12px;
-    }
-}
-
-
-/* =========================================================
-   END BERITA.CSS
-   PLAZA DAYEUHLUHUR
-========================================================= */
+</html>
