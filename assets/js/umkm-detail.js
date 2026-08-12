@@ -1,387 +1,340 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   UMKM DETAIL ENGINE
+   HOME SLIDER
+   slider.js — FINAL
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("====================================");
-    console.log("PLAZA DAYEUHLUHUR");
-    console.log("UMKM DETAIL ENGINE");
-    console.log("====================================");
+    const sliderContainer =
+        document.getElementById("homeSlider");
 
-    loadDetailUMKM();
+    if (!sliderContainer) {
 
-});
-
-
-/* =====================================================
-   LOAD DETAIL UMKM
-===================================================== */
-
-async function loadDetailUMKM() {
-
-    const loading =
-        document.getElementById("loadingUMKM");
-
-    const detail =
-        document.getElementById("detailUMKM");
-
-    const error =
-        document.getElementById("errorUMKM");
-
-
-    try {
-
-        /* ---------------------------------------------
-           AMBIL ID DARI URL
-        --------------------------------------------- */
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-
-        const id =
-            params.get("id");
-
-
-        console.log(
-            "ID UMKM:",
-            id
+        console.warn(
+            "Element #homeSlider tidak ditemukan."
         );
 
-
-        if (!id) {
-
-            throw new Error(
-                "ID UMKM tidak ditemukan pada URL."
-            );
-
-        }
-
-
-        /* ---------------------------------------------
-           BACA DATABASE
-        --------------------------------------------- */
-
-        const response =
-            await fetch(
-                "../../data/umkm.json",
-                {
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Gagal membaca umkm.json. HTTP " +
-                response.status
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        if (!Array.isArray(data)) {
-
-            throw new Error(
-                "Format umkm.json tidak valid."
-            );
-
-        }
-
-
-        /* ---------------------------------------------
-           CARI UMKM
-        --------------------------------------------- */
-
-        const umkm =
-            data.find(function (item) {
-
-                return String(item.id) ===
-                       String(id);
-
-            });
-
-
-        if (!umkm) {
-
-            throw new Error(
-                "UMKM dengan ID " +
-                id +
-                " tidak ditemukan."
-            );
-
-        }
-
-
-        console.log(
-            "UMKM ditemukan:",
-            umkm
-        );
-
-
-        /* ---------------------------------------------
-           TAMPILKAN DATA
-        --------------------------------------------- */
-
-        renderDetailUMKM(
-            umkm
-        );
-
-
-        /* ---------------------------------------------
-           TAMPILKAN DETAIL
-        --------------------------------------------- */
-
-        if (loading) {
-
-            loading.style.display =
-                "none";
-
-        }
-
-
-        if (detail) {
-
-            detail.style.display =
-                "block";
-
-        }
-
-
-    }
-
-    catch (err) {
-
-        console.error(
-            "Gagal memuat detail UMKM:",
-            err
-        );
-
-
-        if (loading) {
-
-            loading.style.display =
-                "none";
-
-        }
-
-
-        if (error) {
-
-            error.style.display =
-                "block";
-
-        }
-
-    }
-
-}
-
-
-/* =====================================================
-   RENDER DETAIL
-===================================================== */
-
-function renderDetailUMKM(
-    umkm
-) {
-
-    /* ---------------------------------------------
-       NAMA
-    --------------------------------------------- */
-
-    setText(
-        "heroNama",
-        umkm.nama || "UMKM Dayeuhluhur"
-    );
-
-
-    setText(
-        "namaUMKM",
-        umkm.nama || "-"
-    );
-
-
-    /* ---------------------------------------------
-       KATEGORI
-    --------------------------------------------- */
-
-    setText(
-        "kategoriUMKM",
-        umkm.kategori || "UMKM"
-    );
-
-
-    /* ---------------------------------------------
-       DESA
-    --------------------------------------------- */
-
-    setText(
-        "desaUMKM",
-        umkm.desa || "-"
-    );
-
-
-    /* ---------------------------------------------
-       PRODUK
-    --------------------------------------------- */
-
-    setText(
-        "produkUMKM",
-        umkm.produk || "-"
-    );
-
-
-    /* ---------------------------------------------
-       RATING
-    --------------------------------------------- */
-
-    setText(
-        "ratingUMKM",
-        umkm.rating || "0"
-    );
-
-
-    /* ---------------------------------------------
-       STATUS
-    --------------------------------------------- */
-
-    setText(
-        "statusUMKM",
-        umkm.status || "Buka"
-    );
-
-
-    /* ---------------------------------------------
-       DESKRIPSI
-    --------------------------------------------- */
-
-    setText(
-        "deskripsiUMKM",
-        umkm.deskripsi ||
-        "Informasi mengenai usaha ini belum tersedia."
-    );
-
-
-    /* ---------------------------------------------
-       GAMBAR
-    --------------------------------------------- */
-
-    const gambar =
-        document.getElementById(
-            "gambarUMKM"
-        );
-
-
-    if (gambar) {
-
-        gambar.src =
-            umkm.gambar ||
-            "../../assets/images/umkm/default.jpg";
-
-
-        gambar.alt =
-            umkm.nama ||
-            "UMKM Dayeuhluhur";
-
-
-        gambar.onerror =
-            function () {
-
-                this.src =
-                    "../../assets/images/umkm/default.jpg";
-
-            };
-
+        return;
     }
 
 
-    /* ---------------------------------------------
-       WHATSAPP
-    --------------------------------------------- */
+    /* =================================================
+       LOAD DATA
+    ================================================= */
 
-    const whatsapp =
-        document.getElementById(
-            "whatsappUMKM"
-        );
+    fetch("data/slider.json")
 
+        .then(function (response) {
 
-    if (whatsapp) {
+            if (!response.ok) {
 
-        const nomor =
-            umkm.whatsapp ||
-            umkm.telepon ||
-            "";
-
-
-        if (nomor) {
-
-            let nomorBersih =
-                String(nomor)
-                    .replace(/\D/g, "");
-
-
-            /* 08xxxx → 628xxxx */
-
-            if (
-                nomorBersih.startsWith("0")
-            ) {
-
-                nomorBersih =
-                    "62" +
-                    nomorBersih.substring(1);
+                throw new Error(
+                    "slider.json gagal dimuat. Status: " +
+                    response.status
+                );
 
             }
 
+            return response.json();
 
-            whatsapp.href =
-                "https://wa.me/" +
-                nomorBersih;
-
-
-            whatsapp.target =
-                "_blank";
+        })
 
 
-        } else {
+        .then(function (data) {
 
-            whatsapp.style.display =
-                "none";
+            if (!Array.isArray(data) || data.length === 0) {
 
-        }
+                throw new Error(
+                    "Data slider kosong."
+                );
+
+            }
+
+            renderSlider(data);
+
+        })
+
+
+        .catch(function (error) {
+
+            console.error(
+                "SLIDER ERROR:",
+                error
+            );
+
+
+            sliderContainer.innerHTML = `
+
+                <div class="slider-error">
+
+                    <i class="fa-solid fa-image"></i>
+
+                    <h3>
+                        Informasi sedang disiapkan
+                    </h3>
+
+                    <p>
+                        Konten promosi Plaza Dayeuhluhur
+                        akan segera hadir.
+                    </p>
+
+                </div>
+
+            `;
+
+        });
+
+
+    /* =================================================
+       RENDER SLIDER
+    ================================================= */
+
+    function renderSlider(data) {
+
+        let slides = "";
+        let indicators = "";
+
+
+        data.forEach(function (item, index) {
+
+            const active =
+                index === 0
+                    ? "active"
+                    : "";
+
+
+            const nomor =
+                String(index + 1).padStart(2, "0");
+
+
+            slides += `
+
+                <div
+                    class="carousel-item ${active}">
+
+                    <div
+                        class="home-slide"
+                        style="
+                            background-image:
+                            linear-gradient(
+                                90deg,
+                                rgba(0,0,0,.78) 0%,
+                                rgba(0,0,0,.55) 45%,
+                                rgba(0,0,0,.15) 100%
+                            ),
+                            url('${escapeAttribute(item.gambar)}');
+                        ">
+
+
+                        <div
+                            class="container">
+
+                            <div
+                                class="home-slide-content">
+
+
+                                <div
+                                    class="home-slide-label">
+
+                                    <span></span>
+
+                                    ${escapeHTML(
+                                        item.label || ""
+                                    )}
+
+                                </div>
+
+
+                                <h1>
+
+                                    ${escapeHTML(
+                                        item.judul || ""
+                                    )}
+
+                                </h1>
+
+
+                                <p>
+
+                                    ${escapeHTML(
+                                        item.deskripsi || ""
+                                    )}
+
+                                </p>
+
+
+                                <a
+                                    href="${escapeAttribute(
+                                        item.link || "#"
+                                    )}"
+                                    class="btn
+                                           btn-success
+                                           btn-lg
+                                           rounded-pill
+                                           px-4">
+
+
+                                    ${escapeHTML(
+                                        item.tombol ||
+                                        "Selengkapnya"
+                                    )}
+
+
+                                    <i
+                                        class="fa-solid
+                                               fa-arrow-right
+                                               ms-2">
+                                    </i>
+
+
+                                </a>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="slide-number">
+
+                            ${nomor}
+                            <span>/ ${String(data.length).padStart(2, "0")}</span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            indicators += `
+
+                <button
+                    type="button"
+                    data-bs-target="#plazaHomeSlider"
+                    data-bs-slide-to="${index}"
+                    class="${active}"
+                    aria-label="Slide ${index + 1}">
+                </button>
+
+            `;
+
+        });
+
+
+        sliderContainer.innerHTML = `
+
+            <div
+                id="plazaHomeSlider"
+                class="carousel slide
+                       carousel-fade"
+                data-bs-ride="carousel"
+                data-bs-interval="5000">
+
+
+                <!-- SLIDES -->
+
+                <div
+                    class="carousel-inner">
+
+                    ${slides}
+
+                </div>
+
+
+                <!-- INDICATORS -->
+
+                <div
+                    class="carousel-indicators">
+
+                    ${indicators}
+
+                </div>
+
+
+                <!-- PREVIOUS -->
+
+                <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#plazaHomeSlider"
+                    data-bs-slide="prev">
+
+
+                    <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true">
+                    </span>
+
+
+                    <span class="visually-hidden">
+                        Sebelumnya
+                    </span>
+
+
+                </button>
+
+
+                <!-- NEXT -->
+
+                <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#plazaHomeSlider"
+                    data-bs-slide="next">
+
+
+                    <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true">
+                    </span>
+
+
+                    <span class="visually-hidden">
+                        Berikutnya
+                    </span>
+
+
+                </button>
+
+
+            </div>
+
+        `;
 
     }
 
-}
 
+    /* =================================================
+       ESCAPE HTML
+    ================================================= */
 
-/* =====================================================
-   HELPER TEXT
-===================================================== */
+    function escapeHTML(value) {
 
-function setText(
-    id,
-    value
-) {
+        return String(value || "")
 
-    const element =
-        document.getElementById(id);
-
-
-    if (element) {
-
-        element.textContent =
-            value;
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
     }
 
-}
+
+    /* =================================================
+       ESCAPE ATTRIBUTE
+    ================================================= */
+
+    function escapeAttribute(value) {
+
+        return escapeHTML(value);
+
+    }
+
+});

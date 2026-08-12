@@ -12,7 +12,7 @@
     "id": 2,
     "label": "PRODUK PILIHAN",
     "judul": "Dukung Produk Lokal",
-    "deskripsi": "Belanja dan dukung pertumbuhan UMKM lokal Dayeuhluhur.",
+    "deskripsi": "Kenali dan dukung pelaku UMKM lokal untuk menggerakkan ekonomi masyarakat Dayeuhluhur.",
     "gambar": "assets/images/slider/produk.jpg",
     "tombol": "Lihat Produk",
     "link": "umkm.html"
@@ -21,7 +21,7 @@
     "id": 3,
     "label": "WISATA DAYEUHLUHUR",
     "judul": "Jelajahi Pesona Dayeuhluhur",
-    "deskripsi": "Nikmati potensi wisata alam dan destinasi menarik di Kecamatan Dayeuhluhur.",
+    "deskripsi": "Nikmati berbagai destinasi wisata alam dan potensi wisata yang ada di Kecamatan Dayeuhluhur.",
     "gambar": "assets/images/slider/wisata.jpg",
     "tombol": "Jelajahi Wisata",
     "link": "wisata.html"
@@ -30,7 +30,7 @@
     "id": 4,
     "label": "BUMDes",
     "judul": "Desa Bergerak, Ekonomi Tumbuh",
-    "deskripsi": "Kenali BUMDes dan berbagai potensi ekonomi desa di Dayeuhluhur.",
+    "deskripsi": "Kenali BUMDes dan berbagai potensi ekonomi desa di Kecamatan Dayeuhluhur.",
     "gambar": "assets/images/slider/bumdes.jpg",
     "tombol": "Lihat BUMDes",
     "link": "bumdes.html"
@@ -39,7 +39,7 @@
     "id": 5,
     "label": "PLAZA DAYEUHLUHUR",
     "judul": "Satu Gerbang untuk Potensi Lokal",
-    "deskripsi": "Temukan informasi, produk, wisata, desa, dan berbagai potensi Kecamatan Dayeuhluhur.",
+    "deskripsi": "Temukan desa, UMKM, BUMDes, wisata, berita dan berbagai potensi Kecamatan Dayeuhluhur.",
     "gambar": "assets/images/slider/dayeuhluhur.jpg",
     "tombol": "Jelajahi Plaza",
     "link": "#"
