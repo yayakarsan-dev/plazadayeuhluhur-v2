@@ -1,29 +1,26 @@
-/* =====================================================
+/* =========================================================
    PLAZA DAYEUHLUHUR
    BUMDes DIRECTORY
-   FINAL VERSION
-===================================================== */
+   PREMIUM V2
+========================================================= */
 
 let bumdesData = [];
-let currentFilter = "semua";
 
 
-/* =====================================================
+/* =========================================================
    DOCUMENT READY
-===================================================== */
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     loadBumdes();
 
-    setupFilter();
-
 });
 
 
-/* =====================================================
-   LOAD DATA BUMDES
-===================================================== */
+/* =========================================================
+   LOAD DATA
+========================================================= */
 
 async function loadBumdes() {
 
@@ -36,13 +33,12 @@ async function loadBumdes() {
 
     try {
 
-        const response =
-            await fetch(
-                "data/bumdes.json",
-                {
-                    cache: "no-store"
-                }
-            );
+        const response = await fetch(
+            "data/bumdes.json",
+            {
+                cache: "no-store"
+            }
+        );
 
 
         if (!response.ok) {
@@ -58,8 +54,6 @@ async function loadBumdes() {
             await response.json();
 
 
-        /* CEK FORMAT DATA */
-
         if (!Array.isArray(data)) {
 
             throw new Error(
@@ -69,7 +63,9 @@ async function loadBumdes() {
         }
 
 
-        /* SIMPAN DATA GLOBAL */
+        /*
+         * Simpan data global
+         */
 
         bumdesData = data;
 
@@ -77,22 +73,28 @@ async function loadBumdes() {
 
 
         console.log(
-            "BUMDes berhasil dimuat:",
+            "✓ Data BUMDes berhasil dimuat:",
             data
         );
 
 
-        /* UPDATE STATISTIK */
+        /*
+         * Statistik
+         */
 
         updateStatistics(data);
 
 
-        /* TAMPILKAN DATA */
+        /*
+         * Tampilkan kartu
+         */
 
         renderBumdes(data);
 
 
-        /* SEARCH */
+        /*
+         * Search
+         */
 
         setupSearch();
 
@@ -102,7 +104,7 @@ async function loadBumdes() {
     catch (error) {
 
         console.error(
-            "Gagal memuat bumdes.json:",
+            "✗ Gagal memuat bumdes.json:",
             error
         );
 
@@ -116,7 +118,9 @@ async function loadBumdes() {
 
         if (emptyBox) {
 
-            emptyBox.style.display = "block";
+            emptyBox.style.display =
+                "block";
+
 
             emptyBox.innerHTML = `
 
@@ -133,7 +137,7 @@ async function loadBumdes() {
                 <p>
                     Periksa file
                     <strong>data/bumdes.json</strong>
-                    dan koneksi website.
+                    dan pastikan format JSON benar.
                 </p>
 
             `;
@@ -145,14 +149,16 @@ async function loadBumdes() {
 }
 
 
-/* =====================================================
-   UPDATE STATISTICS
-===================================================== */
+/* =========================================================
+   STATISTIK
+========================================================= */
 
 function updateStatistics(data) {
 
 
-    /* TOTAL BUMDES */
+    /*
+     * TOTAL BUMDes
+     */
 
     const totalBumdes =
         document.getElementById(
@@ -168,9 +174,27 @@ function updateStatistics(data) {
     }
 
 
-    /* =================================================
-       DESA UNIK
-    ================================================= */
+    /*
+     * SEMUA BUMDes AKTIF
+     */
+
+    const bumdesAktif =
+        document.getElementById(
+            "bumdesAktif"
+        );
+
+
+    if (bumdesAktif) {
+
+        bumdesAktif.textContent =
+            data.length;
+
+    }
+
+
+    /*
+     * DESA
+     */
 
     const desaBumdes =
         document.getElementById(
@@ -197,10 +221,7 @@ function updateStatistics(data) {
             );
 
 
-        if (
-            desa &&
-            desa !== "-"
-        ) {
+        if (desa) {
 
             desaSet.add(
                 String(desa).trim()
@@ -219,9 +240,9 @@ function updateStatistics(data) {
     }
 
 
-    /* =================================================
-       TOTAL UNIT / BIDANG USAHA
-    ================================================= */
+    /*
+     * TOTAL UNIT USAHA
+     */
 
     const totalUsaha =
         document.getElementById(
@@ -248,17 +269,12 @@ function updateStatistics(data) {
             );
 
 
-        /* ARRAY */
-
         if (Array.isArray(unit)) {
 
             unitCount +=
                 unit.length;
 
         }
-
-
-        /* NUMBER */
 
         else if (
             typeof unit === "number"
@@ -269,9 +285,6 @@ function updateStatistics(data) {
 
         }
 
-
-        /* ANGKA STRING */
-
         else if (
             unit &&
             !isNaN(unit)
@@ -279,15 +292,6 @@ function updateStatistics(data) {
 
             unitCount +=
                 Number(unit);
-
-        }
-
-
-        /* TEXT */
-
-        else if (unit) {
-
-            unitCount += 1;
 
         }
 
@@ -301,67 +305,14 @@ function updateStatistics(data) {
 
     }
 
-
-    /* =================================================
-       BUMDES AKTIF
-    ================================================= */
-
-    const bumdesAktif =
-        document.getElementById(
-            "bumdesAktif"
-        );
-
-
-    let aktif = 0;
-
-
-    data.forEach(function (item) {
-
-        const status =
-            getField(
-                item,
-                [
-                    "status",
-                    "keadaan"
-                ],
-                ""
-            );
-
-
-        const statusText =
-            String(status)
-                .toLowerCase()
-                .trim();
-
-
-        if (
-            statusText.includes("aktif") ||
-            statusText.includes("active")
-        ) {
-
-            aktif++;
-
-        }
-
-    });
-
-
-    if (bumdesAktif) {
-
-        bumdesAktif.textContent =
-            aktif;
-
-    }
-
 }
 
 
-/* =====================================================
-   RENDER BUMDES
-===================================================== */
+/* =========================================================
+   RENDER BUMDes
+========================================================= */
 
 function renderBumdes(data) {
-
 
     const container =
         document.getElementById(
@@ -383,16 +334,14 @@ function renderBumdes(data) {
 
     if (!container) {
 
-        console.error(
-            "Element #bumdesContainer tidak ditemukan."
-        );
-
         return;
 
     }
 
 
-    /* UPDATE JUMLAH */
+    /*
+     * JUMLAH
+     */
 
     if (jumlahBumdes) {
 
@@ -402,7 +351,9 @@ function renderBumdes(data) {
     }
 
 
-    /* DATA KOSONG */
+    /*
+     * EMPTY
+     */
 
     if (!data.length) {
 
@@ -416,12 +367,11 @@ function renderBumdes(data) {
 
         }
 
+
         return;
 
     }
 
-
-    /* SEMBUNYIKAN EMPTY STATE */
 
     if (emptyBox) {
 
@@ -436,10 +386,6 @@ function renderBumdes(data) {
 
     data.forEach(function (item) {
 
-
-        /* =================================================
-           IDENTITAS
-        ================================================= */
 
         const id =
             item.id ?? "";
@@ -470,27 +416,40 @@ function renderBumdes(data) {
             );
 
 
-        const status =
+        const direktur =
             getField(
                 item,
                 [
-                    "status",
-                    "keadaan"
+                    "direktur",
+                    "nama_direktur",
+                    "pengelola"
                 ],
-                "Segera Hadir"
+                "-"
             );
 
 
-        const deskripsi =
+        const unit =
             getField(
                 item,
                 [
-                    "deskripsi",
-                    "deskripsi_singkat",
-                    "keterangan",
-                    "profil"
+                    "unit_usaha",
+                    "unitUsaha",
+                    "unit",
+                    "usaha"
                 ],
-                "Informasi BUMDes sedang dilengkapi."
+                "-"
+            );
+
+
+        const produk =
+            getField(
+                item,
+                [
+                    "produk",
+                    "produk_unggulan",
+                    "potensi"
+                ],
+                "-"
             );
 
 
@@ -507,48 +466,22 @@ function renderBumdes(data) {
             );
 
 
-        const unit =
+        const deskripsi =
             getField(
                 item,
                 [
-                    "unit_usaha",
-                    "unitUsaha",
-                    "unit",
-                    "usaha"
+                    "deskripsi",
+                    "deskripsi_singkat",
+                    "keterangan",
+                    "profil"
                 ],
-                ""
+                "BUMDes yang berperan dalam mengembangkan potensi ekonomi dan usaha masyarakat desa."
             );
 
 
-        const verified =
-            item.verified === true ||
-            item.verifikasi === true;
-
-
-        /* =================================================
-           STATUS
-        ================================================= */
-
-        const statusText =
-            String(status)
-                .toLowerCase()
-                .trim();
-
-
-        const active =
-            statusText.includes("aktif") ||
-            statusText.includes("active");
-
-
-        const statusClass =
-            active
-                ? "active"
-                : "pending";
-
-
-        /* =================================================
-           IMAGE
-        ================================================= */
+        /*
+         * IMAGE
+         */
 
         let imageHTML = "";
 
@@ -562,15 +495,12 @@ function renderBumdes(data) {
                     alt="${escapeHTML(nama)}"
                     onerror="
                         this.style.display='none';
-                        if(this.nextElementSibling){
-                            this.nextElementSibling.style.display='flex';
-                        }
+                        this.nextElementSibling.style.display='flex';
                     "
                 >
 
                 <div
-                    class="image-placeholder"
-                    style="display:none;">
+                    class="bumdes-image-placeholder">
 
                     <i class="fa-solid fa-building"></i>
 
@@ -584,7 +514,8 @@ function renderBumdes(data) {
 
             imageHTML = `
 
-                <div class="image-placeholder">
+                <div
+                    class="bumdes-image-placeholder">
 
                     <i class="fa-solid fa-building"></i>
 
@@ -595,9 +526,9 @@ function renderBumdes(data) {
         }
 
 
-        /* =================================================
-           CARD
-        ================================================= */
+        /*
+         * CARD
+         */
 
         html += `
 
@@ -608,58 +539,37 @@ function renderBumdes(data) {
 
                     <!-- IMAGE -->
 
-                    <div class="bumdes-image">
+                    <div class="bumdes-card-image">
 
                         ${imageHTML}
 
 
-                        <!-- STATUS -->
+                        <!-- ACTIVE -->
 
-                        <span
-                            class="status-badge ${statusClass}">
+                        <div class="bumdes-active-badge">
 
-                            ${escapeHTML(status)}
+                            <i class="fa-solid fa-circle-check"></i>
 
-                        </span>
+                            Aktif
+
+                        </div>
 
 
-                        <!-- VERIFIED -->
-
-                        ${
-                            verified
-                            ?
-                            `
-
-                            <span
-                                class="verified-badge"
-                                title="BUMDes Terverifikasi">
-
-                                <i
-                                    class="fa-solid fa-circle-check">
-                                </i>
-
-                            </span>
-
-                            `
-                            :
-                            ""
-                        }
+                        <div class="bumdes-image-overlay"></div>
 
                     </div>
 
 
                     <!-- BODY -->
 
-                    <div class="bumdes-body">
+                    <div class="bumdes-card-body">
 
 
-                        <!-- CATEGORY -->
+                        <!-- LABEL -->
 
-                        <div class="bumdes-category">
+                        <div class="bumdes-card-label">
 
-                            <i
-                                class="fa-solid fa-building">
-                            </i>
+                            <i class="fa-solid fa-building"></i>
 
                             BADAN USAHA MILIK DESA
 
@@ -668,71 +578,113 @@ function renderBumdes(data) {
 
                         <!-- NAME -->
 
-                        <h3 class="bumdes-name">
+                        <h3 class="bumdes-card-title">
 
                             ${escapeHTML(nama)}
 
                         </h3>
 
 
+                        <!-- LOCATION -->
+
+                        <div class="bumdes-location">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+                                Desa ${escapeHTML(desa)}
+                            </span>
+
+                        </div>
+
+
                         <!-- DESCRIPTION -->
 
-                        <p class="bumdes-description">
+                        <p class="bumdes-card-description">
 
                             ${escapeHTML(deskripsi)}
 
                         </p>
 
 
-                        <!-- META -->
+                        <!-- INFO -->
 
-                        <div class="bumdes-meta">
+                        <div class="bumdes-info-grid">
 
 
-                            <!-- DESA -->
+                            <!-- DIREKTUR -->
 
-                            <div
-                                class="bumdes-meta-item">
+                            <div class="bumdes-info-item">
 
-                                <i
-                                    class="fa-solid fa-location-dot">
-                                </i>
+                                <span class="bumdes-info-icon">
 
-                                <span>
-
-                                    ${escapeHTML(desa)}
+                                    <i class="fa-solid fa-user-tie"></i>
 
                                 </span>
+
+                                <div>
+
+                                    <small>
+                                        Direktur
+                                    </small>
+
+                                    <strong>
+                                        ${escapeHTML(direktur)}
+                                    </strong>
+
+                                </div>
 
                             </div>
 
 
-                            <!-- UNIT USAHA -->
+                            <!-- UNIT -->
 
-                            ${
-                                unit
-                                ?
-                                `
+                            <div class="bumdes-info-item">
 
-                                <div
-                                    class="bumdes-meta-item">
+                                <span class="bumdes-info-icon">
 
-                                    <i
-                                        class="fa-solid fa-store">
-                                    </i>
+                                    <i class="fa-solid fa-store"></i>
 
-                                    <span>
+                                </span>
 
-                                        ${formatUnit(unit)}
+                                <div>
 
-                                    </span>
+                                    <small>
+                                        Unit Usaha
+                                    </small>
+
+                                    <strong>
+                                        ${escapeHTML(formatUnit(unit))}
+                                    </strong>
 
                                 </div>
 
-                                `
-                                :
-                                ""
-                            }
+                            </div>
+
+
+                            <!-- PRODUK -->
+
+                            <div class="bumdes-info-item">
+
+                                <span class="bumdes-info-icon">
+
+                                    <i class="fa-solid fa-box-open"></i>
+
+                                </span>
+
+                                <div>
+
+                                    <small>
+                                        Produk
+                                    </small>
+
+                                    <strong>
+                                        ${escapeHTML(produk)}
+                                    </strong>
+
+                                </div>
+
+                            </div>
 
 
                         </div>
@@ -742,14 +694,14 @@ function renderBumdes(data) {
 
                         <button
                             type="button"
-                            class="bumdes-button"
+                            class="bumdes-detail-button"
                             onclick="showBumdesDetail('${escapeHTML(String(id))}')">
 
-                            <i
-                                class="fa-solid fa-eye">
-                            </i>
+                            <span>
+                                Lihat Profil BUMDes
+                            </span>
 
-                            Lihat BUMDes
+                            <i class="fa-solid fa-arrow-right"></i>
 
                         </button>
 
@@ -771,12 +723,11 @@ function renderBumdes(data) {
 }
 
 
-/* =====================================================
+/* =========================================================
    SEARCH
-===================================================== */
+========================================================= */
 
 function setupSearch() {
-
 
     const search =
         document.getElementById(
@@ -791,7 +742,9 @@ function setupSearch() {
     }
 
 
-    /* CEGAH EVENT DOBEL */
+    /*
+     * Hindari event listener ganda
+     */
 
     if (
         search.dataset.initialized === "true"
@@ -817,19 +770,20 @@ function setupSearch() {
                     .trim();
 
 
-            /* FILTER DATA */
+            if (!keyword) {
 
-            let hasil =
+                renderBumdes(
+                    bumdesData
+                );
+
+                return;
+
+            }
+
+
+            const hasil =
                 bumdesData.filter(
                     function (item) {
-
-
-                        if (!keyword) {
-
-                            return true;
-
-                        }
-
 
                         return JSON.stringify(
                             item
@@ -838,14 +792,6 @@ function setupSearch() {
                         .includes(keyword);
 
                     }
-                );
-
-
-            /* TERAPKAN FILTER STATUS */
-
-            hasil =
-                applyStatusFilter(
-                    hasil
                 );
 
 
@@ -859,210 +805,15 @@ function setupSearch() {
 }
 
 
-/* =====================================================
-   FILTER STATUS
-===================================================== */
-
-function setupFilter() {
-
-
-    const buttons =
-        document.querySelectorAll(
-            ".bumdes-filter"
-        );
-
-
-    buttons.forEach(function (button) {
-
-
-        button.addEventListener(
-            "click",
-            function () {
-
-
-                /* HAPUS ACTIVE */
-
-                buttons.forEach(
-                    function (btn) {
-
-                        btn.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-
-                /* AKTIFKAN BUTTON */
-
-                this.classList.add(
-                    "active"
-                );
-
-
-                /* SIMPAN FILTER */
-
-                currentFilter =
-                    this.dataset.filter ||
-                    "semua";
-
-
-                /* AMBIL KEYWORD */
-
-                const search =
-                    document.getElementById(
-                        "searchBumdes"
-                    );
-
-
-                const keyword =
-                    search
-                    ?
-                    search.value
-                        .toLowerCase()
-                        .trim()
-                    :
-                    "";
-
-
-                /* FILTER DATA */
-
-                let hasil =
-                    bumdesData.filter(
-                        function (item) {
-
-
-                            /* SEARCH */
-
-                            if (
-                                keyword &&
-                                !JSON.stringify(item)
-                                    .toLowerCase()
-                                    .includes(keyword)
-                            ) {
-
-                                return false;
-
-                            }
-
-
-                            return true;
-
-                        }
-                    );
-
-
-                /* STATUS */
-
-                hasil =
-                    applyStatusFilter(
-                        hasil
-                    );
-
-
-                renderBumdes(
-                    hasil
-                );
-
-            }
-        );
-
-    });
-
-}
-
-
-/* =====================================================
-   APPLY STATUS FILTER
-===================================================== */
-
-function applyStatusFilter(data) {
-
-
-    if (
-        currentFilter === "semua"
-    ) {
-
-        return data;
-
-    }
-
-
-    return data.filter(
-        function (item) {
-
-
-            const status =
-                getField(
-                    item,
-                    [
-                        "status",
-                        "keadaan"
-                    ],
-                    ""
-                );
-
-
-            const statusText =
-                String(status)
-                    .toLowerCase()
-                    .trim();
-
-
-            if (
-                currentFilter === "Aktif"
-            ) {
-
-                return (
-                    statusText.includes(
-                        "aktif"
-                    ) ||
-                    statusText.includes(
-                        "active"
-                    )
-                );
-
-            }
-
-
-            if (
-                currentFilter === "Segera Hadir"
-            ) {
-
-                return (
-                    statusText.includes(
-                        "segera"
-                    ) ||
-                    statusText.includes(
-                        "hadir"
-                    ) ||
-                    statusText === ""
-                );
-
-            }
-
-
-            return true;
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   DETAIL BUMDES
-===================================================== */
+/* =========================================================
+   DETAIL PROFIL BUMDes
+========================================================= */
 
 function showBumdesDetail(id) {
 
 
-    const data =
-        window.bumdesData || [];
-
-
     const item =
-        data.find(
+        bumdesData.find(
             function (row) {
 
                 return String(row.id)
@@ -1075,7 +826,7 @@ function showBumdesDetail(id) {
     if (!item) {
 
         console.warn(
-            "Data BUMDes tidak ditemukan:",
+            "BUMDes tidak ditemukan:",
             id
         );
 
@@ -1084,9 +835,9 @@ function showBumdesDetail(id) {
     }
 
 
-    /* =================================================
-       FIELD
-    ================================================= */
+    /*
+     * DATA
+     */
 
     const nama =
         getField(
@@ -1113,25 +864,13 @@ function showBumdesDetail(id) {
         );
 
 
-    const status =
+    const direktur =
         getField(
             item,
             [
-                "status",
-                "keadaan"
-            ],
-            "-"
-        );
-
-
-    const deskripsi =
-        getField(
-            item,
-            [
-                "deskripsi",
-                "deskripsi_singkat",
-                "keterangan",
-                "profil"
+                "direktur",
+                "nama_direktur",
+                "pengelola"
             ],
             "-"
         );
@@ -1162,9 +901,82 @@ function showBumdesDetail(id) {
         );
 
 
-    /* =================================================
-       MODAL
-    ================================================= */
+    const deskripsi =
+        getField(
+            item,
+            [
+                "deskripsi",
+                "deskripsi_singkat",
+                "keterangan",
+                "profil"
+            ],
+            "BUMDes yang mengembangkan potensi ekonomi desa."
+        );
+
+
+    const telepon =
+        getField(
+            item,
+            [
+                "telepon",
+                "no_hp",
+                "phone",
+                "kontak"
+            ],
+            ""
+        );
+
+
+    const email =
+        getField(
+            item,
+            [
+                "email"
+            ],
+            ""
+        );
+
+
+    const website =
+        getField(
+            item,
+            [
+                "website",
+                "web",
+                "url"
+            ],
+            ""
+        );
+
+
+    const maps =
+        getField(
+            item,
+            [
+                "maps",
+                "google_maps",
+                "lokasi"
+            ],
+            ""
+        );
+
+
+    const gambar =
+        getField(
+            item,
+            [
+                "gambar",
+                "image",
+                "foto",
+                "logo"
+            ],
+            ""
+        );
+
+
+    /*
+     * MODAL
+     */
 
     const modalTitle =
         document.getElementById(
@@ -1178,23 +990,14 @@ function showBumdesDetail(id) {
         );
 
 
-    /* =================================================
-       CEK MODAL
-    ================================================= */
+    /*
+     * Jika modal belum tersedia
+     */
 
     if (
         !modalTitle ||
         !modalContent
     ) {
-
-        console.warn(
-            "Elemen modal BUMDes belum tersedia di HTML."
-        );
-
-        /*
-         * Jika modal belum dibuat,
-         * tampilkan informasi melalui alert
-         */
 
         alert(
             nama +
@@ -1202,8 +1005,14 @@ function showBumdesDetail(id) {
             "Desa: " +
             desa +
             "\n" +
-            "Status: " +
-            status
+            "Direktur: " +
+            direktur +
+            "\n" +
+            "Unit Usaha: " +
+            formatUnit(unit) +
+            "\n" +
+            "Produk: " +
+            produk
         );
 
         return;
@@ -1215,132 +1024,291 @@ function showBumdesDetail(id) {
         nama;
 
 
+    /*
+     * GAMBAR MODAL
+     */
+
+    let modalImage = "";
+
+
+    if (gambar) {
+
+        modalImage = `
+
+            <div class="modal-bumdes-image">
+
+                <img
+                    src="${escapeHTML(gambar)}"
+                    alt="${escapeHTML(nama)}"
+                    onerror="
+                        this.style.display='none';
+                        this.nextElementSibling.style.display='flex';
+                    "
+                >
+
+                <div
+                    class="modal-bumdes-placeholder">
+
+                    <i class="fa-solid fa-building"></i>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+     * KONTAK
+     */
+
+    let contactHTML = "";
+
+
+    if (telepon) {
+
+        contactHTML += `
+
+            <a
+                href="tel:${escapeHTML(telepon)}"
+                class="modal-contact-item">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <span>
+                    ${escapeHTML(telepon)}
+                </span>
+
+            </a>
+
+        `;
+
+    }
+
+
+    if (email) {
+
+        contactHTML += `
+
+            <a
+                href="mailto:${escapeHTML(email)}"
+                class="modal-contact-item">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <span>
+                    ${escapeHTML(email)}
+                </span>
+
+            </a>
+
+        `;
+
+    }
+
+
+    if (website) {
+
+        contactHTML += `
+
+            <a
+                href="${escapeHTML(website)}"
+                target="_blank"
+                rel="noopener"
+                class="modal-contact-item">
+
+                <i class="fa-solid fa-globe"></i>
+
+                <span>
+                    Website BUMDes
+                </span>
+
+            </a>
+
+        `;
+
+    }
+
+
+    /*
+     * MAPS
+     */
+
+    let mapsHTML = "";
+
+
+    if (maps) {
+
+        mapsHTML = `
+
+            <a
+                href="${escapeHTML(maps)}"
+                target="_blank"
+                rel="noopener"
+                class="bumdes-map-button">
+
+                <i class="fa-solid fa-map-location-dot"></i>
+
+                Lihat Lokasi BUMDes
+
+            </a>
+
+        `;
+
+    }
+
+
+    /*
+     * CONTENT MODAL
+     */
+
     modalContent.innerHTML = `
 
-        <div class="modal-detail-icon">
-
-            <i class="fa-solid fa-building"></i>
-
-        </div>
+        ${modalImage}
 
 
-        <h3 class="fw-bold mb-3">
+        <div class="modal-bumdes-header">
 
-            ${escapeHTML(nama)}
+            <div class="modal-bumdes-label">
 
-        </h3>
+                <i class="fa-solid fa-circle-check"></i>
+
+                BUMDes AKTIF
+
+            </div>
 
 
-        <div class="modal-detail-item">
+            <h3>
 
-            <strong>
+                ${escapeHTML(nama)}
 
-                <i
-                    class="fa-solid fa-location-dot text-success">
-                </i>
+            </h3>
 
-                Desa
 
-            </strong>
+            <div class="modal-bumdes-location">
 
-            <span>
+                <i class="fa-solid fa-location-dot"></i>
 
-                ${escapeHTML(desa)}
+                Desa ${escapeHTML(desa)}
 
-            </span>
+            </div>
 
         </div>
 
 
-        <div class="modal-detail-item">
+        <!-- RINGKASAN -->
 
-            <strong>
-
-                <i
-                    class="fa-solid fa-circle-check text-success">
-                </i>
-
-                Status
-
-            </strong>
-
-            <span>
-
-                ${escapeHTML(status)}
-
-            </span>
-
-        </div>
+        <div class="modal-bumdes-stats">
 
 
-        <div class="modal-detail-item">
+            <div>
 
-            <strong>
+                <i class="fa-solid fa-user-tie"></i>
 
-                <i
-                    class="fa-solid fa-store text-success">
-                </i>
+                <small>
+                    Direktur
+                </small>
 
-                Unit Usaha
+                <strong>
+                    ${escapeHTML(direktur)}
+                </strong>
 
-            </strong>
-
-            <span>
-
-                ${formatUnit(unit)}
-
-            </span>
-
-        </div>
+            </div>
 
 
-        <div class="modal-detail-item">
+            <div>
 
-            <strong>
+                <i class="fa-solid fa-store"></i>
 
-                <i
-                    class="fa-solid fa-box-open text-success">
-                </i>
+                <small>
+                    Unit Usaha
+                </small>
 
-                Produk / Potensi
+                <strong>
+                    ${escapeHTML(formatUnit(unit))}
+                </strong>
 
-            </strong>
+            </div>
 
-            <span>
 
-                ${escapeHTML(produk)}
+            <div>
 
-            </span>
+                <i class="fa-solid fa-box-open"></i>
+
+                <small>
+                    Produk
+                </small>
+
+                <strong>
+                    ${escapeHTML(produk)}
+                </strong>
+
+            </div>
 
         </div>
 
 
-        <div class="modal-detail-item">
+        <!-- PROFIL -->
 
-            <strong>
+        <div class="modal-bumdes-section">
 
-                <i
-                    class="fa-solid fa-circle-info text-success">
-                </i>
+            <h4>
+
+                <i class="fa-solid fa-circle-info"></i>
 
                 Tentang BUMDes
 
-            </strong>
+            </h4>
 
-            <span>
+
+            <p>
 
                 ${escapeHTML(deskripsi)}
 
-            </span>
+            </p>
 
         </div>
+
+
+        ${
+            contactHTML
+            ?
+            `
+
+            <div class="modal-bumdes-section">
+
+                <h4>
+
+                    <i class="fa-solid fa-address-book"></i>
+
+                    Kontak
+
+                </h4>
+
+                <div class="modal-contact-list">
+
+                    ${contactHTML}
+
+                </div>
+
+            </div>
+
+            `
+            :
+            ""
+        }
+
+
+        ${mapsHTML}
 
     `;
 
 
-    /* =================================================
-       BOOTSTRAP MODAL
-    ================================================= */
+    /*
+     * TAMPILKAN MODAL
+     */
 
     const modalElement =
         document.getElementById(
@@ -1348,20 +1316,10 @@ function showBumdesDetail(id) {
         );
 
 
-    if (!modalElement) {
-
-        return;
-
-    }
-
-
     if (
+        !modalElement ||
         typeof bootstrap === "undefined"
     ) {
-
-        console.warn(
-            "Bootstrap JS belum tersedia."
-        );
 
         return;
 
@@ -1379,9 +1337,39 @@ function showBumdesDetail(id) {
 }
 
 
-/* =====================================================
-   HELPER FIELD
-===================================================== */
+/* =========================================================
+   FORMAT UNIT USAHA
+========================================================= */
+
+function formatUnit(value) {
+
+
+    if (Array.isArray(value)) {
+
+        return value.join(", ");
+
+    }
+
+
+    if (
+        value === undefined ||
+        value === null ||
+        value === ""
+    ) {
+
+        return "-";
+
+    }
+
+
+    return String(value);
+
+}
+
+
+/* =========================================================
+   GET FIELD
+========================================================= */
 
 function getField(
     object,
@@ -1419,48 +1407,11 @@ function getField(
 }
 
 
-/* =====================================================
-   FORMAT UNIT USAHA
-===================================================== */
-
-function formatUnit(value) {
-
-
-    if (
-        Array.isArray(value)
-    ) {
-
-        return escapeHTML(
-            value.join(", ")
-        );
-
-    }
-
-
-    if (
-        value === undefined ||
-        value === null ||
-        value === ""
-    ) {
-
-        return "-";
-
-    }
-
-
-    return escapeHTML(
-        String(value)
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
 function escapeHTML(value) {
-
 
     return String(
         value ?? ""
