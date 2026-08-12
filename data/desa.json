@@ -14,6 +14,45 @@
   },
   {
     "id": 2,
+    "slug": "matenggeng",
+    "nama": "Matenggeng",
+    "status": "🌱 Desa Berkembang",
+    "deskripsi": "Potensi Pertanian, Perkebunan dan Perdagangan",
+    "penduduk": "-",
+    "umkm": "-",
+    "bumdes": "-",
+    "wisata": "-",
+    "gambar": "assets/images/desa/default.jpg",
+    "link": "desa/matenggeng.html"
+  },
+  {
+    "id": 3,
+    "slug": "ciwalen",
+    "nama": "Ciwalen",
+    "status": "🌱 Desa Berkembang",
+    "deskripsi": "Potensi Pertanian, Perkebunan dan UMKM",
+    "penduduk": "-",
+    "umkm": "-",
+    "bumdes": "-",
+    "wisata": "-",
+    "gambar": "assets/images/desa/default.jpg",
+    "link": "desa/ciwalen.html"
+  },
+  {
+    "id": 4,
+    "slug": "dayeuhluhur",
+    "nama": "Dayeuhluhur",
+    "status": "🏛️ Pusat Kecamatan",
+    "deskripsi": "Pusat Pemerintahan dan Pelayanan Masyarakat",
+    "penduduk": "-",
+    "umkm": "-",
+    "bumdes": "-",
+    "wisata": "-",
+    "gambar": "assets/images/desa/default.jpg",
+    "link": "desa/dayeuhluhur.html"
+  },
+  {
+    "id": 5,
     "slug": "hanum",
     "nama": "Hanum",
     "status": "🌱 Desa Berkembang",
@@ -26,20 +65,7 @@
     "link": "desa/hanum.html"
   },
   {
-    "id": 3,
-    "slug": "bolang",
-    "nama": "Bolang",
-    "status": "🌱 Desa Berkembang",
-    "deskripsi": "Potensi Perdagangan dan Pertanian",
-    "penduduk": "-",
-    "umkm": "-",
-    "bumdes": "-",
-    "wisata": "-",
-    "gambar": "assets/images/desa/bolang.jpg",
-    "link": "desa/bolang.html"
-  },
-  {
-    "id": 4,
+    "id": 6,
     "slug": "datar",
     "nama": "Datar",
     "status": "🚧 Profil Segera Hadir",
@@ -52,33 +78,46 @@
     "link": "desa/datar.html"
   },
   {
-    "id": 5,
-    "slug": "dayeuhluhur",
-    "nama": "Dayeuhluhur",
-    "status": "🚧 Profil Segera Hadir",
-    "deskripsi": "Data desa sedang dilengkapi.",
-    "penduduk": "-",
-    "umkm": "-",
-    "bumdes": "-",
-    "wisata": "-",
-    "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/dayeuhluhur.html"
-  },
-  {
-    "id": 6,
-    "slug": "matenggeng",
-    "nama": "Matenggeng",
-    "status": "🚧 Profil Segera Hadir",
-    "deskripsi": "Data desa sedang dilengkapi.",
-    "penduduk": "-",
-    "umkm": "-",
-    "bumdes": "-",
-    "wisata": "-",
-    "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/matenggeng.html"
-  },
-  {
     "id": 7,
+    "slug": "bingkeng",
+    "nama": "Bingkeng",
+    "status": "🚧 Profil Segera Hadir",
+    "deskripsi": "Data desa sedang dilengkapi.",
+    "penduduk": "-",
+    "umkm": "-",
+    "bumdes": "-",
+    "wisata": "-",
+    "gambar": "assets/images/desa/default.jpg",
+    "link": "desa/bingkeng.html"
+  },
+  {
+    "id": 8,
+    "slug": "bolang",
+    "nama": "Bolang",
+    "status": "🌱 Desa Berkembang",
+    "deskripsi": "Potensi Perdagangan dan Pertanian",
+    "penduduk": "-",
+    "umkm": "-",
+    "bumdes": "-",
+    "wisata": "-",
+    "gambar": "assets/images/desa/bolang.jpg",
+    "link": "desa/bolang.html"
+  },
+  {
+    "id": 9,
+    "slug": "kutaagung",
+    "nama": "Kutaagung",
+    "status": "🚧 Profil Segera Hadir",
+    "deskripsi": "Data desa sedang dilengkapi.",
+    "penduduk": "-",
+    "umkm": "-",
+    "bumdes": "-",
+    "wisata": "-",
+    "gambar": "assets/images/desa/default.jpg",
+    "link": "desa/kutaagung.html"
+  },
+  {
+    "id": 10,
     "slug": "cijeruk",
     "nama": "Cijeruk",
     "status": "🚧 Profil Segera Hadir",
@@ -91,48 +130,9 @@
     "link": "desa/cijeruk.html"
   },
   {
-    "id": 8,
-    "slug": "cikalong",
-    "nama": "Cikalong",
-    "status": "🚧 Profil Segera Hadir",
-    "deskripsi": "Data desa sedang dilengkapi.",
-    "penduduk": "-",
-    "umkm": "-",
-    "bumdes": "-",
-    "wisata": "-",
-    "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/cikalong.html"
-  },
-  {
-    "id": 9,
-    "slug": "ciwalen",
-    "nama": "Ciwalen",
-    "status": "🚧 Profil Segera Hadir",
-    "deskripsi": "Data desa sedang dilengkapi.",
-    "penduduk": "-",
-    "umkm": "-",
-    "bumdes": "-",
-    "wisata": "-",
-    "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/ciwalen.html"
-  },
-  {
-    "id": 10,
-    "slug": "panulisan-barat",
-    "nama": "Panulisan Barat",
-    "status": "🚧 Profil Segera Hadir",
-    "deskripsi": "Data desa sedang dilengkapi.",
-    "penduduk": "-",
-    "umkm": "-",
-    "bumdes": "-",
-    "wisata": "-",
-    "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/panulisan-barat.html"
-  },
-  {
     "id": 11,
-    "slug": "sadabumi",
-    "nama": "Sadabumi",
+    "slug": "cilumping",
+    "nama": "Cilumping",
     "status": "🚧 Profil Segera Hadir",
     "deskripsi": "Data desa sedang dilengkapi.",
     "penduduk": "-",
@@ -140,7 +140,7 @@
     "bumdes": "-",
     "wisata": "-",
     "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/sadabumi.html"
+    "link": "desa/cilumping.html"
   },
   {
     "id": 12,
@@ -157,8 +157,8 @@
   },
   {
     "id": 13,
-    "slug": "kutaagung",
-    "nama": "Kutaagung",
+    "slug": "panulisan-barat",
+    "nama": "Panulisan Barat",
     "status": "🚧 Profil Segera Hadir",
     "deskripsi": "Data desa sedang dilengkapi.",
     "penduduk": "-",
@@ -166,12 +166,12 @@
     "bumdes": "-",
     "wisata": "-",
     "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/kutaagung.html"
+    "link": "desa/panulisan-barat.html"
   },
   {
     "id": 14,
-    "slug": "bingkeng",
-    "nama": "Bingkeng",
+    "slug": "panulisan-timur",
+    "nama": "Panulisan Timur",
     "status": "🚧 Profil Segera Hadir",
     "deskripsi": "Data desa sedang dilengkapi.",
     "penduduk": "-",
@@ -179,6 +179,6 @@
     "bumdes": "-",
     "wisata": "-",
     "gambar": "assets/images/desa/default.jpg",
-    "link": "desa/bingkeng.html"
+    "link": "desa/panulisan-timur.html"
   }
 ]
