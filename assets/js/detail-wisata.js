@@ -1,41 +1,16 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
    DETAIL WISATA
-   FINAL / SAFE VERSION
+   FINAL VERSION
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const detailContainer =
-        document.getElementById("detailWisata");
+    const container = document.getElementById("detailWisata");
 
-    const heroContainer =
-        document.getElementById("detailHero");
-
-
-    /* =====================================================
-       CEK ELEMENT HTML
-    ===================================================== */
-
-    if (!detailContainer) {
-
-        console.error(
-            "ERROR: id='detailWisata' tidak ditemukan."
-        );
-
+    if (!container) {
+        console.error("detailWisata tidak ditemukan.");
         return;
-
-    }
-
-
-    if (!heroContainer) {
-
-        console.error(
-            "ERROR: id='detailHero' tidak ditemukan."
-        );
-
-        return;
-
     }
 
 
@@ -43,24 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
        AMBIL SLUG DARI URL
     ===================================================== */
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
+    const params = new URLSearchParams(window.location.search);
 
-    const slug =
-        params.get("slug");
+    const slug = params.get("slug");
 
+    console.log("Slug wisata:", slug);
 
-    console.log(
-        "DETAIL WISATA - SLUG:",
-        slug
-    );
-
-
-    /* =====================================================
-       JIKA SLUG TIDAK ADA
-    ===================================================== */
 
     if (!slug) {
 
@@ -69,12 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         return;
-
     }
 
 
     /* =====================================================
-       LOAD WISATA.JSON
+       LOAD DATA
     ===================================================== */
 
     fetch("data/wisata.json")
@@ -82,20 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(function (response) {
 
             console.log(
-                "wisata.json status:",
+                "Status wisata.json:",
                 response.status
             );
-
 
             if (!response.ok) {
 
                 throw new Error(
-                    "wisata.json gagal dimuat. HTTP " +
+                    "wisata.json tidak dapat dimuat. Status: " +
                     response.status
                 );
 
             }
-
 
             return response.json();
 
@@ -113,29 +73,31 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!Array.isArray(data)) {
 
                 throw new Error(
-                    "Format wisata.json bukan Array."
+                    "Format wisata.json harus berupa array."
                 );
 
             }
 
 
-            /* =============================================
-               CARI BERDASARKAN SLUG
-            ============================================= */
+            /* =================================================
+               CARI DATA BERDASARKAN SLUG
+            ================================================= */
 
-            const wisata =
-                data.find(function (item) {
+            const wisata = data.find(function (item) {
 
-                    return String(item.slug)
+                return String(item.slug || "")
+                    .toLowerCase()
+                    .trim()
+                    ===
+                    String(slug)
                         .toLowerCase()
-                        === String(slug)
-                        .toLowerCase();
+                        .trim();
 
-                });
+            });
 
 
             console.log(
-                "Data wisata ditemukan:",
+                "Wisata ditemukan:",
                 wisata
             );
 
@@ -143,17 +105,16 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!wisata) {
 
                 tampilkanError(
-                    "Destinasi dengan slug '" +
+                    "Wisata dengan slug '" +
                     slug +
-                    "' tidak ditemukan di wisata.json."
+                    "' tidak ditemukan dalam wisata.json."
                 );
 
                 return;
-
             }
 
 
-            renderWisata(wisata);
+            renderDetail(wisata);
 
         })
 
@@ -165,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 error
             );
 
-
             tampilkanError(
                 error.message
             );
@@ -174,11 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       RENDER WISATA
+       RENDER DETAIL
     ===================================================== */
 
-    function renderWisata(item) {
-
+    function renderDetail(item) {
 
         const nama =
             item.nama ||
@@ -205,95 +164,29 @@ document.addEventListener("DOMContentLoaded", function () {
             "assets/images/wisata/default.jpg";
 
 
-        const maps =
-            item.maps ||
-            "";
-
-
         const status =
             item.status ||
             "Potensi Wisata";
 
 
-        const jenis =
-            item.jenis ||
-            "Wisata Lokal";
+        const maps =
+            item.maps ||
+            item.google_maps ||
+            "";
 
 
-        /* =============================================
-           TITLE BROWSER
-        ============================================= */
+        /* =================================================
+           TITLE
+        ================================================= */
 
         document.title =
             nama +
             " | PLAZA DAYEUHLUHUR";
 
 
-        /* =============================================
-           HERO
-        ============================================= */
-
-        heroContainer.innerHTML = `
-
-            <div class="detail-hero-content">
-
-                <span class="detail-badge">
-
-                    <i class="fa-solid fa-mountain-sun"></i>
-
-                    ${escapeHTML(kategori)}
-
-                </span>
-
-
-                <h1>
-
-                    ${escapeHTML(nama)}
-
-                </h1>
-
-
-                <p>
-
-                    <i
-                        class="fa-solid fa-location-dot">
-                    </i>
-
-                    Desa ${escapeHTML(desa)},
-                    Kecamatan Dayeuhluhur
-
-                </p>
-
-            </div>
-
-        `;
-
-
-        /* =============================================
-           GAMBAR
-        ============================================= */
-
-        const imageHTML = `
-
-            <div class="detail-image-box">
-
-                <img
-                    src="${escapeAttribute(gambar)}"
-                    alt="${escapeHTML(nama)}"
-                    class="detail-image"
-                    onerror="
-                        this.onerror=null;
-                        this.src='assets/images/wisata/default.jpg';
-                    ">
-
-            </div>
-
-        `;
-
-
-        /* =============================================
+        /* =================================================
            TOMBOL MAPS
-        ============================================= */
+        ================================================= */
 
         let tombolMaps = "";
 
@@ -308,9 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     rel="noopener noreferrer"
                     class="btn btn-success rounded-pill px-4">
 
-                    <i
-                        class="fa-solid fa-location-arrow me-2">
-                    </i>
+                    <i class="fa-solid fa-location-arrow me-2"></i>
 
                     Lihat Lokasi
 
@@ -321,11 +212,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* =============================================
-           DETAIL
-        ============================================= */
+        /* =================================================
+           ISI HALAMAN
+        ================================================= */
 
-        detailContainer.innerHTML = `
+        container.innerHTML = `
 
             <div class="row g-5 align-items-start">
 
@@ -334,7 +225,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="col-lg-6">
 
-                    ${imageHTML}
+                    <div
+                        class="rounded-4 overflow-hidden shadow-sm">
+
+                        <img
+                            src="${escapeAttribute(gambar)}"
+                            alt="${escapeHTML(nama)}"
+                            class="img-fluid w-100"
+                            style="
+                                min-height:380px;
+                                max-height:500px;
+                                object-fit:cover;
+                            "
+                            onerror="
+                                this.onerror=null;
+                                this.src='assets/images/wisata/default.jpg';
+                            ">
+
+                    </div>
 
                 </div>
 
@@ -344,18 +252,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="col-lg-6">
 
 
-                    <span class="text-success fw-bold">
+                    <span
+                        class="badge bg-success rounded-pill px-3 py-2 mb-3">
 
-                        PROFIL DESTINASI
+                        🌿 ${escapeHTML(kategori)}
 
                     </span>
 
 
-                    <h2 class="fw-bold mt-2 mb-3">
+                    <h1
+                        class="fw-bold mb-3">
 
                         ${escapeHTML(nama)}
 
-                    </h2>
+                    </h1>
 
 
                     <div
@@ -379,23 +289,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     </p>
 
 
-                    <!-- INFORMASI -->
+                    <!-- INFO BOX -->
 
-                    <div class="row g-3 mt-3">
+                    <div class="row g-3 mt-4">
 
 
                         <div class="col-md-6">
 
                             <div
-                                class="p-3 rounded-4 shadow-sm bg-white">
-
-                                <i
-                                    class="fa-solid fa-layer-group
-                                           text-success mb-2">
-                                </i>
+                                class="bg-light rounded-4 p-3 h-100">
 
                                 <small
-                                    class="d-block text-muted">
+                                    class="text-muted d-block">
 
                                     Kategori
 
@@ -415,23 +320,18 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="col-md-6">
 
                             <div
-                                class="p-3 rounded-4 shadow-sm bg-white">
-
-                                <i
-                                    class="fa-solid fa-leaf
-                                           text-success mb-2">
-                                </i>
+                                class="bg-light rounded-4 p-3 h-100">
 
                                 <small
-                                    class="d-block text-muted">
+                                    class="text-muted d-block">
 
-                                    Jenis
+                                    Lokasi
 
                                 </small>
 
                                 <strong>
 
-                                    ${escapeHTML(jenis)}
+                                    ${escapeHTML(desa)}
 
                                 </strong>
 
@@ -443,21 +343,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="col-12">
 
                             <div
-                                class="p-3 rounded-4 shadow-sm bg-white">
-
-                                <i
-                                    class="fa-solid fa-circle-check
-                                           text-success mb-2">
-                                </i>
+                                class="bg-light rounded-4 p-3">
 
                                 <small
-                                    class="d-block text-muted">
+                                    class="text-muted d-block">
 
                                     Status
 
                                 </small>
 
-                                <strong>
+                                <strong
+                                    class="text-success">
 
                                     ${escapeHTML(status)}
 
@@ -467,13 +363,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         </div>
 
-
                     </div>
 
 
                     <!-- TOMBOL -->
 
-                    <div class="d-flex flex-wrap gap-2 mt-4">
+                    <div
+                        class="d-flex flex-wrap gap-2 mt-4">
 
                         ${tombolMaps}
 
@@ -492,7 +388,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     </div>
 
-
                 </div>
 
             </div>
@@ -501,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         console.log(
-            "DETAIL WISATA BERHASIL DITAMPILKAN:",
+            "Detail berhasil ditampilkan:",
             nama
         );
 
@@ -509,51 +404,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       ERROR MESSAGE
+       ERROR
     ===================================================== */
 
     function tampilkanError(message) {
 
+        container.innerHTML = `
 
-        heroContainer.innerHTML = `
+            <div
+                class="text-center py-5">
 
-            <div>
+                <div
+                    class="display-1 mb-3">
 
-                <h1 class="fw-bold">
+                    😔
+
+                </div>
+
+
+                <h3
+                    class="fw-bold">
 
                     Wisata Tidak Ditemukan
-
-                </h1>
-
-                <p class="mb-0">
-
-                    ${escapeHTML(message)}
-
-                </p>
-
-            </div>
-
-        `;
-
-
-        detailContainer.innerHTML = `
-
-            <div class="text-center py-5">
-
-                <i
-                    class="fa-solid fa-map-location-dot
-                           fa-4x text-secondary mb-4">
-                </i>
-
-
-                <h3 class="fw-bold">
-
-                    Data wisata belum tersedia
 
                 </h3>
 
 
-                <p class="text-muted">
+                <p
+                    class="text-muted">
 
                     ${escapeHTML(message)}
 
@@ -599,10 +477,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    /* =====================================================
-       ESCAPE ATTRIBUTE
-    ===================================================== */
 
     function escapeAttribute(value) {
 
