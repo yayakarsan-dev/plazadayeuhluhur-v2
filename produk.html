@@ -5,24 +5,22 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Produk Lokal Dayeuhluhur | Plaza Dayeuhluhur</title>
+    <title>Produk UMKM | PLAZA DAYEUHLUHUR</title>
 
     <meta name="description"
-          content="Etalase Produk Lokal Dayeuhluhur. Temukan berbagai produk UMKM Kecamatan Dayeuhluhur dan hubungi pemilik produk melalui WhatsApp.">
+        content="Etalase Produk UMKM Kecamatan Dayeuhluhur. Temukan produk lokal dan hubungi penjual melalui WhatsApp.">
 
     <!-- Google Font -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Bootstrap -->
     <link
@@ -34,12 +32,23 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- CSS -->
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="assets/css/theme.css">
+
+    <link rel="stylesheet" href="assets/css/animation.css">
+
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- CSS Produk -->
     <link rel="stylesheet" href="assets/css/produk.css">
 
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      TOP NEWS FLASH
@@ -76,68 +85,167 @@
 </div>
 
 
+
 <!-- =====================================================
      HEADER / NAVBAR
 ===================================================== -->
 
-<header class="site-header">
+<header>
 
-    <nav class="main-navbar">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
 
-        <div class="nav-container">
+        <div class="container">
+
 
             <!-- LOGO -->
 
-            <a href="index.html" class="brand">
+            <a class="navbar-brand d-flex align-items-center"
+                href="index.html">
 
                 <img
                     src="assets/images/logo.png"
-                    alt="Plaza Dayeuhluhur">
+                    height="55"
+                    alt="Logo Plaza Dayeuhluhur">
 
-                <span>PLAZA DAYEUHLUHUR</span>
+                <span class="fw-bold ms-2">
+
+                    PLAZA DAYEUHLUHUR
+
+                </span>
 
             </a>
 
 
+            <!-- MOBILE MENU -->
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
             <!-- MENU -->
 
-            <div class="nav-menu">
+            <div
+                class="collapse navbar-collapse"
+                id="navbarNav">
 
-                <a href="index.html">
-                    Beranda
-                </a>
+                <ul class="navbar-nav ms-auto">
 
-                <a href="produk.html" class="active">
-                    Produk
-                </a>
 
-                <a href="desa.html">
-                    Desa
-                </a>
+                    <li class="nav-item">
 
-                <a href="bumdes.html">
-                    BUMDes
-                </a>
+                        <a
+                            class="nav-link"
+                            href="index.html">
 
-                <a href="umkm.html">
-                    UMKM
-                </a>
+                            Beranda
 
-                <a href="wisata.html">
-                    Wisata
-                </a>
+                        </a>
 
-                <a href="berita.html">
-                    Berita
-                </a>
+                    </li>
 
-                <a href="kontak.html">
-                    Kontak
-                </a>
 
-                <a href="dashboard.html">
-                    Dashboard
-                </a>
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            href="produk.html">
+
+                            Produk
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="umkm.html">
+
+                            UMKM
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="bursa.html">
+
+                            Bursa
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="wisata.html">
+
+                            Wisata
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="berita.html">
+
+                            Berita
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="desa.html">
+
+                            Desa
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="bumdes.html">
+
+                            BUMDes
+
+                        </a>
+
+                    </li>
+
+
+                </ul>
 
             </div>
 
@@ -148,84 +256,72 @@
 </header>
 
 
+
 <!-- =====================================================
-     HERO PRODUK
+     HERO PAGE
 ===================================================== -->
 
 <section class="produk-hero">
-
-    <div class="hero-decoration hero-decoration-left"></div>
-
-    <div class="hero-decoration hero-decoration-right"></div>
 
     <div class="container">
 
         <div class="row align-items-center">
 
-            <!-- LEFT -->
+            <div class="col-lg-8">
 
-            <div class="col-lg-7">
+                <div class="produk-hero-content">
 
-                <div class="hero-badge">
+                    <span class="produk-hero-label">
 
-                    <i class="fa-solid fa-store"></i>
+                        <i class="fa-solid fa-store me-2"></i>
 
-                    ETALASE PRODUK UMKM
+                        ETALASE PRODUK UMKM
 
-                </div>
-
-
-                <h1>
-
-                    Produk Lokal
-                    <span>Dayeuhluhur</span>
-
-                </h1>
+                    </span>
 
 
-                <p>
+                    <h1>
 
-                    Temukan berbagai produk unggulan hasil karya
-                    pelaku UMKM Kecamatan Dayeuhluhur.
-                    Jelajahi produk, kenali pemiliknya, dan
-                    hubungi penjual secara langsung melalui WhatsApp.
+                        Produk Lokal<br>
 
-                </p>
+                        <span>Dayeuhluhur</span>
 
-
-                <div class="hero-buttons">
-
-                    <a href="#etalase"
-                       class="btn-hero-primary">
-
-                        <i class="fa-solid fa-basket-shopping"></i>
-
-                        Jelajahi Produk
-
-                    </a>
+                    </h1>
 
 
-                    <a href="index.html"
-                       class="btn-hero-outline">
+                    <p>
 
-                        <i class="fa-solid fa-arrow-left"></i>
+                        Temukan berbagai produk unggulan
+                        hasil karya masyarakat Kecamatan
+                        Dayeuhluhur.
 
-                        Beranda
+                    </p>
 
-                    </a>
+
+                    <div class="mt-4">
+
+                        <a
+                            href="#produk"
+                            class="btn btn-light btn-lg">
+
+                            <i class="fa-solid fa-bag-shopping me-2"></i>
+
+                            Jelajahi Produk
+
+                        </a>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- RIGHT -->
+            <div class="col-lg-4 d-none d-lg-block">
 
-            <div class="col-lg-5">
+                <div class="produk-hero-icon">
 
-                <div class="hero-icon">
-
-                    <i class="fa-solid fa-basket-shopping"></i>
+                    <i class="fa-solid fa-store"></i>
 
                 </div>
 
@@ -238,142 +334,163 @@
 </section>
 
 
+
 <!-- =====================================================
-     ETALASE PRODUK
+     PRODUK
 ===================================================== -->
 
-<section id="etalase" class="produk-section">
+<section
+    id="produk"
+    class="produk-section py-5">
 
     <div class="container">
 
-        <!-- TITLE -->
 
-        <div class="section-heading text-center">
+        <!-- JUDUL -->
 
-            <div class="section-label">
+        <div class="text-center mb-5">
 
-                ETALASE PRODUK
+            <h6 class="text-primary fw-bold">
 
-            </div>
+                PRODUK UMKM
 
-            <h2>
+            </h6>
 
-                Produk UMKM Dayeuhluhur
+
+            <h2 class="fw-bold">
+
+                Jelajahi Produk Lokal
 
             </h2>
 
-            <p>
 
-                Belanja dan dukung produk lokal masyarakat
-                Kecamatan Dayeuhluhur.
+            <p class="text-muted">
+
+                Pilih produk yang Anda inginkan dan
+                hubungi penjual langsung melalui WhatsApp.
 
             </p>
 
         </div>
 
 
-        <!-- FILTER -->
 
-        <div class="produk-filter">
+        <!-- =================================================
+             SEARCH & FILTER
+        ================================================= -->
 
-            <div class="filter-item">
+        <div class="produk-filter-card mb-5">
 
-                <label for="searchProduk">
+            <div class="row g-3 align-items-center">
 
-                    Cari Produk
 
-                </label>
+                <!-- SEARCH -->
 
-                <div class="search-box">
+                <div class="col-lg-5">
 
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="input-group">
 
-                    <input
-                        type="text"
-                        id="searchProduk"
-                        placeholder="Cari nama produk atau UMKM...">
+                        <span class="input-group-text">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        </span>
+
+                        <input
+                            type="text"
+                            id="produkSearch"
+                            class="form-control"
+                            placeholder="Cari nama produk atau UMKM...">
+
+                    </div>
+
+                </div>
+
+
+                <!-- KATEGORI -->
+
+                <div class="col-lg-3">
+
+                    <select
+                        id="produkKategori"
+                        class="form-select">
+
+                        <option value="">
+
+                            Semua Kategori
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESA -->
+
+                <div class="col-lg-3">
+
+                    <select
+                        id="produkDesa"
+                        class="form-select">
+
+                        <option value="">
+
+                            Semua Desa
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- RESET -->
+
+                <div class="col-lg-1">
+
+                    <button
+                        type="button"
+                        id="resetProduk"
+                        class="btn btn-outline-secondary w-100"
+                        title="Reset Filter">
+
+                        <i class="fa-solid fa-rotate-left"></i>
+
+                    </button>
 
                 </div>
 
             </div>
 
-
-            <div class="filter-item">
-
-                <label for="filterKategori">
-
-                    Kategori
-
-                </label>
-
-                <select id="filterKategori">
-
-                    <option value="">
-
-                        Semua kategori
-
-                    </option>
-
-                </select>
-
-            </div>
+        </div>
 
 
-            <div class="filter-item">
 
-                <label for="filterDesa">
+        <!-- JUMLAH PRODUK -->
 
-                    Desa
+        <div
+            class="d-flex justify-content-between align-items-center mb-4">
 
-                </label>
+            <div>
 
-                <select id="filterDesa">
+                <span
+                    id="jumlahProduk"
+                    class="text-muted">
 
-                    <option value="">
+                    Memuat produk...
 
-                        Semua Desa
-
-                    </option>
-
-                </select>
+                </span>
 
             </div>
-
-
-            <button
-                type="button"
-                id="resetFilter"
-                class="btn-reset">
-
-                <i class="fa-solid fa-rotate-left"></i>
-
-            </button>
 
         </div>
 
 
-        <!-- INFO -->
 
-        <div class="produk-info">
-
-            <span id="produkStatus">
-
-                Memuat produk...
-
-            </span>
-
-            <span>
-
-                <i class="fa-solid fa-store"></i>
-
-                Plaza Dayeuhluhur
-
-            </span>
-
-        </div>
-
-
-        <!-- PRODUCT GRID -->
+        <!-- =================================================
+             CONTAINER PRODUK
+        ================================================= -->
 
         <div
             class="row g-4"
@@ -382,16 +499,20 @@
         </div>
 
 
-        <!-- EMPTY STATE -->
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================= -->
 
         <div
             id="produkEmpty"
-            class="produk-empty"
-            style="display:none;">
+            class="text-center py-5 d-none">
 
-            <div class="empty-icon">
+            <div class="mb-3">
 
-                <i class="fa-solid fa-box-open"></i>
+                <i
+                    class="fa-solid fa-box-open fa-3x text-muted">
+                </i>
 
             </div>
 
@@ -401,60 +522,66 @@
 
             </h4>
 
-            <p>
+            <p class="text-muted">
 
-                Coba gunakan kata pencarian atau filter
-                yang berbeda.
+                Coba gunakan kata pencarian atau
+                kategori yang berbeda.
 
             </p>
 
         </div>
+
+
 
     </div>
 
 </section>
 
 
+
 <!-- =====================================================
-     CTA
+     AJAKAN UMKM
 ===================================================== -->
 
-<section class="produk-cta">
+<section class="produk-cta py-5">
 
     <div class="container">
 
         <div class="row align-items-center">
 
+
             <div class="col-lg-8">
 
-                <h2>
+                <h3 class="fw-bold">
 
-                    Dukung Produk Lokal Dayeuhluhur
+                    Punya Produk Lokal?
 
-                </h2>
+                </h3>
 
-                <p>
+                <p class="mb-0">
 
-                    Belanja produk masyarakat lokal berarti ikut
-                    menggerakkan perekonomian desa.
+                    Mari tampilkan produk UMKM Anda
+                    di Etalase Produk Plaza Dayeuhluhur.
 
                 </p>
 
             </div>
 
 
-            <div class="col-lg-4 text-lg-end">
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
 
-                <a href="umkm.html"
-                   class="btn-cta">
+                <a
+                    href="umkm.html"
+                    class="btn btn-light btn-lg">
 
-                    <i class="fa-solid fa-store"></i>
+                    <i class="fa-solid fa-store me-2"></i>
 
-                    Lihat UMKM
+                    Lihat Direktori UMKM
 
                 </a>
 
             </div>
+
 
         </div>
 
@@ -463,15 +590,17 @@
 </section>
 
 
+
 <!-- =====================================================
      FOOTER
 ===================================================== -->
 
-<footer class="site-footer">
+<footer class="footer">
 
     <div class="container">
 
         <div class="row">
+
 
             <!-- BRAND -->
 
@@ -479,10 +608,10 @@
 
                 <img
                     src="assets/images/logo.png"
-                    class="footer-logo"
+                    height="70"
                     alt="Plaza Dayeuhluhur">
 
-                <h4>
+                <h4 class="mt-3">
 
                     PLAZA DAYEUHLUHUR
 
@@ -497,9 +626,10 @@
             </div>
 
 
+
             <!-- MENU -->
 
-            <div class="col-lg-2 mb-4">
+            <div class="col-lg-2">
 
                 <h5>
 
@@ -507,21 +637,255 @@
 
                 </h5>
 
-                <ul>
+                <ul class="list-unstyled">
+
 
                     <li>
+
                         <a href="index.html">
+
                             Beranda
+
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="produk.html">
+
                             Produk
+
                         </a>
+
                     </li>
 
+
                     <li>
+
+                        <a href="umkm.html">
+
+                            UMKM
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="bursa.html">
+
+                            Bursa
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="wisata.html">
+
+                            Wisata
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="berita.html">
+
+                            Berita
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
                         <a href="desa.html">
+
                             Desa
-                       
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="bumdes.html">
+
+                            BUMDes
+
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- KONTAK -->
+
+            <div class="col-lg-3">
+
+                <h5>
+
+                    Kontak
+
+                </h5>
+
+
+                <p>
+
+                    <i class="fa-solid fa-location-dot me-2"></i>
+
+                    Kecamatan Dayeuhluhur
+
+                </p>
+
+
+                <p>
+
+                    <i class="fa-solid fa-envelope me-2"></i>
+
+                    info@plazadayeuhluhur.com
+
+                </p>
+
+
+                <p>
+
+                    <i class="fa-solid fa-phone me-2"></i>
+
+                    (0280) xxxx
+
+                </p>
+
+            </div>
+
+
+
+            <!-- SOSIAL -->
+
+            <div class="col-lg-3">
+
+                <h5>
+
+                    Media Sosial
+
+                </h5>
+
+
+                <div class="social-icons">
+
+
+                    <a href="#">
+
+                        <i class="fab fa-facebook"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fab fa-youtube"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fab fa-tiktok"></i>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="text-center">
+
+            © 2026 PLAZA DAYEUHLUHUR
+
+            <br>
+
+            Gerbang Digital Kecamatan Dayeuhluhur
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<!-- Bootstrap -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- AOS -->
+
+<script
+    src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+</script>
+
+
+<script>
+
+    if (typeof AOS !== "undefined") {
+
+        AOS.init();
+
+    }
+
+</script>
+
+
+
+<!-- News Flash -->
+
+<script src="assets/js/newsflash.js"></script>
+
+
+<!-- Produk -->
+
+<script src="assets/js/produk.js"></script>
+
+
+
+</body>
+
+</html>
