@@ -1,46 +1,50 @@
 [
-  {
-    "id": 1,
-    "produk": "Kopi Khas Panulisan",
-    "kategori": "Kuliner",
-    "gambar": "assets/images/umkm/kopi.jpg",
-    "deskripsi": "Kopi lokal khas Panulisan dengan cita rasa khas pegunungan Dayeuhluhur.",
-    "umkm": "UMKM Kopi Panulisan",
-    "desa": "Panulisan",
-    "harga": "Rp25.000",
-    "whatsapp": "081234567890"
-  },
-  {
-    "id": 2,
-    "produk": "Keripik Pisang",
-    "kategori": "Kuliner",
-    "gambar": "assets/images/umkm/keripik.jpg",
-    "deskripsi": "Keripik pisang renyah dengan bahan pilihan hasil produksi masyarakat lokal.",
-    "umkm": "Ginong Cafe",
-    "desa": "Dayeuhluhur",
-    "harga": "Rp15.000",
-    "whatsapp": "081234567891"
-  },
-  {
-    "id": 3,
-    "produk": "Madu Asli Dayeuhluhur",
-    "kategori": "Pertanian",
-    "gambar": "assets/images/umkm/madu.jpg",
-    "deskripsi": "Madu lokal pilihan dari peternak lebah masyarakat Kecamatan Dayeuhluhur.",
-    "umkm": "Madu Dayeuhluhur",
-    "desa": "Hanum",
-    "harga": "Rp75.000",
-    "whatsapp": "081234567892"
-  },
-  {
-    "id": 4,
-    "produk": "Produk Kuliner Lokal",
-    "kategori": "Kuliner",
-    "gambar": "assets/images/umkm/default.jpg",
-    "deskripsi": "Aneka produk kuliner khas masyarakat Dayeuhluhur yang dibuat secara lokal.",
-    "umkm": "UMKM Lokal Dayeuhluhur",
-    "desa": "Bolang",
-    "harga": "Mulai Rp10.000",
-    "whatsapp": "081234567893"
-  }
+    {
+        "id": 1,
+        "nama": "Kopi Khas Panulisan",
+        "kategori": "Kuliner",
+        "gambar": "assets/images/produk/kopi-panulisan.jpg",
+        "deskripsi": "Kopi lokal khas Panulisan dengan cita rasa khas pegunungan Dayeuhluhur.",
+        "umkm": "UMKM Kopi Panulisan",
+        "desa": "Panulisan",
+        "harga": "Rp25.000",
+        "whatsapp": "",
+        "cta": "BELI BY WA"
+    },
+    {
+        "id": 2,
+        "nama": "Keripik Pisang",
+        "kategori": "Kuliner",
+        "gambar": "assets/images/produk/keripik-pisang.jpg",
+        "deskripsi": "Keripik pisang renyah dengan bahan pilihan hasil produksi masyarakat lokal.",
+        "umkm": "Ginong Cafe",
+        "desa": "Dayeuhluhur",
+        "harga": "Rp15.000",
+        "whatsapp": "",
+        "cta": "BELI BY WA"
+    },
+    {
+        "id": 3,
+        "nama": "Madu Asli Dayeuhluhur",
+        "kategori": "Pertanian",
+        "gambar": "assets/images/produk/madu.jpg",
+        "deskripsi": "Madu lokal pilihan dari peternak lebah masyarakat Kecamatan Dayeuhluhur.",
+        "umkm": "Madu Dayeuhluhur",
+        "desa": "Hanum",
+        "harga": "Rp75.000",
+        "whatsapp": "",
+        "cta": "BELI BY WA"
+    },
+    {
+        "id": 4,
+        "nama": "Produk Kuliner Lokal",
+        "kategori": "Kuliner",
+        "gambar": "assets/images/produk/kuliner.jpg",
+        "deskripsi": "Aneka produk kuliner khas masyarakat Dayeuhluhur yang dibuat secara lokal.",
+        "umkm": "UMKM Lokal Dayeuhluhur",
+        "desa": "Bolang",
+        "harga": "Mulai Rp10.000",
+        "whatsapp": "",
+        "cta": "BELI BY WA"
+    }
 ]
