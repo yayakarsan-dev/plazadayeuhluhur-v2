@@ -686,3 +686,11 @@ body {
     }
 
 }
+/* FIX FOTO ETALASE PRODUK UMKM */
+
+#umkmContainer img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+}
