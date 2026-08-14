@@ -1,218 +1,198 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   UMKM HOME PAGE
-   Menampilkan UMKM pada halaman depan
-===================================================== */
+   UMKM HOME / ETALASE PRODUK
+   ===================================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    loadUmkmHome();
+    const container = document.getElementById("umkmContainer");
+
+    if (!container) {
+        console.warn("UMKM HOME: #umkmContainer tidak ditemukan.");
+        return;
+    }
+
+    loadProdukUMKM();
 
 });
 
 
-/* =====================================================
-   LOAD DATA UMKM
-===================================================== */
+async function loadProdukUMKM() {
 
-async function loadUmkmHome() {
-
-    const container =
-        document.getElementById("umkmContainer");
-
-    if (!container) {
-        console.log("umkmContainer tidak ditemukan.");
-        return;
-    }
+    const container = document.getElementById("umkmContainer");
 
     try {
 
-        const response = await fetch("data/umkm.json", {
+        const response = await fetch("data/produk.json", {
             cache: "no-store"
         });
 
         if (!response.ok) {
-
             throw new Error(
-                "HTTP " +
-                response.status +
-                " - " +
-                response.statusText
+                `produk.json gagal dimuat. Status: ${response.status}`
             );
-
         }
 
-        const data = await response.json();
+        const produk = await response.json();
 
-        console.log("Data UMKM halaman depan:", data);
+        console.log(
+            "Etalase Produk UMKM berhasil dimuat:",
+            produk
+        );
 
-        renderUmkmHome(data);
+        if (!Array.isArray(produk) || produk.length === 0) {
+
+            container.innerHTML = `
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        Belum ada produk UMKM yang tersedia.
+                    </div>
+                </div>
+            `;
+
+            return;
+        }
+
+        /*
+         * Homepage hanya menampilkan maksimal 4 produk.
+         * Produk lainnya dapat ditampilkan pada halaman UMKM
+         * di tahap pengembangan berikutnya.
+         */
+        const tampil = produk.slice(0, 4);
+
+        container.innerHTML = tampil
+            .map((item) => createProdukCard(item))
+            .join("");
+
+        console.log(
+            `${tampil.length} produk UMKM berhasil ditampilkan di halaman depan.`
+        );
 
     } catch (error) {
 
         console.error(
-            "Gagal memuat UMKM:",
+            "UMKM HOME: Gagal memuat produk.",
             error
         );
 
         container.innerHTML = `
-            <div class="col-12 text-center">
-                <div class="alert alert-warning">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    Data UMKM belum dapat dimuat.
+            <div class="col-12">
+                <div class="alert alert-warning text-center">
+                    Data produk UMKM belum dapat dimuat.
                 </div>
             </div>
         `;
-
     }
-
 }
 
 
 /* =====================================================
-   RENDER UMKM
-===================================================== */
+   MEMBUAT KARTU PRODUK
+   ===================================================== */
 
-function renderUmkmHome(data) {
+function createProdukCard(item) {
 
-    const container =
-        document.getElementById("umkmContainer");
+    const produk = item.produk || "Produk UMKM";
+    const deskripsi = item.deskripsi || "Produk lokal Dayeuhluhur.";
+    const gambar = item.gambar || "assets/images/umkm/default.jpg";
+    const umkm = item.umkm || "UMKM Lokal";
+    const desa = item.desa || "Dayeuhluhur";
+    const harga = item.harga || "Hubungi Penjual";
+    const kategori = item.kategori || "UMKM";
+    const whatsapp = normalizeWhatsApp(item.whatsapp);
 
-    if (!container) {
-        return;
-    }
+    const pesan = `
+Halo, saya tertarik membeli produk:
 
-    if (!Array.isArray(data) || data.length === 0) {
+Produk: ${produk}
+UMKM: ${umkm}
+Desa: ${desa}
+Harga: ${harga}
 
-        container.innerHTML = `
-            <div class="col-12 text-center py-4">
-                <p class="text-muted">
-                    Belum ada data UMKM.
-                </p>
-            </div>
-        `;
+Mohon informasi selanjutnya. Terima kasih.
+`.trim();
 
-        return;
-    }
+    const waLink = whatsapp
+        ? `https://wa.me/${whatsapp}?text=${encodeURIComponent(pesan)}`
+        : "#";
 
+    return `
+        <div class="col-md-6 col-lg-3 mb-4">
 
-    /*
-       Untuk sementara tampilkan 4 UMKM pertama.
-       Nanti setelah sistem unggulan selesai,
-       kita bisa menggunakan field "unggulan".
-    */
+            <div class="card h-100 border-0 shadow-sm umkm-product-card">
 
-    const umkmUnggulan = data.slice(0, 4);
+                <div class="umkm-product-image">
 
+                    <img
+                        src="${gambar}"
+                        class="card-img-top"
+                        alt="${escapeHTML(produk)}"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='assets/images/umkm/default.jpg';"
+                    >
 
-    let html = "";
+                    <span class="umkm-product-category">
+                        ${escapeHTML(kategori)}
+                    </span>
 
+                </div>
 
-    umkmUnggulan.forEach(function (item) {
+                <div class="card-body d-flex flex-column">
 
-        const gambar =
-            item.gambar ||
-            "assets/images/umkm/default.jpg";
+                    <h5 class="card-title fw-bold">
+                        ${escapeHTML(produk)}
+                    </h5>
 
-        const nama =
-            item.nama || "UMKM Dayeuhluhur";
+                    <p class="card-text text-muted small mb-3">
+                        ${escapeHTML(deskripsi)}
+                    </p>
 
-        const kategori =
-            item.kategori || "UMKM";
+                    <div class="small mb-2">
 
-        const desa =
-            item.desa || "Dayeuhluhur";
+                        <div class="mb-1">
+                            <i class="fa-solid fa-store text-primary me-2"></i>
+                            <strong>UMKM:</strong>
+                            ${escapeHTML(umkm)}
+                        </div>
 
-        const produk =
-            item.produk || "Produk Lokal";
-
-        const rating =
-            item.rating || "0";
-
-        const status =
-            item.status || "Buka";
-
-        const link =
-            item.link || "#";
-
-
-        html += `
-
-        <div class="col-lg-3 col-md-6 mb-4">
-
-            <div class="card h-100 border-0 shadow-sm umkm-card">
-
-                <img
-                    src="${escapeUmkmHome(gambar)}"
-                    class="card-img-top"
-                    alt="${escapeUmkmHome(nama)}"
-                    style="height:220px; object-fit:cover;"
-                    onerror="this.src='assets/images/umkm/default.jpg'"
-                >
-
-                <div class="card-body">
-
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-
-                        <span class="badge bg-primary">
-                            ${escapeUmkmHome(kategori)}
-                        </span>
-
-                        <span class="text-warning">
-                            <i class="fa-solid fa-star"></i>
-                            ${escapeUmkmHome(rating)}
-                        </span>
+                        <div>
+                            <i class="fa-solid fa-location-dot text-danger me-2"></i>
+                            <strong>Desa:</strong>
+                            ${escapeHTML(desa)}
+                        </div>
 
                     </div>
 
+                    <div class="mt-auto">
 
-                    <h5 class="fw-bold">
-                        ${escapeUmkmHome(nama)}
-                    </h5>
+                        <div class="umkm-product-price">
+                            ${escapeHTML(harga)}
+                        </div>
 
-
-                    <p class="text-muted mb-2">
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        ${escapeUmkmHome(desa)}
-
-                    </p>
-
-
-                    <p class="mb-3">
-
-                        <i class="fa-solid fa-box-open text-primary"></i>
-
-                        ${escapeUmkmHome(produk)}
-
-                    </p>
-
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <span class="badge ${
-                            String(status).toLowerCase() === "buka"
-                                ? "bg-success"
-                                : "bg-secondary"
-                        }">
-
-                            <i class="fa-solid fa-circle"></i>
-
-                            ${escapeUmkmHome(status)}
-
-                        </span>
-
-
-                        <a
-                            href="${escapeUmkmHome(link)}"
-                            class="btn btn-outline-primary btn-sm"
-                            target="_blank"
-                        >
-
-                            Lihat Detail
-
-                        </a>
+                        ${
+                            whatsapp
+                            ? `
+                                <a
+                                    href="${waLink}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn btn-success w-100 mt-3"
+                                >
+                                    <i class="fa-brands fa-whatsapp me-2"></i>
+                                    BELI BY WA
+                                </a>
+                            `
+                            : `
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary w-100 mt-3"
+                                    disabled
+                                >
+                                    <i class="fa-solid fa-phone me-2"></i>
+                                    WA Belum Tersedia
+                                </button>
+                            `
+                        }
 
                     </div>
 
@@ -221,33 +201,47 @@ function renderUmkmHome(data) {
             </div>
 
         </div>
-
-        `;
-
-    });
-
-
-    container.innerHTML = html;
-
-
-    console.log(
-        "4 UMKM berhasil ditampilkan di halaman depan."
-    );
-
+    `;
 }
 
 
 /* =====================================================
-   ESCAPE HTML
-===================================================== */
+   NORMALISASI NOMOR WHATSAPP
+   ===================================================== */
 
-function escapeUmkmHome(value) {
+function normalizeWhatsApp(number) {
 
-    return String(value || "")
+    if (!number) {
+        return "";
+    }
+
+    let wa = String(number)
+        .replace(/\s+/g, "")
+        .replace(/-/g, "")
+        .replace(/[^\d+]/g, "");
+
+    if (wa.startsWith("0")) {
+        wa = "62" + wa.substring(1);
+    }
+
+    if (wa.startsWith("+62")) {
+        wa = wa.substring(1);
+    }
+
+    return wa;
+}
+
+
+/* =====================================================
+   KEAMANAN HTML
+   ===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
