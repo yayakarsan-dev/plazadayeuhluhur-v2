@@ -8,12 +8,17 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Kelola Bisnis | Plaza Dayeuhluhur</title>
+    <title>
+        Kelola Bisnis | Plaza Dayeuhluhur
+    </title>
 
     <meta name="description"
           content="Dashboard pengelolaan Direktori Bisnis Plaza Dayeuhluhur">
 
-    <!-- Google Font -->
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
 
@@ -24,35 +29,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
-    <!-- Bootstrap -->
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Font Awesome -->
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- Dashboard CSS -->
+
+    <!-- =====================================================
+         DASHBOARD CSS
+    ====================================================== -->
+
     <link rel="stylesheet"
           href="assets/css/dashboard.css">
 
-    <!-- Bisnis Admin CSS -->
+
+    <!-- =====================================================
+         BISNIS ADMIN CSS
+    ====================================================== -->
+
     <link rel="stylesheet"
           href="assets/css/bisnis-admin.css">
 
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      TOP BAR
-===================================================== -->
+====================================================== -->
 
 <header class="admin-topbar">
 
     <div class="container-fluid">
 
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex
+                    align-items-center
+                    justify-content-between">
+
+            <!-- BRAND -->
 
             <div class="d-flex align-items-center">
 
@@ -64,6 +91,7 @@
                          alt="Plaza Dayeuhluhur">
 
                 </a>
+
 
                 <div class="ms-3">
 
@@ -78,6 +106,9 @@
                 </div>
 
             </div>
+
+
+            <!-- BACK -->
 
             <div>
 
@@ -99,13 +130,17 @@
 </header>
 
 
+
 <!-- =====================================================
      MAIN
-===================================================== -->
+====================================================== -->
 
 <main class="container-fluid py-4">
 
-    <!-- PAGE HEADER -->
+
+    <!-- =================================================
+         PAGE HEADER
+    ================================================== -->
 
     <div class="page-header mb-4">
 
@@ -129,15 +164,22 @@
     </div>
 
 
+
     <!-- =================================================
          STATISTIK
     ================================================== -->
 
     <div class="row g-4 mb-4">
 
+
+        <!-- TOTAL BISNIS -->
+
         <div class="col-md-4">
 
-            <div class="card border-0 shadow-sm bisnis-stat-card">
+            <div class="card
+                        border-0
+                        shadow-sm
+                        bisnis-stat-card">
 
                 <div class="card-body">
 
@@ -157,7 +199,9 @@
 
                             <h3 id="totalBisnis"
                                 class="fw-bold mb-0">
+
                                 0
+
                             </h3>
 
                         </div>
@@ -171,9 +215,15 @@
         </div>
 
 
+
+        <!-- BISNIS AKTIF -->
+
         <div class="col-md-4">
 
-            <div class="card border-0 shadow-sm bisnis-stat-card">
+            <div class="card
+                        border-0
+                        shadow-sm
+                        bisnis-stat-card">
 
                 <div class="card-body">
 
@@ -193,7 +243,9 @@
 
                             <h3 id="bisnisAktif"
                                 class="fw-bold mb-0">
+
                                 0
+
                             </h3>
 
                         </div>
@@ -207,9 +259,15 @@
         </div>
 
 
+
+        <!-- TOTAL DESA -->
+
         <div class="col-md-4">
 
-            <div class="card border-0 shadow-sm bisnis-stat-card">
+            <div class="card
+                        border-0
+                        shadow-sm
+                        bisnis-stat-card">
 
                 <div class="card-body">
 
@@ -229,7 +287,9 @@
 
                             <h3 id="totalDesa"
                                 class="fw-bold mb-0">
+
                                 0
+
                             </h3>
 
                         </div>
@@ -245,11 +305,18 @@
     </div>
 
 
+
     <!-- =================================================
-         FORM TAMBAH BISNIS
+         FORM TAMBAH / EDIT BISNIS
     ================================================== -->
 
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card
+                border-0
+                shadow-sm
+                mb-4">
+
+
+        <!-- HEADER -->
 
         <div class="card-header bg-white py-3">
 
@@ -278,18 +345,28 @@
         </div>
 
 
+
+        <!-- BODY -->
+
         <div class="card-body">
 
+
             <form id="bisnisForm">
+
+
+                <!-- ID -->
 
                 <input type="hidden"
                        id="bisnisId">
 
 
+
                 <div class="row g-3">
 
 
-                    <!-- NAMA BISNIS -->
+                    <!-- =================================================
+                         NAMA
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -297,7 +374,10 @@
                                class="form-label fw-semibold">
 
                             Nama Bisnis
-                            <span class="text-danger">*</span>
+
+                            <span class="text-danger">
+                                *
+                            </span>
 
                         </label>
 
@@ -310,7 +390,10 @@
                     </div>
 
 
-                    <!-- KATEGORI -->
+
+                    <!-- =================================================
+                         KATEGORI
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -318,7 +401,10 @@
                                class="form-label fw-semibold">
 
                             Kategori
-                            <span class="text-danger">*</span>
+
+                            <span class="text-danger">
+                                *
+                            </span>
 
                         </label>
 
@@ -370,6 +456,18 @@
                                 Teknologi
                             </option>
 
+                            <option value="Wedding Organizer">
+                                Wedding Organizer
+                            </option>
+
+                            <option value="Rental">
+                                Rental
+                            </option>
+
+                            <option value="Barbershop">
+                                Barbershop
+                            </option>
+
                             <option value="Lainnya">
                                 Lainnya
                             </option>
@@ -379,7 +477,10 @@
                     </div>
 
 
-                    <!-- DESA -->
+
+                    <!-- =================================================
+                         DESA
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -387,7 +488,10 @@
                                class="form-label fw-semibold">
 
                             Desa
-                            <span class="text-danger">*</span>
+
+                            <span class="text-danger">
+                                *
+                            </span>
 
                         </label>
 
@@ -460,7 +564,10 @@
                     </div>
 
 
-                    <!-- PEMILIK -->
+
+                    <!-- =================================================
+                         PEMILIK
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -479,7 +586,10 @@
                     </div>
 
 
-                    <!-- PRODUK / JASA -->
+
+                    <!-- =================================================
+                         PRODUK / JASA
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -487,7 +597,10 @@
                                class="form-label fw-semibold">
 
                             Produk / Jasa Utama
-                            <span class="text-danger">*</span>
+
+                            <span class="text-danger">
+                                *
+                            </span>
 
                         </label>
 
@@ -500,7 +613,10 @@
                     </div>
 
 
-                    <!-- WHATSAPP -->
+
+                    <!-- =================================================
+                         WHATSAPP
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -517,13 +633,19 @@
                                placeholder="08xxxxxxxxxx">
 
                         <small class="text-muted">
-                            Contoh: 081234567890
+
+                            Contoh:
+                            081234567890
+
                         </small>
 
                     </div>
 
 
-                    <!-- ALAMAT -->
+
+                    <!-- =================================================
+                         ALAMAT
+                    ================================================== -->
 
                     <div class="col-12">
 
@@ -542,7 +664,10 @@
                     </div>
 
 
-                    <!-- DESKRIPSI -->
+
+                    <!-- =================================================
+                         DESKRIPSI
+                    ================================================== -->
 
                     <div class="col-12">
 
@@ -561,7 +686,10 @@
                     </div>
 
 
-                    <!-- GAMBAR -->
+
+                    <!-- =================================================
+                         GAMBAR
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -578,13 +706,18 @@
                                placeholder="assets/images/bisnis/nama.jpg">
 
                         <small class="text-muted">
+
                             Untuk tahap awal masukkan path gambar.
+
                         </small>
 
                     </div>
 
 
-                    <!-- STATUS -->
+
+                    <!-- =================================================
+                         STATUS
+                    ================================================== -->
 
                     <div class="col-md-6">
 
@@ -611,12 +744,20 @@
                     </div>
 
 
+
                 </div>
 
 
-                <!-- BUTTON -->
 
-                <div class="d-flex gap-2 mt-4">
+                <!-- =================================================
+                     BUTTON
+                ================================================== -->
+
+                <div class="d-flex
+                            flex-wrap
+                            gap-2
+                            mt-4">
+
 
                     <button type="submit"
                             class="btn btn-primary px-4">
@@ -626,6 +767,7 @@
                         Simpan Bisnis
 
                     </button>
+
 
 
                     <button type="button"
@@ -638,24 +780,38 @@
 
                     </button>
 
+
                 </div>
 
+
             </form>
+
 
         </div>
 
     </div>
 
 
+
     <!-- =================================================
          DAFTAR BISNIS
     ================================================== -->
 
-    <div class="card border-0 shadow-sm">
+    <div class="card
+                border-0
+                shadow-sm">
+
+
+        <!-- HEADER -->
 
         <div class="card-header bg-white py-3">
 
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex
+                        flex-wrap
+                        justify-content-between
+                        align-items-center
+                        gap-2">
+
 
                 <div>
 
@@ -684,16 +840,26 @@
 
                 </div>
 
+
             </div>
 
         </div>
 
 
+
+        <!-- BODY -->
+
         <div class="card-body">
 
-            <!-- SEARCH -->
+
+            <!-- =================================================
+                 SEARCH & FILTER
+            ================================================== -->
 
             <div class="row mb-4">
+
+
+                <!-- SEARCH -->
 
                 <div class="col-md-6">
 
@@ -713,6 +879,10 @@
                     </div>
 
                 </div>
+
+
+
+                <!-- KATEGORI -->
 
                 <div class="col-md-3 mt-2 mt-md-0">
 
@@ -743,6 +913,14 @@
                             Fashion
                         </option>
 
+                        <option value="Pendidikan">
+                            Pendidikan
+                        </option>
+
+                        <option value="Kesehatan">
+                            Kesehatan
+                        </option>
+
                         <option value="Pertanian">
                             Pertanian
                         </option>
@@ -755,9 +933,29 @@
                             Teknologi
                         </option>
 
+                        <option value="Wedding Organizer">
+                            Wedding Organizer
+                        </option>
+
+                        <option value="Rental">
+                            Rental
+                        </option>
+
+                        <option value="Barbershop">
+                            Barbershop
+                        </option>
+
+                        <option value="Lainnya">
+                            Lainnya
+                        </option>
+
                     </select>
 
                 </div>
+
+
+
+                <!-- STATUS -->
 
                 <div class="col-md-3 mt-2 mt-md-0">
 
@@ -780,14 +978,21 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- TABLE -->
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
 
             <div class="table-responsive">
 
-                <table class="table table-hover align-middle">
+                <table class="table
+                              table-hover
+                              align-middle">
+
 
                     <thead>
 
@@ -829,14 +1034,21 @@
 
                     </thead>
 
+
                     <tbody id="bisnisTableBody">
 
                         <tr>
 
                             <td colspan="8"
-                                class="text-center py-5 text-muted">
+                                class="text-center
+                                       py-5
+                                       text-muted">
 
-                                <i class="fa-solid fa-spinner fa-spin me-2"></i>
+                                <i class="fa-solid
+                                          fa-spinner
+                                          fa-spin
+                                          me-2">
+                                </i>
 
                                 Memuat data bisnis...
 
@@ -846,47 +1058,62 @@
 
                     </tbody>
 
+
                 </table>
 
             </div>
+
 
         </div>
 
     </div>
 
+
 </main>
 
 
+
 <!-- =====================================================
-     MODAL DETAIL
-===================================================== -->
+     MODAL DETAIL BISNIS
+====================================================== -->
 
 <div class="modal fade"
      id="detailBisnisModal"
      tabindex="-1"
      aria-hidden="true">
 
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+    <div class="modal-dialog
+                modal-lg
+                modal-dialog-centered">
+
 
         <div class="modal-content">
+
 
             <div class="modal-header">
 
                 <h5 class="modal-title fw-bold">
+
                     Detail Bisnis
+
                 </h5>
+
 
                 <button type="button"
                         class="btn-close"
-                        data-bs-dismiss="modal">
+                        data-bs-dismiss="modal"
+                        aria-label="Tutup">
                 </button>
 
             </div>
+
 
             <div class="modal-body"
                  id="detailBisnisContent">
 
             </div>
+
 
         </div>
 
@@ -895,18 +1122,21 @@
 </div>
 
 
+
 <!-- =====================================================
-     BOOTSTRAP
-===================================================== -->
+     BOOTSTRAP JAVASCRIPT
+====================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 
+
 <!-- =====================================================
-     JAVASCRIPT BISNIS ADMIN
-===================================================== -->
+     BISNIS ADMIN JAVASCRIPT
+====================================================== -->
 
 <script src="assets/js/bisnis-admin.js"></script>
+
 
 </body>
 
