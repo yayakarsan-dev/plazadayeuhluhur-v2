@@ -42,13 +42,23 @@
     "desa": "Panulisan",
     "pemilik": "Yayakha",
     "produk": "Brilink dan Aplikasi",
+    "whatsapp": "628179942420",
     "alamat": "Jl Maryani 14",
-    "deskripsi": "Brilink, wifi corner",
-    "status": "aktif",
+    "deskripsi": "Brilink, wfi corner",
     "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL1QH50EnnKWPF0qlh2O1qhgh5h6ZLceUZ-pyS80pLlQ&s=10",
-    "wa": "",
-    "cta": "Hubungi Bisnis",
-    "pesan": "Halo Rumah Internet, saya ingin mendapatkan informasi mengenai Brilink dan Aplikasi.",
-    "verified": false
+    "status": "aktif"
+  },
+  {
+    "id": 5,
+    "nama": "Ginong Cafe",
+    "kategori": "Kuliner",
+    "desa": "Panulisan",
+    "pemilik": "Inka Novianti",
+    "produk": "Makanan dan Minuman Khas Panulisan",
+    "whatsapp": "6281987623333",
+    "alamat": "Panulisan Depan GOR Manggala",
+    "deskripsi": "Tempat nyaman untuk usia muda nyantai makan dan minum sambail NGENET gratis",
+    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5i7v5tsWUp3n8sGj5xa-3HQYwdIu8bC7KryASOzcvkA&s=10",
+    "status": "aktif"
   }
 ]
