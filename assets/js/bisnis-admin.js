@@ -1302,3 +1302,144 @@ function hapusBisnis(id) {
         `Bisnis "${bisnis.nama}" berhasil dihapus.`
     );
 }
+/* =====================================================
+   UPDATE STATISTIK
+===================================================== */
+
+function updateStatistics() {
+
+    const totalBisnisEl =
+        document.getElementById("totalBisnis");
+
+    const bisnisAktifEl =
+        document.getElementById("bisnisAktif");
+
+    const totalDesaEl =
+        document.getElementById("totalDesa");
+
+
+    /* TOTAL BISNIS */
+
+    if (totalBisnisEl) {
+
+        totalBisnisEl.textContent =
+            dataBisnis.length;
+
+    }
+
+
+    /* BISNIS AKTIF */
+
+    const jumlahAktif =
+        dataBisnis.filter(item => {
+
+            return String(item.status || "")
+                .toLowerCase() === "aktif";
+
+        }).length;
+
+
+    if (bisnisAktifEl) {
+
+        bisnisAktifEl.textContent =
+            jumlahAktif;
+
+    }
+
+
+    /* TOTAL DESA */
+
+    const daftarDesa =
+        new Set(
+
+            dataBisnis
+                .map(item => item.desa)
+                .filter(Boolean)
+
+        );
+
+
+    if (totalDesaEl) {
+
+        totalDesaEl.textContent =
+            daftarDesa.size;
+
+    }
+
+
+    console.log(
+        "STATISTIK BISNIS:",
+        {
+            total: dataBisnis.length,
+            aktif: jumlahAktif,
+            desa: daftarDesa.size
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PESAN PADA TABEL
+===================================================== */
+
+function showTableMessage(
+    message,
+    type = "info"
+) {
+
+    const tbody =
+        document.getElementById(
+            "bisnisTableBody"
+        );
+
+
+    if (!tbody) {
+
+        console.warn(
+            "BISNIS ADMIN: #bisnisTableBody tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    tbody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="8"
+                class="text-center py-5"
+            >
+
+                <div class="alert alert-${type} mb-0">
+
+                    ${escapeHTML(message)}
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
