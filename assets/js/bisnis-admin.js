@@ -1,6 +1,6 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
-   BISNIS ADMIN V1
+   BISNIS ADMIN FINAL
    Kelola Direktori Bisnis Lokal
 ===================================================== */
 
@@ -10,22 +10,21 @@
    KONFIGURASI
 ===================================================== */
 
+const BISNIS_DATA_URL = "data/bisnis.json";
 const BISNIS_STORAGE_KEY = "plaza_dayeuhluhur_bisnis";
-const BISNIS_JSON_URL = "data/bisnis.json";
 
-let bisnisData = [];
-let bisnisEditId = null;
+let dataBisnis = [];
+let editMode = false;
 
 
 /* =====================================================
    INITIALIZE
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
     console.log("====================================");
-    console.log("BISNIS ADMIN V1");
-    console.log("Inisialisasi halaman...");
+    console.log("BISNIS ADMIN FINAL");
     console.log("====================================");
 
     initBisnisAdmin();
@@ -41,13 +40,13 @@ async function initBisnisAdmin() {
 
     try {
 
-        bindEvents();
-
         await loadBisnisData();
 
         updateStatistics();
 
-        renderBisnisTable();
+        renderTable();
+
+        bindEvents();
 
         console.log(
             "BISNIS ADMIN: Inisialisasi berhasil."
@@ -71,12 +70,116 @@ async function initBisnisAdmin() {
 
 
 /* =====================================================
-   EVENT
+   LOAD DATA
+===================================================== */
+
+async function loadBisnisData() {
+
+    console.log(
+        "BISNIS ADMIN: Membaca data bisnis..."
+    );
+
+
+    /* =================================================
+       PRIORITAS 1
+       LOCAL STORAGE
+    ================================================== */
+
+    const localData =
+        localStorage.getItem(BISNIS_STORAGE_KEY);
+
+
+    if (localData) {
+
+        try {
+
+            const parsed =
+                JSON.parse(localData);
+
+
+            if (Array.isArray(parsed)) {
+
+                dataBisnis = parsed;
+
+                console.log(
+                    "Data bisnis dimuat dari localStorage:",
+                    dataBisnis
+                );
+
+                return;
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "localStorage bisnis tidak valid."
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       PRIORITAS 2
+       BISNIS.JSON
+    ================================================== */
+
+    const response =
+        await fetch(
+            BISNIS_DATA_URL,
+            {
+                cache: "no-store"
+            }
+        );
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            "Gagal membaca bisnis.json. Status: " +
+            response.status
+        );
+
+    }
+
+
+    const json =
+        await response.json();
+
+
+    if (!Array.isArray(json)) {
+
+        throw new Error(
+            "Format bisnis.json harus berupa Array."
+        );
+
+    }
+
+
+    dataBisnis = json;
+
+
+    localStorage.setItem(
+        BISNIS_STORAGE_KEY,
+        JSON.stringify(dataBisnis)
+    );
+
+
+    console.log(
+        "Data bisnis dimuat dari bisnis.json:",
+        dataBisnis
+    );
+
+}
+
+
+/* =====================================================
+   BIND EVENTS
 ===================================================== */
 
 function bindEvents() {
-
-    /* FORM TAMBAH / EDIT */
 
     const form =
         document.getElementById("bisnisForm");
@@ -85,13 +188,11 @@ function bindEvents() {
 
         form.addEventListener(
             "submit",
-            handleSubmit
+            simpanBisnis
         );
 
     }
 
-
-    /* RESET */
 
     const resetButton =
         document.getElementById("btnReset");
@@ -106,8 +207,6 @@ function bindEvents() {
     }
 
 
-    /* REFRESH */
-
     const refreshButton =
         document.getElementById("btnRefresh");
 
@@ -115,21 +214,15 @@ function bindEvents() {
 
         refreshButton.addEventListener(
             "click",
-            async function () {
+            async () => {
 
-                await loadBisnisData();
-
-                updateStatistics();
-
-                renderBisnisTable();
+                await refreshData();
 
             }
         );
 
     }
 
-
-    /* SEARCH */
 
     const search =
         document.getElementById("searchBisnis");
@@ -138,41 +231,50 @@ function bindEvents() {
 
         search.addEventListener(
             "input",
-            renderBisnisTable
+            renderTable
         );
 
     }
 
 
-    /* FILTER KATEGORI */
+    const filterKategori =
+        document.getElementById("filterKategori");
 
-    const kategori =
-        document.getElementById(
-            "filterKategori"
-        );
+    if (filterKategori) {
 
-    if (kategori) {
-
-        kategori.addEventListener(
+        filterKategori.addEventListener(
             "change",
-            renderBisnisTable
+            renderTable
         );
 
     }
 
 
-    /* FILTER STATUS */
+    const filterStatus =
+        document.getElementById("filterStatus");
 
-    const status =
-        document.getElementById(
-            "filterStatus"
-        );
+    if (filterStatus) {
 
-    if (status) {
-
-        status.addEventListener(
+        filterStatus.addEventListener(
             "change",
-            renderBisnisTable
+            renderTable
+        );
+
+    }
+
+
+    /* =================================================
+       EXPORT JSON
+    ================================================== */
+
+    const exportButton =
+        document.getElementById("btnExportJSON");
+
+    if (exportButton) {
+
+        exportButton.addEventListener(
+            "click",
+            exportBisnisJSON
         );
 
     }
@@ -181,281 +283,348 @@ function bindEvents() {
 
 
 /* =====================================================
-   LOAD DATA
+   SIMPAN BISNIS
 ===================================================== */
 
-async function loadBisnisData() {
-
-    console.log(
-        "BISNIS ADMIN: Membaca data bisnis..."
-    );
-
-
-    /*
-     * PRIORITAS 1
-     * Baca localStorage
-     */
-
-    try {
-
-        const localData =
-            localStorage.getItem(
-                BISNIS_STORAGE_KEY
-            );
-
-
-        if (localData) {
-
-            const parsed =
-                JSON.parse(localData);
-
-
-            if (Array.isArray(parsed)) {
-
-                bisnisData = parsed;
-
-                console.log(
-                    "Data bisnis dimuat dari localStorage:",
-                    bisnisData
-                );
-
-                return;
-
-            }
-
-        }
-
-    } catch (error) {
-
-        console.warn(
-            "localStorage bisnis tidak dapat dibaca.",
-            error
-        );
-
-    }
-
-
-    /*
-     * PRIORITAS 2
-     * Jika localStorage belum ada,
-     * baca data/bisnis.json
-     */
-
-    try {
-
-        const response =
-            await fetch(
-                BISNIS_JSON_URL,
-                {
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "bisnis.json gagal dimuat. Status: " +
-                response.status
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        bisnisData =
-            Array.isArray(data)
-                ? data
-                : [];
-
-
-        saveLocalData();
-
-
-        console.log(
-            "Data bisnis dimuat dari bisnis.json:",
-            bisnisData
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "BISNIS ADMIN: Gagal memuat data bisnis.",
-            error
-        );
-
-        bisnisData = [];
-
-    }
-
-}
-
-
-/* =====================================================
-   SAVE LOCAL STORAGE
-===================================================== */
-
-function saveLocalData() {
-
-    try {
-
-        localStorage.setItem(
-            BISNIS_STORAGE_KEY,
-            JSON.stringify(bisnisData)
-        );
-
-
-        console.log(
-            "Data bisnis berhasil disimpan ke localStorage:",
-            bisnisData
-        );
-
-
-        return true;
-
-    } catch (error) {
-
-        console.error(
-            "BISNIS ADMIN: Gagal menyimpan localStorage.",
-            error
-        );
-
-
-        alert(
-            "Data bisnis tidak dapat disimpan di browser."
-        );
-
-
-        return false;
-
-    }
-
-}
-
-
-/* =====================================================
-   SUBMIT FORM
-===================================================== */
-
-function handleSubmit(event) {
+function simpanBisnis(event) {
 
     event.preventDefault();
 
 
-    const data =
-        getFormData();
+    const idElement =
+        document.getElementById("bisnisId");
+
+    const namaElement =
+        document.getElementById("nama");
+
+    const kategoriElement =
+        document.getElementById("kategori");
+
+    const desaElement =
+        document.getElementById("desa");
+
+    const pemilikElement =
+        document.getElementById("pemilik");
+
+    const produkElement =
+        document.getElementById("produk");
+
+    const whatsappElement =
+        document.getElementById("whatsapp");
+
+    const alamatElement =
+        document.getElementById("alamat");
+
+    const deskripsiElement =
+        document.getElementById("deskripsi");
+
+    const gambarElement =
+        document.getElementById("gambar");
+
+    const statusElement =
+        document.getElementById("status");
 
 
-    /* VALIDASI */
+    const nama =
+        namaElement
+            ? namaElement.value.trim()
+            : "";
 
-    if (!data.nama) {
+
+    const kategori =
+        kategoriElement
+            ? kategoriElement.value.trim()
+            : "";
+
+
+    const desa =
+        desaElement
+            ? desaElement.value.trim()
+            : "";
+
+
+    const pemilik =
+        pemilikElement
+            ? pemilikElement.value.trim()
+            : "";
+
+
+    const produk =
+        produkElement
+            ? produkElement.value.trim()
+            : "";
+
+
+    const whatsapp =
+        normalizeWhatsApp(
+            whatsappElement
+                ? whatsappElement.value
+                : ""
+        );
+
+
+    const alamat =
+        alamatElement
+            ? alamatElement.value.trim()
+            : "";
+
+
+    const deskripsi =
+        deskripsiElement
+            ? deskripsiElement.value.trim()
+            : "";
+
+
+    const gambar =
+        gambarElement
+            ? gambarElement.value.trim()
+            : "";
+
+
+    const status =
+        statusElement
+            ? statusElement.value
+            : "aktif";
+
+
+    /* =================================================
+       VALIDASI
+    ================================================== */
+
+    if (!nama) {
 
         alert(
             "Nama bisnis wajib diisi."
         );
 
+        if (namaElement) {
+            namaElement.focus();
+        }
+
         return;
 
     }
 
 
-    if (!data.kategori) {
+    if (!kategori) {
 
         alert(
             "Kategori bisnis wajib dipilih."
         );
 
+        if (kategoriElement) {
+            kategoriElement.focus();
+        }
+
         return;
 
     }
 
 
-    if (!data.desa) {
+    if (!desa) {
 
         alert(
             "Desa wajib dipilih."
         );
 
+        if (desaElement) {
+            desaElement.focus();
+        }
+
         return;
 
     }
 
 
-    if (!data.produk) {
+    if (!produk) {
 
         alert(
-            "Produk / jasa utama wajib diisi."
+            "Produk / jasa wajib diisi."
         );
 
-        return;
-
-    }
-
-
-    /*
-     * MODE EDIT
-     */
-
-    if (bisnisEditId !== null) {
-
-        updateBisnis(data);
+        if (produkElement) {
+            produkElement.focus();
+        }
 
         return;
 
     }
 
 
-    /*
-     * MODE TAMBAH
-     */
+    /* =================================================
+       ID
+    ================================================== */
 
-    addBisnis(data);
+    const idValue =
+        idElement
+            ? idElement.value
+            : "";
+
+
+    /* =================================================
+       MODE EDIT
+    ================================================== */
+
+    if (
+        editMode &&
+        idValue
+    ) {
+
+        const index =
+            dataBisnis.findIndex(
+                item =>
+                    Number(item.id) ===
+                    Number(idValue)
+            );
+
+
+        if (index !== -1) {
+
+            const oldData =
+                dataBisnis[index];
+
+
+            dataBisnis[index] =
+                buildBisnisObject(
+                    Number(idValue),
+                    nama,
+                    kategori,
+                    desa,
+                    pemilik,
+                    produk,
+                    whatsapp,
+                    alamat,
+                    deskripsi,
+                    gambar,
+                    status,
+                    oldData
+                );
+
+
+            saveToLocalStorage();
+
+
+            showNotification(
+                "Data bisnis berhasil diperbarui."
+            );
+
+        }
+
+
+    } else {
+
+        /* =============================================
+           TAMBAH DATA BARU
+        ============================================== */
+
+        const newId =
+            getNextId();
+
+
+        const newBisnis =
+            buildBisnisObject(
+                newId,
+                nama,
+                kategori,
+                desa,
+                pemilik,
+                produk,
+                whatsapp,
+                alamat,
+                deskripsi,
+                gambar,
+                status,
+                null
+            );
+
+
+        dataBisnis.push(
+            newBisnis
+        );
+
+
+        saveToLocalStorage();
+
+
+        showNotification(
+            "Bisnis baru berhasil disimpan."
+        );
+
+    }
+
+
+    /* =================================================
+       REFRESH TAMPILAN
+    ================================================== */
+
+    updateStatistics();
+
+    renderTable();
+
+    resetForm();
+
+
+    console.log(
+        "Data bisnis terbaru:",
+        dataBisnis
+    );
 
 }
 
 
 /* =====================================================
-   GET FORM DATA
+   BUILD OBJECT
 ===================================================== */
 
-function getFormData() {
+function buildBisnisObject(
+    id,
+    nama,
+    kategori,
+    desa,
+    pemilik,
+    produk,
+    whatsapp,
+    alamat,
+    deskripsi,
+    gambar,
+    status,
+    oldData
+) {
 
-    const nama =
-        getValue("nama");
+    const pesan =
+        oldData &&
+        oldData.pesan
+            ? oldData.pesan
+            : (
+                "Halo " +
+                nama +
+                ", saya ingin mendapatkan informasi mengenai " +
+                produk +
+                "."
+            );
 
-    const kategori =
-        getValue("kategori");
 
-    const desa =
-        getValue("desa");
+    const cta =
+        oldData &&
+        oldData.cta
+            ? oldData.cta
+            : (
+                whatsapp
+                    ? "Hubungi via WhatsApp"
+                    : "Hubungi Bisnis"
+            );
 
-    const pemilik =
-        getValue("pemilik");
 
-    const produk =
-        getValue("produk");
-
-    const whatsapp =
-        getValue("whatsapp");
-
-    const alamat =
-        getValue("alamat");
-
-    const deskripsi =
-        getValue("deskripsi");
-
-    const gambar =
-        getValue("gambar");
-
-    const status =
-        getValue("status") || "aktif";
+    const verified =
+        oldData &&
+        typeof oldData.verified === "boolean"
+            ? oldData.verified
+            : false;
 
 
     return {
+
+        id: id,
 
         nama: nama,
 
@@ -467,16 +636,23 @@ function getFormData() {
 
         produk: produk,
 
-        whatsapp:
-            normalizeWhatsApp(whatsapp),
-
         alamat: alamat,
 
         deskripsi: deskripsi,
 
-        gambar: gambar,
+        gambar:
+            gambar ||
+            "assets/images/bisnis/default.jpg",
 
-        status: status
+        wa: whatsapp,
+
+        cta: cta,
+
+        pesan: pesan,
+
+        status: status,
+
+        verified: verified
 
     };
 
@@ -484,420 +660,526 @@ function getFormData() {
 
 
 /* =====================================================
-   TAMBAH BISNIS
+   NEXT ID
 ===================================================== */
 
-function addBisnis(data) {
+function getNextId() {
 
-    const nextId =
-        getNextId();
+    if (
+        !Array.isArray(dataBisnis) ||
+        dataBisnis.length === 0
+    ) {
 
-
-    const newBisnis = {
-
-        id: nextId,
-
-        nama: data.nama,
-
-        kategori: data.kategori,
-
-        desa: data.desa,
-
-        pemilik: data.pemilik,
-
-        produk: data.produk,
-
-        whatsapp: data.whatsapp,
-
-        alamat: data.alamat,
-
-        deskripsi: data.deskripsi,
-
-        gambar: data.gambar,
-
-        status: data.status
-
-    };
-
-
-    /*
-     * Masukkan ke array
-     */
-
-    bisnisData.push(
-        newBisnis
-    );
-
-
-    /*
-     * Simpan
-     */
-
-    const berhasil =
-        saveLocalData();
-
-
-    if (!berhasil) {
-
-        /*
-         * Jika gagal simpan,
-         * rollback data
-         */
-
-        bisnisData.pop();
-
-        return;
+        return 1;
 
     }
 
 
-    /*
-     * Refresh tampilan
-     */
+    const ids =
+        dataBisnis
+            .map(
+                item =>
+                    Number(item.id)
+            )
+            .filter(
+                id =>
+                    !Number.isNaN(id)
+            );
 
-    updateStatistics();
 
-    renderBisnisTable();
-
-    resetForm();
-
-
-    alert(
-        "Bisnis berhasil ditambahkan."
+    return (
+        Math.max(...ids) + 1
     );
+
+}
+
+
+/* =====================================================
+   SAVE LOCAL STORAGE
+===================================================== */
+
+function saveToLocalStorage() {
+
+    try {
+
+        localStorage.setItem(
+            BISNIS_STORAGE_KEY,
+            JSON.stringify(
+                dataBisnis
+            )
+        );
+
+
+        console.log(
+            "BISNIS ADMIN: Data berhasil disimpan ke localStorage."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "BISNIS ADMIN: Gagal menyimpan localStorage.",
+            error
+        );
+
+
+        alert(
+            "Data gagal disimpan ke browser."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE STATISTICS
+===================================================== */
+
+function updateStatistics() {
+
+    const totalElement =
+        document.getElementById(
+            "totalBisnis"
+        );
+
+
+    const aktifElement =
+        document.getElementById(
+            "bisnisAktif"
+        );
+
+
+    const desaElement =
+        document.getElementById(
+            "totalDesa"
+        );
+
+
+    const total =
+        dataBisnis.length;
+
+
+    const aktif =
+        dataBisnis.filter(
+            item =>
+                String(
+                    item.status ||
+                    "aktif"
+                ).toLowerCase() ===
+                "aktif"
+        ).length;
+
+
+    const desaUnik =
+        new Set(
+            dataBisnis
+                .map(
+                    item =>
+                        item.desa
+                )
+                .filter(Boolean)
+        ).size;
+
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            total;
+
+    }
+
+
+    if (aktifElement) {
+
+        aktifElement.textContent =
+            aktif;
+
+    }
+
+
+    if (desaElement) {
+
+        desaElement.textContent =
+            desaUnik;
+
+    }
 
 
     console.log(
-        "BISNIS BARU:",
-        newBisnis
+        "STATISTIK BISNIS:",
+        {
+            total,
+            aktif,
+            desa: desaUnik
+        }
     );
 
 }
 
 
 /* =====================================================
-   UPDATE BISNIS
+   RENDER TABLE
 ===================================================== */
 
-function updateBisnis(data) {
+function renderTable() {
 
-    const index =
-        bisnisData.findIndex(
-            function (item) {
-
-                return String(item.id) ===
-                    String(bisnisEditId);
-
-            }
-        );
-
-
-    if (index === -1) {
-
-        alert(
-            "Data bisnis yang akan diperbarui tidak ditemukan."
-        );
-
-        resetForm();
-
-        return;
-
-    }
-
-
-    bisnisData[index] = {
-
-        ...bisnisData[index],
-
-        nama: data.nama,
-
-        kategori: data.kategori,
-
-        desa: data.desa,
-
-        pemilik: data.pemilik,
-
-        produk: data.produk,
-
-        whatsapp: data.whatsapp,
-
-        alamat: data.alamat,
-
-        deskripsi: data.deskripsi,
-
-        gambar: data.gambar,
-
-        status: data.status
-
-    };
-
-
-    const berhasil =
-        saveLocalData();
-
-
-    if (!berhasil) {
-
-        return;
-
-    }
-
-
-    updateStatistics();
-
-    renderBisnisTable();
-
-    resetForm();
-
-
-    alert(
-        "Data bisnis berhasil diperbarui."
-    );
-
-}
-
-
-/* =====================================================
-   EDIT BISNIS
-===================================================== */
-
-function editBisnis(id) {
-
-    const item =
-        bisnisData.find(
-            function (bisnis) {
-
-                return String(bisnis.id) ===
-                    String(id);
-
-            }
-        );
-
-
-    if (!item) {
-
-        alert(
-            "Data bisnis tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
-    bisnisEditId =
-        item.id;
-
-
-    setValue(
-        "bisnisId",
-        item.id
-    );
-
-    setValue(
-        "nama",
-        item.nama
-    );
-
-    setValue(
-        "kategori",
-        item.kategori
-    );
-
-    setValue(
-        "desa",
-        item.desa
-    );
-
-    setValue(
-        "pemilik",
-        item.pemilik
-    );
-
-    setValue(
-        "produk",
-        item.produk
-    );
-
-    setValue(
-        "whatsapp",
-        item.whatsapp
-    );
-
-    setValue(
-        "alamat",
-        item.alamat
-    );
-
-    setValue(
-        "deskripsi",
-        item.deskripsi
-    );
-
-    setValue(
-        "gambar",
-        item.gambar
-    );
-
-    setValue(
-        "status",
-        item.status || "aktif"
-    );
-
-
-    /*
-     * Ubah tombol menjadi UPDATE
-     */
-
-    const submitButton =
-        document.querySelector(
-            '#bisnisForm button[type="submit"]'
-        );
-
-
-    if (submitButton) {
-
-        submitButton.innerHTML =
-            '<i class="fa-solid fa-pen-to-square me-2"></i>' +
-            'Update Bisnis';
-
-    }
-
-
-    /*
-     * Scroll ke form
-     */
-
-    const form =
+    const tbody =
         document.getElementById(
-            "bisnisForm"
+            "bisnisTableBody"
         );
 
 
-    if (form) {
+    if (!tbody) {
 
-        form.scrollIntoView({
-
-            behavior: "smooth",
-
-            block: "start"
-
-        });
+        return;
 
     }
+
+
+    const searchElement =
+        document.getElementById(
+            "searchBisnis"
+        );
+
+
+    const kategoriElement =
+        document.getElementById(
+            "filterKategori"
+        );
+
+
+    const statusElement =
+        document.getElementById(
+            "filterStatus"
+        );
+
+
+    const search =
+        searchElement
+            ? searchElement.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+
+    const kategori =
+        kategoriElement
+            ? kategoriElement.value
+            : "";
+
+
+    const status =
+        statusElement
+            ? statusElement.value
+            : "";
+
+
+    const filtered =
+        dataBisnis.filter(
+            item => {
+
+                const text =
+                    (
+                        (item.nama || "") +
+                        " " +
+                        (item.kategori || "") +
+                        " " +
+                        (item.desa || "") +
+                        " " +
+                        (item.pemilik || "") +
+                        " " +
+                        (item.produk || "")
+                    ).toLowerCase();
+
+
+                const matchSearch =
+                    !search ||
+                    text.includes(search);
+
+
+                const matchKategori =
+                    !kategori ||
+                    item.kategori ===
+                    kategori;
+
+
+                const itemStatus =
+                    String(
+                        item.status ||
+                        "aktif"
+                    ).toLowerCase();
+
+
+                const matchStatus =
+                    !status ||
+                    itemStatus ===
+                    status;
+
+
+                return (
+                    matchSearch &&
+                    matchKategori &&
+                    matchStatus
+                );
+
+            }
+        );
+
+
+    if (filtered.length === 0) {
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="text-center py-5 text-muted"
+                >
+
+                    <i class="fa-solid
+                              fa-database
+                              fa-2x
+                              mb-3">
+                    </i>
+
+                    <div>
+                        Belum ada data bisnis.
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        filtered
+            .map(
+                (item, index) =>
+                    createTableRow(
+                        item,
+                        index
+                    )
+            )
+            .join("");
 
 }
 
 
 /* =====================================================
-   HAPUS BISNIS
+   TABLE ROW
 ===================================================== */
 
-function deleteBisnis(id) {
+function createTableRow(
+    item,
+    index
+) {
 
-    const item =
-        bisnisData.find(
-            function (bisnis) {
-
-                return String(bisnis.id) ===
-                    String(id);
-
-            }
-        );
-
-
-    if (!item) {
-
-        alert(
-            "Data bisnis tidak ditemukan."
-        );
-
-        return;
-
-    }
+    const status =
+        String(
+            item.status ||
+            "aktif"
+        ).toLowerCase();
 
 
-    const yakin =
-        confirm(
-            'Hapus bisnis "' +
-            item.nama +
-            '"?'
-        );
+    const statusBadge =
+        status === "aktif"
+            ?
+            `
+                <span class="badge bg-success">
+                    Aktif
+                </span>
+            `
+            :
+            `
+                <span class="badge bg-secondary">
+                    Nonaktif
+                </span>
+            `;
 
 
-    if (!yakin) {
-
-        return;
-
-    }
-
-
-    bisnisData =
-        bisnisData.filter(
-            function (bisnis) {
-
-                return String(bisnis.id) !==
-                    String(id);
-
-            }
-        );
+    const verifiedBadge =
+        item.verified
+            ?
+            `
+                <i
+                    class="fa-solid
+                           fa-circle-check
+                           text-primary ms-1"
+                    title="Verified"
+                ></i>
+            `
+            :
+            "";
 
 
-    const berhasil =
-        saveLocalData();
+    return `
+
+        <tr>
+
+            <td>
+                ${index + 1}
+            </td>
 
 
-    if (!berhasil) {
+            <td>
 
-        return;
+                <div class="fw-semibold">
 
-    }
+                    ${escapeHTML(
+                        item.nama ||
+                        "-"
+                    )}
+
+                    ${verifiedBadge}
+
+                </div>
+
+                <small class="text-muted">
+
+                    ${escapeHTML(
+                        item.produk ||
+                        "-"
+                    )}
+
+                </small>
+
+            </td>
 
 
-    updateStatistics();
+            <td>
 
-    renderBisnisTable();
+                <span class="badge bg-primary">
+
+                    ${escapeHTML(
+                        item.kategori ||
+                        "-"
+                    )}
+
+                </span>
+
+            </td>
 
 
-    if (
-        bisnisEditId !== null &&
-        String(bisnisEditId) === String(id)
-    ) {
+            <td>
 
-        resetForm();
+                <i class="fa-solid
+                          fa-location-dot
+                          text-danger me-1">
+                </i>
 
-    }
+                ${escapeHTML(
+                    item.desa ||
+                    "-"
+                )}
+
+            </td>
 
 
-    alert(
-        "Bisnis berhasil dihapus."
-    );
+            <td>
+
+                ${escapeHTML(
+                    item.pemilik ||
+                    "-"
+                )}
+
+            </td>
+
+
+            <td>
+
+                ${
+                    item.wa
+                    ?
+                    escapeHTML(
+                        item.wa
+                    )
+                    :
+                    '<span class="text-muted">-</span>'
+                }
+
+            </td>
+
+
+            <td>
+
+                ${statusBadge}
+
+            </td>
+
+
+            <td class="text-end">
+
+                <div class="btn-group">
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        onclick="lihatDetailBisnis(${Number(item.id)})"
+                        title="Lihat Detail"
+                    >
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-warning"
+                        onclick="editBisnis(${Number(item.id)})"
+                        title="Edit"
+                    >
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-danger"
+                        onclick="hapusBisnis(${Number(item.id)})"
+                        title="Hapus"
+                    >
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    `;
 
 }
 
 
 /* =====================================================
-   DETAIL BISNIS
+   DETAIL
 ===================================================== */
 
-function showDetail(id) {
+function lihatDetailBisnis(id) {
 
-    const item =
-        bisnisData.find(
-            function (bisnis) {
-
-                return String(bisnis.id) ===
-                    String(id);
-
-            }
+    const bisnis =
+        dataBisnis.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
         );
 
 
-    if (!item) {
-
-        alert(
-            "Data bisnis tidak ditemukan."
-        );
+    if (!bisnis) {
 
         return;
 
@@ -917,43 +1199,26 @@ function showDetail(id) {
     }
 
 
-    const gambar =
-        item.gambar ||
-        "assets/images/bisnis/default.jpg";
-
-
-    const whatsapp =
-        normalizeWhatsApp(
-            item.whatsapp
-        );
-
-
-    const pesan =
-        "Halo, saya ingin mengetahui informasi tentang " +
-        (item.nama || "bisnis") +
-        ".";
-
-
-    const waLink =
-        whatsapp
-            ? "https://wa.me/" +
-              whatsapp +
-              "?text=" +
-              encodeURIComponent(pesan)
-            : "";
-
-
     content.innerHTML = `
 
         <div class="row g-4">
 
+
             <div class="col-md-5">
 
                 <img
-                    src="${escapeHTML(gambar)}"
-                    class="detail-business-image w-100"
-                    alt="${escapeHTML(item.nama || "Bisnis")}"
-                    onerror="this.onerror=null;this.src='assets/images/umkm/default.jpg';"
+                    src="${
+                        escapeHTML(
+                            bisnis.gambar ||
+                            "assets/images/bisnis/default.jpg"
+                        )
+                    }"
+                    class="img-fluid rounded shadow-sm"
+                    alt="${escapeHTML(
+                        bisnis.nama ||
+                        "Bisnis"
+                    )}"
+                    onerror="this.onerror=null;this.src='assets/images/bisnis/default.jpg';"
                 >
 
             </div>
@@ -961,153 +1226,106 @@ function showDetail(id) {
 
             <div class="col-md-7">
 
-                <h3 class="fw-bold mb-1">
+                <span class="badge bg-primary mb-2">
 
                     ${escapeHTML(
-                        item.nama || "-"
-                    )}
-
-                </h3>
-
-
-                <span class="business-category mb-3">
-
-                    ${escapeHTML(
-                        item.kategori || "Bisnis"
+                        bisnis.kategori ||
+                        "-"
                     )}
 
                 </span>
 
 
-                <div class="row g-3 mt-2">
+                <h4 class="fw-bold">
+
+                    ${escapeHTML(
+                        bisnis.nama ||
+                        "-"
+                    )}
+
+                </h4>
 
 
-                    <div class="col-6">
+                <p class="mb-2">
 
-                        <div class="detail-label">
-                            Desa
-                        </div>
+                    <strong>Desa:</strong>
+                    ${escapeHTML(
+                        bisnis.desa ||
+                        "-"
+                    )}
 
-                        <div class="detail-value">
-
-                            ${escapeHTML(
-                                item.desa || "-"
-                            )}
-
-                        </div>
-
-                    </div>
+                </p>
 
 
-                    <div class="col-6">
+                <p class="mb-2">
 
-                        <div class="detail-label">
-                            Pemilik
-                        </div>
+                    <strong>Pemilik:</strong>
+                    ${escapeHTML(
+                        bisnis.pemilik ||
+                        "-"
+                    )}
 
-                        <div class="detail-value">
-
-                            ${escapeHTML(
-                                item.pemilik || "-"
-                            )}
-
-                        </div>
-
-                    </div>
+                </p>
 
 
-                    <div class="col-12">
+                <p class="mb-2">
 
-                        <div class="detail-label">
-                            Produk / Jasa
-                        </div>
+                    <strong>Produk / Jasa:</strong>
+                    ${escapeHTML(
+                        bisnis.produk ||
+                        "-"
+                    )}
 
-                        <div class="detail-value">
-
-                            ${escapeHTML(
-                                item.produk || "-"
-                            )}
-
-                        </div>
-
-                    </div>
+                </p>
 
 
-                    <div class="col-12">
+                <p class="mb-2">
 
-                        <div class="detail-label">
-                            Alamat
-                        </div>
+                    <strong>Alamat:</strong>
+                    ${escapeHTML(
+                        bisnis.alamat ||
+                        "-"
+                    )}
 
-                        <div class="detail-value">
-
-                            ${escapeHTML(
-                                item.alamat || "-"
-                            )}
-
-                        </div>
-
-                    </div>
+                </p>
 
 
-                    <div class="col-12">
+                <p class="mb-3">
 
-                        <div class="detail-label">
-                            Deskripsi
-                        </div>
+                    <strong>Status:</strong>
 
-                        <div>
+                    ${
+                        String(
+                            bisnis.status ||
+                            "aktif"
+                        ).toLowerCase() === "aktif"
 
-                            ${escapeHTML(
-                                item.deskripsi || "-"
-                            )}
+                        ?
+                        '<span class="badge bg-success ms-1">Aktif</span>'
 
-                        </div>
+                        :
+                        '<span class="badge bg-secondary ms-1">Nonaktif</span>'
+                    }
 
-                    </div>
+                </p>
 
 
-                    <div class="col-12">
+                <div class="border-top pt-3">
 
-                        <div class="detail-label">
-                            Status
-                        </div>
+                    <strong>
+                        Deskripsi
+                    </strong>
 
-                        <div>
+                    <p class="text-muted mt-2">
 
-                            ${
-                                item.status === "nonaktif"
-                                    ? "Nonaktif"
-                                    : "Aktif"
-                            }
+                        ${escapeHTML(
+                            bisnis.deskripsi ||
+                            "-"
+                        )}
 
-                        </div>
-
-                    </div>
+                    </p>
 
                 </div>
-
-
-                ${
-                    whatsapp
-                        ? `
-
-                            <a
-                                href="${waLink}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="btn btn-success mt-4"
-                            >
-
-                                <i class="fa-brands fa-whatsapp me-2"></i>
-
-                                Hubungi via WhatsApp
-
-                            </a>
-
-                          `
-                        : ""
-                }
 
 
             </div>
@@ -1117,10 +1335,6 @@ function showDetail(id) {
     `;
 
 
-    /*
-     * Bootstrap Modal
-     */
-
     const modalElement =
         document.getElementById(
             "detailBisnisModal"
@@ -1129,14 +1343,14 @@ function showDetail(id) {
 
     if (
         modalElement &&
-        typeof bootstrap !== "undefined" &&
-        bootstrap.Modal
+        typeof bootstrap !== "undefined"
     ) {
 
         const modal =
             bootstrap.Modal.getOrCreateInstance(
                 modalElement
             );
+
 
         modal.show();
 
@@ -1146,498 +1360,180 @@ function showDetail(id) {
 
 
 /* =====================================================
-   RENDER TABLE
+   EDIT BISNIS
 ===================================================== */
 
-function renderBisnisTable() {
+function editBisnis(id) {
 
-    const tbody =
+    const bisnis =
+        dataBisnis.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if (!bisnis) {
+
+        return;
+
+    }
+
+
+    editMode = true;
+
+
+    setValue(
+        "bisnisId",
+        bisnis.id
+    );
+
+
+    setValue(
+        "nama",
+        bisnis.nama
+    );
+
+
+    setValue(
+        "kategori",
+        bisnis.kategori
+    );
+
+
+    setValue(
+        "desa",
+        bisnis.desa
+    );
+
+
+    setValue(
+        "pemilik",
+        bisnis.pemilik
+    );
+
+
+    setValue(
+        "produk",
+        bisnis.produk
+    );
+
+
+    setValue(
+        "whatsapp",
+        bisnis.wa
+    );
+
+
+    setValue(
+        "alamat",
+        bisnis.alamat
+    );
+
+
+    setValue(
+        "deskripsi",
+        bisnis.deskripsi
+    );
+
+
+    setValue(
+        "gambar",
+        bisnis.gambar
+    );
+
+
+    setValue(
+        "status",
+        bisnis.status ||
+        "aktif"
+    );
+
+
+    const form =
         document.getElementById(
-            "bisnisTableBody"
+            "bisnisForm"
         );
 
 
-    if (!tbody) {
+    if (form) {
 
-        console.warn(
-            "BISNIS ADMIN: #bisnisTableBody tidak ditemukan."
+        form.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    console.log(
+        "Mode edit bisnis:",
+        bisnis
+    );
+
+}
+
+
+/* =====================================================
+   HAPUS BISNIS
+===================================================== */
+
+function hapusBisnis(id) {
+
+    const bisnis =
+        dataBisnis.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
         );
+
+
+    if (!bisnis) {
 
         return;
 
     }
 
 
-    const search =
-        getValue(
-            "searchBisnis"
-        )
-        .toLowerCase()
-        .trim();
-
-
-    const kategori =
-        getValue(
-            "filterKategori"
+    const konfirmasi =
+        confirm(
+            "Hapus bisnis \"" +
+            bisnis.nama +
+            "\"?"
         );
 
 
-    const status =
-        getValue(
-            "filterStatus"
-        );
-
-
-    const filtered =
-        bisnisData.filter(
-            function (item) {
-
-
-                const searchable = [
-
-                    item.nama,
-
-                    item.kategori,
-
-                    item.desa,
-
-                    item.pemilik,
-
-                    item.produk,
-
-                    item.alamat
-
-                ]
-                    .map(function (value) {
-
-                        return String(
-                            value || ""
-                        );
-
-                    })
-                    .join(" ")
-                    .toLowerCase();
-
-
-                const cocokSearch =
-                    !search ||
-                    searchable.includes(
-                        search
-                    );
-
-
-                const cocokKategori =
-                    !kategori ||
-                    item.kategori ===
-                    kategori;
-
-
-                const cocokStatus =
-                    !status ||
-                    (
-                        item.status ||
-                        "aktif"
-                    ) === status;
-
-
-                return (
-                    cocokSearch &&
-                    cocokKategori &&
-                    cocokStatus
-                );
-
-            }
-        );
-
-
-    /*
-     * Tidak ada data
-     */
-
-    if (
-        filtered.length === 0
-    ) {
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="8"
-                    class="text-center py-5"
-                >
-
-                    <div class="business-empty">
-
-                        <div class="business-empty-icon">
-
-                            <i
-                                class="fa-solid fa-briefcase"
-                            ></i>
-
-                        </div>
-
-
-                        <h5 class="fw-bold">
-
-                            Belum ada bisnis
-
-                        </h5>
-
-
-                        <p class="text-muted mb-0">
-
-                            Data bisnis yang sesuai
-                            dengan pencarian belum tersedia.
-
-                        </p>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
+    if (!konfirmasi) {
 
         return;
 
     }
 
 
-    tbody.innerHTML =
-        filtered
-            .map(
-                function (item, index) {
-
-                    return createBusinessRow(
-                        item,
-                        index
-                    );
-
-                }
-            )
-            .join("");
-
-}
-
-
-/* =====================================================
-   TABLE ROW
-===================================================== */
-
-function createBusinessRow(
-    item,
-    index
-) {
-
-    const status =
-        item.status || "aktif";
-
-
-    const statusLabel =
-        status === "aktif"
-            ? "Aktif"
-            : "Nonaktif";
-
-
-    const whatsapp =
-        normalizeWhatsApp(
-            item.whatsapp
+    dataBisnis =
+        dataBisnis.filter(
+            item =>
+                Number(item.id) !==
+                Number(id)
         );
 
 
-    const waHtml =
-        whatsapp
-            ? `
+    saveToLocalStorage();
 
-                <a
-                    href="https://wa.me/${whatsapp}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="business-wa"
-                >
 
-                    <i
-                        class="fa-brands fa-whatsapp me-1"
-                    ></i>
+    updateStatistics();
 
-                    ${escapeHTML(
-                        item.whatsapp
-                    )}
+    renderTable();
 
-                </a>
 
-              `
-            : `
-
-                <span class="text-muted">
-                    -
-                </span>
-
-              `;
-
-
-    return `
-
-        <tr>
-
-            <!-- NO -->
-
-            <td>
-                ${index + 1}
-            </td>
-
-
-            <!-- BISNIS -->
-
-            <td>
-
-                <div class="business-name">
-
-                    ${escapeHTML(
-                        item.nama || "-"
-                    )}
-
-                </div>
-
-
-                <div class="business-product">
-
-                    ${escapeHTML(
-                        item.produk || "-"
-                    )}
-
-                </div>
-
-            </td>
-
-
-            <!-- KATEGORI -->
-
-            <td>
-
-                <span class="business-category">
-
-                    ${escapeHTML(
-                        item.kategori || "-"
-                    )}
-
-                </span>
-
-            </td>
-
-
-            <!-- DESA -->
-
-            <td>
-
-                <span class="business-location">
-
-                    <i
-                        class="fa-solid fa-location-dot me-1"
-                    ></i>
-
-                    ${escapeHTML(
-                        item.desa || "-"
-                    )}
-
-                </span>
-
-            </td>
-
-
-            <!-- PEMILIK -->
-
-            <td>
-
-                ${escapeHTML(
-                    item.pemilik || "-"
-                )}
-
-            </td>
-
-
-            <!-- WHATSAPP -->
-
-            <td>
-
-                ${waHtml}
-
-            </td>
-
-
-            <!-- STATUS -->
-
-            <td>
-
-                <span
-                    class="status-badge status-${status}"
-                >
-
-                    <i
-                        class="fa-solid ${
-                            status === "aktif"
-                                ? "fa-circle-check"
-                                : "fa-circle-xmark"
-                        }"
-                    ></i>
-
-                    ${statusLabel}
-
-                </span>
-
-            </td>
-
-
-            <!-- AKSI -->
-
-            <td>
-
-                <div class="business-actions">
-
-
-                    <!-- DETAIL -->
-
-                    <button
-                        type="button"
-                        class="btn btn-outline-info"
-                        title="Detail"
-                        onclick="showDetail('${escapeJS(item.id)}')"
-                    >
-
-                        <i
-                            class="fa-solid fa-eye"
-                        ></i>
-
-                    </button>
-
-
-                    <!-- EDIT -->
-
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary"
-                        title="Edit"
-                        onclick="editBisnis('${escapeJS(item.id)}')"
-                    >
-
-                        <i
-                            class="fa-solid fa-pen"
-                        ></i>
-
-                    </button>
-
-
-                    <!-- HAPUS -->
-
-                    <button
-                        type="button"
-                        class="btn btn-outline-danger"
-                        title="Hapus"
-                        onclick="deleteBisnis('${escapeJS(item.id)}')"
-                    >
-
-                        <i
-                            class="fa-solid fa-trash"
-                        ></i>
-
-                    </button>
-
-
-                </div>
-
-            </td>
-
-        </tr>
-
-    `;
-
-}
-
-
-/* =====================================================
-   STATISTICS
-===================================================== */
-
-function updateStatistics() {
-
-    const total =
-        Array.isArray(bisnisData)
-            ? bisnisData.length
-            : 0;
-
-
-    const aktif =
-        Array.isArray(bisnisData)
-            ? bisnisData.filter(
-                function (item) {
-
-                    return (
-                        item.status ||
-                        "aktif"
-                    ) === "aktif";
-
-                }
-            ).length
-            : 0;
-
-
-    const desaSet =
-        new Set();
-
-
-    if (
-        Array.isArray(bisnisData)
-    ) {
-
-        bisnisData.forEach(
-            function (item) {
-
-                if (
-                    item.desa &&
-                    String(item.desa).trim()
-                ) {
-
-                    desaSet.add(
-                        String(
-                            item.desa
-                        ).trim()
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    setText(
-        "totalBisnis",
-        total
-    );
-
-
-    setText(
-        "bisnisAktif",
-        aktif
-    );
-
-
-    setText(
-        "totalDesa",
-        desaSet.size
+    showNotification(
+        "Bisnis berhasil dihapus."
     );
 
 
     console.log(
-        "STATISTIK BISNIS:",
-        {
-            total: total,
-            aktif: aktif,
-            desa: desaSet.size
-        }
+        "Bisnis dihapus:",
+        bisnis
     );
 
 }
@@ -1648,10 +1544,6 @@ function updateStatistics() {
 ===================================================== */
 
 function resetForm() {
-
-    bisnisEditId =
-        null;
-
 
     const form =
         document.getElementById(
@@ -1678,75 +1570,283 @@ function resetForm() {
     );
 
 
-    const submitButton =
-        document.querySelector(
-            '#bisnisForm button[type="submit"]'
-        );
+    editMode = false;
 
 
-    if (submitButton) {
-
-        submitButton.innerHTML =
-            '<i class="fa-solid fa-floppy-disk me-2"></i>' +
-            'Simpan Bisnis';
-
-    }
-
-}
-
-
-/* =====================================================
-   NEXT ID
-===================================================== */
-
-function getNextId() {
-
-    if (
-        !Array.isArray(bisnisData) ||
-        bisnisData.length === 0
-    ) {
-
-        return 1;
-
-    }
-
-
-    const ids =
-        bisnisData
-            .map(
-                function (item) {
-
-                    return Number(
-                        item.id
-                    );
-
-                }
-            )
-            .filter(
-                Number.isFinite
-            );
-
-
-    if (
-        ids.length === 0
-    ) {
-
-        return (
-            bisnisData.length + 1
-        );
-
-    }
-
-
-    return (
-        Math.max(...ids) + 1
+    console.log(
+        "Form bisnis direset."
     );
 
 }
 
 
 /* =====================================================
-   SHOW TABLE MESSAGE
+   REFRESH
+===================================================== */
+
+async function refreshData() {
+
+    const button =
+        document.getElementById(
+            "btnRefresh"
+        );
+
+
+    if (button) {
+
+        button.disabled = true;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                BISNIS_DATA_URL,
+                {
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+
+        const json =
+            await response.json();
+
+
+        if (!Array.isArray(json)) {
+
+            throw new Error(
+                "Format JSON tidak valid."
+            );
+
+        }
+
+
+        /*
+         * Jangan menimpa localStorage
+         * secara otomatis jika sudah ada
+         * data hasil input Dashboard.
+         */
+
+        if (
+            dataBisnis.length >
+            json.length
+        ) {
+
+            console.warn(
+                "Data localStorage lebih banyak daripada bisnis.json."
+            );
+
+            showNotification(
+                "Data Dashboard masih memiliki data lokal yang belum diekspor."
+            );
+
+        } else {
+
+            dataBisnis = json;
+
+            saveToLocalStorage();
+
+            updateStatistics();
+
+            renderTable();
+
+            showNotification(
+                "Data bisnis berhasil diperbarui."
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Refresh bisnis gagal:",
+            error
+        );
+
+
+        showNotification(
+            "Data bisnis gagal dimuat."
+        );
+
+    }
+
+
+    if (button) {
+
+        button.disabled = false;
+
+    }
+
+}
+
+
+/* =====================================================
+   EXPORT BISNIS.JSON
+===================================================== */
+
+function exportBisnisJSON() {
+
+    if (
+        !Array.isArray(dataBisnis)
+    ) {
+
+        alert(
+            "Data bisnis tidak tersedia."
+        );
+
+        return;
+
+    }
+
+
+    const json =
+        JSON.stringify(
+            dataBisnis,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type:
+                    "application/json;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href = url;
+
+    link.download =
+        "bisnis.json";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    showNotification(
+        "bisnis.json berhasil dibuat."
+    );
+
+
+    console.log(
+        "JSON berhasil diekspor:",
+        dataBisnis
+    );
+
+}
+
+
+/* =====================================================
+   SHOW NOTIFICATION
+===================================================== */
+
+function showNotification(message) {
+
+    const old =
+        document.getElementById(
+            "bisnisAdminNotification"
+        );
+
+
+    if (old) {
+
+        old.remove();
+
+    }
+
+
+    const notification =
+        document.createElement(
+            "div"
+        );
+
+
+    notification.id =
+        "bisnisAdminNotification";
+
+
+    notification.className =
+        "position-fixed top-0 end-0 m-3 alert alert-success shadow";
+
+
+    notification.style.zIndex =
+        "99999";
+
+
+    notification.innerHTML = `
+
+        <i class="fa-solid
+                  fa-circle-check
+                  me-2">
+        </i>
+
+        ${escapeHTML(message)}
+
+    `;
+
+
+    document.body.appendChild(
+        notification
+    );
+
+
+    setTimeout(
+        () => {
+
+            notification.remove();
+
+        },
+        3000
+    );
+
+}
+
+
+/* =====================================================
+   TABLE MESSAGE
 ===================================================== */
 
 function showTableMessage(
@@ -1778,9 +1878,7 @@ function showTableMessage(
 
                 <div class="alert alert-${type} mb-0">
 
-                    ${escapeHTML(
-                        message
-                    )}
+                    ${escapeHTML(message)}
 
                 </div>
 
@@ -1794,33 +1892,7 @@ function showTableMessage(
 
 
 /* =====================================================
-   HELPER GET VALUE
-===================================================== */
-
-function getValue(id) {
-
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    if (!element) {
-
-        return "";
-
-    }
-
-
-    return String(
-        element.value || ""
-    ).trim();
-
-}
-
-
-/* =====================================================
-   HELPER SET VALUE
+   SET VALUE
 ===================================================== */
 
 function setValue(
@@ -1834,49 +1906,18 @@ function setValue(
         );
 
 
-    if (!element) {
+    if (element) {
 
-        return;
+        element.value =
+            value ?? "";
 
     }
-
-
-    element.value =
-        value ?? "";
 
 }
 
 
 /* =====================================================
-   HELPER SET TEXT
-===================================================== */
-
-function setText(
-    id,
-    value
-) {
-
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    if (!element) {
-
-        return;
-
-    }
-
-
-    element.textContent =
-        value ?? "";
-
-}
-
-
-/* =====================================================
-   NORMALISASI WHATSAPP
+   NORMALIZE WHATSAPP
 ===================================================== */
 
 function normalizeWhatsApp(
@@ -1898,12 +1939,6 @@ function normalizeWhatsApp(
             .replace(/[^\d+]/g, "");
 
 
-    /*
-     * 0812xxxx
-     * menjadi
-     * 62812xxxx
-     */
-
     if (
         wa.startsWith("0")
     ) {
@@ -1915,12 +1950,6 @@ function normalizeWhatsApp(
     }
 
 
-    /*
-     * +62812xxxx
-     * menjadi
-     * 62812xxxx
-     */
-
     if (
         wa.startsWith("+62")
     ) {
@@ -1931,18 +1960,13 @@ function normalizeWhatsApp(
     }
 
 
-    /*
-     * Jika diawali 62
-     * sudah benar
-     */
-
     return wa;
 
 }
 
 
 /* =====================================================
-   SECURITY HTML
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(
@@ -1977,32 +2001,17 @@ function escapeHTML(
 
 
 /* =====================================================
-   SECURITY JAVASCRIPT
+   GLOBAL ACCESS
 ===================================================== */
 
-function escapeJS(
-    value
-) {
+window.editBisnis =
+    editBisnis;
 
-    return String(
-        value ?? ""
-    )
-        .replace(
-            /\\/g,
-            "\\\\"
-        )
-        .replace(
-            /'/g,
-            "\\'"
-        );
+window.hapusBisnis =
+    hapusBisnis;
 
-}
+window.lihatDetailBisnis =
+    lihatDetailBisnis;
 
-
-/* =====================================================
-   SELESAI
-===================================================== */
-
-console.log(
-    "BISNIS ADMIN JS berhasil dimuat."
-);
+window.exportBisnisJSON =
+    exportBisnisJSON;
