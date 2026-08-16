@@ -1,38 +1,18 @@
 [
   {
-    "id": 1,
-    "nama": "Wahyu Barbershop",
-    "kategori": "Barbershop",
-    "desa": "Panulisan",
-    "deskripsi": "Potong rambut modern, hair coloring dan hair spa.",
-    "gambar": "assets/images/bisnis/barbershop.jpg",
-    "wa": "628123456789",
-    "cta": "✂️ Tanya Jadwal",
-    "pesan": "Halo Wahyu Barbershop, saya ingin menanyakan jadwal potong rambut yang masih tersedia.",
-    "verified": true
-  },
-  {
-    "id": 2,
-    "nama": "Aura Wedding Organizer",
-    "kategori": "Wedding Organizer",
-    "desa": "Dayeuhluhur",
-    "deskripsi": "Dekorasi, MUA, Photography dan Wedding Planner.",
-    "gambar": "assets/images/bisnis/wedding.jpg",
-    "wa": "628123456780",
-    "cta": "💍 Hubungi WO",
-    "pesan": "Halo Aura Wedding Organizer, saya ingin mengetahui informasi paket wedding.",
-    "verified": true
-  },
-  {
     "id": 3,
     "nama": "Berkah Rental Mobil",
-    "kategori": "Rental Mobil",
+    "kategori": "Otomotif",
     "desa": "Hanum",
+    "pemilik": "Asep",
+    "produk": "Bisnis kendaraan",
+    "alamat": "Hanum Utama 13",
     "deskripsi": "Rental mobil harian, mingguan dan wisata.",
     "gambar": "assets/images/bisnis/rental.jpg",
     "wa": "628123456781",
     "cta": "🚗 Tanya Harga",
     "pesan": "Halo Berkah Rental Mobil, saya ingin mengetahui harga sewa mobil yang tersedia.",
+    "status": "aktif",
     "verified": true
   },
   {
@@ -42,11 +22,14 @@
     "desa": "Panulisan",
     "pemilik": "Yayakha",
     "produk": "Brilink dan Aplikasi",
-    "whatsapp": "628179942420",
     "alamat": "Jl Maryani 14",
     "deskripsi": "Brilink, wfi corner",
     "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL1QH50EnnKWPF0qlh2O1qhgh5h6ZLceUZ-pyS80pLlQ&s=10",
-    "status": "aktif"
+    "wa": "6281799443322",
+    "cta": "Hubungi via WhatsApp",
+    "pesan": "Halo Rumah Internet, saya ingin mendapatkan informasi mengenai Brilink dan Aplikasi.",
+    "status": "aktif",
+    "verified": false
   },
   {
     "id": 5,
@@ -55,10 +38,13 @@
     "desa": "Panulisan",
     "pemilik": "Inka Novianti",
     "produk": "Makanan dan Minuman Khas Panulisan",
-    "whatsapp": "6281987623333",
     "alamat": "Panulisan Depan GOR Manggala",
     "deskripsi": "Tempat nyaman untuk usia muda nyantai makan dan minum sambail NGENET gratis",
     "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5i7v5tsWUp3n8sGj5xa-3HQYwdIu8bC7KryASOzcvkA&s=10",
-    "status": "aktif"
+    "wa": "62893221111233",
+    "cta": "Hubungi via WhatsApp",
+    "pesan": "Halo Ginong Cafe, saya ingin mendapatkan informasi mengenai Makanan dan Minuman Khas Panulisan.",
+    "status": "aktif",
+    "verified": false
   }
 ]
