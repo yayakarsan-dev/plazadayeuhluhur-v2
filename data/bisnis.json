@@ -11,7 +11,6 @@
     "pesan": "Halo Wahyu Barbershop, saya ingin menanyakan jadwal potong rambut yang masih tersedia.",
     "verified": true
   },
-
   {
     "id": 2,
     "nama": "Aura Wedding Organizer",
@@ -24,7 +23,6 @@
     "pesan": "Halo Aura Wedding Organizer, saya ingin mengetahui informasi paket wedding.",
     "verified": true
   },
-
   {
     "id": 3,
     "nama": "Berkah Rental Mobil",
@@ -36,5 +34,21 @@
     "cta": "🚗 Tanya Harga",
     "pesan": "Halo Berkah Rental Mobil, saya ingin mengetahui harga sewa mobil yang tersedia.",
     "verified": true
+  },
+  {
+    "id": 4,
+    "nama": "Rumah Internet",
+    "kategori": "Teknologi",
+    "desa": "Panulisan",
+    "pemilik": "Yayakha",
+    "produk": "Brilink dan Aplikasi",
+    "alamat": "Jl Maryani 14",
+    "deskripsi": "Brilink, wifi corner",
+    "status": "aktif",
+    "gambar": "assets/images/bisnis/default.jpg",
+    "wa": "",
+    "cta": "Hubungi Bisnis",
+    "pesan": "Halo Rumah Internet, saya ingin mendapatkan informasi mengenai Brilink dan Aplikasi.",
+    "verified": false
   }
 ]
