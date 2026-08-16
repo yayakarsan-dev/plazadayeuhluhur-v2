@@ -172,3 +172,35 @@ async function initBisnisAdmin() {
     }
 
 }
+function hapusBisnis(id) {
+
+    // kode hapus bisnis
+
+}
+
+
+/* =====================================================
+   NORMALISASI NOMOR WHATSAPP
+===================================================== */
+
+function normalizeWhatsApp(number) {
+
+    if (!number) {
+        return "";
+    }
+
+    let wa = String(number)
+        .replace(/\s+/g, "")
+        .replace(/-/g, "")
+        .replace(/[^\d+]/g, "");
+
+    if (wa.startsWith("0")) {
+        wa = "62" + wa.substring(1);
+    }
+
+    if (wa.startsWith("+62")) {
+        wa = wa.substring(1);
+    }
+
+    return wa;
+}
