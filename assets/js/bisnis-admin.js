@@ -1258,19 +1258,47 @@ function lihatDetailBisnis(id) {
 
 function hapusBisnis(id) {
 
-    const bisnis =
-        dataBisnis.find(
-            item =>
-                Number(item.id) ===
-                Number(id)
-        );
-
+    const bisnis = dataBisnis.find(
+        item => Number(item.id) === Number(id)
+    );
 
     if (!bisnis) {
-
+        alert("Data bisnis tidak ditemukan.");
         return;
+    }
+
+    const konfirmasi = confirm(
+        `Apakah Anda yakin ingin menghapus bisnis "${bisnis.nama}"?`
+    );
+
+    if (!konfirmasi) {
+        return;
+    }
+
+    dataBisnis = dataBisnis.filter(
+        item => Number(item.id) !== Number(id)
+    );
+
+    try {
+
+        localStorage.setItem(
+            "plaza_dayeuhluhur_bisnis",
+            JSON.stringify(dataBisnis)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Gagal menyimpan perubahan ke localStorage:",
+            error
+        );
 
     }
 
+    renderBisnis();
+    updateStatistik();
 
-    const kon
+    alert(
+        `Bisnis "${bisnis.nama}" berhasil dihapus.`
+    );
+}
