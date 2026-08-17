@@ -1,0 +1,761 @@
+/* =====================================================
+   PLAZA DAYEUHLUHUR
+   KALENDER HAJATAN - INDEX
+   PREMIUM CARD V1
+===================================================== */
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.kalender-hajatan-section {
+    padding: 70px 0;
+    background: #f7f9fc;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.kalender-hajatan-section .section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.kalender-hajatan-section .section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 15px;
+
+    border-radius: 50px;
+
+    background: #eaf3ff;
+    color: #0d6efd;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+.kalender-hajatan-section .section-title {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 32px;
+    line-height: 1.25;
+
+    font-weight: 800;
+}
+
+.kalender-hajatan-section .section-title span {
+    color: #0d6efd;
+}
+
+.kalender-hajatan-section .section-description {
+    max-width: 720px;
+
+    margin: 12px auto 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   INFO BAR
+===================================================== */
+
+.kalender-info-bar {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+.kalender-info-item {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background: #ffffff;
+
+    padding: 17px 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid #e6ebf2;
+
+    box-shadow:
+        0 5px 20px
+        rgba(23, 32, 51, 0.04);
+}
+
+.kalender-info-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #edf5ff;
+
+    color: #0d6efd;
+
+    font-size: 19px;
+}
+
+.kalender-info-item strong {
+    display: block;
+
+    color: #172033;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.kalender-info-item span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #7a8494;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   GRID UTAMA
+===================================================== */
+
+.kalender-undangan-grid {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+
+/*
+=========================================================
+DESKTOP
+5 KARTU DALAM SATU BARIS
+=========================================================
+*/
+
+.kalender-undangan-grid
+.index-undangan-col {
+
+    width: 20%;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.index-undangan-card {
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border-radius: 17px;
+
+    border: 1px solid #e5eaf0;
+
+    box-shadow:
+        0 6px 20px
+        rgba(15, 23, 42, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.index-undangan-card:hover {
+
+    transform: translateY(-6px);
+
+    border-color: #d5e5ff;
+
+    box-shadow:
+        0 15px 35px
+        rgba(15, 23, 42, 0.12);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.index-undangan-image {
+
+    position: relative;
+
+    width: 100%;
+    height: 145px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf3ff,
+            #f5f8fc
+        );
+}
+
+.index-undangan-image img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.4s ease;
+}
+
+.index-undangan-card:hover
+.index-undangan-image img {
+
+    transform: scale(1.07);
+}
+
+
+/* =====================================================
+   DATE BADGE
+===================================================== */
+
+.index-undangan-date {
+
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    width: 47px;
+    height: 52px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,0.96);
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.14);
+
+    line-height: 1;
+}
+
+.index-undangan-date strong {
+
+    display: block;
+
+    color: #172033;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.index-undangan-date span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #0d6efd;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   EVENT TYPE
+===================================================== */
+
+.index-undangan-type {
+
+    position: absolute;
+
+    right: 9px;
+    bottom: 9px;
+
+    padding: 5px 9px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(13,110,253,0.94);
+
+    color: #ffffff;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    box-shadow:
+        0 3px 10px
+        rgba(13,110,253,0.25);
+}
+
+
+/* =====================================================
+   CARD BODY
+===================================================== */
+
+.index-undangan-body {
+
+    flex: 1;
+
+    padding: 15px 15px 10px;
+}
+
+.index-undangan-body h3 {
+
+    margin: 0 0 4px;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    line-height: 1.35;
+}
+
+.index-undangan-title {
+
+    min-height: 28px;
+
+    margin-bottom: 10px;
+
+    color: #0d6efd;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.index-undangan-info {
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 7px;
+
+    margin-bottom: 6px;
+
+    color: #687386;
+
+    font-size: 9px;
+
+    line-height: 1.45;
+}
+
+.index-undangan-info i {
+
+    flex-shrink: 0;
+
+    color: #0d6efd;
+
+    font-size: 10px;
+
+    margin-top: 1px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.index-undangan-footer {
+
+    padding:
+        5px 15px 15px;
+}
+
+.btn-index-undangan {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 8px 10px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: #0d6efd;
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease;
+}
+
+.btn-index-undangan:hover {
+
+    background: #0b5ed7;
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.kalender-loading {
+
+    width: 100%;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+.kalender-loading .spinner-border {
+
+    width: 30px;
+    height: 30px;
+}
+
+.kalender-loading p {
+
+    margin:
+        12px 0 0;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   BUTTON BAWAH
+===================================================== */
+
+.btn-kalender-primary,
+.btn-kalender-outline {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.btn-kalender-primary {
+
+    background: #0d6efd;
+
+    color: #ffffff;
+}
+
+.btn-kalender-primary:hover {
+
+    background: #0b5ed7;
+
+    color: #ffffff;
+}
+
+.btn-kalender-outline {
+
+    border: 1px solid #dbe2ea;
+
+    background: #ffffff;
+
+    color: #172033;
+}
+
+.btn-kalender-outline:hover {
+
+    border-color: #0d6efd;
+
+    color: #0d6efd;
+}
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.kalender-cta {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 24px 28px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e4e9ef;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(15,23,42,0.04);
+}
+
+.kalender-cta-content {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.kalender-cta-icon {
+
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #edf5ff;
+
+    color: #0d6efd;
+
+    font-size: 21px;
+}
+
+.kalender-cta h3 {
+
+    margin:
+        0 0 4px;
+
+    color: #172033;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+.kalender-cta p {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+.btn-kalender-cta {
+
+    flex-shrink: 0;
+
+    padding: 10px 16px;
+
+    border-radius: 9px;
+
+    background: #172033;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.btn-kalender-cta:hover {
+
+    background: #0d6efd;
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1199px) {
+
+    .kalender-undangan-grid
+    .index-undangan-col {
+
+        width: 25%;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 991px) {
+
+    .kalender-info-bar {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .kalender-undangan-grid
+    .index-undangan-col {
+
+        width: 33.333333%;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .kalender-hajatan-section {
+
+        padding:
+            50px 0;
+    }
+
+    .kalender-hajatan-section
+    .section-title {
+
+        font-size: 26px;
+    }
+
+    .kalender-info-bar {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .kalender-undangan-grid
+    .index-undangan-col {
+
+        width: 50%;
+    }
+
+    .kalender-cta {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .btn-kalender-cta {
+
+        width: 100%;
+
+        text-align: center;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 575px) {
+
+    .kalender-undangan-grid
+    .index-undangan-col {
+
+        width: 100%;
+    }
+
+    .index-undangan-image {
+
+        height: 180px;
+    }
+
+}
