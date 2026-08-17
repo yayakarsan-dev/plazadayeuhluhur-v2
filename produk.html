@@ -5,44 +5,783 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Produk UMKM | PLAZA DAYEUHLUHUR</title>
+    <title>
+        Etalase Produk Lokal Dayeuhluhur
+    </title>
 
-    <meta name="description"
-        content="Etalase Produk UMKM Kecamatan Dayeuhluhur. Temukan produk lokal dan hubungi penjual melalui WhatsApp.">
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <meta
+        name="description"
+        content="Temukan berbagai produk lokal unggulan masyarakat Kecamatan Dayeuhluhur."
+    >
 
     <!-- Bootstrap -->
     <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
     <!-- Font Awesome -->
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
-    <!-- CSS Global -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <link rel="stylesheet" href="assets/css/theme.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link rel="stylesheet" href="assets/css/animation.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <link rel="stylesheet" href="assets/css/responsive.css">
 
-    <!-- CSS Produk -->
-    <link rel="stylesheet" href="assets/css/produk.css">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            background:
+                #f7f9fc;
+
+            color:
+                #172033;
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .produk-navbar {
+
+            background:
+                rgba(255,255,255,.96);
+
+            backdrop-filter:
+                blur(10px);
+
+            box-shadow:
+                0 2px 15px rgba(0,0,0,.06);
+
+        }
+
+
+        .produk-navbar .navbar-brand {
+
+            font-weight:
+                800;
+
+            color:
+                #172033;
+
+        }
+
+
+        .produk-navbar .navbar-brand span {
+
+            color:
+                #0d6efd;
+
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .produk-hero {
+
+            padding:
+                90px 20px 70px;
+
+            text-align:
+                center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #ffffff
+                );
+
+        }
+
+
+        .produk-hero-badge {
+
+            display:
+                inline-block;
+
+            padding:
+                7px 16px;
+
+            border-radius:
+                50px;
+
+            background:
+                #e8f1ff;
+
+            color:
+                #0d6efd;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                .4px;
+
+            margin-bottom:
+                15px;
+
+        }
+
+
+        .produk-hero h1 {
+
+            font-weight:
+                800;
+
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    48px
+                );
+
+            margin-bottom:
+                15px;
+
+        }
+
+
+        .produk-hero p {
+
+            max-width:
+                760px;
+
+            margin:
+                0 auto;
+
+            color:
+                #667085;
+
+        }
+
+
+        /* =====================================================
+           TOOLBAR
+        ===================================================== */
+
+        .produk-toolbar {
+
+            margin-top:
+                -25px;
+
+            position:
+                relative;
+
+            z-index:
+                5;
+
+        }
+
+
+        .toolbar-box {
+
+            background:
+                #ffffff;
+
+            border-radius:
+                18px;
+
+            padding:
+                18px 22px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,.07);
+
+        }
+
+
+        .toolbar-info {
+
+            font-size:
+                14px;
+
+            color:
+                #667085;
+
+        }
+
+
+        .toolbar-info strong {
+
+            color:
+                #0d6efd;
+
+            font-size:
+                18px;
+
+        }
+
+
+        .search-box {
+
+            position:
+                relative;
+
+            min-width:
+                260px;
+
+        }
+
+
+        .search-box i {
+
+            position:
+                absolute;
+
+            left:
+                15px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                #98a2b3;
+
+        }
+
+
+        .search-box input {
+
+            padding-left:
+                42px;
+
+            border-radius:
+                50px;
+
+            border:
+                1px solid #e4e7ec;
+
+        }
+
+
+        /* =====================================================
+           PRODUCT CARD
+        ===================================================== */
+
+        .produk-card {
+
+            height:
+                100%;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid #edf0f5;
+
+            border-radius:
+                18px;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.05);
+
+            transition:
+                all .25s ease;
+
+        }
+
+
+        .produk-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 14px 35px rgba(0,0,0,.10);
+
+        }
+
+
+        .produk-image {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            height:
+                245px;
+
+            overflow:
+                hidden;
+
+            background:
+                #eef1f5;
+
+        }
+
+
+        .produk-image img {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+
+            display:
+                block;
+
+            transition:
+                transform .35s ease;
+
+        }
+
+
+        .produk-card:hover
+        .produk-image img {
+
+            transform:
+                scale(1.04);
+
+        }
+
+
+        .produk-category {
+
+            position:
+                absolute;
+
+            left:
+                14px;
+
+            top:
+                14px;
+
+            background:
+                #0d6efd;
+
+            color:
+                #ffffff;
+
+            padding:
+                6px 12px;
+
+            border-radius:
+                50px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .produk-status {
+
+            position:
+                absolute;
+
+            right:
+                14px;
+
+            top:
+                14px;
+
+            background:
+                #198754;
+
+            color:
+                #ffffff;
+
+            padding:
+                6px 11px;
+
+            border-radius:
+                50px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .produk-body {
+
+            padding:
+                18px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            flex: 1;
+
+        }
+
+
+        .produk-title {
+
+            font-size:
+                19px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                8px;
+
+            color:
+                #172033;
+
+        }
+
+
+        .produk-description {
+
+            color:
+                #667085;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.7;
+
+            margin-bottom:
+                14px;
+
+        }
+
+
+        .produk-info {
+
+            font-size:
+                12px;
+
+            color:
+                #475467;
+
+            margin-bottom:
+                6px;
+
+        }
+
+
+        .produk-info i {
+
+            width:
+                18px;
+
+            color:
+                #0d6efd;
+
+        }
+
+
+        .produk-location i {
+
+            color:
+                #dc3545;
+
+        }
+
+
+        .produk-price {
+
+            margin-top:
+                auto;
+
+            padding-top:
+                14px;
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            color:
+                #172033;
+
+        }
+
+
+        .produk-wa {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            width:
+                100%;
+
+            margin-top:
+                13px;
+
+            padding:
+                11px 14px;
+
+            border-radius:
+                50px;
+
+            background:
+                #198754;
+
+            color:
+                #ffffff;
+
+            text-decoration:
+                none;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .produk-wa:hover {
+
+            background:
+                #157347;
+
+            color:
+                #ffffff;
+
+        }
+
+
+        /* =====================================================
+           EMPTY / LOADING
+        ===================================================== */
+
+        .produk-state {
+
+            text-align:
+                center;
+
+            padding:
+                70px 20px;
+
+            color:
+                #667085;
+
+        }
+
+
+        .produk-state i {
+
+            font-size:
+                45px;
+
+            margin-bottom:
+                15px;
+
+            color:
+                #98a2b3;
+
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .produk-cta {
+
+            margin:
+                70px 0;
+
+            padding:
+                45px 25px;
+
+            border-radius:
+                24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #185abc
+                );
+
+            color:
+                #ffffff;
+
+            text-align:
+                center;
+
+        }
+
+
+        .produk-cta h2 {
+
+            font-weight:
+                800;
+
+        }
+
+
+        .produk-cta p {
+
+            opacity:
+                .9;
+
+            max-width:
+                700px;
+
+            margin:
+                10px auto 25px;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            background:
+                #111827;
+
+            color:
+                #ffffff;
+
+            padding:
+                30px 20px;
+
+            text-align:
+                center;
+
+            font-size:
+                13px;
+
+        }
+
+
+        footer .muted {
+
+            color:
+                #98a2b3;
+
+            margin-top:
+                5px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 576px) {
+
+            .produk-hero {
+
+                padding:
+                    70px 18px 55px;
+
+            }
+
+
+            .toolbar-box {
+
+                padding:
+                    15px;
+
+            }
+
+
+            .search-box {
+
+                width:
+                    100%;
+
+                min-width:
+                    0;
+
+            }
+
+
+            .produk-image {
+
+                height:
+                    220px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -50,102 +789,56 @@
 <body>
 
 
-<!-- =====================================================
-     TOP NEWS FLASH
-===================================================== -->
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
-<div class="top-news">
-
-    <div class="container-fluid">
-
-        <div class="news-wrapper">
-
-            <div class="news-label">
-
-                <span class="live-dot"></span>
-
-                LIVE NEWS
-
-            </div>
-
-            <div class="news-marquee">
-
-                <div id="newsFlashContent">
-
-                    Memuat informasi terbaru...
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     HEADER / NAVBAR
-===================================================== -->
-
-<header>
-
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <nav
+        class="navbar navbar-expand-lg produk-navbar sticky-top"
+    >
 
         <div class="container">
 
+            <a
+                href="index.html"
+                class="navbar-brand"
+            >
 
-            <!-- LOGO -->
+                <i class="fa-solid fa-store text-primary me-2"></i>
 
-            <a class="navbar-brand d-flex align-items-center"
-                href="index.html">
-
-                <img
-                    src="assets/images/logo.png"
-                    height="55"
-                    alt="Logo Plaza Dayeuhluhur">
-
-                <span class="fw-bold ms-2">
-
-                    PLAZA DAYEUHLUHUR
-
-                </span>
+                PLAZA
+                <span>DAYEUHLUHUR</span>
 
             </a>
 
-
-            <!-- MOBILE MENU -->
 
             <button
                 class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+                data-bs-target="#produkMenu"
+            >
 
                 <span class="navbar-toggler-icon"></span>
 
             </button>
 
 
-            <!-- MENU -->
-
             <div
                 class="collapse navbar-collapse"
-                id="navbarNav">
+                id="produkMenu"
+            >
 
                 <ul class="navbar-nav ms-auto">
-
 
                     <li class="nav-item">
 
                         <a
+                            href="index.html"
                             class="nav-link"
-                            href="index.html">
+                        >
+
+                            <i class="fa-solid fa-house me-1"></i>
 
                             Beranda
 
@@ -157,93 +850,17 @@
                     <li class="nav-item">
 
                         <a
+                            href="produk.html"
                             class="nav-link active"
-                            href="produk.html">
+                        >
 
-                            Produk
+                            <i class="fa-solid fa-store me-1"></i>
 
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="umkm.html">
-
-                            UMKM
+                            Produk Lokal
 
                         </a>
 
                     </li>
-
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="bursa.html">
-
-                            Bursa
-
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="wisata.html">
-
-                            Wisata
-
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="berita.html">
-
-                            Berita
-
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="desa.html">
-
-                            Desa
-
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="bumdes.html">
-
-                            BUMDes
-
-                        </a>
-
-                    </li>
-
 
                 </ul>
 
@@ -253,637 +870,193 @@
 
     </nav>
 
-</header>
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="produk-hero">
+
+        <div class="container">
+
+            <span class="produk-hero-badge">
+
+                <i class="fa-solid fa-basket-shopping me-1"></i>
+
+                ETALASE PRODUK UMKM
+
+            </span>
 
 
+            <h1>
 
-<!-- =====================================================
-     HERO PAGE
-===================================================== -->
+                Produk Lokal Dayeuhluhur
 
-<section class="produk-hero">
-
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-8">
-
-                <div class="produk-hero-content">
-
-                    <span class="produk-hero-label">
-
-                        <i class="fa-solid fa-store me-2"></i>
-
-                        ETALASE PRODUK UMKM
-
-                    </span>
+            </h1>
 
 
-                    <h1>
+            <p>
 
-                        Produk Lokal<br>
-
-                        <span>Dayeuhluhur</span>
-
-                    </h1>
-
-
-                    <p>
-
-                        Temukan berbagai produk unggulan
-                        hasil karya masyarakat Kecamatan
-                        Dayeuhluhur.
-
-                    </p>
-
-
-                    <div class="mt-4">
-
-                        <a
-                            href="#produk"
-                            class="btn btn-light btn-lg">
-
-                            <i class="fa-solid fa-bag-shopping me-2"></i>
-
-                            Jelajahi Produk
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-lg-4 d-none d-lg-block">
-
-                <div class="produk-hero-icon">
-
-                    <i class="fa-solid fa-store"></i>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PRODUK
-===================================================== -->
-
-<section
-    id="produk"
-    class="produk-section py-5">
-
-    <div class="container">
-
-
-        <!-- JUDUL -->
-
-        <div class="text-center mb-5">
-
-            <h6 class="text-primary fw-bold">
-
-                PRODUK UMKM
-
-            </h6>
-
-
-            <h2 class="fw-bold">
-
-                Jelajahi Produk Lokal
-
-            </h2>
-
-
-            <p class="text-muted">
-
-                Pilih produk yang Anda inginkan dan
-                hubungi penjual langsung melalui WhatsApp.
+                Temukan berbagai produk unggulan masyarakat
+                Kecamatan Dayeuhluhur dan hubungi penjual
+                secara langsung melalui WhatsApp.
 
             </p>
 
         </div>
 
+    </section>
 
 
-        <!-- =================================================
-             SEARCH & FILTER
-        ================================================= -->
+    <!-- =====================================================
+         TOOLBAR
+    ===================================================== -->
 
-        <div class="produk-filter-card mb-5">
+    <section class="produk-toolbar">
 
-            <div class="row g-3 align-items-center">
+        <div class="container">
+
+            <div class="toolbar-box">
+
+                <div
+                    class="d-flex
+                           align-items-center
+                           justify-content-between
+                           gap-3
+                           flex-wrap"
+                >
+
+                    <div class="toolbar-info">
+
+                        <i class="fa-solid fa-box me-1"></i>
+
+                        Menampilkan
+
+                        <strong id="totalProduk">
+                            0
+                        </strong>
+
+                        produk
+
+                    </div>
 
 
-                <!-- SEARCH -->
+                    <div class="search-box">
 
-                <div class="col-lg-5">
-
-                    <div class="input-group">
-
-                        <span class="input-group-text">
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                        </span>
+                        <i class="fa-solid fa-search"></i>
 
                         <input
-                            type="text"
-                            id="produkSearch"
+                            type="search"
+                            id="searchProduk"
                             class="form-control"
-                            placeholder="Cari nama produk atau UMKM...">
+                            placeholder="Cari produk, UMKM atau desa..."
+                        >
 
                     </div>
 
                 </div>
 
-
-                <!-- KATEGORI -->
-
-                <div class="col-lg-3">
-
-                    <select
-                        id="produkKategori"
-                        class="form-select">
-
-                        <option value="">
-
-                            Semua Kategori
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- DESA -->
-
-                <div class="col-lg-3">
-
-                    <select
-                        id="produkDesa"
-                        class="form-select">
-
-                        <option value="">
-
-                            Semua Desa
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- RESET -->
-
-                <div class="col-lg-1">
-
-                    <button
-                        type="button"
-                        id="resetProduk"
-                        class="btn btn-outline-secondary w-100"
-                        title="Reset Filter">
-
-                        <i class="fa-solid fa-rotate-left"></i>
-
-                    </button>
-
-                </div>
-
             </div>
 
         </div>
 
+    </section>
 
 
-        <!-- JUMLAH PRODUK -->
+    <!-- =====================================================
+         PRODUCT CONTENT
+    ===================================================== -->
 
-        <div
-            class="d-flex justify-content-between align-items-center mb-4">
-
-            <div>
-
-                <span
-                    id="jumlahProduk"
-                    class="text-muted">
-
-                    Memuat produk...
-
-                </span>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             CONTAINER PRODUK
-        ================================================= -->
+    <main class="container py-5">
 
         <div
+            id="produkContainer"
             class="row g-4"
-            id="produkContainer">
+        >
+
+            <div class="col-12">
+
+                <div class="produk-state">
+
+                    <div class="spinner-border text-primary">
+                    </div>
+
+                    <p class="mt-3 mb-0">
+                        Memuat produk...
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
 
-
         <!-- =================================================
-             EMPTY STATE
-        ================================================= -->
+             CTA
+        ================================================== -->
 
-        <div
-            id="produkEmpty"
-            class="text-center py-5 d-none">
+        <div class="produk-cta">
 
-            <div class="mb-3">
+            <h2>
+                Punya Produk Lokal?
+            </h2>
 
-                <i
-                    class="fa-solid fa-box-open fa-3x text-muted">
-                </i>
-
-            </div>
-
-            <h4>
-
-                Produk tidak ditemukan
-
-            </h4>
-
-            <p class="text-muted">
-
-                Coba gunakan kata pencarian atau
-                kategori yang berbeda.
-
+            <p>
+                Daftarkan produk UMKM Anda agar dapat
+                ditampilkan di Etalase Produk Plaza Dayeuhluhur.
             </p>
 
-        </div>
 
+            <a
+                href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur%2C%20saya%20ingin%20mendaftarkan%20produk%20UMKM%20saya%20untuk%20ditampilkan%20di%20Etalase%20Produk.%20Mohon%20informasi%20prosedur%20pendaftarannya.%20Terima%20kasih."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-light rounded-pill px-4"
+            >
 
+                <i class="fa-brands fa-whatsapp me-2"></i>
 
-    </div>
+                DAFTARKAN PRODUK ANDA
 
-</section>
-
-
-
-<!-- =====================================================
-     AJAKAN UMKM
-===================================================== -->
-
-<section class="produk-cta py-5">
-
-    <div class="container">
-
-        <div class="row align-items-center">
-
-
-            <div class="col-lg-8">
-
-                <h3 class="fw-bold">
-
-                    Punya Produk Lokal?
-
-                </h3>
-
-                <p class="mb-0">
-
-                    Mari tampilkan produk UMKM Anda
-                    di Etalase Produk Plaza Dayeuhluhur.
-
-                </p>
-
-            </div>
-
-
-            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-
-                <a
-                    href="umkm.html"
-                    class="btn btn-light btn-lg">
-
-                    <i class="fa-solid fa-store me-2"></i>
-
-                    Lihat Direktori UMKM
-
-                </a>
-
-            </div>
-
+            </a>
 
         </div>
 
-    </div>
+    </main>
 
-</section>
 
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
+    <footer>
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="row">
-
-
-            <!-- BRAND -->
-
-            <div class="col-lg-4 mb-4">
-
-                <img
-                    src="assets/images/logo.png"
-                    height="70"
-                    alt="Plaza Dayeuhluhur">
-
-                <h4 class="mt-3">
-
-                    PLAZA DAYEUHLUHUR
-
-                </h4>
-
-                <p>
-
-                    Gerbang Digital Kecamatan Dayeuhluhur
-
-                </p>
-
-            </div>
-
-
-
-            <!-- MENU -->
-
-            <div class="col-lg-2">
-
-                <h5>
-
-                    Menu
-
-                </h5>
-
-                <ul class="list-unstyled">
-
-
-                    <li>
-
-                        <a href="index.html">
-
-                            Beranda
-
-                        </a>
-
-                    </li>
-
-
-                    <li>
-
-                        <a href="produk.html">
-
-                            Produk
-
-                        </a>
-
-                    </li>
-
-
-                    <li>
-
-                        <a href="umkm.html">
-
-                            UMKM
-
-                        </a>
-
-                    </li>
-
-
-                    <li>
-
-                        <a href="bursa.html">
-
-                            Bursa
-
-                        </a>
-
-                    </li>
-
-
-                    <li>
-
-                        <a href="wisata.html">
-
-                            Wisata
-
-                        </a>
-
-                    </li>
-
-
-                    <li>
-
-                        <a href="berita.html">
-
-                            Berita
-
-                        </a>
-
-                    </li>
-
-
-                    <li>
-
-                        <a href="desa.html">
-
-                            Desa
-
-                        </a>
-
-                    </li>
-
-
-                    <li>
-
-                        <a href="bumdes.html">
-
-                            BUMDes
-
-                        </a>
-
-                    </li>
-
-
-                </ul>
-
-            </div>
-
-
-
-            <!-- KONTAK -->
-
-            <div class="col-lg-3">
-
-                <h5>
-
-                    Kontak
-
-                </h5>
-
-
-                <p>
-
-                    <i class="fa-solid fa-location-dot me-2"></i>
-
-                    Kecamatan Dayeuhluhur
-
-                </p>
-
-
-                <p>
-
-                    <i class="fa-solid fa-envelope me-2"></i>
-
-                    info@plazadayeuhluhur.com
-
-                </p>
-
-
-                <p>
-
-                    <i class="fa-solid fa-phone me-2"></i>
-
-                    (0280) xxxx
-
-                </p>
-
-            </div>
-
-
-
-            <!-- SOSIAL -->
-
-            <div class="col-lg-3">
-
-                <h5>
-
-                    Media Sosial
-
-                </h5>
-
-
-                <div class="social-icons">
-
-
-                    <a href="#">
-
-                        <i class="fab fa-facebook"></i>
-
-                    </a>
-
-
-                    <a href="#">
-
-                        <i class="fab fa-instagram"></i>
-
-                    </a>
-
-
-                    <a href="#">
-
-                        <i class="fab fa-youtube"></i>
-
-                    </a>
-
-
-                    <a href="#">
-
-                        <i class="fab fa-tiktok"></i>
-
-                    </a>
-
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <hr>
-
-
-        <div class="text-center">
-
+        <div>
             © 2026 PLAZA DAYEUHLUHUR
-
-            <br>
-
-            Gerbang Digital Kecamatan Dayeuhluhur
-
         </div>
 
+        <div class="muted">
+            Etalase Produk Lokal Dayeuhluhur
+        </div>
 
-    </div>
-
-</footer>
-
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
-<!-- Bootstrap -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
-</script>
+    </footer>
 
 
-<!-- AOS -->
+    <!-- =====================================================
+         BOOTSTRAP
+    ===================================================== -->
 
-<script
-    src="https://unpkg.com/aos@2.3.4/dist/aos.js">
-</script>
-
-
-<script>
-
-    if (typeof AOS !== "undefined") {
-
-        AOS.init();
-
-    }
-
-</script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
 
 
+    <!-- =====================================================
+         PRODUK ENGINE
+    ===================================================== -->
 
-<!-- News Flash -->
-
-<script src="assets/js/newsflash.js"></script>
-
-
-<!-- Produk -->
-
-<script src="assets/js/produk.js"></script>
-
+    <script src="assets/js/produk.js"></script>
 
 
 </body>
