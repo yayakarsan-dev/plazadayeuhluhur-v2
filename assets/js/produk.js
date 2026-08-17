@@ -1,1150 +1,879 @@
-/* =========================================================
-PLAZA DAYEUHLUHUR
-ETALASE PRODUK UMKM
-produk.js — FINAL V1
-========================================================= */
+```javascript
+/* =====================================================
+   PLAZA DAYEUHLUHUR
+   PRODUK UMKM
+   JavaScript FINAL
+===================================================== */
 
 "use strict";
 
-/* =========================================================
-KONFIGURASI
-========================================================= */
 
-const PRODUK_API_URL =
-"/api/produk";
+/* =====================================================
+   KONFIGURASI
+===================================================== */
 
-const PRODUK_JSON_URL =
-"data/produk.json";
+const PRODUK_API_URL = "/api/produk";
+const PRODUK_JSON_URL = "data/produk.json";
 
-const DEFAULT_IMAGE =
-"assets/images/umkm/default.jpg";
 
-/* =========================================================
-DATA
-========================================================= */
+let produkData = [];
+let filteredProduk = [];
 
-let semuaProduk = [];
 
-let produkAktif = [];
-
-/* =========================================================
-INITIALIZE
-========================================================= */
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
 document.addEventListener(
-"DOMContentLoaded",
-initProduk
+    "DOMContentLoaded",
+    initProduk
 );
+
 
 async function initProduk() {
 
-```
-console.log(
-    "===================================="
-);
-
-console.log(
-    "PLAZA DAYEUHLUHUR"
-);
-
-console.log(
-    "ETALASE PRODUK UMKM"
-);
-
-console.log(
-    "Inisialisasi halaman..."
-);
-
-console.log(
-    "===================================="
-);
+    console.log("====================================");
+    console.log("PLAZA DAYEUHLUHUR - PRODUK");
+    console.log("Inisialisasi halaman produk...");
+    console.log("====================================");
 
 
-setCurrentYear();
-
-
-try {
+    bindEvents();
 
     await loadProduk();
 
-    populateFilters();
-
-    updateStatistics();
-
-    renderProduk();
-
-    bindProdukEvents();
-
 }
 
-catch (error) {
 
-    console.error(
-        "PRODUK: Gagal inisialisasi:",
-        error
-    );
-
-    showProdukError();
-
-}
-```
-
-}
-
-/* =========================================================
-LOAD DATA
-========================================================= */
+/* =====================================================
+   LOAD PRODUK
+===================================================== */
 
 async function loadProduk() {
 
-```
-let apiBerhasil =
-    false;
+    showLoading();
+
+    let berhasil = false;
 
 
-/* =====================================================
-   COBA API TERLEBIH DAHULU
-====================================================== */
-
-try {
-
-    console.log(
-        "PRODUK: Membaca data dari API..."
-    );
-
-
-    const response =
-        await fetch(
-            PRODUK_API_URL,
-            {
-                method: "GET",
-
-                headers: {
-                    "Accept":
-                        "application/json"
-                },
-
-                cache:
-                    "no-store"
-            }
-        );
-
-
-    if (response.ok) {
-
-        const data =
-            await response.json();
-
-
-        if (Array.isArray(data)) {
-
-            semuaProduk =
-                normalizeProdukData(data);
-
-            apiBerhasil =
-                true;
-
-
-            console.log(
-                "PRODUK: Data berhasil dimuat dari API:",
-                semuaProduk
-            );
-
-        }
-
-    }
-
-    else {
-
-        console.warn(
-            "PRODUK: API merespons status:",
-            response.status
-        );
-
-    }
-
-}
-
-catch (error) {
-
-    console.warn(
-        "PRODUK: API tidak dapat diakses:",
-        error
-    );
-
-}
-
-
-/* =====================================================
-   FALLBACK KE JSON
-====================================================== */
-
-if (!apiBerhasil) {
+    /* -------------------------------------------------
+       1. COBA API
+    ------------------------------------------------- */
 
     try {
 
         console.log(
-            "PRODUK: Menggunakan fallback produk.json..."
+            "Mencoba membaca produk dari:",
+            PRODUK_API_URL
         );
 
 
-        const response =
-            await fetch(
-                PRODUK_JSON_URL,
-                {
-                    cache:
-                        "no-store"
-                }
-            );
+        const response = await fetch(
+            PRODUK_API_URL,
+            {
+                method: "GET",
+                cache: "no-store"
+            }
+        );
 
 
         if (!response.ok) {
 
             throw new Error(
-                "produk.json tidak ditemukan."
+                `API HTTP ${response.status}`
             );
 
         }
 
 
-        const data =
+        const result =
             await response.json();
 
 
-        if (!Array.isArray(data)) {
+        const data =
+            extractProdukData(result);
 
-            throw new Error(
-                "Format produk.json bukan array."
+
+        if (Array.isArray(data)) {
+
+            produkData =
+                normalizeProdukData(data);
+
+            berhasil = true;
+
+
+            console.log(
+                "Produk berhasil dimuat dari API:",
+                produkData
             );
 
         }
-
-
-        semuaProduk =
-            normalizeProdukData(data);
-
-
-        console.log(
-            "PRODUK: Data berhasil dimuat dari produk.json:",
-            semuaProduk
-        );
 
     }
 
     catch (error) {
 
-        console.error(
-            "PRODUK: Gagal membaca API dan JSON:",
+        console.warn(
+            "API produk tidak dapat digunakan. Menggunakan produk.json.",
             error
         );
 
-        throw error;
-
     }
 
-}
 
+    /* -------------------------------------------------
+       2. FALLBACK JSON
+    ------------------------------------------------- */
 
-/* =====================================================
-   FILTER STATUS
-====================================================== */
+    if (!berhasil) {
 
-produkAktif =
-    semuaProduk.filter(
-        item =>
-            isProdukAktif(item)
-    );
+        try {
 
-
-console.log(
-    "PRODUK: Total data:",
-    semuaProduk.length
-);
-
-
-console.log(
-    "PRODUK: Produk aktif:",
-    produkAktif.length
-);
-```
-
-}
-
-/* =========================================================
-NORMALIZE DATA
-========================================================= */
-
-function normalizeProdukData(
-data
-) {
-
-```
-return data.map(
-    (item, index) => {
-
-        const produk =
-            item.produk ||
-            item.nama ||
-            item.nama_produk ||
-            "Produk Lokal";
-
-
-        const nama =
-            item.nama ||
-            item.produk ||
-            item.nama_produk ||
-            "Produk Lokal";
-
-
-        const kategori =
-            item.kategori ||
-            item.category ||
-            "UMKM";
-
-
-        const umkm =
-            item.umkm ||
-            item.nama_umkm ||
-            item.pemilik ||
-            "UMKM Lokal";
-
-
-        const desa =
-            item.desa ||
-            item.desa_kelurahan ||
-            "Dayeuhluhur";
-
-
-        const deskripsi =
-            item.deskripsi ||
-            item.description ||
-            "Produk unggulan masyarakat Dayeuhluhur.";
-
-
-        const harga =
-            item.harga ||
-            item.price ||
-            "Hubungi Penjual";
-
-
-        const gambar =
-            item.gambar ||
-            item.image ||
-            item.foto ||
-            DEFAULT_IMAGE;
-
-
-        const whatsapp =
-            normalizeWhatsApp(
-                item.whatsapp ||
-                item.wa ||
-                item.telepon ||
-                item.nohp ||
-                ""
+            console.log(
+                "Membaca:",
+                PRODUK_JSON_URL
             );
 
 
-        const status =
-            item.status ||
-            "aktif";
+            const response =
+                await fetch(
+                    PRODUK_JSON_URL,
+                    {
+                        cache: "no-store"
+                    }
+                );
 
 
-        return {
+            if (!response.ok) {
 
-            ...item,
+                throw new Error(
+                    `JSON HTTP ${response.status}`
+                );
 
-            id:
-                item.id ??
-                index + 1,
+            }
 
-            produk:
-                produk,
 
-            nama:
-                nama,
+            const data =
+                await response.json();
 
-            kategori:
-                kategori,
 
-            umkm:
-                umkm,
+            if (!Array.isArray(data)) {
 
-            desa:
-                desa,
+                throw new Error(
+                    "Format produk.json bukan array."
+                );
 
-            deskripsi:
-                deskripsi,
+            }
 
-            harga:
-                harga,
 
-            gambar:
-                gambar,
+            produkData =
+                normalizeProdukData(data);
 
-            whatsapp:
-                whatsapp,
 
-            status:
-                status
+            berhasil = true;
 
-        };
+
+            console.log(
+                "Produk berhasil dimuat dari produk.json:",
+                produkData
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Gagal membaca produk.json:",
+                error
+            );
+
+            produkData = [];
+
+        }
 
     }
-);
-```
-
-}
-
-/* =========================================================
-STATUS PRODUK
-========================================================= */
-
-function isProdukAktif(
-item
-) {
-
-```
-const status =
-    String(
-        item.status ||
-        "aktif"
-    )
-    .trim()
-    .toLowerCase();
 
 
-return (
+    /* -------------------------------------------------
+       RENDER
+    ------------------------------------------------- */
 
-    status === "aktif" ||
-
-    status === "active" ||
-
-    status === "tersedia" ||
-
-    status === "publish" ||
-
-    status === "published"
-
-);
-```
-
-}
-
-/* =========================================================
-FILTER EVENTS
-========================================================= */
-
-function bindProdukEvents() {
-
-```
-const search =
-    document.getElementById(
-        "searchProduk"
-    );
+    filteredProduk =
+        produkData.filter(
+            item =>
+                getStatus(item) === "aktif"
+        );
 
 
-const kategori =
-    document.getElementById(
-        "filterKategori"
-    );
+    updateStatistics();
 
+    populateFilters();
 
-const desa =
-    document.getElementById(
-        "filterDesa"
-    );
-
-
-if (search) {
-
-    search.addEventListener(
-        "input",
-        renderProduk
-    );
+    renderProduk();
 
 }
 
 
-if (kategori) {
+/* =====================================================
+   EXTRACT API DATA
+===================================================== */
 
-    kategori.addEventListener(
-        "change",
-        renderProduk
+function extractProdukData(result) {
+
+    if (Array.isArray(result)) {
+
+        return result;
+
+    }
+
+
+    if (
+        result &&
+        Array.isArray(result.data)
+    ) {
+
+        return result.data;
+
+    }
+
+
+    if (
+        result &&
+        Array.isArray(result.produk)
+    ) {
+
+        return result.produk;
+
+    }
+
+
+    if (
+        result &&
+        Array.isArray(result.products)
+    ) {
+
+        return result.products;
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =====================================================
+   NORMALIZE DATA
+===================================================== */
+
+function normalizeProdukData(data) {
+
+    return data.map(
+        item => ({
+
+            id:
+                item.id ?? "",
+
+            produk:
+                item.produk ||
+                item.nama ||
+                "Produk UMKM",
+
+            nama:
+                item.nama ||
+                item.produk ||
+                "Produk UMKM",
+
+            kategori:
+                item.kategori ||
+                "UMKM",
+
+            umkm:
+                item.umkm ||
+                item.nama_umkm ||
+                item.pemilik ||
+                "UMKM Lokal",
+
+            desa:
+                item.desa ||
+                "Dayeuhluhur",
+
+            deskripsi:
+                item.deskripsi ||
+                "Produk lokal Dayeuhluhur.",
+
+            harga:
+                item.harga ||
+                "Hubungi Penjual",
+
+            whatsapp:
+                normalizeWhatsApp(
+                    item.whatsapp ||
+                    item.wa ||
+                    item.telepon ||
+                    ""
+                ),
+
+            gambar:
+                item.gambar ||
+                item.image ||
+                item.foto ||
+                "assets/images/produk/default.jpg",
+
+            status:
+                item.status ||
+                "aktif"
+
+        })
     );
 
 }
 
 
-if (desa) {
+/* =====================================================
+   BIND EVENTS
+===================================================== */
 
-    desa.addEventListener(
-        "change",
-        renderProduk
-    );
+function bindEvents() {
+
+    const search =
+        document.getElementById(
+            "searchProduk"
+        );
+
+
+    const kategori =
+        document.getElementById(
+            "filterKategori"
+        );
+
+
+    const desa =
+        document.getElementById(
+            "filterDesa"
+        );
+
+
+    const reset =
+        document.getElementById(
+            "resetFilter"
+        );
+
+
+    if (search) {
+
+        search.addEventListener(
+            "input",
+            applyFilters
+        );
+
+    }
+
+
+    if (kategori) {
+
+        kategori.addEventListener(
+            "change",
+            applyFilters
+        );
+
+    }
+
+
+    if (desa) {
+
+        desa.addEventListener(
+            "change",
+            applyFilters
+        );
+
+    }
+
+
+    if (reset) {
+
+        reset.addEventListener(
+            "click",
+            resetFilters
+        );
+
+    }
 
 }
-```
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function applyFilters() {
+
+    const search =
+        getElementValue(
+            "searchProduk"
+        ).toLowerCase();
+
+
+    const kategori =
+        getElementValue(
+            "filterKategori"
+        ).toLowerCase();
+
+
+    const desa =
+        getElementValue(
+            "filterDesa"
+        ).toLowerCase();
+
+
+    filteredProduk =
+        produkData.filter(
+            item => {
+
+                if (
+                    getStatus(item) !==
+                    "aktif"
+                ) {
+
+                    return false;
+
+                }
+
+
+                const text = (
+
+                    getProdukName(item) +
+                    " " +
+                    item.kategori +
+                    " " +
+                    item.umkm +
+                    " " +
+                    item.desa +
+                    " " +
+                    item.deskripsi
+
+                ).toLowerCase();
+
+
+                const cocokSearch =
+                    !search ||
+                    text.includes(search);
+
+
+                const cocokKategori =
+                    !kategori ||
+                    String(
+                        item.kategori
+                    ).toLowerCase() ===
+                    kategori;
+
+
+                const cocokDesa =
+                    !desa ||
+                    String(
+                        item.desa
+                    ).toLowerCase() ===
+                    desa;
+
+
+                return (
+                    cocokSearch &&
+                    cocokKategori &&
+                    cocokDesa
+                );
+
+            }
+        );
+
+
+    renderProduk();
 
 }
 
-/* =========================================================
-POPULATE FILTER
-========================================================= */
+
+/* =====================================================
+   RESET FILTER
+===================================================== */
+
+function resetFilters() {
+
+    const search =
+        document.getElementById(
+            "searchProduk"
+        );
+
+
+    const kategori =
+        document.getElementById(
+            "filterKategori"
+        );
+
+
+    const desa =
+        document.getElementById(
+            "filterDesa"
+        );
+
+
+    if (search) {
+
+        search.value = "";
+
+    }
+
+
+    if (kategori) {
+
+        kategori.value = "";
+
+    }
+
+
+    if (desa) {
+
+        desa.value = "";
+
+    }
+
+
+    applyFilters();
+
+}
+
+
+/* =====================================================
+   POPULATE FILTER
+===================================================== */
 
 function populateFilters() {
 
-```
-const kategoriSelect =
-    document.getElementById(
-        "filterKategori"
-    );
+    const kategori =
+        document.getElementById(
+            "filterKategori"
+        );
 
 
-const desaSelect =
-    document.getElementById(
-        "filterDesa"
-    );
+    const desa =
+        document.getElementById(
+            "filterDesa"
+        );
 
 
-/* =====================================================
-   KATEGORI
-====================================================== */
+    if (!kategori || !desa) {
 
-if (kategoriSelect) {
+        return;
 
-    const kategoriSet =
-        new Set();
-
-
-    produkAktif.forEach(
-        item => {
-
-            const kategori =
-                String(
-                    item.kategori ||
-                    ""
-                ).trim();
-
-
-            if (kategori) {
-
-                kategoriSet.add(
-                    kategori
-                );
-
-            }
-
-        }
-    );
+    }
 
 
     const kategoriList =
-        Array.from(
-            kategoriSet
-        ).sort(
-            (a, b) =>
-                a.localeCompare(
-                    b,
-                    "id"
-                )
-        );
+        produkData
+            .filter(
+                item =>
+                    getStatus(item) ===
+                    "aktif"
+            )
+            .map(
+                item =>
+                    String(
+                        item.kategori ||
+                        ""
+                    ).trim()
+            )
+            .filter(Boolean);
 
 
-    kategoriSelect.innerHTML = `
+    const desaList =
+        produkData
+            .filter(
+                item =>
+                    getStatus(item) ===
+                    "aktif"
+            )
+            .map(
+                item =>
+                    String(
+                        item.desa ||
+                        ""
+                    ).trim()
+            )
+            .filter(Boolean);
 
-        <option value="">
-            Semua Kategori
-        </option>
 
-        ${
+    const kategoriUnik =
+        [...new Set(
             kategoriList
-                .map(
-                    kategori => `
+        )].sort();
 
-                        <option
-                            value="${escapeHTML(kategori)}"
-                        >
 
-                            ${escapeHTML(kategori)}
+    const desaUnik =
+        [...new Set(
+            desaList
+        )].sort();
 
-                        </option>
 
-                    `
-                )
-                .join("")
-        }
+    kategori.innerHTML =
+        '<option value="">Semua Kategori</option>' +
+        kategoriUnik
+            .map(
+                item =>
+                    `<option value="${escapeHTML(item)}">${escapeHTML(item)}</option>`
+            )
+            .join("");
 
-    `;
+
+    desa.innerHTML =
+        '<option value="">Semua Desa</option>' +
+        desaUnik
+            .map(
+                item =>
+                    `<option value="${escapeHTML(item)}">${escapeHTML(item)}</option>`
+            )
+            .join("");
 
 }
 
 
 /* =====================================================
-   DESA
-====================================================== */
-
-if (desaSelect) {
-
-    const desaSet =
-        new Set();
-
-
-    produkAktif.forEach(
-        item => {
-
-            const desa =
-                String(
-                    item.desa ||
-                    ""
-                ).trim();
-
-
-            if (desa) {
-
-                desaSet.add(
-                    desa
-                );
-
-            }
-
-        }
-    );
-
-
-    const desaList =
-        Array.from(
-            desaSet
-        ).sort(
-            (a, b) =>
-                a.localeCompare(
-                    b,
-                    "id"
-                )
-        );
-
-
-    desaSelect.innerHTML = `
-
-        <option value="">
-            Semua Desa
-        </option>
-
-        ${
-            desaList
-                .map(
-                    desa => `
-
-                        <option
-                            value="${escapeHTML(desa)}"
-                        >
-
-                            ${escapeHTML(desa)}
-
-                        </option>
-
-                    `
-                )
-                .join("")
-        }
-
-    `;
-
-}
-```
-
-}
-
-/* =========================================================
-GET FILTERED DATA
-========================================================= */
-
-function getFilteredProduk() {
-
-```
-const searchElement =
-    document.getElementById(
-        "searchProduk"
-    );
-
-
-const kategoriElement =
-    document.getElementById(
-        "filterKategori"
-    );
-
-
-const desaElement =
-    document.getElementById(
-        "filterDesa"
-    );
-
-
-const search =
-    searchElement
-        ? searchElement.value
-            .trim()
-            .toLowerCase()
-        : "";
-
-
-const kategori =
-    kategoriElement
-        ? kategoriElement.value
-            .trim()
-            .toLowerCase()
-        : "";
-
-
-const desa =
-    desaElement
-        ? desaElement.value
-            .trim()
-            .toLowerCase()
-        : "";
-
-
-return produkAktif.filter(
-    item => {
-
-        const nama =
-            String(
-                item.produk ||
-                item.nama ||
-                ""
-            )
-            .toLowerCase();
-
-
-        const umkm =
-            String(
-                item.umkm ||
-                ""
-            )
-            .toLowerCase();
-
-
-        const itemDesa =
-            String(
-                item.desa ||
-                ""
-            )
-            .toLowerCase();
-
-
-        const itemKategori =
-            String(
-                item.kategori ||
-                ""
-            )
-            .toLowerCase();
-
-
-        const cocokSearch =
-
-            !search ||
-
-            nama.includes(search) ||
-
-            umkm.includes(search) ||
-
-            itemDesa.includes(search) ||
-
-            itemKategori.includes(search);
-
-
-        const cocokKategori =
-
-            !kategori ||
-
-            itemKategori === kategori;
-
-
-        const cocokDesa =
-
-            !desa ||
-
-            itemDesa === desa;
-
-
-        return (
-
-            cocokSearch &&
-
-            cocokKategori &&
-
-            cocokDesa
-
-        );
-
-    }
-);
-```
-
-}
-
-/* =========================================================
-RENDER PRODUK
-========================================================= */
+   RENDER PRODUK
+===================================================== */
 
 function renderProduk() {
 
-```
-const container =
-    document.getElementById(
-        "produkContainer"
-    );
+    const container =
+        document.getElementById(
+            "produkContainer"
+        );
 
 
-const loading =
-    document.getElementById(
-        "produkLoading"
-    );
+    const empty =
+        document.getElementById(
+            "produkEmpty"
+        );
 
 
-const empty =
-    document.getElementById(
-        "produkEmpty"
-    );
+    const count =
+        document.getElementById(
+            "produkCount"
+        );
 
 
-if (!container) {
+    if (!container) {
 
-    console.warn(
-        "PRODUK: produkContainer tidak ditemukan."
-    );
+        console.error(
+            "produkContainer tidak ditemukan."
+        );
 
-    return;
+        return;
 
-}
-
-
-if (loading) {
-
-    loading.style.display =
-        "none";
-
-}
+    }
 
 
-if (empty) {
+    if (count) {
 
-    empty.style.display =
-        "none";
+        count.textContent =
+            `${filteredProduk.length} produk`;
 
-}
-
-
-const data =
-    getFilteredProduk();
+    }
 
 
-if (
-    !data.length
-) {
+    if (
+        !filteredProduk.length
+    ) {
 
-    container.innerHTML =
-        "";
+        container.innerHTML = "";
+
+        if (empty) {
+
+            empty.style.display =
+                "block";
+
+        }
+
+        return;
+
+    }
 
 
     if (empty) {
 
         empty.style.display =
-            "block";
+            "none";
 
     }
 
 
-    return;
+    container.innerHTML =
+        filteredProduk
+            .map(
+                createProdukCard
+            )
+            .join("");
 
 }
 
 
-container.innerHTML =
-    data
-        .map(
-            item =>
-                createProdukCard(
-                    item
-                )
-        )
-        .join("");
-```
+/* =====================================================
+   CREATE CARD
+===================================================== */
 
-}
+function createProdukCard(item) {
 
-/* =========================================================
-CREATE PRODUCT CARD
-========================================================= */
-
-function createProdukCard(
-item
-) {
-
-```
-const nama =
-    item.produk ||
-    item.nama ||
-    "Produk Lokal";
+    const nama =
+        getProdukName(item);
 
 
-const kategori =
-    item.kategori ||
-    "UMKM";
+    const kategori =
+        item.kategori ||
+        "UMKM";
 
 
-const umkm =
-    item.umkm ||
-    "UMKM Lokal";
+    const umkm =
+        item.umkm ||
+        "UMKM Lokal";
 
 
-const desa =
-    item.desa ||
-    "Dayeuhluhur";
+    const desa =
+        item.desa ||
+        "Dayeuhluhur";
 
 
-const deskripsi =
-    item.deskripsi ||
-    "Produk unggulan masyarakat Dayeuhluhur.";
+    const deskripsi =
+        item.deskripsi ||
+        "Produk lokal Dayeuhluhur.";
 
 
-const harga =
-    item.harga ||
-    "Hubungi Penjual";
+    const harga =
+        item.harga ||
+        "Hubungi Penjual";
 
 
-const gambar =
-    item.gambar ||
-    DEFAULT_IMAGE;
+    const gambar =
+        item.gambar ||
+        "assets/images/produk/default.jpg";
 
 
-const whatsapp =
-    normalizeWhatsApp(
-        item.whatsapp ||
-        item.wa ||
-        ""
-    );
-
-
-const hasWhatsApp =
-    Boolean(
-        whatsapp
-    );
-
-
-const image =
-    escapeHTML(
-        gambar
-    );
-
-
-const safeNama =
-    escapeHTML(
-        nama
-    );
-
-
-const safeKategori =
-    escapeHTML(
-        kategori
-    );
-
-
-const safeUMKM =
-    escapeHTML(
-        umkm
-    );
-
-
-const safeDesa =
-    escapeHTML(
-        desa
-    );
-
-
-const safeDeskripsi =
-    escapeHTML(
-        deskripsi
-    );
-
-
-const safeHarga =
-    escapeHTML(
-        formatHarga(
-            harga
-        )
-    );
-
-
-let whatsappButton;
-
-
-if (hasWhatsApp) {
-
-    const pesan =
-        encodeURIComponent(
-            `Halo ${nama}, saya tertarik dengan produk "${nama}". Saya ingin mengetahui informasi harga dan ketersediaannya.`
+    const whatsapp =
+        normalizeWhatsApp(
+            item.whatsapp ||
+            item.wa ||
+            ""
         );
 
 
-    whatsappButton = `
-
-        <a
-            href="https://wa.me/${whatsapp}?text=${pesan}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="produk-wa"
-        >
-
-            <i class="fa-brands fa-whatsapp"></i>
-
-            Beli via WhatsApp
-
-        </a>
-
-    `;
-
-}
-
-else {
-
-    whatsappButton = `
-
-        <span
-            class="produk-wa disabled"
-        >
-
-            <i class="fa-solid fa-phone-slash"></i>
-
-            WhatsApp Belum Tersedia
-
-        </span>
-
-    `;
-
-}
+    let whatsappButton;
 
 
-return `
+    if (whatsapp) {
 
-    <article
-        class="produk-card"
-        data-id="${escapeHTML(item.id)}"
-    >
+        const pesan =
+            encodeURIComponent(
+                `Halo ${umkm}, saya tertarik dengan produk ${nama}. Mohon informasi lebih lanjut mengenai produk dan harganya.`
+            );
 
 
-        <!-- IMAGE -->
+        whatsappButton = `
 
-        <div class="produk-card-image">
-
-            <img
-                src="${image}"
-                alt="${safeNama}"
-                loading="lazy"
-                onerror="
-                    this.onerror=null;
-                    this.src='${DEFAULT_IMAGE}';
-                "
+            <a
+                href="https://wa.me/${whatsapp}?text=${pesan}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="produk-whatsapp"
             >
+                <i class="fa-brands fa-whatsapp me-2"></i>
+                Hubungi Penjual
+            </a>
 
+        `;
+
+    }
+
+    else {
+
+        whatsappButton = `
 
             <span
-                class="produk-category-badge"
+                class="produk-whatsapp disabled"
             >
-
-                ${safeKategori}
-
+                <i class="fa-solid fa-phone-slash me-2"></i>
+                Kontak Belum Tersedia
             </span>
 
-        </div>
+        `;
+
+    }
 
 
+    return `
 
-        <!-- BODY -->
+        <article class="produk-card">
 
-        <div class="produk-card-body">
+            <div class="produk-image-wrapper">
 
-
-            <h3
-                class="produk-card-title"
-            >
-
-                ${safeNama}
-
-            </h3>
-
-
-            <p
-                class="produk-card-description"
-            >
-
-                ${safeDeskripsi}
-
-            </p>
-
-
-
-            <!-- META -->
-
-            <div
-                class="produk-card-meta"
-            >
-
-                <div
-                    class="produk-meta-item"
+                <img
+                    src="${escapeHTML(gambar)}"
+                    alt="${escapeHTML(nama)}"
+                    loading="lazy"
+                    onerror="
+                        this.onerror=null;
+                        this.src='assets/images/produk/default.jpg';
+                    "
                 >
 
-                    <i
-                        class="fa-solid fa-store"
-                    ></i>
 
-                    <span>
+                <span class="produk-category">
 
-                        <strong>
-                            UMKM:
-                        </strong>
+                    ${escapeHTML(kategori)}
 
-                        ${safeUMKM}
-
-                    </span>
-
-                </div>
+                </span>
 
 
-                <div
-                    class="produk-meta-item"
-                >
+                <span class="produk-status">
 
-                    <i
-                        class="fa-solid fa-location-dot"
-                    ></i>
+                    AKTIF
 
-                    <span>
-
-                        <strong>
-                            Desa:
-                        </strong>
-
-                        ${safeDesa}
-
-                    </span>
-
-                </div>
+                </span>
 
             </div>
 
 
+            <div class="produk-card-body">
 
-            <!-- BOTTOM -->
+                <h3 class="produk-card-title">
 
-            <div
-                class="produk-card-bottom"
-            >
+                    ${escapeHTML(nama)}
 
-                <div
-                    class="produk-price"
-                >
+                </h3>
 
-                    ${safeHarga}
+
+                <div class="produk-umkm">
+
+                    <i class="fa-solid fa-store me-1"></i>
+
+                    ${escapeHTML(umkm)}
+
+                </div>
+
+
+                <div class="produk-location">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    ${escapeHTML(desa)}
+
+                </div>
+
+
+                <p class="produk-description">
+
+                    ${escapeHTML(deskripsi)}
+
+                </p>
+
+
+                <div class="produk-price">
+
+                    ${escapeHTML(harga)}
 
                 </div>
 
@@ -1153,425 +882,286 @@ return `
 
             </div>
 
+        </article>
 
-        </div>
-
-    </article>
-
-`;
-```
+    `;
 
 }
 
-/* =========================================================
-STATISTICS
-========================================================= */
+
+/* =====================================================
+   STATISTICS
+===================================================== */
 
 function updateStatistics() {
 
-```
-const totalProdukElement =
-    document.getElementById(
-        "totalProduk"
-    );
-
-
-const totalUMKMElement =
-    document.getElementById(
-        "totalUMKM"
-    );
-
-
-const totalDesaElement =
-    document.getElementById(
-        "totalDesa"
-    );
-
-
-const totalProduk =
-    produkAktif.length;
-
-
-const umkmSet =
-    new Set();
-
-
-const desaSet =
-    new Set();
-
-
-produkAktif.forEach(
-    item => {
-
-        const umkm =
-            String(
-                item.umkm ||
-                ""
-            ).trim().toLowerCase();
-
-
-        const desa =
-            String(
-                item.desa ||
-                ""
-            ).trim().toLowerCase();
-
-
-        if (umkm) {
-
-            umkmSet.add(
-                umkm
-            );
-
-        }
-
-
-        if (desa) {
-
-            desaSet.add(
-                desa
-            );
-
-        }
-
-    }
-);
-
-
-if (totalProdukElement) {
-
-    totalProdukElement.textContent =
-        totalProduk;
-
-}
-
-
-if (totalUMKMElement) {
-
-    totalUMKMElement.textContent =
-        umkmSet.size;
-
-}
-
-
-if (totalDesaElement) {
-
-    totalDesaElement.textContent =
-        desaSet.size;
-
-}
-
-
-console.log(
-    "PRODUK STATISTIK:",
-    {
-        produk:
-            totalProduk,
-
-        umkm:
-            umkmSet.size,
-
-        desa:
-            desaSet.size
-    }
-);
-```
-
-}
-
-/* =========================================================
-FORMAT HARGA
-========================================================= */
-
-function formatHarga(
-harga
-) {
-
-```
-if (
-    harga === null ||
-    harga === undefined ||
-    harga === ""
-) {
-
-    return "Hubungi Penjual";
-
-}
-
-
-const value =
-    String(
-        harga
-    ).trim();
-
-
-if (!value) {
-
-    return "Hubungi Penjual";
-
-}
-
-
-/*
- * Jika sudah mengandung Rp,
- * jangan diformat ulang.
- */
-
-if (
-    /rp/i.test(
-        value
-    )
-) {
-
-    return value;
-
-}
-
-
-/*
- * Jika berupa angka,
- * format otomatis menjadi Rupiah.
- */
-
-const numeric =
-    Number(
-        value.replace(
-            /[^\d]/g,
-            ""
-        )
-    );
-
-
-if (
-    !Number.isNaN(numeric) &&
-    numeric > 0
-) {
-
-    return (
-        "Rp" +
-        new Intl.NumberFormat(
-            "id-ID"
-        ).format(
-            numeric
-        )
-    );
-
-}
-
-
-return value;
-```
-
-}
-
-/* =========================================================
-NORMALIZE WHATSAPP
-========================================================= */
-
-function normalizeWhatsApp(
-number
-) {
-
-```
-if (!number) {
-
-    return "";
-
-}
-
-
-let wa =
-    String(number)
-        .trim()
-        .replace(
-            /\s+/g,
-            ""
-        )
-        .replace(
-            /-/g,
-            ""
-        )
-        .replace(
-            /[^\d+]/g,
-            ""
+    const aktif =
+        produkData.filter(
+            item =>
+                getStatus(item) ===
+                "aktif"
         );
 
 
-if (
-    wa.startsWith("0")
+    const kategori =
+        new Set(
+            aktif
+                .map(
+                    item =>
+                        String(
+                            item.kategori ||
+                            ""
+                        ).trim()
+                )
+                .filter(Boolean)
+        );
+
+
+    const desa =
+        new Set(
+            aktif
+                .map(
+                    item =>
+                        String(
+                            item.desa ||
+                            ""
+                        ).trim()
+                )
+                .filter(Boolean)
+        );
+
+
+    setText(
+        "totalProduk",
+        aktif.length
+    );
+
+
+    setText(
+        "produkAktif",
+        aktif.length
+    );
+
+
+    setText(
+        "totalKategori",
+        kategori.size
+    );
+
+
+    setText(
+        "totalDesa",
+        desa.size
+    );
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+function showLoading() {
+
+    const container =
+        document.getElementById(
+            "produkContainer"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="produk-loading">
+
+            <div
+                class="spinner-border text-primary"
+                role="status"
+            >
+                <span class="visually-hidden">
+                    Loading...
+                </span>
+            </div>
+
+            <p>
+                Memuat produk lokal...
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function getStatus(item) {
+
+    return String(
+        item.status ||
+        "aktif"
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =====================================================
+   NAME
+===================================================== */
+
+function getProdukName(item) {
+
+    return (
+        item.produk ||
+        item.nama ||
+        "Produk UMKM"
+    );
+
+}
+
+
+/* =====================================================
+   GET ELEMENT VALUE
+===================================================== */
+
+function getElementValue(id) {
+
+    const element =
+        document.getElementById(id);
+
+
+    return element
+        ? element.value.trim()
+        : "";
+
+}
+
+
+/* =====================================================
+   SET TEXT
+===================================================== */
+
+function setText(
+    id,
+    value
 ) {
 
-    wa =
-        "62" +
-        wa.substring(1);
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.textContent =
+            value;
+
+    }
 
 }
 
 
-if (
-    wa.startsWith("+62")
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function normalizeWhatsApp(
+    number
 ) {
 
-    wa =
-        wa.substring(1);
+    if (!number) {
+
+        return "";
+
+    }
+
+
+    let wa =
+        String(number)
+            .replace(/\s+/g, "")
+            .replace(/-/g, "")
+            .replace(/[^\d+]/g, "");
+
+
+    if (
+        wa.startsWith("0")
+    ) {
+
+        wa =
+            "62" +
+            wa.substring(1);
+
+    }
+
+
+    if (
+        wa.startsWith("+62")
+    ) {
+
+        wa =
+            wa.substring(1);
+
+    }
+
+
+    return wa;
 
 }
 
 
-return wa;
-```
-
-}
-
-/* =========================================================
-SHOW ERROR
-========================================================= */
-
-function showProdukError() {
-
-```
-const loading =
-    document.getElementById(
-        "produkLoading"
-    );
-
-
-const container =
-    document.getElementById(
-        "produkContainer"
-    );
-
-
-const error =
-    document.getElementById(
-        "produkError"
-    );
-
-
-if (loading) {
-
-    loading.style.display =
-        "none";
-
-}
-
-
-if (container) {
-
-    container.innerHTML =
-        "";
-
-}
-
-
-if (error) {
-
-    error.style.display =
-        "block";
-
-}
-```
-
-}
-
-/* =========================================================
-CURRENT YEAR
-========================================================= */
-
-function setCurrentYear() {
-
-```
-const year =
-    document.getElementById(
-        "tahunSekarang"
-    );
-
-
-if (year) {
-
-    year.textContent =
-        new Date()
-            .getFullYear();
-
-}
-```
-
-}
-
-/* =========================================================
-ESCAPE HTML
-========================================================= */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
 function escapeHTML(
-value
+    value
 ) {
 
-```
-return String(
-    value
-)
+    return String(value)
 
-    .replace(
-        /&/g,
-        "&amp;"
-    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-    .replace(
-        /</g,
-        "&lt;"
-    )
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-    .replace(
-        />/g,
-        "&gt;"
-    )
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-    .replace(
-        /"/g,
-        "&quot;"
-    )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-```
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
-/* =========================================================
-DEBUG HELPER
-========================================================= */
 
-window.getProdukData =
-function () {
+/* =====================================================
+   DEBUG
+===================================================== */
 
+console.log(
+    "produk.js FINAL berhasil dimuat."
+);
 ```
-    console.log(
-        "SEMUA PRODUK:",
-        semuaProduk
-    );
-
-
-    console.log(
-        "PRODUK AKTIF:",
-        produkAktif
-    );
-
-
-    return {
-
-        semuaProduk:
-            semuaProduk,
-
-        produkAktif:
-            produkAktif
-
-    };
-
-};
-```
-
-/* =========================================================
-END
-========================================================= */
