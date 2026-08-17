@@ -1,0 +1,271 @@
+[
+  {
+    "id": 1,
+    "slug": "andi-siti-2026",
+    "status": "aktif",
+    "jenis": "Pernikahan",
+    "judul": "Undangan Pernikahan",
+    "nama": "Andi & Siti",
+    "tanggal": "2026-08-30",
+    "hari": "Minggu",
+    "waktu": "10.00 WIB - selesai",
+    "desa": "Panulisan",
+    "dusun": "Sukamaju",
+    "alamat": "Dusun Sukamaju, Desa Panulisan, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/pernikahan.jpg",
+    "hiburan": "Organ Tunggal",
+    "deskripsi": "Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara untuk hadir dalam acara pernikahan kami.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Panulisan+Dayeuhluhur+Cilacap",
+    "kontak": "628123456789",
+    "vendor": [
+      {
+        "kategori": "Hiburan",
+        "nama": "Organ Tunggal Jaya",
+        "id_umkm": 15
+      },
+      {
+        "kategori": "Sound System",
+        "nama": "Sound System Panulisan",
+        "id_umkm": 21
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "budi-rina-2026",
+    "status": "aktif",
+    "jenis": "Pernikahan",
+    "judul": "Resepsi Pernikahan",
+    "nama": "Budi & Rina",
+    "tanggal": "2026-09-05",
+    "hari": "Sabtu",
+    "waktu": "09.00 WIB - selesai",
+    "desa": "Dayeuhluhur",
+    "dusun": "Cikondang",
+    "alamat": "Dusun Cikondang, Desa Dayeuhluhur, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/pernikahan-2.jpg",
+    "hiburan": "Calung & Musik Sunda",
+    "deskripsi": "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara berkenan hadir dan memberikan doa restu.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Dayeuhluhur+Cilacap",
+    "kontak": "628123456780",
+    "vendor": [
+      {
+        "kategori": "Dekorasi",
+        "nama": "Dekorasi Cikondang",
+        "id_umkm": 22
+      },
+      {
+        "kategori": "Catering",
+        "nama": "Catering Rasa Desa",
+        "id_umkm": 23
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "ahmad-khitan-2026",
+    "status": "aktif",
+    "jenis": "Khitanan",
+    "judul": "Syukuran Khitanan",
+    "nama": "Ahmad Fauzan",
+    "tanggal": "2026-09-12",
+    "hari": "Sabtu",
+    "waktu": "11.00 WIB - selesai",
+    "desa": "Bolang",
+    "dusun": "Bolang",
+    "alamat": "Dusun Bolang, Desa Bolang, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/khitanan.jpg",
+    "hiburan": "Jaipongan",
+    "deskripsi": "Puji syukur ke hadirat Allah SWT atas terlaksananya khitanan putra kami. Dengan penuh rasa syukur kami mengundang keluarga dan kerabat untuk hadir.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Bolang+Dayeuhluhur+Cilacap",
+    "kontak": "628123456781",
+    "vendor": [
+      {
+        "kategori": "Hiburan",
+        "nama": "Sanggar Seni Bolang",
+        "id_umkm": 24
+      },
+      {
+        "kategori": "Sound System",
+        "nama": "Bolang Audio",
+        "id_umkm": 25
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "syukuran-keluarga-rahman-2026",
+    "status": "aktif",
+    "jenis": "Syukuran",
+    "judul": "Syukuran Keluarga",
+    "nama": "Keluarga Bapak Rahman",
+    "tanggal": "2026-09-20",
+    "hari": "Minggu",
+    "waktu": "10.00 WIB - selesai",
+    "desa": "Hanum",
+    "dusun": "Sukajaya",
+    "alamat": "Dusun Sukajaya, Desa Hanum, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/syukuran.jpg",
+    "hiburan": "Tidak Ada",
+    "deskripsi": "Acara syukuran keluarga sekaligus silaturahmi bersama keluarga besar dan masyarakat sekitar.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Hanum+Dayeuhluhur+Cilacap",
+    "kontak": "628123456782",
+    "vendor": [
+      {
+        "kategori": "Catering",
+        "nama": "Dapur Sukajaya",
+        "id_umkm": 26
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "pengajian-akbar-panulisan-2026",
+    "status": "aktif",
+    "jenis": "Pengajian",
+    "judul": "Pengajian Akbar Warga",
+    "nama": "Pengajian Akbar Panulisan",
+    "tanggal": "2026-09-27",
+    "hari": "Minggu",
+    "waktu": "19.30 WIB - selesai",
+    "desa": "Panulisan",
+    "dusun": "Panulisan",
+    "alamat": "Lapangan Desa Panulisan, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/pengajian.jpg",
+    "hiburan": "Shalawat & Hadroh",
+    "deskripsi": "Pengajian akbar dan silaturahmi masyarakat Desa Panulisan bersama tokoh agama dan masyarakat.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Lapangan+Desa+Panulisan+Dayeuhluhur",
+    "kontak": "628123456783",
+    "vendor": [
+      {
+        "kategori": "Sound System",
+        "nama": "Panulisan Audio",
+        "id_umkm": 27
+      },
+      {
+        "kategori": "Tratag",
+        "nama": "Sewa Tratag Panulisan",
+        "id_umkm": 28
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "asep-nurhayati-2026",
+    "status": "aktif",
+    "jenis": "Pernikahan",
+    "judul": "Walimatul Ursy",
+    "nama": "Asep & Nurhayati",
+    "tanggal": "2026-10-04",
+    "hari": "Minggu",
+    "waktu": "10.00 WIB - selesai",
+    "desa": "Cilumping",
+    "dusun": "Cilumping",
+    "alamat": "Dusun Cilumping, Desa Cilumping, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/pernikahan-3.jpg",
+    "hiburan": "Dangdut Organ Tunggal",
+    "deskripsi": "Dengan penuh kebahagiaan kami mengundang keluarga, sahabat dan seluruh masyarakat untuk hadir dalam acara walimatul ursy.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Cilumping+Dayeuhluhur+Cilacap",
+    "kontak": "628123456784",
+    "vendor": [
+      {
+        "kategori": "Hiburan",
+        "nama": "Nada Jaya Entertainment",
+        "id_umkm": 29
+      },
+      {
+        "kategori": "Dekorasi",
+        "nama": "Dekorasi Cilumping",
+        "id_umkm": 30
+      },
+      {
+        "kategori": "Dokumentasi",
+        "nama": "Foto Video Dayeuhluhur",
+        "id_umkm": 31
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "khitanan-fajar-2026",
+    "status": "aktif",
+    "jenis": "Khitanan",
+    "judul": "Tasyakuran Khitanan",
+    "nama": "Fajar Ramadhan",
+    "tanggal": "2026-10-11",
+    "hari": "Minggu",
+    "waktu": "11.00 WIB - selesai",
+    "desa": "Kutaagung",
+    "dusun": "Kutaagung",
+    "alamat": "Dusun Kutaagung, Desa Kutaagung, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/khitanan-2.jpg",
+    "hiburan": "Wayang Golek",
+    "deskripsi": "Tasyakuran khitanan putra kami sekaligus acara silaturahmi keluarga besar dan masyarakat.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Kutaagung+Dayeuhluhur+Cilacap",
+    "kontak": "628123456785",
+    "vendor": [
+      {
+        "kategori": "Hiburan",
+        "nama": "Wayang Golek Kutaagung",
+        "id_umkm": 32
+      },
+      {
+        "kategori": "Tratag",
+        "nama": "Sewa Tratag Kutaagung",
+        "id_umkm": 33
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "hiburan-warga-bolang-2026",
+    "status": "aktif",
+    "jenis": "Hiburan",
+    "judul": "Hiburan Rakyat",
+    "nama": "Gebyar Hiburan Warga Bolang",
+    "tanggal": "2026-10-18",
+    "hari": "Minggu",
+    "waktu": "19.00 WIB - selesai",
+    "desa": "Bolang",
+    "dusun": "Bolang",
+    "alamat": "Lapangan Desa Bolang, Kecamatan Dayeuhluhur",
+    "latitude": "",
+    "longitude": "",
+    "gambar": "assets/images/undangan/hiburan.jpg",
+    "hiburan": "Panggung Musik & Organ Tunggal",
+    "deskripsi": "Gebyar hiburan rakyat sebagai ajang silaturahmi dan kebersamaan masyarakat Desa Bolang.",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Lapangan+Desa+Bolang+Dayeuhluhur",
+    "kontak": "628123456786",
+    "vendor": [
+      {
+        "kategori": "Sound System",
+        "nama": "Bolang Audio Professional",
+        "id_umkm": 34
+      },
+      {
+        "kategori": "Tratag",
+        "nama": "Sewa Tratag Bolang",
+        "id_umkm": 35
+      },
+      {
+        "kategori": "Hiburan",
+        "nama": "Bolang Entertainment",
+        "id_umkm": 36
+      }
+    ]
+  }
+]
