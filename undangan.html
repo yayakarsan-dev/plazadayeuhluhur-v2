@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -8,45 +10,46 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <title>
+        Kalender Hajatan & Undangan Online | Plaza Dayeuhluhur
+    </title>
+
     <meta
         name="description"
-        content="Kalender Hajatan Warga Dayeuhluhur - Temukan informasi pernikahan, khitanan, syukuran, hiburan dan berbagai acara warga Dayeuhluhur."
+        content="Kalender Hajatan dan Undangan Online Warga Dayeuhluhur."
     >
 
-    <meta
-        name="theme-color"
-        content="#0d6efd"
-    >
-
-    <title>Kalender Hajatan Warga | Plaza Dayeuhluhur</title>
-
-    <!-- =====================================================
+    <!-- =================================================
          BOOTSTRAP
-    ====================================================== -->
+    ================================================== -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-    <!-- =====================================================
-         BOOTSTRAP ICONS
-    ====================================================== -->
+    <!-- =================================================
+         BOOTSTRAP ICON
+    ================================================== -->
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
-    <!-- =====================================================
+    <!-- =================================================
          GOOGLE FONT
-    ====================================================== -->
+    ================================================== -->
+
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <!-- =====================================================
-         GLOBAL CSS PLAZA DAYEUHLUHUR
-    ====================================================== -->
+    <!-- =================================================
+         CSS PLAZA
+    ================================================== -->
+
     <link
         rel="stylesheet"
         href="assets/css/style.css"
@@ -57,48 +60,152 @@
         href="assets/css/responsive.css"
     >
 
-    <!-- =====================================================
-         UNDANGAN CSS
-    ====================================================== -->
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/responsive.css">
-<link rel="stylesheet" href="assets/css/undangan.css">
-<link rel="stylesheet" href="assets/css/undangan-detail.css">
+    <link
+        rel="stylesheet"
+        href="assets/css/undangan.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/undangan-detail.css"
+    >
+
+
+    <!-- =================================================
+         MODE DETAIL
+         Jika URL mempunyai ?id= maka kalender disembunyikan
+    ================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+                const eventId =
+                    params.get("id");
+
+                if (eventId) {
+
+                    document.body.classList.add(
+                        "mode-undangan-detail"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- =================================================
+         CSS MODE DETAIL
+    ================================================== -->
+
+    <style>
+
+        /*
+         * Mode Kalender
+         * tampil normal
+         */
+
+        #undanganCalendarPage {
+            display: block;
+        }
+
+
+        /*
+         * Mode Detail
+         * kalender disembunyikan
+         */
+
+        body.mode-undangan-detail
+        #undanganCalendarPage {
+
+            display: none;
+
+        }
+
+
+        /*
+         * Container detail
+         */
+
+        #undanganDetail {
+
+            width: 100%;
+            min-height: 500px;
+
+        }
+
+
+        /*
+         * Saat mode kalender,
+         * container detail tidak diperlukan
+         */
+
+        body:not(.mode-undangan-detail)
+        #undanganDetail {
+
+            display: none;
+
+        }
+
+
+        /*
+         * Saat mode detail,
+         * container detail tampil
+         */
+
+        body.mode-undangan-detail
+        #undanganDetail {
+
+            display: block;
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================================================
-     HEADER
-========================================================== -->
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
 <header class="site-header">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg">
 
         <div class="container">
 
             <!-- LOGO -->
+
             <a
-                class="navbar-brand d-flex align-items-center"
                 href="index.html"
+                class="navbar-brand"
             >
 
-                <div class="brand-icon">
-                    <i class="bi bi-buildings"></i>
-                </div>
-
-                <div class="brand-text ms-2">
-
-                    <strong>PLAZA</strong>
-                    <span>DAYEUHLUHUR</span>
-
-                </div>
+                <img
+                    src="assets/images/logo-plaza.png"
+                    alt="Plaza Dayeuhluhur"
+                    class="logo-plaza"
+                >
 
             </a>
 
 
-            <!-- MOBILE TOGGLE -->
+            <!-- MOBILE BUTTON -->
+
             <button
                 class="navbar-toggler"
                 type="button"
@@ -108,66 +215,102 @@
                 aria-expanded="false"
                 aria-label="Toggle navigation"
             >
+
                 <span class="navbar-toggler-icon"></span>
+
             </button>
 
 
-            <!-- NAVIGATION -->
+            <!-- MENU -->
+
             <div
                 class="collapse navbar-collapse"
                 id="mainNavbar"
             >
 
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+                <ul
+                    class="
+                        navbar-nav
+                        ms-auto
+                        align-items-lg-center
+                    "
+                >
 
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             href="index.html"
                         >
-                            <i class="bi bi-house-door me-1"></i>
+
+                            <i class="bi bi-house-door"></i>
                             Beranda
+
                         </a>
+
                     </li>
 
+
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             href="umkm.html"
                         >
-                            <i class="bi bi-shop me-1"></i>
+
+                            <i class="bi bi-shop"></i>
                             UMKM
+
                         </a>
+
                     </li>
 
+
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             href="bumdes.html"
                         >
-                            <i class="bi bi-building me-1"></i>
+
+                            <i class="bi bi-building"></i>
                             BUMDes
+
                         </a>
+
                     </li>
 
+
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             href="bursa.html"
                         >
-                            <i class="bi bi-bag me-1"></i>
+
+                            <i class="bi bi-bag"></i>
                             Bursa
+
                         </a>
+
                     </li>
 
+
                     <li class="nav-item">
+
                         <a
-                            class="nav-link active"
+                            class="
+                                nav-link
+                                active
+                            "
                             href="undangan.html"
                         >
-                            <i class="bi bi-calendar-heart me-1"></i>
+
+                            <i class="bi bi-calendar-heart"></i>
                             Hajatan
+
                         </a>
+
                     </li>
 
                 </ul>
@@ -181,182 +324,231 @@
 </header>
 
 
-<!-- =========================================================
-     HERO
-========================================================== -->
 
-<section class="undangan-hero">
+<!-- =====================================================
+     MODE KALENDER
+===================================================== -->
 
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-8">
-
-                <span class="hero-badge">
-                    <i class="bi bi-calendar-heart"></i>
-                    KALENDER WARGA
-                </span>
-
-                <h1>
-                    Kalender Hajatan
-                    <span>Warga Dayeuhluhur</span>
-                </h1>
-
-                <p>
-                    Temukan informasi berbagai hajatan warga
-                    Dayeuhluhur, mulai dari pernikahan, khitanan,
-                    syukuran, pengajian hingga berbagai acara
-                    hiburan masyarakat.
-                </p>
-
-            </div>
+<main
+    id="undanganCalendarPage"
+>
 
 
-            <div class="col-lg-4 d-none d-lg-block">
+    <!-- =================================================
+         HERO
+    ================================================== -->
 
-                <div class="hero-calendar-icon">
+    <section class="undangan-page-hero">
 
-                    <i class="bi bi-calendar-heart"></i>
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-7">
+
+                    <span class="section-kicker">
+
+                        <i class="bi bi-calendar-heart"></i>
+
+                        Kalender Warga
+
+                    </span>
+
+
+                    <h1>
+
+                        Kalender Hajatan
+
+                        <span>
+                            Warga Dayeuhluhur
+                        </span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Temukan berbagai informasi
+                        hajatan warga Dayeuhluhur
+                        mulai dari pernikahan,
+                        khitanan, syukuran,
+                        pengajian hingga hiburan
+                        masyarakat.
+
+                    </p>
 
                 </div>
 
-            </div>
 
-        </div>
+                <div class="col-lg-5 text-center">
 
-    </div>
+                    <div class="hero-calendar-icon">
 
-</section>
-
-
-<!-- =========================================================
-     SEARCH & FILTER
-========================================================== -->
-
-<section class="undangan-filter-section">
-
-    <div class="container">
-
-        <div class="filter-card">
-
-            <div class="row g-3 align-items-end">
-
-                <!-- SEARCH -->
-                <div class="col-lg-4">
-
-                    <label
-                        for="searchUndangan"
-                        class="form-label"
-                    >
-                        <i class="bi bi-search me-1"></i>
-                        Cari Hajatan
-                    </label>
-
-                    <div class="input-group">
-
-                        <span class="input-group-text">
-                            <i class="bi bi-search"></i>
-                        </span>
-
-                        <input
-                            type="text"
-                            id="searchUndangan"
-                            class="form-control"
-                            placeholder="Nama, alamat, acara..."
-                        >
+                        <i
+                            class="
+                                bi
+                                bi-calendar-heart
+                            "
+                        ></i>
 
                     </div>
 
                 </div>
 
+            </div>
 
-                <!-- DESA -->
-                <div class="col-lg-2 col-md-4">
+        </div>
 
-                    <label
-                        for="filterDesa"
-                        class="form-label"
-                    >
-                        Desa
-                    </label>
-
-                    <select
-                        id="filterDesa"
-                        class="form-select"
-                    >
-
-                        <option value="">
-                            Semua Desa
-                        </option>
-
-                    </select>
-
-                </div>
+    </section>
 
 
-                <!-- JENIS -->
-                <div class="col-lg-2 col-md-4">
 
-                    <label
-                        for="filterJenis"
-                        class="form-label"
-                    >
-                        Jenis Acara
-                    </label>
+    <!-- =================================================
+         FILTER
+    ================================================== -->
 
-                    <select
-                        id="filterJenis"
-                        class="form-select"
-                    >
+    <section class="undangan-filter-section">
 
-                        <option value="">
-                            Semua Acara
-                        </option>
+        <div class="container">
 
-                    </select>
+            <div class="undangan-filter-card">
 
-                </div>
+                <div class="row g-3 align-items-end">
 
 
-                <!-- BULAN -->
-                <div class="col-lg-2 col-md-4">
+                    <!-- SEARCH -->
 
-                    <label
-                        for="filterBulan"
-                        class="form-label"
-                    >
-                        Bulan
-                    </label>
+                    <div class="col-lg-4">
 
-                    <select
-                        id="filterBulan"
-                        class="form-select"
-                    >
+                        <label>
+                            Cari Hajatan
+                        </label>
 
-                        <option value="">
-                            Semua Bulan
-                        </option>
+                        <div
+                            class="
+                                input-group
+                            "
+                        >
 
-                    </select>
+                            <span
+                                class="
+                                    input-group-text
+                                "
+                            >
 
-                </div>
+                                <i
+                                    class="
+                                        bi
+                                        bi-search
+                                    "
+                                ></i>
+
+                            </span>
+
+                            <input
+                                type="text"
+                                id="searchHajatan"
+                                class="form-control"
+                                placeholder="Nama, alamat, acara..."
+                            >
+
+                        </div>
+
+                    </div>
 
 
-                <!-- RESET -->
-                <div class="col-lg-2">
+                    <!-- DESA -->
 
-                    <button
-                        type="button"
-                        id="resetFilter"
-                        class="btn btn-outline-primary w-100"
-                    >
+                    <div class="col-lg-2">
 
-                        <i class="bi bi-arrow-counterclockwise me-1"></i>
+                        <label>
+                            Desa
+                        </label>
 
-                        Reset
+                        <select
+                            id="filterDesa"
+                            class="form-select"
+                        >
 
-                    </button>
+                            <option value="">
+                                Semua Desa
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- JENIS -->
+
+                    <div class="col-lg-2">
+
+                        <label>
+                            Jenis Acara
+                        </label>
+
+                        <select
+                            id="filterJenis"
+                            class="form-select"
+                        >
+
+                            <option value="">
+                                Semua Acara
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- BULAN -->
+
+                    <div class="col-lg-2">
+
+                        <label>
+                            Bulan
+                        </label>
+
+                        <select
+                            id="filterBulan"
+                            class="form-select"
+                        >
+
+                            <option value="">
+                                Semua Bulan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- RESET -->
+
+                    <div class="col-lg-2">
+
+                        <button
+                            type="button"
+                            id="resetFilter"
+                            class="
+                                btn
+                                btn-outline-primary
+                                w-100
+                            "
+                        >
+
+                            <i
+                                class="
+                                    bi
+                                    bi-arrow-counterclockwise
+                                "
+                            ></i>
+
+                            Reset
+
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -364,75 +556,84 @@
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     HAJATAN TERDEKAT
-========================================================== -->
 
-<section class="section-undangan-terdekat">
+    <!-- =================================================
+         HAJATAN TERDEKAT
+    ================================================== -->
 
-    <div class="container">
+    <section class="undangan-nearest-section">
 
-        <div class="section-heading">
+        <div class="container">
 
-            <div>
+            <div class="section-heading-row">
 
-                <span class="section-label">
-                    <i class="bi bi-calendar-event"></i>
-                    AGENDA WARGA
+                <div>
+
+                    <span class="section-kicker">
+
+                        <i class="bi bi-calendar-check"></i>
+
+                        Agenda Warga
+
+                    </span>
+
+                    <h2>
+                        Hajatan Terdekat
+                    </h2>
+
+                </div>
+
+
+                <span
+                    id="jumlahHajatan"
+                    class="section-badge"
+                >
+                    0 Hajatan
                 </span>
 
-                <h2>
-                    Hajatan Terdekat
-                </h2>
+            </div>
+
+
+            <div
+                id="hajatanTerdekat"
+                class="
+                    row
+                    g-4
+                "
+            >
+
+                <!--
+                    Diisi otomatis oleh
+                    undangan.js
+                -->
 
             </div>
 
-            <span
-                id="jumlahHajatan"
-                class="jumlah-hajatan"
-            >
-                0 Hajatan
-            </span>
-
         </div>
 
-
-        <!-- CARD TERDEKAT -->
-
-        <div
-            id="hajatanTerdekat"
-            class="row g-4"
-        >
-
-            <!-- Diisi oleh undangan.js -->
-
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     KALENDER
-========================================================== -->
 
-<section class="section-calendar">
+    <!-- =================================================
+         KALENDER BULANAN
+    ================================================== -->
 
-    <div class="container">
+    <section class="undangan-calendar-section">
 
-        <div class="section-heading">
+        <div class="container">
 
-            <div>
+            <div class="section-heading">
 
-                <span class="section-label">
+                <span class="section-kicker">
+
                     <i class="bi bi-calendar3"></i>
-                    AGENDA
+
+                    Agenda
+
                 </span>
 
                 <h2>
@@ -441,91 +642,41 @@
 
             </div>
 
-        </div>
-
-
-        <div class="calendar-card">
-
-            <!-- CALENDAR HEADER -->
-
-            <div class="calendar-header">
-
-                <button
-                    type="button"
-                    id="prevMonth"
-                    class="calendar-nav-btn"
-                    aria-label="Bulan sebelumnya"
-                >
-
-                    <i class="bi bi-chevron-left"></i>
-
-                </button>
-
-
-                <div class="calendar-title">
-
-                    <h3 id="calendarMonth">
-                        Agustus 2026
-                    </h3>
-
-                    <button
-                        type="button"
-                        id="todayButton"
-                        class="btn btn-sm btn-outline-primary"
-                    >
-                        Hari Ini
-                    </button>
-
-                </div>
-
-
-                <button
-                    type="button"
-                    id="nextMonth"
-                    class="calendar-nav-btn"
-                    aria-label="Bulan berikutnya"
-                >
-
-                    <i class="bi bi-chevron-right"></i>
-
-                </button>
-
-            </div>
-
-
-            <!-- CALENDAR -->
 
             <div
-                id="calendarContainer"
-                class="calendar-container"
+                id="calendarHajatan"
+                class="calendar-wrapper"
             >
 
-                <!-- Diisi oleh undangan.js -->
+                <!--
+                    Kalender dibuat oleh
+                    JavaScript
+                -->
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     DAFTAR HAJATAN
-========================================================== -->
 
-<section class="section-daftar-undangan">
+    <!-- =================================================
+         DAFTAR HAJATAN
+    ================================================== -->
 
-    <div class="container">
+    <section class="undangan-list-section">
 
-        <div class="section-heading">
+        <div class="container">
 
-            <div>
+            <div class="section-heading">
 
-                <span class="section-label">
+                <span class="section-kicker">
+
                     <i class="bi bi-grid"></i>
-                    INFORMASI WARGA
+
+                    Informasi Warga
+
                 </span>
 
                 <h2>
@@ -534,257 +685,130 @@
 
             </div>
 
-        </div>
-
-
-        <!-- HASIL -->
-
-        <div
-            id="daftarUndangan"
-            class="row g-4"
-        >
-
-            <!-- CARD DIISI JS -->
-
-        </div>
-
-
-        <!-- EMPTY STATE -->
-
-        <div
-            id="emptyUndangan"
-            class="empty-undangan d-none"
-        >
-
-            <div class="empty-icon">
-
-                <i class="bi bi-calendar-x"></i>
-
-            </div>
-
-            <h3>
-                Hajatan Tidak Ditemukan
-            </h3>
-
-            <p>
-                Belum ada hajatan yang sesuai dengan
-                pencarian atau filter yang dipilih.
-            </p>
-
-        </div>
-
-
-        <!-- LOADING -->
-
-        <div
-            id="loadingUndangan"
-            class="loading-undangan"
-        >
 
             <div
-                class="spinner-border text-primary"
-                role="status"
+                id="undanganGrid"
+                class="
+                    row
+                    g-4
+                "
             >
 
-                <span class="visually-hidden">
-                    Memuat...
-                </span>
+                <!--
+                    Kartu hajatan
+                    dibuat oleh undangan.js
+                -->
 
-            </div>
+                <div
+                    class="
+                        col-12
+                        text-center
+                        py-5
+                    "
+                >
 
-            <p>
-                Memuat kalender hajatan...
-            </p>
+                    <div
+                        class="
+                            spinner-border
+                            text-primary
+                        "
+                        role="status"
+                    ></div>
 
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     VENDOR HAJATAN
-========================================================== -->
-
-<section class="section-vendor">
-
-    <div class="container">
-
-        <div class="vendor-banner">
-
-            <div class="row align-items-center">
-
-                <div class="col-lg-8">
-
-                    <span class="section-label">
-                        <i class="bi bi-shop-window"></i>
-                        PELUANG USAHA
-                    </span>
-
-                    <h2>
-                        Butuh Vendor Untuk Hajatan?
-                    </h2>
-
-                    <p>
-                        Temukan penyedia jasa dan kebutuhan
-                        hajatan di sekitar Dayeuhluhur.
+                    <p
+                        class="
+                            mt-3
+                            text-muted
+                        "
+                    >
+                        Memuat kalender hajatan...
                     </p>
 
                 </div>
 
-
-                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-
-                    <a
-                        href="umkm.html?kategori=hajatan"
-                        class="btn btn-light btn-lg"
-                    >
-
-                        <i class="bi bi-search me-2"></i>
-
-                        Cari Vendor
-
-                    </a>
-
-                </div>
-
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     CTA TAMBAH HAJATAN
-========================================================== -->
-
-<section class="section-submit-undangan">
-
-    <div class="container">
-
-        <div class="submit-card text-center">
-
-            <div class="submit-icon">
-
-                <i class="bi bi-calendar-plus"></i>
-
-            </div>
-
-            <h2>
-                Ingin Hajatan Anda Ditampilkan?
-            </h2>
-
-            <p>
-                Bagikan informasi hajatan Anda agar
-                mudah diketahui oleh keluarga, kerabat
-                dan warga Dayeuhluhur.
-            </p>
-
-            <a
-                href="javascript:void(0)"
-                id="btnTambahUndangan"
-                class="btn btn-primary"
-            >
-
-                <i class="bi bi-plus-circle me-2"></i>
-
-                Tambahkan Hajatan
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
+</main>
 
 
-<!-- =========================================================
-     MODAL DETAIL UNDANGAN
-========================================================== -->
 
-<div
-    class="modal fade"
-    id="modalUndangan"
-    tabindex="-1"
-    aria-hidden="true"
+<!-- =====================================================
+     MODE DETAIL UNDANGAN
+===================================================== -->
+
+<main
+    id="undanganDetail"
 >
 
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <!--
+        Konten akan dibuat otomatis
+        oleh undangan.js
 
-        <div class="modal-content">
+        Contoh:
 
-            <div class="modal-header">
+        undangan.html?id=1
 
-                <h5
-                    class="modal-title"
-                    id="modalUndanganTitle"
-                >
-                    Detail Undangan
-                </h5>
+        Foto
+        Nama
+        Tanggal
+        Waktu
+        Lokasi
+        Hiburan
+        Maps
+        WhatsApp
+        Vendor
+        Share
+    -->
 
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Tutup"
-                ></button>
-
-            </div>
-
-
-            <div
-                class="modal-body"
-                id="modalUndanganBody"
-            >
-
-                <!-- Detail diisi oleh JS -->
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
+</main>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      FOOTER
-========================================================== -->
+===================================================== -->
 
 <footer class="site-footer">
 
     <div class="container">
 
-        <div class="row">
+        <div class="row g-4">
 
-            <div class="col-lg-6 mb-4 mb-lg-0">
+
+            <!-- BRAND -->
+
+            <div class="col-lg-5">
 
                 <h5>
                     Plaza Dayeuhluhur
                 </h5>
 
                 <p>
-                    Portal digital masyarakat Dayeuhluhur
-                    untuk informasi, UMKM, BUMDes, wisata,
-                    bursa lokal dan kalender kegiatan warga.
+
+                    Portal informasi,
+                    promosi dan ekosistem
+                    digital masyarakat
+                    Kecamatan Dayeuhluhur.
+
                 </p>
 
             </div>
 
 
-            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <!-- LINK -->
+
+            <div class="col-lg-3">
 
                 <h6>
                     Jelajahi
                 </h6>
 
-                <ul class="footer-links">
+                <ul>
 
                     <li>
                         <a href="index.html">
@@ -806,7 +830,13 @@
 
                     <li>
                         <a href="bursa.html">
-                            Bursa Lokal
+                            Bursa
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="undangan.html">
+                            Kalender Hajatan
                         </a>
                     </li>
 
@@ -815,33 +845,22 @@
             </div>
 
 
-            <div class="col-lg-3 col-md-6">
+            <!-- INFORMASI -->
+
+            <div class="col-lg-4">
 
                 <h6>
-                    Kalender
+                    Kalender Warga
                 </h6>
 
-                <ul class="footer-links">
+                <p>
 
-                    <li>
-                        <a href="undangan.html">
-                            Hajatan Warga
-                        </a>
-                    </li>
+                    Bagikan informasi hajatan
+                    warga dan dukung usaha
+                    lokal yang terlibat dalam
+                    setiap acara.
 
-                    <li>
-                        <a href="agenda.html">
-                            Agenda
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="berita.html">
-                            Berita
-                        </a>
-                    </li>
-
-                </ul>
+                </p>
 
             </div>
 
@@ -851,14 +870,26 @@
         <hr>
 
 
-        <div class="footer-bottom">
+        <div
+            class="
+                footer-bottom
+                d-flex
+                justify-content-between
+                flex-wrap
+                gap-2
+            "
+        >
 
             <span>
+
                 © 2026 Plaza Dayeuhluhur
+
             </span>
 
             <span>
-                Digitalisasi Potensi Lokal Dayeuhluhur
+
+                Kalender Hajatan & Undangan Online
+
             </span>
 
         </div>
@@ -868,20 +899,25 @@
 </footer>
 
 
-<!-- =========================================================
+
+<!-- =====================================================
      BOOTSTRAP JS
-========================================================== -->
+===================================================== -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 ></script>
 
 
-<!-- =========================================================
+<!-- =====================================================
      UNDANGAN JS
-========================================================== -->
+===================================================== -->
 
-<script src="assets/js/undangan.js"></script>
+<script
+    src="assets/js/undangan.js"
+></script>
+
 
 </body>
+
 </html>
