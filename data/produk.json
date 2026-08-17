@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "produk": "Kopi Khas Panulisan",
+    "nama": "Kopi Khas Panulisan",
+    "kategori": "Kuliner",
+    "umkm": "UMKM Kopi Panulisan",
+    "desa": "Panulisan",
+    "deskripsi": "Kopi lokal khas Panulisan dengan cita rasa khas pegunungan Dayeuhluhur.",
+    "harga": "Rp25.000",
+    "whatsapp": "",
+    "gambar": "assets/images/produk/kopi.jpg",
+    "status": "aktif"
+  },
+  {
+    "id": 2,
+    "produk": "Keripik Pisang",
+    "nama": "Keripik Pisang",
+    "kategori": "Kuliner",
+    "umkm": "UMKM Keripik Lokal",
+    "desa": "Dayeuhluhur",
+    "deskripsi": "Keripik pisang renyah dengan rasa gurih dan cocok untuk camilan maupun oleh-oleh.",
+    "harga": "Rp15.000",
+    "whatsapp": "",
+    "gambar": "assets/images/produk/keripik-pisang.jpg",
+    "status": "aktif"
+  },
+  {
+    "id": 3,
+    "produk": "Madu Asli Dayeuhluhur",
+    "nama": "Madu Asli Dayeuhluhur",
+    "kategori": "Pertanian",
+    "umkm": "Madu Dayeuhluhur",
+    "desa": "Hanum",
+    "deskripsi": "Madu lokal alami hasil budidaya masyarakat dengan cita rasa khas dan segar.",
+    "harga": "Rp75.000",
+    "whatsapp": "",
+    "gambar": "assets/images/produk/madu.jpg",
+    "status": "aktif"
+  },
+  {
+    "id": 4,
+    "produk": "Produk Kuliner Lokal",
+    "nama": "Produk Kuliner Lokal",
+    "kategori": "Kuliner",
+    "umkm": "UMKM Lokal Dayeuhluhur",
+    "desa": "Bolang",
+    "deskripsi": "Aneka produk kuliner khas masyarakat Dayeuhluhur yang dibuat secara lokal.",
+    "harga": "Mulai Rp10.000",
+    "whatsapp": "",
+    "gambar": "assets/images/produk/kuliner.jpg",
+    "status": "aktif"
+  }
+]

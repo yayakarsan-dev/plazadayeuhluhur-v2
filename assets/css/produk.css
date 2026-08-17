@@ -1,0 +1,1659 @@
+/* =========================================================
+PLAZA DAYEUHLUHUR
+ETALASE PRODUK UMKM
+produk.css — FINAL V1
+========================================================= */
+
+/* =========================================================
+ROOT
+========================================================= */
+
+:root {
+
+```
+--primary: #0d6efd;
+--primary-dark: #0b5ed7;
+
+--success: #198754;
+--success-dark: #157347;
+
+--dark: #172033;
+--muted: #6c757d;
+
+--light: #f5f7fa;
+--white: #ffffff;
+
+--border: #e7eaf0;
+
+--shadow:
+    0 4px 15px rgba(23, 32, 51, 0.08);
+
+--shadow-hover:
+    0 12px 30px rgba(23, 32, 51, 0.14);
+
+--radius:
+    16px;
+```
+
+}
+
+/* =========================================================
+GLOBAL
+========================================================= */
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+html {
+
+```
+scroll-behavior: smooth;
+```
+
+}
+
+body {
+
+```
+margin: 0;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+color:
+    var(--dark);
+
+background:
+    var(--light);
+
+line-height:
+    1.6;
+```
+
+}
+
+a {
+
+```
+text-decoration: none;
+```
+
+}
+
+img {
+
+```
+max-width: 100%;
+
+display: block;
+```
+
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.produk-header {
+
+```
+background:
+    var(--white);
+
+border-bottom:
+    1px solid var(--border);
+
+position:
+    sticky;
+
+top:
+    0;
+
+z-index:
+    1000;
+```
+
+}
+
+.produk-header-inner {
+
+```
+min-height:
+    70px;
+
+display:
+    flex;
+
+align-items:
+    center;
+
+justify-content:
+    space-between;
+
+gap:
+    20px;
+```
+
+}
+
+.produk-brand {
+
+```
+display:
+    flex;
+
+align-items:
+    center;
+
+gap:
+    10px;
+
+color:
+    var(--dark);
+
+font-weight:
+    800;
+
+font-size:
+    18px;
+```
+
+}
+
+.produk-brand i {
+
+```
+width:
+    38px;
+
+height:
+    38px;
+
+display:
+    flex;
+
+align-items:
+    center;
+
+justify-content:
+    center;
+
+border-radius:
+    50%;
+
+background:
+    var(--primary);
+
+color:
+    var(--white);
+```
+
+}
+
+.produk-back {
+
+```
+display:
+    inline-flex;
+
+align-items:
+    center;
+
+gap:
+    7px;
+
+color:
+    var(--primary);
+
+font-size:
+    14px;
+
+font-weight:
+    600;
+```
+
+}
+
+.produk-back:hover {
+
+```
+color:
+    var(--primary-dark);
+```
+
+}
+
+/* =========================================================
+HERO
+========================================================= */
+
+.produk-hero {
+
+```
+padding:
+    55px 0 30px;
+
+background:
+    var(--white);
+```
+
+}
+
+.produk-label {
+
+```
+display:
+    inline-block;
+
+margin-bottom:
+    8px;
+
+color:
+    var(--primary);
+
+font-size:
+    13px;
+
+font-weight:
+    800;
+
+letter-spacing:
+    .3px;
+```
+
+}
+
+.produk-hero h1 {
+
+```
+margin:
+    0 0 10px;
+
+color:
+    var(--dark);
+
+font-size:
+    clamp(30px, 4vw, 44px);
+
+font-weight:
+    800;
+
+line-height:
+    1.2;
+```
+
+}
+
+.produk-hero p {
+
+```
+max-width:
+    850px;
+
+margin:
+    0 auto;
+
+color:
+    var(--muted);
+
+font-size:
+    15px;
+```
+
+}
+
+/* =========================================================
+FILTER
+========================================================= */
+
+.produk-filter {
+
+```
+padding:
+    10px 0 20px;
+
+background:
+    var(--white);
+```
+
+}
+
+.produk-filter-box {
+
+```
+display:
+    grid;
+
+grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(180px, .7fr)
+    minmax(180px, .7fr);
+
+gap:
+    12px;
+
+padding:
+    15px;
+
+background:
+    var(--light);
+
+border:
+    1px solid var(--border);
+
+border-radius:
+    14px;
+```
+
+}
+
+.produk-search {
+
+```
+position:
+    relative;
+```
+
+}
+
+.produk-search i {
+
+```
+position:
+    absolute;
+
+left:
+    15px;
+
+top:
+    50%;
+
+transform:
+    translateY(-50%);
+
+color:
+    var(--muted);
+```
+
+}
+
+.produk-search input,
+.produk-category select,
+.produk-village select {
+
+```
+width:
+    100%;
+
+min-height:
+    48px;
+
+padding:
+    0 14px;
+
+border:
+    1px solid var(--border);
+
+border-radius:
+    10px;
+
+background:
+    var(--white);
+
+color:
+    var(--dark);
+
+font-family:
+    inherit;
+
+font-size:
+    14px;
+
+outline:
+    none;
+
+transition:
+    .2s ease;
+```
+
+}
+
+.produk-search input {
+
+```
+padding-left:
+    43px;
+```
+
+}
+
+.produk-search input:focus,
+.produk-category select:focus,
+.produk-village select:focus {
+
+```
+border-color:
+    var(--primary);
+
+box-shadow:
+    0 0 0 3px rgba(13, 110, 253, .10);
+```
+
+}
+
+/* =========================================================
+STATISTIK
+========================================================= */
+
+.produk-statistik {
+
+```
+padding:
+    5px 0 30px;
+
+background:
+    var(--white);
+```
+
+}
+
+.produk-statistik-inner {
+
+```
+display:
+    grid;
+
+grid-template-columns:
+    repeat(3, 1fr);
+
+gap:
+    15px;
+```
+
+}
+
+.produk-stat-item {
+
+```
+display:
+    flex;
+
+align-items:
+    center;
+
+gap:
+    12px;
+
+padding:
+    16px;
+
+background:
+    var(--white);
+
+border:
+    1px solid var(--border);
+
+border-radius:
+    14px;
+
+box-shadow:
+    var(--shadow);
+```
+
+}
+
+.produk-stat-icon {
+
+```
+width:
+    45px;
+
+height:
+    45px;
+
+flex:
+    0 0 45px;
+
+display:
+    flex;
+
+align-items:
+    center;
+
+justify-content:
+    center;
+
+border-radius:
+    12px;
+
+background:
+    rgba(13, 110, 253, .10);
+
+color:
+    var(--primary);
+```
+
+}
+
+.produk-stat-item strong {
+
+```
+display:
+    block;
+
+font-size:
+    21px;
+
+font-weight:
+    800;
+
+line-height:
+    1.1;
+```
+
+}
+
+.produk-stat-item span {
+
+```
+display:
+    block;
+
+margin-top:
+    3px;
+
+color:
+    var(--muted);
+
+font-size:
+    12px;
+```
+
+}
+
+/* =========================================================
+MAIN
+========================================================= */
+
+.produk-main {
+
+```
+padding:
+    10px 0 55px;
+```
+
+}
+
+/* =========================================================
+GRID
+========================================================= */
+
+.produk-grid {
+
+```
+display:
+    grid;
+
+grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+gap:
+    22px;
+```
+
+}
+
+/* =========================================================
+CARD
+========================================================= */
+
+.produk-card {
+
+```
+display:
+    flex;
+
+flex-direction:
+    column;
+
+min-width:
+    0;
+
+overflow:
+    hidden;
+
+background:
+    var(--white);
+
+border:
+    1px solid var(--border);
+
+border-radius:
+    var(--radius);
+
+box-shadow:
+    var(--shadow);
+
+transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+```
+
+}
+
+.produk-card:hover {
+
+```
+transform:
+    translateY(-5px);
+
+box-shadow:
+    var(--shadow-hover);
+```
+
+}
+
+/* =========================================================
+IMAGE
+========================================================= */
+
+.produk-card-image {
+
+```
+position:
+    relative;
+
+width:
+    100%;
+
+aspect-ratio:
+    4 / 3;
+
+overflow:
+    hidden;
+
+background:
+    #eef1f5;
+```
+
+}
+
+.produk-card-image img {
+
+```
+width:
+    100%;
+
+height:
+    100%;
+
+object-fit:
+    cover;
+
+transition:
+    transform .4s ease;
+```
+
+}
+
+.produk-card:hover
+.produk-card-image img {
+
+```
+transform:
+    scale(1.04);
+```
+
+}
+
+/* =========================================================
+CATEGORY BADGE
+========================================================= */
+
+.produk-category-badge {
+
+```
+position:
+    absolute;
+
+left:
+    12px;
+
+top:
+    12px;
+
+padding:
+    5px 10px;
+
+border-radius:
+    30px;
+
+background:
+    var(--primary);
+
+color:
+    var(--white);
+
+font-size:
+    11px;
+
+font-weight:
+    700;
+
+box-shadow:
+    0 3px 10px rgba(0, 0, 0, .12);
+```
+
+}
+
+/* =========================================================
+CARD BODY
+========================================================= */
+
+.produk-card-body {
+
+```
+display:
+    flex;
+
+flex-direction:
+    column;
+
+flex:
+    1;
+
+padding:
+    17px;
+```
+
+}
+
+.produk-card-title {
+
+```
+margin:
+    0 0 7px;
+
+color:
+    var(--dark);
+
+font-size:
+    17px;
+
+font-weight:
+    700;
+
+line-height:
+    1.35;
+```
+
+}
+
+.produk-card-description {
+
+```
+margin:
+    0 0 12px;
+
+color:
+    var(--muted);
+
+font-size:
+    12.5px;
+
+line-height:
+    1.6;
+
+display:
+    -webkit-box;
+
+-webkit-line-clamp:
+    3;
+
+-webkit-box-orient:
+    vertical;
+
+overflow:
+    hidden;
+```
+
+}
+
+/* =========================================================
+UMKM & DESA
+========================================================= */
+
+.produk-card-meta {
+
+```
+margin-bottom:
+    12px;
+```
+
+}
+
+.produk-meta-item {
+
+```
+display:
+    flex;
+
+align-items:
+    flex-start;
+
+gap:
+    8px;
+
+margin-bottom:
+    6px;
+
+color:
+    #4d5666;
+
+font-size:
+    12px;
+```
+
+}
+
+.produk-meta-item:last-child {
+
+```
+margin-bottom:
+    0;
+```
+
+}
+
+.produk-meta-item i {
+
+```
+width:
+    15px;
+
+flex:
+    0 0 15px;
+
+margin-top:
+    3px;
+
+color:
+    var(--primary);
+
+text-align:
+    center;
+```
+
+}
+
+.produk-meta-item strong {
+
+```
+color:
+    var(--dark);
+
+font-weight:
+    700;
+```
+
+}
+
+/* =========================================================
+PRICE
+========================================================= */
+
+.produk-card-bottom {
+
+```
+margin-top:
+    auto;
+```
+
+}
+
+.produk-price {
+
+```
+margin:
+    7px 0 13px;
+
+color:
+    var(--dark);
+
+font-size:
+    16px;
+
+font-weight:
+    800;
+```
+
+}
+
+.produk-price-label {
+
+```
+color:
+    var(--muted);
+
+font-size:
+    11px;
+
+font-weight:
+    500;
+```
+
+}
+
+/* =========================================================
+WHATSAPP BUTTON
+========================================================= */
+
+.produk-wa {
+
+```
+width:
+    100%;
+
+min-height:
+    43px;
+
+display:
+    flex;
+
+align-items:
+    center;
+
+justify-content:
+    center;
+
+gap:
+    7px;
+
+border:
+    none;
+
+border-radius:
+    10px;
+
+background:
+    var(--success);
+
+color:
+    var(--white);
+
+font-size:
+    12px;
+
+font-weight:
+    700;
+
+transition:
+    .2s ease;
+```
+
+}
+
+.produk-wa:hover {
+
+```
+background:
+    var(--success-dark);
+
+color:
+    var(--white);
+
+transform:
+    translateY(-1px);
+```
+
+}
+
+.produk-wa.disabled {
+
+```
+background:
+    #adb5bd;
+
+cursor:
+    default;
+```
+
+}
+
+.produk-wa.disabled:hover {
+
+```
+transform:
+    none;
+
+background:
+    #adb5bd;
+```
+
+}
+
+/* =========================================================
+LOADING
+========================================================= */
+
+.produk-loading {
+
+```
+min-height:
+    250px;
+
+display:
+    flex;
+
+flex-direction:
+    column;
+
+align-items:
+    center;
+
+justify-content:
+    center;
+
+gap:
+    12px;
+
+color:
+    var(--muted);
+```
+
+}
+
+.produk-loading p {
+
+```
+margin:
+    0;
+
+font-size:
+    13px;
+```
+
+}
+
+/* =========================================================
+EMPTY
+========================================================= */
+
+.produk-empty {
+
+```
+padding:
+    70px 20px;
+
+text-align:
+    center;
+```
+
+}
+
+.produk-empty i {
+
+```
+margin-bottom:
+    15px;
+
+color:
+    #adb5bd;
+
+font-size:
+    50px;
+```
+
+}
+
+.produk-empty h3 {
+
+```
+margin:
+    0 0 7px;
+
+font-size:
+    20px;
+
+font-weight:
+    700;
+```
+
+}
+
+.produk-empty p {
+
+```
+margin:
+    0;
+
+color:
+    var(--muted);
+
+font-size:
+    13px;
+```
+
+}
+
+/* =========================================================
+ERROR
+========================================================= */
+
+.produk-error {
+
+```
+padding:
+    60px 20px;
+
+text-align:
+    center;
+```
+
+}
+
+.produk-error i {
+
+```
+margin-bottom:
+    15px;
+
+color:
+    #dc3545;
+
+font-size:
+    45px;
+```
+
+}
+
+.produk-error h3 {
+
+```
+margin:
+    0 0 7px;
+
+font-size:
+    20px;
+
+font-weight:
+    700;
+```
+
+}
+
+.produk-error p {
+
+```
+margin:
+    0;
+
+color:
+    var(--muted);
+
+font-size:
+    13px;
+```
+
+}
+
+/* =========================================================
+CTA
+========================================================= */
+
+.produk-cta {
+
+```
+padding:
+    10px 0 55px;
+```
+
+}
+
+.produk-cta-box {
+
+```
+display:
+    flex;
+
+align-items:
+    center;
+
+justify-content:
+    space-between;
+
+gap:
+    25px;
+
+padding:
+    25px 28px;
+
+background:
+    var(--white);
+
+border:
+    1px solid var(--border);
+
+border-radius:
+    var(--radius);
+
+box-shadow:
+    var(--shadow);
+```
+
+}
+
+.produk-cta-content {
+
+```
+display:
+    flex;
+
+align-items:
+    center;
+
+gap:
+    15px;
+```
+
+}
+
+.produk-cta-icon {
+
+```
+width:
+    52px;
+
+height:
+    52px;
+
+flex:
+    0 0 52px;
+
+display:
+    flex;
+
+align-items:
+    center;
+
+justify-content:
+    center;
+
+border-radius:
+    14px;
+
+background:
+    rgba(25, 135, 84, .10);
+
+color:
+    var(--success);
+
+font-size:
+    21px;
+```
+
+}
+
+.produk-cta-content h3 {
+
+```
+margin:
+    0 0 4px;
+
+font-size:
+    17px;
+
+font-weight:
+    700;
+```
+
+}
+
+.produk-cta-content p {
+
+```
+margin:
+    0;
+
+color:
+    var(--muted);
+
+font-size:
+    12px;
+```
+
+}
+
+.produk-cta-button {
+
+```
+min-height:
+    45px;
+
+padding:
+    0 20px;
+
+border-radius:
+    10px;
+
+font-size:
+    12px;
+
+font-weight:
+    700;
+
+white-space:
+    nowrap;
+```
+
+}
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+.produk-footer {
+
+```
+padding:
+    35px 0;
+
+background:
+    var(--dark);
+
+color:
+    rgba(255, 255, 255, .85);
+```
+
+}
+
+.produk-footer strong {
+
+```
+color:
+    var(--white);
+
+font-size:
+    15px;
+```
+
+}
+
+.produk-footer p {
+
+```
+margin:
+    5px 0;
+
+font-size:
+    12px;
+```
+
+}
+
+.produk-footer small {
+
+```
+color:
+    rgba(255, 255, 255, .55);
+
+font-size:
+    11px;
+```
+
+}
+
+/* =========================================================
+RESPONSIVE — LAPTOP
+========================================================= */
+
+@media (max-width: 1199px) {
+
+```
+.produk-grid {
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+}
+```
+
+}
+
+/* =========================================================
+RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+```
+.produk-grid {
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+}
+
+
+.produk-filter-box {
+
+    grid-template-columns:
+        1fr 1fr;
+
+}
+
+
+.produk-search {
+
+    grid-column:
+        1 / -1;
+
+}
+```
+
+}
+
+/* =========================================================
+RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+```
+.produk-header-inner {
+
+    min-height:
+        62px;
+
+}
+
+
+.produk-brand span {
+
+    font-size:
+        14px;
+
+}
+
+
+.produk-brand i {
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+}
+
+
+.produk-back {
+
+    font-size:
+        12px;
+
+}
+
+
+.produk-back i {
+
+    display:
+        none;
+
+}
+
+
+.produk-hero {
+
+    padding:
+        40px 0 25px;
+
+}
+
+
+.produk-hero h1 {
+
+    font-size:
+        28px;
+
+}
+
+
+.produk-hero p {
+
+    font-size:
+        13px;
+
+}
+
+
+.produk-filter-box {
+
+    grid-template-columns:
+        1fr;
+
+    padding:
+        12px;
+
+}
+
+
+.produk-search {
+
+    grid-column:
+        auto;
+
+}
+
+
+.produk-statistik-inner {
+
+    grid-template-columns:
+        1fr;
+
+}
+
+
+.produk-stat-item {
+
+    padding:
+        13px;
+
+}
+
+
+.produk-grid {
+
+    grid-template-columns:
+        1fr;
+
+    gap:
+        18px;
+
+}
+
+
+.produk-card-body {
+
+    padding:
+        15px;
+
+}
+
+
+.produk-card-title {
+
+    font-size:
+        16px;
+
+}
+
+
+.produk-cta-box {
+
+    flex-direction:
+        column;
+
+    align-items:
+        stretch;
+
+    padding:
+        20px;
+
+}
+
+
+.produk-cta-content {
+
+    align-items:
+        flex-start;
+
+}
+
+
+.produk-cta-button {
+
+    width:
+        100%;
+
+}
+```
+
+}
+
+/* =========================================================
+VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+```
+.produk-brand span {
+
+    font-size:
+        12px;
+
+}
+
+
+.produk-back {
+
+    font-size:
+        11px;
+
+}
+
+
+.produk-card-image {
+
+    aspect-ratio:
+        4 / 3;
+
+}
+```
+
+}
