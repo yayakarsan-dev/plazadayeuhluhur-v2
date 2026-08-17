@@ -1,38 +1,46 @@
 /* =====================================================
    PLAZA DAYEUHLUHUR
    DETAIL UNDANGAN ONLINE
-   undangan-detail.css
+   FINAL LAYOUT
 ===================================================== */
 
+* {
+    box-sizing: border-box;
+}
+
 .undangan-detail-page {
+    width: 100%;
+    min-height: 100vh;
     background: #f5f8fc;
     color: #172033;
-    min-height: 100vh;
-    padding-bottom: 70px;
+    overflow: hidden;
 }
 
 
 /* =====================================================
-   HERO
+   HERO UNDANGAN
 ===================================================== */
 
 .undangan-hero {
     position: relative;
-    min-height: 620px;
-    margin-top: 0;
-    padding: 110px 20px 70px;
+    width: 100%;
+    min-height: 650px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+
+    padding: 130px 20px 80px;
 
     background:
         linear-gradient(
             135deg,
-            #eaf3ff 0%,
-            #f8fbff 55%,
+            #edf5ff 0%,
+            #ffffff 50%,
             #eef5ff 100%
         );
+
+    overflow: hidden;
 }
 
 .undangan-hero-overlay {
@@ -41,10 +49,12 @@
 
     background:
         radial-gradient(
-            circle at 50% 20%,
+            circle at 50% 15%,
             rgba(255,255,255,.95),
             transparent 45%
         );
+
+    pointer-events: none;
 }
 
 .undangan-hero-content {
@@ -52,7 +62,9 @@
     z-index: 2;
 
     width: 100%;
-    max-width: 850px;
+    max-width: 900px;
+
+    margin: 0 auto;
 
     text-align: center;
 }
@@ -63,60 +75,71 @@
 .undangan-label {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
 
-    padding: 8px 16px;
+    padding: 9px 18px;
+
+    margin-bottom: 18px;
 
     border-radius: 50px;
 
     background: #ffffff;
+
     color: #1769ff;
 
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
 
-    box-shadow: 0 8px 25px rgba(23,105,255,.10);
+    box-shadow:
+        0 8px 25px rgba(23,105,255,.10);
 }
 
 
-/* FOTO UTAMA */
+/* =====================================================
+   FOTO UTAMA
+===================================================== */
 
 .undangan-main-photo {
-    width: 210px;
-    height: 210px;
+    position: relative;
 
-    margin: 25px auto;
+    width: 230px;
+    height: 230px;
 
-    border-radius: 50%;
+    margin: 0 auto 25px;
 
     padding: 7px;
+
+    border-radius: 50%;
 
     background: #ffffff;
 
     box-shadow:
-        0 18px 45px rgba(20,40,80,.15);
+        0 20px 50px rgba(20,40,80,.16);
 
     overflow: hidden;
 }
 
 .undangan-main-photo img {
+    display: block;
+
     width: 100%;
     height: 100%;
 
     object-fit: cover;
 
     border-radius: 50%;
-
-    display: block;
 }
 
 
-/* TEXT */
+/* =====================================================
+   TEXT HERO
+===================================================== */
 
 .undangan-pembuka {
-    margin: 15px 0 5px;
+    margin: 0 0 7px;
 
-    color: #667085;
+    color: #687386;
 
     font-size: 15px;
 }
@@ -124,11 +147,11 @@
 .undangan-hero h1 {
     margin: 0 0 18px;
 
-    font-size: clamp(34px, 5vw, 58px);
+    font-size: clamp(36px, 5vw, 58px);
+
+    line-height: 1.1;
 
     font-weight: 700;
-
-    line-height: 1.15;
 
     color: #172033;
 }
@@ -142,11 +165,11 @@
 
     gap: 8px;
 
+    margin-top: 8px;
+
     color: #526071;
 
-    font-size: 15px;
-
-    margin-top: 7px;
+    font-size: 14px;
 }
 
 .undangan-date-main i,
@@ -156,11 +179,14 @@
 
 
 /* =====================================================
-   DETAIL SECTION
+   DETAIL ACARA
 ===================================================== */
 
 .undangan-detail-section {
-    padding: 70px 20px;
+    width: 100%;
+
+    padding: 80px 20px;
+
     background: #ffffff;
 }
 
@@ -175,6 +201,8 @@
 /* HEADING */
 
 .detail-section-heading {
+    width: 100%;
+
     text-align: center;
 
     margin-bottom: 35px;
@@ -182,72 +210,84 @@
 
 .detail-section-heading span {
     display: inline-flex;
+
     align-items: center;
+
     gap: 7px;
+
+    margin-bottom: 8px;
 
     color: #1769ff;
 
-    font-size: 12px;
+    font-size: 11px;
+
     font-weight: 700;
 
     text-transform: uppercase;
 
-    letter-spacing: .5px;
+    letter-spacing: .6px;
 }
 
 .detail-section-heading h2 {
-    margin: 8px 0 0;
-
-    font-size: 32px;
-    font-weight: 700;
+    margin: 0;
 
     color: #172033;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
 }
 
 .detail-section-heading p {
-    max-width: 600px;
+    max-width: 650px;
 
     margin: 10px auto 0;
 
-    color: #667085;
+    color: #6b7484;
 
     font-size: 14px;
+
+    line-height: 1.7;
 }
 
 
 /* =====================================================
-   INFO GRID
+   4 INFO CARD
 ===================================================== */
 
 .detail-info-grid {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        repeat(4, 1fr);
 
     gap: 18px;
 
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .detail-info-card {
+    min-height: 105px;
+
     display: flex;
 
     align-items: center;
 
-    gap: 13px;
-
-    min-height: 95px;
+    gap: 14px;
 
     padding: 18px;
 
-    background: #f7f9fc;
+    background: #f8faff;
 
-    border: 1px solid #e6ebf2;
+    border: 1px solid #e4eaf3;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
-    transition: .25s ease;
+    transition: all .25s ease;
 }
 
 .detail-info-card:hover {
@@ -258,12 +298,13 @@
 }
 
 .detail-info-icon {
+    flex: 0 0 45px;
+
     width: 45px;
     height: 45px;
 
-    min-width: 45px;
-
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -273,15 +314,15 @@
 
     color: #1769ff;
 
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .detail-info-card small {
     display: block;
 
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 
-    color: #7b8494;
+    color: #7c8696;
 
     font-size: 11px;
 }
@@ -291,41 +332,44 @@
 
     color: #172033;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
 
 /* =====================================================
-   ADDRESS
+   ALAMAT
 ===================================================== */
 
 .detail-address-card {
+    width: 100%;
+
     display: flex;
 
     align-items: flex-start;
 
-    gap: 16px;
+    gap: 15px;
+
+    margin-top: 18px;
 
     padding: 22px;
 
-    margin-top: 20px;
+    background: #f8faff;
 
-    background: #f7f9fc;
-
-    border: 1px solid #e6ebf2;
+    border: 1px solid #e4eaf3;
 
     border-radius: 15px;
 }
 
 .detail-address-icon {
+    flex: 0 0 48px;
+
     width: 48px;
     height: 48px;
 
-    min-width: 48px;
-
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -335,7 +379,7 @@
 
     color: #1769ff;
 
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .detail-address-card small {
@@ -343,7 +387,7 @@
 
     margin-bottom: 5px;
 
-    color: #7b8494;
+    color: #7c8696;
 
     font-size: 11px;
 
@@ -357,36 +401,36 @@
 
     font-size: 14px;
 
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 
 /* =====================================================
-   DESCRIPTION
+   DESKRIPSI
 ===================================================== */
 
 .detail-description {
-    position: relative;
+    width: 100%;
 
-    margin-top: 20px;
+    margin-top: 18px;
 
-    padding: 25px 30px;
+    padding: 24px 28px;
 
-    border-radius: 15px;
-
-    background: #f0f6ff;
+    background: #eef5ff;
 
     border-left: 4px solid #1769ff;
+
+    border-radius: 12px;
 }
 
 .detail-description i {
-    color: #1769ff;
-
-    font-size: 25px;
+    display: block;
 
     margin-bottom: 8px;
 
-    display: block;
+    color: #1769ff;
+
+    font-size: 22px;
 }
 
 .detail-description p {
@@ -401,30 +445,33 @@
 
 
 /* =====================================================
-   ACTION BUTTON
+   BUTTON
 ===================================================== */
 
 .detail-action-buttons {
+    width: 100%;
+
     display: flex;
 
+    align-items: center;
     justify-content: center;
 
     flex-wrap: wrap;
 
     gap: 12px;
 
-    margin-top: 30px;
+    margin-top: 28px;
 }
 
 .btn-detail {
+    min-width: 190px;
+
     display: inline-flex;
 
     align-items: center;
     justify-content: center;
 
     gap: 8px;
-
-    min-width: 190px;
 
     padding: 12px 20px;
 
@@ -433,6 +480,7 @@
     text-decoration: none;
 
     font-size: 13px;
+
     font-weight: 600;
 
     transition: .25s ease;
@@ -448,6 +496,7 @@
 
 .btn-maps:hover {
     color: #ffffff;
+
     background: #1769ff;
 }
 
@@ -465,38 +514,54 @@
 
 
 /* =====================================================
-   VENDOR
+   VENDOR SECTION
 ===================================================== */
 
 .detail-vendor-section {
+    width: 100%;
+
+    padding: 80px 20px;
+
+    background: #f5f8fc;
+}
+
+.detail-vendor-section > .detail-section-heading {
+    max-width: 1100px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.detail-vendor-grid {
+    width: 100%;
     max-width: 1100px;
 
     margin: 0 auto;
 
-    padding: 70px 20px;
-}
-
-.detail-vendor-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+        repeat(2, 1fr);
 
-    gap: 18px;
+    gap: 20px;
 }
 
 .detail-vendor-card {
+    width: 100%;
+
     display: flex;
 
-    gap: 15px;
+    align-items: center;
 
-    padding: 20px;
+    gap: 16px;
+
+    padding: 22px;
 
     background: #ffffff;
 
-    border: 1px solid #e5eaf1;
+    border: 1px solid #e3e9f2;
 
-    border-radius: 15px;
+    border-radius: 16px;
 
     box-shadow:
         0 8px 25px rgba(20,40,80,.05);
@@ -508,27 +573,38 @@
     transform: translateY(-4px);
 
     box-shadow:
-        0 15px 35px rgba(20,40,80,.10);
+        0 15px 35px rgba(20,40,80,.09);
 }
 
 .vendor-icon {
-    width: 48px;
-    height: 48px;
+    flex: 0 0 52px;
 
-    min-width: 48px;
+    width: 52px;
+    height: 52px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     background: #eaf2ff;
 
     color: #1769ff;
+
+    font-size: 20px;
+}
+
+.vendor-content {
+    min-width: 0;
 }
 
 .vendor-content span {
+    display: block;
+
+    margin-bottom: 4px;
+
     color: #1769ff;
 
     font-size: 10px;
@@ -539,9 +615,12 @@
 }
 
 .vendor-content h3 {
-    margin: 5px 0 8px;
+    margin: 0 0 7px;
 
-    font-size: 15px;
+    color: #172033;
+
+    font-size: 16px;
+
     font-weight: 700;
 }
 
@@ -551,6 +630,7 @@
     text-decoration: none;
 
     font-size: 12px;
+
     font-weight: 600;
 }
 
@@ -560,15 +640,18 @@
 ===================================================== */
 
 .undangan-share-section {
+    width: 100%;
+
     padding: 0 20px 30px;
+
+    background: #f5f8fc;
 }
 
 .undangan-share-box {
+    width: 100%;
     max-width: 1100px;
 
     margin: 0 auto;
-
-    padding: 25px;
 
     display: flex;
 
@@ -576,23 +659,23 @@
 
     gap: 18px;
 
+    padding: 25px;
+
     background: #ffffff;
 
-    border: 1px solid #e5eaf1;
+    border: 1px solid #e3e9f2;
 
-    border-radius: 18px;
-
-    box-shadow:
-        0 10px 30px rgba(20,40,80,.06);
+    border-radius: 16px;
 }
 
 .share-icon {
+    flex: 0 0 52px;
+
     width: 52px;
     height: 52px;
 
-    min-width: 52px;
-
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -606,7 +689,9 @@
 }
 
 .undangan-share-box h3 {
-    margin: 0 0 4px;
+    margin: 0 0 5px;
+
+    color: #172033;
 
     font-size: 17px;
 }
@@ -614,7 +699,7 @@
 .undangan-share-box p {
     margin: 0;
 
-    color: #667085;
+    color: #687386;
 
     font-size: 13px;
 }
@@ -622,9 +707,9 @@
 .btn-share-undangan {
     margin-left: auto;
 
-    border: 0;
+    padding: 12px 24px;
 
-    padding: 11px 22px;
+    border: 0;
 
     border-radius: 9px;
 
@@ -645,9 +730,13 @@
 ===================================================== */
 
 .undangan-back-wrapper {
+    width: 100%;
+
+    padding: 10px 20px 60px;
+
     text-align: center;
 
-    padding: 15px 20px 0;
+    background: #f5f8fc;
 }
 
 .btn-back-undangan {
@@ -655,9 +744,11 @@
 
     align-items: center;
 
+    justify-content: center;
+
     gap: 8px;
 
-    padding: 11px 20px;
+    padding: 12px 22px;
 
     border-radius: 9px;
 
@@ -672,8 +763,6 @@
     font-size: 13px;
 
     font-weight: 600;
-
-    transition: .25s ease;
 }
 
 .btn-back-undangan:hover {
@@ -684,153 +773,57 @@
 
 
 /* =====================================================
-   ERROR
-===================================================== */
-
-.undangan-error-page {
-    min-height: 70vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 40px 20px;
-}
-
-.undangan-error-icon {
-    width: 80px;
-    height: 80px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 20px;
-
-    border-radius: 50%;
-
-    background: #eaf2ff;
-
-    color: #1769ff;
-
-    font-size: 32px;
-}
-
-.undangan-error-page h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.undangan-error-page p {
-    max-width: 500px;
-
-    color: #667085;
-
-    font-size: 14px;
-
-    margin-bottom: 25px;
-}
-
-
-/* =====================================================
-   RESPONSIVE TABLET
+   RESPONSIVE
 ===================================================== */
 
 @media (max-width: 991px) {
 
-    .undangan-hero {
-        min-height: 560px;
-        padding-top: 130px;
-    }
-
     .detail-info-grid {
         grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+            repeat(2, 1fr);
     }
 
-    .detail-vendor-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+    .undangan-hero {
+        padding-top: 140px;
     }
 
 }
 
 
-/* =====================================================
-   RESPONSIVE MOBILE
-===================================================== */
-
 @media (max-width: 767px) {
 
     .undangan-hero {
-        min-height: 520px;
+        min-height: 560px;
 
         padding:
-            110px
+            120px
             18px
-            50px;
+            60px;
     }
 
     .undangan-main-photo {
-        width: 165px;
-        height: 165px;
-
-        margin: 20px auto;
+        width: 175px;
+        height: 175px;
     }
 
     .undangan-hero h1 {
         font-size: 34px;
     }
 
-    .undangan-pembuka {
-        font-size: 13px;
-    }
-
-    .undangan-date-main,
-    .undangan-location-main {
-        font-size: 13px;
-    }
-
-
-    .undangan-detail-section {
-        padding:
-            50px
-            18px;
-    }
-
-    .detail-section-heading h2 {
-        font-size: 26px;
-    }
-
-
     .detail-info-grid {
         grid-template-columns: 1fr;
-
-        gap: 12px;
-    }
-
-
-    .detail-vendor-section {
-        padding:
-            50px
-            18px;
     }
 
     .detail-vendor-grid {
         grid-template-columns: 1fr;
     }
 
+    .detail-action-buttons {
+        flex-direction: column;
+    }
 
-    .undangan-share-section {
-        padding:
-            0
-            18px
-            25px;
+    .btn-detail {
+        width: 100%;
     }
 
     .undangan-share-box {
@@ -845,43 +838,26 @@
         margin-left: 0;
     }
 
-
-    .detail-action-buttons {
-        flex-direction: column;
-    }
-
-    .btn-detail {
-        width: 100%;
-    }
-
 }
 
-
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
 
 @media (max-width: 480px) {
 
     .undangan-hero {
-        padding-top: 105px;
-    }
-
-    .undangan-label {
-        font-size: 11px;
+        padding-top: 110px;
     }
 
     .undangan-main-photo {
-        width: 145px;
-        height: 145px;
+        width: 150px;
+        height: 150px;
     }
 
     .undangan-hero h1 {
-        font-size: 29px;
+        font-size: 30px;
     }
 
-    .detail-info-card {
-        padding: 15px;
+    .detail-section-heading h2 {
+        font-size: 27px;
     }
 
 }
