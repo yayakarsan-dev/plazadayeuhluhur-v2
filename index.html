@@ -621,37 +621,208 @@ Ikuti perkembangan terbaru seputar Kecamatan Dayeuhluhur.
 </div>
 
 </section>
-<!-- ==========================
-     AGENDA
-========================== -->
+<!-- =====================================================
+     KALENDER HAJATAN & UNDANGAN ONLINE
+===================================================== -->
 
-<section id="agenda" class="py-5 bg-light">
+<section
+    id="kalender-hajatan"
+    class="section-padding kalender-hajatan-section"
+>
 
     <div class="container">
 
-        <div class="text-center mb-5">
+        <!-- HEADER SECTION -->
+        <div class="section-heading text-center mb-5">
 
-            <h6 class="text-primary fw-bold">
-                AGENDA KEGIATAN
-            </h6>
+            <span class="section-kicker">
+                <i class="bi bi-calendar-heart"></i>
+                Kalender Warga
+            </span>
 
-            <h2 class="fw-bold">
-                Kalender Kegiatan Kecamatan
+            <h2 class="section-title">
+                Kalender Hajatan &
+                <span>Undangan Online</span>
             </h2>
 
-            <p>
-                Informasi kegiatan pemerintahan, masyarakat, UMKM, pendidikan, dan budaya.
+            <p class="section-description">
+                Temukan berbagai informasi hajatan warga
+                Dayeuhluhur mulai dari pernikahan, khitanan,
+                syukuran, pengajian hingga hiburan masyarakat.
             </p>
 
         </div>
 
-        <div class="row" id="agendaContainer">
+
+        <!-- INFO BAR -->
+        <div class="kalender-info-bar">
+
+            <div class="kalender-info-item">
+
+                <div class="kalender-info-icon">
+                    <i class="bi bi-calendar-event"></i>
+                </div>
+
+                <div>
+                    <strong id="jumlahHajatanIndex">
+                        0
+                    </strong>
+
+                    <span>
+                        Hajatan Mendatang
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="kalender-info-item">
+
+                <div class="kalender-info-icon">
+                    <i class="bi bi-geo-alt"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Dayeuhluhur
+                    </strong>
+
+                    <span>
+                        Kabupaten Cilacap
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="kalender-info-item">
+
+                <div class="kalender-info-icon">
+                    <i class="bi bi-megaphone"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Promosi Lokal
+                    </strong>
+
+                    <span>
+                        UMKM & Vendor Hajatan
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- GRID UNDANGAN -->
+        <div
+            id="indexUndanganGrid"
+            class="row g-4 kalender-undangan-grid"
+        >
+
+            <!-- Loading -->
+            <div class="col-12">
+
+                <div
+                    class="kalender-loading"
+                >
+
+                    <div
+                        class="spinner-border"
+                        role="status"
+                    ></div>
+
+                    <p>
+                        Memuat kalender hajatan...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER SECTION -->
+        <div class="text-center mt-5">
+
+            <a
+                href="undangan.html"
+                class="btn btn-kalender-primary"
+            >
+
+                <i class="bi bi-calendar3 me-2"></i>
+
+                Lihat Semua Kalender Hajatan
+
+            </a>
+
+
+            <a
+                href="undangan.html"
+                class="btn btn-kalender-outline ms-2"
+            >
+
+                <i class="bi bi-envelope-paper me-2"></i>
+
+                Undangan Online
+
+            </a>
+
+        </div>
+
+
+        <!-- CTA UNTUK WARGA -->
+        <div class="kalender-cta mt-5">
+
+            <div class="kalender-cta-content">
+
+                <div class="kalender-cta-icon">
+
+                    <i class="bi bi-envelope-heart"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Punya Hajatan?
+                    </h3>
+
+                    <p>
+                        Publikasikan informasi hajatan Anda
+                        di Kalender Warga Plaza Dayeuhluhur
+                        sekaligus bantu promosikan vendor
+                        lokal yang terlibat.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="undangan.html"
+                class="btn btn-kalender-cta"
+            >
+
+                <i class="bi bi-plus-circle me-2"></i>
+
+                Ajukan Undangan
+
+            </a>
 
         </div>
 
     </div>
 
 </section>
+
+<!-- =====================================================
+     END KALENDER HAJATAN
+===================================================== -->
 <!-- ==========================
      PARTNER
 ========================== -->
@@ -917,6 +1088,7 @@ AOS.init();
 <script src="assets/js/counter.js"></script>
 <script src="assets/js/bursa.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/index-undangan.js"></script>
 </body>
 
 </html>    
