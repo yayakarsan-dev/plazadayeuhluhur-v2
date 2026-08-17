@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
         --------------------------------------------- */
 
         const tampil =
-            aktif.slice(0, 4);
+            aktif.slice(0, 8);
 
 
         /* ---------------------------------------------
