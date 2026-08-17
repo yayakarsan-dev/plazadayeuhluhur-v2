@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -12,13 +12,14 @@
     >
 
     <title>
-        Etalase Produk UMKM | Plaza Dayeuhluhur
+        Produk Lokal Dayeuhluhur | Plaza Dayeuhluhur
     </title>
 
     <meta
         name="description"
-        content="Etalase Produk UMKM Kecamatan Dayeuhluhur. Temukan berbagai produk lokal dan hubungi penjual melalui WhatsApp."
+        content="Etalase lengkap produk UMKM lokal Kecamatan Dayeuhluhur."
     >
+
 
     <!-- =====================================================
          BOOTSTRAP
@@ -29,6 +30,7 @@
         rel="stylesheet"
     >
 
+
     <!-- =====================================================
          FONT AWESOME
     ====================================================== -->
@@ -38,20 +40,10 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
+
     <!-- =====================================================
          GOOGLE FONT
     ====================================================== -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
@@ -60,7 +52,7 @@
 
 
     <!-- =====================================================
-         STYLE KHUSUS PRODUK
+         STYLE
     ====================================================== -->
 
     <style>
@@ -79,7 +71,7 @@
                 sans-serif;
 
             background:
-                #f6f8fb;
+                #f5f7fa;
 
             color:
                 #172033;
@@ -87,458 +79,134 @@
         }
 
 
-        /* =================================================
-           TOP NAVBAR
-        ================================================= */
+        /* =====================================================
+           HEADER
+        ====================================================== */
 
-        .produk-navbar {
+        .produk-header {
 
-            background:
-                #ffffff;
+            padding:
+                50px 20px 30px;
 
-            border-bottom:
-                1px solid #e9edf3;
-
-            position:
-                sticky;
-
-            top:
-                0;
-
-            z-index:
-                1000;
+            text-align:
+                center;
 
         }
 
 
-        .produk-navbar .navbar-brand {
-
-            font-weight:
-                800;
-
-            color:
-                #172033;
-
-        }
-
-
-        .produk-navbar .navbar-brand span {
+        .produk-header .label {
 
             color:
                 #0d6efd;
-
-        }
-
-
-        .back-home {
-
-            color:
-                #172033;
-
-            text-decoration:
-                none;
-
-            font-weight:
-                600;
 
             font-size:
                 14px;
 
-        }
-
-
-        .back-home:hover {
-
-            color:
-                #0d6efd;
-
-        }
-
-
-        /* =================================================
-           HERO
-        ================================================= */
-
-        .produk-hero {
-
-            padding:
-                55px 20px 40px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffffff 0%,
-                    #eef5ff 100%
-                );
-
-            border-bottom:
-                1px solid #e9edf3;
-
-        }
-
-
-        .produk-label {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            gap:
-                8px;
-
-            color:
-                #0d6efd;
-
             font-weight:
                 800;
-
-            font-size:
-                13px;
-
-            text-transform:
-                uppercase;
-
-            letter-spacing:
-                .4px;
-
-        }
-
-
-        .produk-hero h1 {
-
-            margin:
-                10px 0 12px;
-
-            font-size:
-                clamp(30px, 5vw, 46px);
-
-            font-weight:
-                800;
-
-            color:
-                #172033;
-
-        }
-
-
-        .produk-hero p {
-
-            max-width:
-                760px;
-
-            margin:
-                auto;
-
-            color:
-                #667085;
-
-            font-size:
-                15px;
-
-        }
-
-
-        /* =================================================
-           STATISTICS
-        ================================================= */
-
-        .produk-stats {
-
-            margin-top:
-                28px;
-
-        }
-
-
-        .stat-card {
-
-            background:
-                #ffffff;
-
-            border:
-                1px solid #e9edf3;
-
-            border-radius:
-                14px;
-
-            padding:
-                18px;
-
-            height:
-                100%;
-
-            box-shadow:
-                0 5px 18px rgba(
-                    20,
-                    35,
-                    60,
-                    .05
-                );
-
-        }
-
-
-        .stat-icon {
-
-            width:
-                42px;
-
-            height:
-                42px;
-
-            border-radius:
-                12px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            background:
-                #edf5ff;
-
-            color:
-                #0d6efd;
-
-            font-size:
-                18px;
 
             margin-bottom:
-                10px;
-
-        }
-
-
-        .stat-number {
-
-            font-size:
-                24px;
-
-            font-weight:
-                800;
-
-            line-height:
-                1;
-
-        }
-
-
-        .stat-label {
-
-            color:
-                #667085;
-
-            font-size:
-                12px;
-
-            margin-top:
                 5px;
 
         }
 
 
-        /* =================================================
-           FILTER AREA
-        ================================================= */
-
-        .produk-filter-wrapper {
-
-            margin-top:
-                35px;
-
-            background:
-                #ffffff;
-
-            border:
-                1px solid #e9edf3;
-
-            border-radius:
-                18px;
-
-            padding:
-                20px;
-
-            box-shadow:
-                0 5px 20px rgba(
-                    20,
-                    35,
-                    60,
-                    .05
-                );
-
-        }
-
-
-        .filter-title {
-
-            font-size:
-                14px;
-
-            font-weight:
-                700;
-
-            margin-bottom:
-                12px;
-
-        }
-
-
-        .search-box {
-
-            position:
-                relative;
-
-        }
-
-
-        .search-box i {
-
-            position:
-                absolute;
-
-            left:
-                16px;
-
-            top:
-                50%;
-
-            transform:
-                translateY(-50%);
-
-            color:
-                #98a2b3;
-
-        }
-
-
-        .search-box input {
-
-            padding-left:
-                45px;
-
-            height:
-                48px;
-
-            border-radius:
-                12px;
-
-            border:
-                1px solid #d9dee7;
-
-        }
-
-
-        .search-box input:focus {
-
-            border-color:
-                #0d6efd;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(
-                    13,
-                    110,
-                    253,
-                    .10
-                );
-
-        }
-
-
-        .filter-select {
-
-            height:
-                48px;
-
-            border-radius:
-                12px;
-
-            border:
-                1px solid #d9dee7;
-
-        }
-
-
-        /* =================================================
-           SECTION CATALOG
-        ================================================= */
-
-        .produk-section {
-
-            padding:
-                45px 0 70px;
-
-        }
-
-
-        .catalog-heading {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                15px;
-
-            margin-bottom:
-                25px;
-
-        }
-
-
-        .catalog-heading h2 {
-
-            font-size:
-                24px;
-
-            font-weight:
-                800;
+        .produk-header h1 {
 
             margin:
                 0;
 
+            font-size:
+                32px;
+
+            font-weight:
+                800;
+
         }
 
 
-        .catalog-count {
+        .produk-header p {
+
+            max-width:
+                850px;
+
+            margin:
+                10px auto 0;
 
             color:
                 #667085;
 
             font-size:
-                13px;
+                14px;
 
         }
 
 
-        /* =================================================
-           PRODUCT CARD
-        ================================================= */
+        /* =====================================================
+           CONTAINER
+        ====================================================== */
+
+        .produk-wrapper {
+
+            max-width:
+                1250px;
+
+            margin:
+                auto;
+
+            padding:
+                10px 20px 60px;
+
+        }
+
+
+        /* =====================================================
+           GRID
+        ====================================================== */
+
+        #produkContainer {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0, 1fr)
+                );
+
+            gap:
+                20px;
+
+        }
+
+
+        /* =====================================================
+           CARD PRODUK
+        ====================================================== */
 
         .produk-card {
 
             background:
                 #ffffff;
 
-            border:
-                1px solid #e8ecf2;
-
             border-radius:
-                18px;
+                16px;
 
             overflow:
                 hidden;
+
+            border:
+                1px solid #e9edf3;
+
+            box-shadow:
+                0 4px 15px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
 
             height:
                 100%;
@@ -550,15 +218,7 @@
                 column;
 
             transition:
-                .25s ease;
-
-            box-shadow:
-                0 5px 18px rgba(
-                    20,
-                    35,
-                    60,
-                    .05
-                );
+                all 0.25s ease;
 
         }
 
@@ -566,35 +226,37 @@
         .produk-card:hover {
 
             transform:
-                translateY(-5px);
+                translateY(-4px);
 
             box-shadow:
-                0 14px 35px rgba(
-                    20,
-                    35,
-                    60,
-                    .12
+                0 10px 25px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.11
                 );
-
-            border-color:
-                #d8e5ff;
 
         }
 
 
-        .produk-image-wrapper {
+        /* =====================================================
+           GAMBAR
+        ====================================================== */
 
-            position:
-                relative;
+        .produk-card-image {
 
             width:
                 100%;
 
             height:
-                235px;
+                220px;
 
-            overflow:
-                hidden;
+            object-fit:
+                cover;
+
+            display:
+                block;
 
             background:
                 #eef1f5;
@@ -602,105 +264,14 @@
         }
 
 
-        .produk-image {
+        /* =====================================================
+           BODY
+        ====================================================== */
 
-            width:
-                100%;
-
-            height:
-                100%;
-
-            object-fit:
-                cover;
-
-            transition:
-                transform .35s ease;
-
-        }
-
-
-        .produk-card:hover
-        .produk-image {
-
-            transform:
-                scale(1.05);
-
-        }
-
-
-        .produk-category {
-
-            position:
-                absolute;
-
-            top:
-                14px;
-
-            left:
-                14px;
-
-            background:
-                rgba(
-                    13,
-                    110,
-                    253,
-                    .95
-                );
-
-            color:
-                #ffffff;
+        .produk-card-body {
 
             padding:
-                6px 11px;
-
-            border-radius:
-                20px;
-
-            font-size:
-                11px;
-
-            font-weight:
-                700;
-
-        }
-
-
-        .produk-status {
-
-            position:
-                absolute;
-
-            top:
-                14px;
-
-            right:
-                14px;
-
-            background:
-                #198754;
-
-            color:
-                #ffffff;
-
-            padding:
-                6px 10px;
-
-            border-radius:
-                20px;
-
-            font-size:
-                10px;
-
-            font-weight:
-                700;
-
-        }
-
-
-        .produk-content {
-
-            padding:
-                18px;
+                16px;
 
             display:
                 flex;
@@ -714,22 +285,69 @@
         }
 
 
+        /* =====================================================
+           KATEGORI
+        ====================================================== */
+
+        .produk-category {
+
+            display:
+                inline-block;
+
+            width:
+                fit-content;
+
+            background:
+                #0d6efd;
+
+            color:
+                #ffffff;
+
+            font-size:
+                11px;
+
+            font-weight:
+                600;
+
+            padding:
+                5px 10px;
+
+            border-radius:
+                20px;
+
+            margin-bottom:
+                9px;
+
+        }
+
+
+        /* =====================================================
+           NAMA PRODUK
+        ====================================================== */
+
         .produk-name {
 
             font-size:
-                18px;
+                17px;
 
             font-weight:
-                800;
+                700;
+
+            line-height:
+                1.35;
+
+            margin:
+                0 0 7px;
 
             color:
                 #172033;
 
-            margin:
-                0 0 8px;
-
         }
 
+
+        /* =====================================================
+           DESKRIPSI
+        ====================================================== */
 
         .produk-description {
 
@@ -740,55 +358,36 @@
                 12px;
 
             line-height:
-                1.7;
+                1.6;
 
-            margin-bottom:
-                14px;
-
-        }
-
-
-        .produk-meta {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                7px;
-
-            margin-bottom:
-                15px;
+            margin:
+                0 0 12px;
 
         }
 
 
-        .produk-meta-item {
+        /* =====================================================
+           INFORMASI UMKM
+        ====================================================== */
+
+        .produk-info {
 
             font-size:
                 12px;
 
-            color:
-                #667085;
+            line-height:
+                1.8;
 
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
+            margin-bottom:
                 8px;
 
         }
 
 
-        .produk-meta-item i {
+        .produk-info i {
 
             width:
-                17px;
+                18px;
 
             color:
                 #0d6efd;
@@ -796,65 +395,51 @@
         }
 
 
-        .produk-umkm {
-
-            font-weight:
-                600;
+        .produk-info .desa-icon {
 
             color:
-                #344054;
+                #dc3545;
 
         }
 
+
+        .produk-info strong {
+
+            font-weight:
+                700;
+
+        }
+
+
+        /* =====================================================
+           HARGA
+        ====================================================== */
 
         .produk-price {
 
             margin-top:
                 auto;
 
-            font-size:
-                18px;
-
-            font-weight:
-                800;
-
-            color:
-                #172033;
-
-            margin-bottom:
-                13px;
-
-        }
-
-
-        .produk-whatsapp {
-
-            width:
-                100%;
-
-            border:
-                none;
-
-            border-radius:
-                11px;
-
-            padding:
-                11px 14px;
-
-            background:
-                #198754;
-
-            color:
-                #ffffff;
+            padding-top:
+                10px;
 
             font-size:
-                12px;
+                15px;
 
             font-weight:
                 700;
 
-            text-decoration:
-                none;
+            color:
+                #172033;
+
+        }
+
+
+        /* =====================================================
+           BUTTON WHATSAPP
+        ====================================================== */
+
+        .produk-whatsapp {
 
             display:
                 flex;
@@ -865,11 +450,38 @@
             justify-content:
                 center;
 
-            gap:
-                8px;
+            width:
+                100%;
+
+            margin-top:
+                12px;
+
+            padding:
+                10px 14px;
+
+            border:
+                none;
+
+            border-radius:
+                10px;
+
+            background:
+                #198754;
+
+            color:
+                #ffffff;
+
+            text-decoration:
+                none;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
 
             transition:
-                .2s ease;
+                0.2s ease;
 
         }
 
@@ -891,56 +503,31 @@
                 #adb5bd;
 
             cursor:
-                not-allowed;
+                default;
 
         }
 
 
-        /* =================================================
-           EMPTY / LOADING
-        ================================================= */
-
-        .produk-loading {
-
-            text-align:
-                center;
-
-            padding:
-                70px 20px;
-
-            color:
-                #667085;
-
-        }
-
-
-        .produk-loading i {
-
-            font-size:
-                35px;
-
-            margin-bottom:
-                15px;
-
-        }
-
+        /* =====================================================
+           EMPTY STATE
+        ====================================================== */
 
         .produk-empty {
 
-            background:
-                #ffffff;
+            grid-column:
+                1 / -1;
 
-            border:
-                1px dashed #cfd6e1;
-
-            border-radius:
-                18px;
+            text-align:
+                center;
 
             padding:
                 60px 20px;
 
-            text-align:
-                center;
+            background:
+                #ffffff;
+
+            border-radius:
+                16px;
 
             color:
                 #667085;
@@ -957,157 +544,70 @@
                 15px;
 
             color:
-                #98a2b3;
+                #adb5bd;
 
         }
 
 
-        /* =================================================
-           CTA
-        ================================================= */
-
-        .produk-cta {
-
-            background:
-                #172033;
-
-            color:
-                #ffffff;
-
-            padding:
-                45px 20px;
-
-        }
-
-
-        .produk-cta h3 {
-
-            font-weight:
-                800;
-
-            margin-bottom:
-                8px;
-
-        }
-
-
-        .produk-cta p {
-
-            color:
-                #cbd5e1;
-
-            font-size:
-                13px;
-
-            margin-bottom:
-                22px;
-
-        }
-
-
-        .btn-daftar {
-
-            background:
-                #198754;
-
-            color:
-                #ffffff;
-
-            border:
-                none;
-
-            border-radius:
-                10px;
-
-            padding:
-                11px 20px;
-
-            font-size:
-                13px;
-
-            font-weight:
-                700;
-
-            text-decoration:
-                none;
-
-        }
-
-
-        .btn-daftar:hover {
-
-            background:
-                #157347;
-
-            color:
-                #ffffff;
-
-        }
-
-
-        /* =================================================
-           FOOTER
-        ================================================= */
-
-        footer {
-
-            background:
-                #101828;
-
-            color:
-                #98a2b3;
-
-            padding:
-                20px;
-
-            text-align:
-                center;
-
-            font-size:
-                12px;
-
-        }
-
-
-        /* =================================================
+        /* =====================================================
            RESPONSIVE
-        ================================================= */
+        ====================================================== */
+
+        @media (
+            max-width: 1100px
+        ) {
+
+            #produkContainer {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(0, 1fr)
+                    );
+
+            }
+
+        }
+
 
         @media (
             max-width: 768px
         ) {
 
-            .produk-hero {
+            .produk-header {
 
                 padding:
-                    40px 15px 30px;
+                    35px 15px 20px;
 
             }
 
 
-            .produk-section {
+            .produk-header h1 {
 
-                padding:
-                    30px 0 50px;
+                font-size:
+                    26px;
 
             }
 
 
-            .produk-image-wrapper {
+            #produkContainer {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0, 1fr)
+                    );
+
+                gap:
+                    15px;
+
+            }
+
+
+            .produk-card-image {
 
                 height:
-                    220px;
-
-            }
-
-
-            .catalog-heading {
-
-                align-items:
-                    flex-start;
-
-                flex-direction:
-                    column;
+                    190px;
 
             }
 
@@ -1115,33 +615,21 @@
 
 
         @media (
-            max-width: 576px
+            max-width: 520px
         ) {
 
-            .produk-navbar
-            .container {
+            #produkContainer {
 
-                padding-left:
-                    15px;
-
-                padding-right:
-                    15px;
+                grid-template-columns:
+                    1fr;
 
             }
 
 
-            .produk-image-wrapper {
+            .produk-card-image {
 
                 height:
-                    230px;
-
-            }
-
-
-            .produk-content {
-
-                padding:
-                    16px;
+                    220px;
 
             }
 
@@ -1155,65 +643,14 @@
 <body>
 
 
-<!-- =====================================================
-     NAVBAR
-====================================================== -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-<nav class="produk-navbar">
+    <header class="produk-header">
 
-    <div class="container">
-
-        <div
-            class="d-flex align-items-center justify-content-between"
-            style="height:68px;"
-        >
-
-            <a
-                href="index.html"
-                class="navbar-brand text-decoration-none"
-            >
-
-                PLAZA
-                <span>
-                    DAYEUHLUHUR
-                </span>
-
-            </a>
-
-
-            <a
-                href="index.html"
-                class="back-home"
-            >
-
-                <i class="fa-solid fa-arrow-left me-2"></i>
-
-                Kembali ke Beranda
-
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-
-<!-- =====================================================
-     HERO
-====================================================== -->
-
-<section class="produk-hero">
-
-    <div class="container text-center">
-
-        <div class="produk-label">
-
-            <i class="fa-solid fa-store"></i>
-
+        <div class="label">
             ETALASE PRODUK UMKM
-
         </div>
 
 
@@ -1223,330 +660,55 @@
 
 
         <p>
-
-            Temukan berbagai produk unggulan
-            masyarakat Kecamatan Dayeuhluhur
-            dan hubungi penjual secara langsung
-            melalui WhatsApp.
-
+            Temukan berbagai produk unggulan masyarakat
+            Kecamatan Dayeuhluhur dan hubungi penjual
+            secara langsung melalui WhatsApp.
         </p>
 
+    </header>
 
 
-        <!-- =============================================
-             STATISTICS
-        ============================================== -->
 
-        <div class="produk-stats">
+    <!-- =====================================================
+         PRODUK
+    ====================================================== -->
 
-            <div class="row g-3 justify-content-center">
+    <main class="produk-wrapper">
 
-                <div class="col-6 col-md-3">
+        <div id="produkContainer">
 
-                    <div class="stat-card">
+            <div class="produk-empty">
 
-                        <div class="stat-icon mx-auto">
-
-                            <i class="fa-solid fa-box"></i>
-
-                        </div>
-
-                        <div
-                            class="stat-number"
-                            id="totalProduk"
-                        >
-                            0
-                        </div>
-
-                        <div class="stat-label">
-                            Total Produk
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-6 col-md-3">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon mx-auto">
-
-                            <i class="fa-solid fa-circle-check"></i>
-
-                        </div>
-
-                        <div
-                            class="stat-number"
-                            id="produkAktif"
-                        >
-                            0
-                        </div>
-
-                        <div class="stat-label">
-                            Produk Aktif
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-6 col-md-3">
-
-                    <div class="stat-card">
-
-                        <div class="stat-icon mx-auto">
-
-                            <i class="fa-solid fa-store"></i>
-
-                        </div>
-
-                        <div
-                            class="stat-number"
-                            id="umkmTerlibat"
-                        >
-                            0
-                        </div>
-
-                        <div class="stat-label">
-                            UMKM Terlibat
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     MAIN
-====================================================== -->
-
-<main>
-
-    <section class="produk-section">
-
-        <div class="container">
-
-
-            <!-- =========================================
-                 FILTER
-            ========================================== -->
-
-            <div class="produk-filter-wrapper">
-
-                <div class="filter-title">
-
-                    <i class="fa-solid fa-filter me-2"></i>
-
-                    Cari & Filter Produk
-
-                </div>
-
-
-                <div class="row g-3">
-
-                    <div class="col-lg-6">
-
-                        <div class="search-box">
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                            <input
-                                type="search"
-                                id="searchProduk"
-                                class="form-control"
-                                placeholder="Cari nama produk, UMKM atau deskripsi..."
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-6 col-lg-3">
-
-                        <select
-                            id="filterKategori"
-                            class="form-select filter-select"
-                        >
-
-                            <option value="">
-                                Semua Kategori
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="col-md-6 col-lg-3">
-
-                        <select
-                            id="filterDesa"
-                            class="form-select filter-select"
-                        >
-
-                            <option value="">
-                                Semua Desa
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =========================================
-                 CATALOG HEADING
-            ========================================== -->
-
-            <div class="catalog-heading mt-5">
+                <i class="fa-solid fa-spinner fa-spin"></i>
 
                 <div>
-
-                    <h2>
-                        Semua Produk
-                    </h2>
-
-                    <div class="catalog-count">
-
-                        Menampilkan
-                        <strong id="jumlahProduk">
-                            0
-                        </strong>
-                        produk
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =========================================
-                 PRODUCT CONTAINER
-            ========================================== -->
-
-            <div
-                id="produkContainer"
-                class="row g-4"
-            >
-
-                <div class="col-12">
-
-                    <div class="produk-loading">
-
-                        <i class="fa-solid fa-spinner fa-spin"></i>
-
-                        <div>
-                            Memuat produk...
-                        </div>
-
-                    </div>
-
+                    Memuat produk...
                 </div>
 
             </div>
 
         </div>
 
-    </section>
+    </main>
 
 
 
-    <!-- =================================================
-         CTA DAFTARKAN PRODUK
-    ================================================== -->
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
 
-    <section class="produk-cta">
-
-        <div class="container text-center">
-
-            <h3>
-                Punya Produk Lokal?
-            </h3>
-
-            <p>
-                Daftarkan produk UMKM Anda agar
-                dapat ditampilkan di Etalase Produk
-                Plaza Dayeuhluhur.
-            </p>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
 
 
-            <a
-                href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur%2C%20saya%20ingin%20mendaftarkan%20produk%20UMKM%20saya%20untuk%20ditampilkan%20di%20Etalase%20Produk.%20Mohon%20informasi%20prosedur%20pendaftarannya.%20Terima%20kasih."
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-daftar"
-            >
+    <!-- =====================================================
+         PRODUK JS
+    ====================================================== -->
 
-                <i class="fa-brands fa-whatsapp me-2"></i>
-
-                DAFTARKAN PRODUK ANDA
-
-            </a>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-
-<footer>
-
-    &copy;
-    2026 Plaza Dayeuhluhur
-
-    <br>
-
-    Etalase Produk UMKM Kecamatan Dayeuhluhur
-
-</footer>
-
-
-
-<!-- =====================================================
-     BOOTSTRAP JS
-====================================================== -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-></script>
-
-
-
-<!-- =====================================================
-     PRODUK JS
-====================================================== -->
-
-<script
-    src="assets/js/produk.js"
-></script>
+    <script src="assets/js/produk.js"></script>
 
 
 </body>
 
 </html>
-```
