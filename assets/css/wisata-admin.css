@@ -1,7 +1,7 @@
 /* =========================================================
    PLAZA DAYEUHLUHUR
-   ADMIN DESTINASI WISATA
-   WISATA-ADMIN.CSS V1
+   ADMIN WISATA
+   WISATA-ADMIN.CSS V2 FINAL
 ========================================================= */
 
 
@@ -10,95 +10,52 @@
 ========================================================= */
 
 .wisata-page-intro {
-
     position: relative;
 
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
+    justify-content: space-between;
 
     gap: 30px;
 
-    margin-bottom: 30px;
+    padding: 30px 32px;
 
-    padding: 32px 36px;
+    margin-bottom: 30px;
 
     border-radius: 22px;
 
     background:
         linear-gradient(
             135deg,
-            #173f35 0%,
-            #286653 55%,
-            #3c8068 100%
+            #f0fdf4,
+            #ecfdf5
         );
 
-    color: #ffffff;
+    border: 1px solid #d1fae5;
 
     overflow: hidden;
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.08);
-
-}
-
-
-.wisata-page-intro::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 260px;
-
-    height: 260px;
-
-    right: -80px;
-
-    top: -120px;
-
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.08);
-
 }
 
 
 .wisata-page-intro::after {
-
     content: "";
 
     position: absolute;
 
-    width: 180px;
+    width: 220px;
+    height: 220px;
 
-    height: 180px;
-
-    right: 100px;
-
-    bottom: -120px;
+    right: -80px;
+    top: -100px;
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.05);
-
-}
-
-
-.wisata-page-intro > div:first-child {
-
-    position: relative;
-
-    z-index: 2;
-
+    background: rgba(16, 185, 129, 0.08);
 }
 
 
 .wisata-label {
-
-    display: inline-block;
+    display: block;
 
     margin-bottom: 8px;
 
@@ -106,29 +63,25 @@
 
     font-weight: 700;
 
-    letter-spacing: 1.8px;
+    letter-spacing: 1.5px;
 
-    opacity: 0.75;
-
+    color: #059669;
 }
 
 
 .wisata-page-intro h2 {
+    margin: 0 0 8px;
 
-    margin: 0 0 10px;
-
-    font-size: 30px;
+    font-size: 27px;
 
     font-weight: 700;
 
-    line-height: 1.2;
-
+    color: #172033;
 }
 
 
 .wisata-page-intro p {
-
-    max-width: 680px;
+    max-width: 700px;
 
     margin: 0;
 
@@ -136,65 +89,43 @@
 
     line-height: 1.7;
 
-    opacity: 0.85;
-
+    color: #64748b;
 }
 
 
 .wisata-intro-icon {
-
     position: relative;
-
     z-index: 2;
+
+    flex-shrink: 0;
+
+    width: 78px;
+    height: 78px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    flex-shrink: 0;
+    border-radius: 20px;
 
-    width: 100px;
+    background: #ffffff;
 
-    height: 100px;
+    color: #059669;
 
-    border-radius: 28px;
+    font-size: 34px;
 
-    background: rgba(255, 255, 255, 0.12);
-
-    border: 1px solid rgba(255, 255, 255, 0.15);
-
-    backdrop-filter: blur(10px);
-
-}
-
-
-.wisata-intro-icon i {
-
-    font-size: 48px;
-
-    opacity: 0.9;
-
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.08);
 }
 
 
 /* =========================================================
-   SECTION HEADING
-========================================================= */
-
-.wisata-admin-section-title {
-
-    margin-bottom: 18px;
-
-}
-
-
-/* =========================================================
-   STAT CARD
+   STATISTIC CARDS
 ========================================================= */
 
 .wisata-stat-card {
+    min-height: 118px;
 
     display: flex;
 
@@ -202,133 +133,104 @@
 
     gap: 16px;
 
-    min-height: 118px;
-
     padding: 20px;
-
-    background: #ffffff;
-
-    border: 1px solid #edf0f2;
 
     border-radius: 18px;
 
+    background: #ffffff;
+
+    border: 1px solid #e8edf3;
+
     box-shadow:
-        0 5px 20px rgba(25, 40, 35, 0.05);
+        0 5px 18px rgba(15, 23, 42, 0.05);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-
 }
 
 
 .wisata-stat-card:hover {
-
     transform: translateY(-3px);
 
     box-shadow:
-        0 12px 28px rgba(25, 40, 35, 0.09);
-
+        0 12px 28px rgba(15, 23, 42, 0.09);
 }
 
 
 .wisata-stat-icon {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
     width: 52px;
-
     height: 52px;
 
     flex-shrink: 0;
 
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
     border-radius: 15px;
 
     font-size: 21px;
-
 }
 
 
 .wisata-stat-icon.total {
-
-    background: #eaf5f1;
-
-    color: #26705c;
-
+    background: #ecfdf5;
+    color: #059669;
 }
 
 
 .wisata-stat-icon.unggulan {
-
-    background: #fff5dc;
-
-    color: #b77a13;
-
+    background: #fffbeb;
+    color: #d97706;
 }
 
 
 .wisata-stat-icon.potensi {
-
-    background: #eaf7eb;
-
-    color: #3f8750;
-
+    background: #f0fdf4;
+    color: #16a34a;
 }
 
 
 .wisata-stat-icon.desa {
-
-    background: #edf3fb;
-
-    color: #3f6795;
-
+    background: #eff6ff;
+    color: #2563eb;
 }
 
 
 .wisata-stat-card span {
-
     display: block;
 
-    margin-bottom: 2px;
-
-    color: #7c8790;
+    margin-bottom: 3px;
 
     font-size: 12px;
 
-    font-weight: 600;
-
+    color: #64748b;
 }
 
 
 .wisata-stat-card strong {
-
     display: block;
-
-    color: #18252b;
 
     font-size: 27px;
 
-    font-weight: 700;
-
     line-height: 1.2;
 
+    font-weight: 700;
+
+    color: #172033;
 }
 
 
 .wisata-stat-card small {
-
     display: block;
 
     margin-top: 3px;
 
-    color: #9aa3aa;
+    font-size: 11px;
 
-    font-size: 10px;
-
+    color: #94a3b8;
 }
 
 
@@ -337,146 +239,148 @@
 ========================================================= */
 
 .wisata-toolbar {
-
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 18px;
 
-    margin-top: 28px;
+    margin-top: 30px;
+    margin-bottom: 25px;
 
-    margin-bottom: 24px;
-
-    padding: 15px;
-
-    background: #ffffff;
-
-    border: 1px solid #edf0f2;
+    padding: 18px;
 
     border-radius: 18px;
 
-    box-shadow:
-        0 5px 18px rgba(25, 40, 35, 0.04);
+    background: #ffffff;
 
+    border: 1px solid #e8edf3;
+
+    box-shadow:
+        0 5px 18px rgba(15, 23, 42, 0.04);
 }
 
 
-.wisata-search {
+/* =========================================================
+   SEARCH
+========================================================= */
 
+.wisata-search {
     position: relative;
 
     flex: 1;
 
-    min-width: 250px;
-
+    max-width: 430px;
 }
 
 
 .wisata-search i {
-
     position: absolute;
 
-    left: 16px;
-
+    left: 15px;
     top: 50%;
 
     transform: translateY(-50%);
 
-    color: #8d989f;
+    color: #94a3b8;
 
     font-size: 14px;
-
 }
 
 
 .wisata-search input {
-
     width: 100%;
 
-    height: 45px;
+    height: 44px;
 
-    padding:
-        0 16px 0 43px;
+    padding: 0 16px 0 42px;
 
-    border: 1px solid #e4e8ea;
+    border: 1px solid #dbe2ea;
 
     border-radius: 12px;
 
     outline: none;
 
-    color: #243139;
-
-    background: #fafbfb;
-
     font-size: 13px;
+
+    color: #172033;
+
+    background: #f8fafc;
 
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
-
 }
 
 
 .wisata-search input:focus {
-
-    border-color: #4d8a76;
-
-    box-shadow:
-        0 0 0 3px rgba(77, 138, 118, 0.10);
+    border-color: #10b981;
 
     background: #ffffff;
 
+    box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.10);
 }
 
 
-.wisata-filter {
+.wisata-search input::placeholder {
+    color: #94a3b8;
+}
 
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.wisata-filter {
     display: flex;
 
     align-items: center;
 
-    gap: 9px;
+    gap: 10px;
 
+    flex-wrap: wrap;
 }
 
 
 .wisata-filter select {
-
-    height: 45px;
+    height: 44px;
 
     min-width: 145px;
 
-    padding:
-        0 35px 0 13px;
+    padding: 0 35px 0 13px;
 
-    border: 1px solid #e4e8ea;
+    border: 1px solid #dbe2ea;
 
     border-radius: 12px;
 
+    background: #f8fafc;
+
+    color: #475569;
+
+    font-size: 13px;
+
     outline: none;
 
-    background: #fafbfb;
-
-    color: #45515a;
-
-    font-size: 12px;
-
     cursor: pointer;
-
 }
 
 
 .wisata-filter select:focus {
+    border-color: #10b981;
 
-    border-color: #4d8a76;
-
+    box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.10);
 }
 
 
+/* =========================================================
+   RESET BUTTON
+========================================================= */
+
 .btn-reset-filter {
+    height: 44px;
 
     display: inline-flex;
 
@@ -486,38 +390,30 @@
 
     gap: 7px;
 
-    height: 45px;
+    padding: 0 15px;
 
-    padding:
-        0 14px;
-
-    border: 1px solid #e4e8ea;
+    border: 1px solid #dbe2ea;
 
     border-radius: 12px;
 
     background: #ffffff;
 
-    color: #69757c;
+    color: #64748b;
 
-    font-size: 12px;
-
-    font-weight: 600;
+    font-size: 13px;
 
     cursor: pointer;
 
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-
+    transition: all 0.2s ease;
 }
 
 
 .btn-reset-filter:hover {
+    border-color: #10b981;
 
-    background: #f2f5f4;
+    color: #059669;
 
-    color: #286653;
-
+    background: #ecfdf5;
 }
 
 
@@ -526,7 +422,6 @@
 ========================================================= */
 
 .wisata-list-header {
-
     display: flex;
 
     align-items: center;
@@ -535,42 +430,42 @@
 
     gap: 20px;
 
-    margin-bottom: 18px;
-
+    margin-bottom: 20px;
 }
 
 
 .wisata-list-header span {
-
     display: block;
 
     margin-bottom: 4px;
-
-    color: #8a959b;
 
     font-size: 10px;
 
     font-weight: 700;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.4px;
 
+    color: #10b981;
 }
 
 
 .wisata-list-header h3 {
-
     margin: 0;
-
-    color: #1c2b31;
 
     font-size: 21px;
 
     font-weight: 700;
 
+    color: #172033;
 }
 
 
+/* =========================================================
+   ADD BUTTON
+========================================================= */
+
 .btn-add-wisata {
+    height: 44px;
 
     display: inline-flex;
 
@@ -580,45 +475,36 @@
 
     gap: 8px;
 
-    min-height: 43px;
+    padding: 0 18px;
 
-    padding:
-        0 18px;
-
-    border: none;
+    border: 0;
 
     border-radius: 12px;
 
-    background: #286653;
+    background: #059669;
 
     color: #ffffff;
 
-    font-size: 12px;
+    font-size: 13px;
 
-    font-weight: 700;
+    font-weight: 600;
 
     cursor: pointer;
 
     box-shadow:
-        0 6px 15px rgba(40, 102, 83, 0.18);
+        0 7px 18px rgba(5, 150, 105, 0.20);
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-
+    transition: all 0.2s ease;
 }
 
 
 .btn-add-wisata:hover {
+    background: #047857;
 
     transform: translateY(-2px);
 
-    background: #1f5645;
-
     box-shadow:
-        0 9px 20px rgba(40, 102, 83, 0.23);
-
+        0 10px 22px rgba(5, 150, 105, 0.25);
 }
 
 
@@ -627,36 +513,33 @@
 ========================================================= */
 
 .wisata-loading {
+    min-height: 180px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
+    flex-direction: column;
+
     gap: 12px;
-
-    min-height: 180px;
-
-    margin-bottom: 30px;
-
-    border: 1px dashed #dce3e0;
 
     border-radius: 18px;
 
     background: #ffffff;
 
-    color: #7b878e;
+    border: 1px solid #e8edf3;
+
+    color: #64748b;
 
     font-size: 13px;
-
 }
 
 
 .wisata-loading i {
+    color: #059669;
 
-    color: #286653;
-
+    font-size: 22px;
 }
 
 
@@ -665,67 +548,54 @@
 ========================================================= */
 
 .wisata-empty {
-
     padding: 55px 20px;
-
-    margin-bottom: 30px;
 
     text-align: center;
 
-    background: #ffffff;
-
-    border: 1px dashed #dce3e0;
-
     border-radius: 18px;
 
+    background: #ffffff;
+
+    border: 1px dashed #cbd5e1;
 }
 
 
 .empty-icon {
+    width: 64px;
+    height: 64px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    width: 65px;
+    margin: 0 auto 15px;
 
-    height: 65px;
+    border-radius: 18px;
 
-    margin:
-        0 auto 15px;
+    background: #ecfdf5;
 
-    border-radius: 20px;
+    color: #059669;
 
-    background: #edf5f2;
-
-    color: #4d8875;
-
-    font-size: 25px;
-
+    font-size: 27px;
 }
 
 
 .wisata-empty h3 {
-
     margin: 0 0 7px;
 
-    color: #28363c;
+    font-size: 18px;
 
-    font-size: 17px;
-
+    color: #172033;
 }
 
 
 .wisata-empty p {
-
     margin: 0;
 
-    color: #929ca2;
+    color: #94a3b8;
 
-    font-size: 12px;
-
+    font-size: 13px;
 }
 
 
@@ -734,34 +604,32 @@
 ========================================================= */
 
 .wisata-card {
+    position: relative;
 
     height: 100%;
 
     overflow: hidden;
 
-    background: #ffffff;
-
-    border: 1px solid #edf0f2;
-
     border-radius: 20px;
 
+    background: #ffffff;
+
+    border: 1px solid #e8edf3;
+
     box-shadow:
-        0 6px 22px rgba(25, 40, 35, 0.055);
+        0 6px 20px rgba(15, 23, 42, 0.06);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-
 }
 
 
 .wisata-card:hover {
-
     transform: translateY(-5px);
 
     box-shadow:
-        0 15px 32px rgba(25, 40, 35, 0.11);
-
+        0 16px 35px rgba(15, 23, 42, 0.11);
 }
 
 
@@ -770,22 +638,18 @@
 ========================================================= */
 
 .wisata-card-image {
-
     position: relative;
 
-    height: 205px;
+    height: 190px;
 
     overflow: hidden;
 
-    background: #e9eeee;
-
+    background: #e2e8f0;
 }
 
 
 .wisata-card-image img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -793,60 +657,24 @@
     display: block;
 
     transition:
-        transform 0.45s ease;
-
+        transform 0.4s ease;
 }
 
 
 .wisata-card:hover
 .wisata-card-image img {
-
     transform: scale(1.05);
-
 }
 
 
 /* =========================================================
-   IMAGE OVERLAY
+   CARD BADGES
 ========================================================= */
 
-.wisata-card-image::after {
-
-    content: "";
-
+.wisata-card-badge {
     position: absolute;
-
-    left: 0;
-
-    right: 0;
-
-    bottom: 0;
-
-    height: 45%;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(0, 0, 0, 0.42)
-        );
-
-    pointer-events: none;
-
-}
-
-
-/* =========================================================
-   CATEGORY BADGE
-========================================================= */
-
-.wisata-card-category {
-
-    position: absolute;
-
-    z-index: 3;
 
     top: 13px;
-
     left: 13px;
 
     display: inline-flex;
@@ -855,52 +683,57 @@
 
     gap: 5px;
 
-    padding:
-        6px 10px;
+    padding: 6px 10px;
 
-    border-radius: 999px;
+    border-radius: 30px;
 
-    background: rgba(255, 255, 255, 0.93);
+    background: rgba(255, 255, 255, 0.94);
 
-    color: #286653;
+    color: #059669;
 
     font-size: 10px;
 
     font-weight: 700;
 
     box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.08);
-
+        0 3px 10px rgba(0, 0, 0, 0.10);
 }
 
 
-/* =========================================================
-   STATUS BADGE
-========================================================= */
-
 .wisata-card-status {
-
     position: absolute;
 
-    z-index: 3;
-
+    top: 13px;
     right: 13px;
 
-    top: 13px;
+    padding: 6px 10px;
 
-    padding:
-        6px 9px;
+    border-radius: 30px;
 
-    border-radius: 999px;
-
-    background: rgba(40, 102, 83, 0.92);
-
-    color: #ffffff;
-
-    font-size: 9px;
+    font-size: 10px;
 
     font-weight: 700;
 
+    background: rgba(255, 255, 255, 0.94);
+
+    color: #64748b;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+.wisata-card-status.unggulan {
+    color: #b45309;
+
+    background: #fffbeb;
+}
+
+
+.wisata-card-status.potensi {
+    color: #047857;
+
+    background: #ecfdf5;
 }
 
 
@@ -909,169 +742,117 @@
 ========================================================= */
 
 .wisata-card-body {
-
-    padding: 19px;
-
+    padding: 18px;
 }
 
 
 .wisata-card-title {
+    margin: 0 0 7px;
 
-    display: flex;
+    font-size: 18px;
 
-    align-items: flex-start;
-
-    gap: 9px;
-
-    margin-bottom: 8px;
-
-}
-
-
-.wisata-card-icon {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 32px;
-
-    height: 32px;
-
-    flex-shrink: 0;
-
-    border-radius: 10px;
-
-    background: #edf5f2;
-
-    font-size: 17px;
-
-}
-
-
-.wisata-card-title h4 {
-
-    margin: 2px 0 0;
-
-    color: #1d2c32;
-
-    font-size: 17px;
+    line-height: 1.35;
 
     font-weight: 700;
 
-    line-height: 1.3;
-
+    color: #172033;
 }
 
-
-.wisata-card-description {
-
-    display: -webkit-box;
-
-    margin:
-        0 0 14px;
-
-    color: #7c878d;
-
-    font-size: 11px;
-
-    line-height: 1.65;
-
-    -webkit-line-clamp: 2;
-
-    -webkit-box-orient: vertical;
-
-    overflow: hidden;
-
-}
-
-
-/* =========================================================
-   LOCATION
-========================================================= */
 
 .wisata-card-location {
-
     display: flex;
 
     align-items: center;
 
-    gap: 7px;
+    gap: 6px;
 
-    margin-bottom: 7px;
+    margin-bottom: 11px;
 
-    color: #657279;
+    color: #64748b;
 
-    font-size: 11px;
-
+    font-size: 12px;
 }
 
 
 .wisata-card-location i {
+    color: #10b981;
+}
 
-    width: 15px;
 
-    color: #4c8170;
+.wisata-card-description {
+    min-height: 58px;
 
-    text-align: center;
+    margin: 0 0 15px;
 
+    font-size: 12px;
+
+    line-height: 1.65;
+
+    color: #64748b;
 }
 
 
 /* =========================================================
-   TYPE
+   CARD META
 ========================================================= */
 
-.wisata-card-type {
-
+.wisata-card-meta {
     display: flex;
 
-    align-items: center;
+    flex-wrap: wrap;
 
     gap: 7px;
 
-    color: #657279;
+    padding-bottom: 15px;
 
-    font-size: 11px;
-
+    border-bottom: 1px solid #edf1f5;
 }
 
 
-.wisata-card-type i {
+.wisata-meta-item {
+    display: inline-flex;
 
-    width: 15px;
+    align-items: center;
 
-    color: #b18948;
+    gap: 5px;
 
-    text-align: center;
+    padding: 5px 9px;
 
+    border-radius: 8px;
+
+    background: #f8fafc;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+.wisata-meta-item i {
+    color: #059669;
 }
 
 
 /* =========================================================
-   CARD FOOTER
+   CARD ACTIONS
 ========================================================= */
 
-.wisata-card-footer {
-
+.wisata-card-actions {
     display: flex;
 
-    align-items: center;
-
-    gap: 7px;
-
-    margin-top: 17px;
+    gap: 8px;
 
     padding-top: 14px;
-
-    border-top: 1px solid #edf0f1;
-
 }
 
 
-.wisata-card-action {
+.wisata-card-actions button,
+.wisata-card-actions a {
+    flex: 1;
+
+    height: 38px;
 
     display: inline-flex;
 
@@ -1081,83 +862,448 @@
 
     gap: 6px;
 
-    flex: 1;
+    border-radius: 10px;
 
-    height: 36px;
+    font-size: 11px;
 
-    padding:
-        0 9px;
-
-    border-radius: 9px;
-
-    border: 1px solid #e2e8e5;
-
-    background: #ffffff;
-
-    color: #536169;
-
-    font-size: 10px;
-
-    font-weight: 700;
+    font-weight: 600;
 
     text-decoration: none;
 
     cursor: pointer;
 
+    transition: all 0.2s ease;
+}
+
+
+.btn-wisata-edit {
+    border: 1px solid #dbeafe;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+}
+
+
+.btn-wisata-edit:hover {
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+
+.btn-wisata-map {
+    border: 1px solid #d1fae5;
+
+    background: #ecfdf5;
+
+    color: #059669;
+}
+
+
+.btn-wisata-map:hover {
+    background: #d1fae5;
+
+    color: #047857;
+}
+
+
+.btn-wisata-delete {
+    border: 1px solid #fee2e2;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+}
+
+
+.btn-wisata-delete:hover {
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   MODAL WISATA
+========================================================= */
+
+.wisata-modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(15, 23, 42, 0.60);
+
+    backdrop-filter: blur(4px);
+}
+
+
+.wisata-modal-overlay.show {
+    display: flex;
+}
+
+
+.wisata-modal {
+    width: 100%;
+
+    max-width: 760px;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    border-radius: 22px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 25px 70px rgba(15, 23, 42, 0.25);
+
+    animation:
+        wisataModalIn 0.25s ease;
+}
+
+
+@keyframes wisataModalIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.wisata-modal-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 24px 26px;
+
+    border-bottom: 1px solid #edf1f5;
+}
+
+
+.wisata-modal-header span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #059669;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+}
+
+
+.wisata-modal-header h3 {
+    margin: 0 0 5px;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.wisata-modal-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+.wisata-modal-close {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    cursor: pointer;
+}
+
+
+.wisata-modal-close:hover {
+    background: #fee2e2;
+
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.wisata-modal-body {
+    padding: 25px 26px;
+}
+
+
+.wisata-form-group {
+    margin-bottom: 17px;
+}
+
+
+.wisata-form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+
+.wisata-form-group label span {
+    color: #dc2626;
+}
+
+
+.wisata-form-control {
+    width: 100%;
+
+    min-height: 43px;
+
+    padding: 9px 12px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    color: #172033;
+
+    font-size: 13px;
+
+    outline: none;
+
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
-
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-.wisata-card-action:hover {
+.wisata-form-control:focus {
+    border-color: #10b981;
 
-    background: #f0f6f3;
+    background: #ffffff;
 
-    border-color: #cddfd8;
-
-    color: #286653;
-
+    box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.10);
 }
 
 
-.wisata-card-action.maps {
+textarea.wisata-form-control {
+    min-height: 100px;
 
-    color: #3f6795;
-
+    resize: vertical;
 }
 
 
-.wisata-card-action.maps:hover {
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
 
-    background: #eef4fb;
+.wisata-modal-footer {
+    display: flex;
 
-    border-color: #d5e1ef;
+    justify-content: flex-end;
 
-    color: #315b8d;
+    gap: 10px;
 
+    padding: 18px 26px;
+
+    border-top: 1px solid #edf1f5;
+
+    background: #f8fafc;
 }
 
 
-.wisata-card-action.delete {
+.btn-wisata-cancel,
+.btn-wisata-save {
+    height: 42px;
 
-    flex: 0 0 36px;
+    padding: 0 18px;
 
-    color: #a05a5a;
+    border-radius: 10px;
 
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
 }
 
 
-.wisata-card-action.delete:hover {
+.btn-wisata-cancel {
+    border: 1px solid #dbe2ea;
 
-    background: #fff1f1;
+    background: #ffffff;
 
-    border-color: #efd4d4;
+    color: #64748b;
+}
 
-    color: #a23e3e;
 
+.btn-wisata-cancel:hover {
+    background: #f1f5f9;
+}
+
+
+.btn-wisata-save {
+    border: 0;
+
+    background: #059669;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 6px 15px rgba(5, 150, 105, 0.18);
+}
+
+
+.btn-wisata-save:hover {
+    background: #047857;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.wisata-toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    z-index: 10000;
+
+    min-width: 300px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    border-radius: 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 15px 40px rgba(15, 23, 42, 0.15);
+
+    opacity: 0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        all 0.25s ease;
+}
+
+
+.wisata-toast.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+.wisata-toast.success {
+    border-left: 4px solid #10b981;
+}
+
+
+.wisata-toast.error {
+    border-left: 4px solid #ef4444;
+}
+
+
+.wisata-toast-icon {
+    font-size: 19px;
+}
+
+
+.wisata-toast.success
+.wisata-toast-icon {
+    color: #059669;
+}
+
+
+.wisata-toast.error
+.wisata-toast-icon {
+    color: #dc2626;
+}
+
+
+.wisata-toast-content {
+    flex: 1;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #334155;
 }
 
 
@@ -1168,36 +1314,24 @@
 @media (max-width: 1100px) {
 
     .wisata-toolbar {
-
-        flex-direction: column;
-
         align-items: stretch;
 
+        flex-direction: column;
     }
 
 
     .wisata-search {
-
-        width: 100%;
-
+        max-width: none;
     }
 
 
     .wisata-filter {
-
         width: 100%;
-
-        flex-wrap: wrap;
-
     }
 
 
     .wisata-filter select {
-
         flex: 1;
-
-        min-width: 140px;
-
     }
 
 }
@@ -1209,152 +1343,138 @@
 
 @media (max-width: 768px) {
 
-
     .wisata-page-intro {
-
-        padding: 25px;
+        padding: 23px;
 
         border-radius: 18px;
-
     }
 
 
     .wisata-page-intro h2 {
-
-        font-size: 23px;
-
-    }
-
-
-    .wisata-page-intro p {
-
-        font-size: 12px;
-
+        font-size: 22px;
     }
 
 
     .wisata-intro-icon {
+        width: 60px;
+        height: 60px;
 
-        width: 70px;
+        font-size: 25px;
 
-        height: 70px;
-
-        border-radius: 20px;
-
-    }
-
-
-    .wisata-intro-icon i {
-
-        font-size: 31px;
-
+        border-radius: 15px;
     }
 
 
     .wisata-toolbar {
+        padding: 14px;
 
-        padding: 12px;
-
+        border-radius: 15px;
     }
 
 
     .wisata-filter {
-
         display: grid;
 
         grid-template-columns:
-            1fr 1fr;
+            repeat(2, 1fr);
 
+        gap: 8px;
     }
 
 
     .wisata-filter select {
-
         width: 100%;
 
         min-width: 0;
-
     }
 
 
     .btn-reset-filter {
-
         width: 100%;
-
     }
 
 
     .wisata-list-header {
-
         align-items: flex-start;
 
         flex-direction: column;
-
     }
 
 
     .btn-add-wisata {
-
         width: 100%;
-
     }
 
 
     .wisata-card-image {
-
         height: 210px;
+    }
 
+
+    .wisata-modal {
+        max-height: 95vh;
+
+        border-radius: 18px;
+    }
+
+
+    .wisata-modal-header,
+    .wisata-modal-body {
+        padding: 20px;
+    }
+
+
+    .wisata-modal-footer {
+        padding: 15px 20px;
+    }
+
+
+    .wisata-toast {
+        left: 15px;
+        right: 15px;
+
+        bottom: 15px;
+
+        min-width: 0;
     }
 
 }
 
 
 /* =========================================================
-   SMALL MOBILE
+   RESPONSIVE SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 480px) {
 
-
     .wisata-page-intro {
-
-        padding: 22px;
-
-    }
-
-
-    .wisata-page-intro h2 {
-
-        font-size: 20px;
-
+        display: block;
     }
 
 
     .wisata-intro-icon {
-
         display: none;
-
     }
 
 
     .wisata-filter {
-
         grid-template-columns: 1fr;
-
-    }
-
-
-    .wisata-stat-card {
-
-        min-height: 105px;
-
     }
 
 
     .wisata-card-image {
+        height: 190px;
+    }
 
-        height: 200px;
 
+    .wisata-card-actions {
+        flex-direction: column;
+    }
+
+
+    .wisata-card-actions button,
+    .wisata-card-actions a {
+        width: 100%;
     }
 
 }
