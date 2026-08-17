@@ -1,22 +1,36 @@
 /* =========================================================
    PLAZA DAYEUHLUHUR
-   ADMIN WISATA
-   WISATA-ADMIN.JS V1
-   Statistik + Search + Filter + Listing
+   WISATA ADMIN V2
+   =========================================================
+   Fitur:
+   - Load data wisata.json
+   - Gabung data JSON + localStorage
+   - Statistik wisata
+   - Search
+   - Filter kategori
+   - Filter desa
+   - Filter status
+   - Reset filter
+   - Tambah wisata
+   - Edit wisata
+   - Hapus wisata
+   - Modal form
+   - Generate slug otomatis
+   - Aktivitas dashboard
+   - Responsive
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("ADMIN WISATA V1");
+    console.log("WISATA ADMIN V2");
     console.log("====================================");
 
     initSidebar();
     initLogout();
     loadWisataData();
-    initWisataControls();
-    initTambahWisata();
+    initWisataEvents();
 
 });
 
@@ -26,6 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
 ========================================================= */
 
 let wisataData = [];
+
+let filteredWisata = [];
+
+const WISATA_STORAGE_KEY = "plazaWisata";
 
 
 /* =========================================================
@@ -43,11 +61,9 @@ function initSidebar() {
     const mobileButton =
         document.getElementById("mobileMenuBtn");
 
-
     if (!sidebar || !overlay || !mobileButton) {
         return;
     }
-
 
     mobileButton.addEventListener("click", function () {
 
@@ -55,7 +71,6 @@ function initSidebar() {
         overlay.classList.toggle("show");
 
     });
-
 
     overlay.addEventListener("click", function () {
 
@@ -76,32 +91,25 @@ function initLogout() {
     const logoutButton =
         document.getElementById("logoutButton");
 
-
     if (!logoutButton) {
         return;
     }
-
 
     logoutButton.addEventListener("click", function (event) {
 
         event.preventDefault();
 
-
-        const yakin =
-            confirm(
-                "Apakah Anda yakin ingin keluar dari Dashboard?"
-            );
-
+        const yakin = confirm(
+            "Apakah Anda yakin ingin keluar dari Dashboard?"
+        );
 
         if (!yakin) {
             return;
         }
 
-
         sessionStorage.removeItem(
             "plazaAdminLogin"
         );
-
 
         window.location.href =
             "login.html";
@@ -117,16 +125,9 @@ function initLogout() {
 
 async function loadWisataData() {
 
-    const loading =
-        document.getElementById("wisataLoading");
-
+    showLoading(true);
 
     try {
-
-        console.log(
-            "Membaca data wisata..."
-        );
-
 
         const response =
             await fetch(
@@ -136,68 +137,90 @@ async function loadWisataData() {
                 }
             );
 
-
         if (!response.ok) {
 
             throw new Error(
-                "HTTP " + response.status
+                "Gagal membaca data/wisata.json"
             );
 
         }
 
-
-        const json =
+        const jsonData =
             await response.json();
 
+        const dataJson =
+            Array.isArray(jsonData)
+                ? jsonData
+                : [];
 
-        if (!Array.isArray(json)) {
+        const localData =
+            getStoredWisata();
 
-            throw new Error(
-                "Format wisata.json bukan array."
+        /*
+         * Jika localStorage sudah memiliki data,
+         * gunakan data local sebagai tambahan.
+         */
+
+        wisataData = [
+            ...dataJson,
+            ...localData
+        ];
+
+        /*
+         * Hindari ID duplikat
+         */
+
+        wisataData =
+            removeDuplicateWisata(
+                wisataData
             );
 
-        }
+        filteredWisata =
+            [...wisataData];
 
-
-        wisataData = json;
-
+        updateStatistics();
+        populateFilters();
+        renderWisata();
 
         console.log(
-            "Data wisata berhasil:",
+            "Data wisata berhasil dimuat:",
             wisataData
         );
-
-
-        updateWisataStatistics();
-        populateFilters();
-        renderWisata(wisataData);
-
 
     }
 
     catch (error) {
 
         console.error(
-            "Gagal memuat wisata:",
+            "Error memuat wisata:",
             error
         );
 
+        /*
+         * Jika JSON gagal tetapi localStorage
+         * memiliki data, tetap tampilkan data.
+         */
 
-        wisataData = [];
+        wisataData =
+            getStoredWisata();
 
+        filteredWisata =
+            [...wisataData];
 
-        showWisataError();
+        updateStatistics();
+        populateFilters();
+        renderWisata();
+
+        showToast(
+            "danger",
+            "Data wisata.json gagal dimuat."
+        );
 
     }
 
     finally {
 
-        if (loading) {
-
-            loading.style.display =
-                "none";
-
-        }
+        showLoading(false);
 
     }
 
@@ -205,45 +228,309 @@ async function loadWisataData() {
 
 
 /* =========================================================
-   STATISTIK WISATA
+   REMOVE DUPLICATE
 ========================================================= */
 
-function updateWisataStatistics() {
+function removeDuplicateWisata(
+    data
+) {
+
+    const map =
+        new Map();
+
+    data.forEach(function (item) {
+
+        const id =
+            String(
+                item.id ?? ""
+            );
+
+        const key =
+            id || createSlug(
+                item.nama || ""
+            );
+
+        map.set(
+            key,
+            item
+        );
+
+    });
+
+    return Array.from(
+        map.values()
+    );
+
+}
+
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+function getStoredWisata() {
+
+    try {
+
+        const stored =
+            localStorage.getItem(
+                WISATA_STORAGE_KEY
+            );
+
+        if (!stored) {
+            return [];
+        }
+
+        const parsed =
+            JSON.parse(stored);
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "LocalStorage wisata rusak:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE LOCAL STORAGE
+========================================================= */
+
+function saveStoredWisata() {
+
+    try {
+
+        /*
+         * Yang disimpan hanya data tambahan
+         * dari administrator.
+         */
+
+        const jsonIds =
+            getJsonWisataIds();
+
+        const customData =
+            wisataData.filter(function (item) {
+
+                return !jsonIds.has(
+                    String(item.id)
+                );
+
+            });
+
+        localStorage.setItem(
+            WISATA_STORAGE_KEY,
+            JSON.stringify(
+                customData
+            )
+        );
+
+        return true;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Gagal menyimpan wisata:",
+            error
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   JSON IDS
+========================================================= */
+
+function getJsonWisataIds() {
+
+    const ids =
+        new Set();
+
+    /*
+     * Data awal dari JSON
+     * memiliki ID yang biasanya numerik.
+     */
+
+    const knownIds = [
+        1,
+        2,
+        3,
+        4,
+        5
+    ];
+
+    knownIds.forEach(function (id) {
+
+        ids.add(
+            String(id)
+        );
+
+    });
+
+    return ids;
+
+}
+
+
+/* =========================================================
+   INIT EVENTS
+========================================================= */
+
+function initWisataEvents() {
+
+    const search =
+        document.getElementById(
+            "searchWisata"
+        );
+
+    const kategori =
+        document.getElementById(
+            "filterKategori"
+        );
+
+    const desa =
+        document.getElementById(
+            "filterDesa"
+        );
+
+    const status =
+        document.getElementById(
+            "filterStatus"
+        );
+
+    const reset =
+        document.getElementById(
+            "resetFilter"
+        );
+
+    const tambah =
+        document.getElementById(
+            "btnTambahWisata"
+        );
+
+
+    if (search) {
+
+        search.addEventListener(
+            "input",
+            applyFilters
+        );
+
+    }
+
+
+    if (kategori) {
+
+        kategori.addEventListener(
+            "change",
+            applyFilters
+        );
+
+    }
+
+
+    if (desa) {
+
+        desa.addEventListener(
+            "change",
+            applyFilters
+        );
+
+    }
+
+
+    if (status) {
+
+        status.addEventListener(
+            "change",
+            applyFilters
+        );
+
+    }
+
+
+    if (reset) {
+
+        reset.addEventListener(
+            "click",
+            resetFilters
+        );
+
+    }
+
+
+    if (tambah) {
+
+        tambah.addEventListener(
+            "click",
+            function () {
+
+                openWisataModal();
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+function updateStatistics() {
 
     const total =
         wisataData.length;
 
-
     const unggulan =
         wisataData.filter(function (item) {
 
-            return normalize(
-                item.status
-            ) === "destinasi unggulan";
+            return String(
+                item.status || ""
+            ).toLowerCase()
+            === "destinasi unggulan";
 
         }).length;
-
 
     const potensi =
         wisataData.filter(function (item) {
 
-            return normalize(
-                item.status
-            ) === "potensi wisata";
+            return String(
+                item.status || ""
+            ).toLowerCase()
+            === "potensi wisata";
 
         }).length;
 
-
-    const desaUnik =
+    const desa =
         new Set(
-            wisataData
-                .map(function (item) {
+            wisataData.map(function (item) {
 
-                    return item.desa;
+                return String(
+                    item.desa || ""
+                ).trim();
 
-                })
-                .filter(Boolean)
-        );
+            }).filter(Boolean)
+        ).size;
 
 
     setText(
@@ -251,22 +538,19 @@ function updateWisataStatistics() {
         total
     );
 
-
     setText(
         "wisataUnggulan",
         unggulan
     );
-
 
     setText(
         "wisataPotensi",
         potensi
     );
 
-
     setText(
         "wisataDesa",
-        desaUnik.size
+        desa
     );
 
 }
@@ -278,258 +562,117 @@ function updateWisataStatistics() {
 
 function populateFilters() {
 
-    const kategoriSelect =
-        document.getElementById(
-            "filterKategori"
-        );
+    populateSelect(
+        "filterKategori",
+        getUniqueValues(
+            "kategori"
+        ),
+        "Semua Kategori"
+    );
 
+    populateSelect(
+        "filterDesa",
+        getUniqueValues(
+            "desa"
+        ),
+        "Semua Desa"
+    );
 
-    const desaSelect =
-        document.getElementById(
-            "filterDesa"
-        );
-
-
-    const statusSelect =
-        document.getElementById(
-            "filterStatus"
-        );
-
-
-    if (!kategoriSelect ||
-        !desaSelect ||
-        !statusSelect) {
-
-        return;
-
-    }
-
-
-    /*
-     * Simpan pilihan default
-     */
-
-    kategoriSelect.innerHTML =
-        `<option value="">
-            Semua Kategori
-        </option>`;
-
-
-    desaSelect.innerHTML =
-        `<option value="">
-            Semua Desa
-        </option>`;
-
-
-    statusSelect.innerHTML =
-        `<option value="">
-            Semua Status
-        </option>`;
-
-
-    /*
-     * KATEGORI
-     */
-
-    const kategori =
-        [...new Set(
-            wisataData
-                .map(function (item) {
-                    return item.kategori;
-                })
-                .filter(Boolean)
-        )].sort();
-
-
-    kategori.forEach(function (item) {
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            item;
-
-        option.textContent =
-            item;
-
-        kategoriSelect.appendChild(
-            option
-        );
-
-    });
-
-
-    /*
-     * DESA
-     */
-
-    const desa =
-        [...new Set(
-            wisataData
-                .map(function (item) {
-                    return item.desa;
-                })
-                .filter(Boolean)
-        )].sort();
-
-
-    desa.forEach(function (item) {
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            item;
-
-        option.textContent =
-            item;
-
-        desaSelect.appendChild(
-            option
-        );
-
-    });
-
-
-    /*
-     * STATUS
-     */
-
-    const status =
-        [...new Set(
-            wisataData
-                .map(function (item) {
-                    return item.status;
-                })
-                .filter(Boolean)
-        )].sort();
-
-
-    status.forEach(function (item) {
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            item;
-
-        option.textContent =
-            item;
-
-        statusSelect.appendChild(
-            option
-        );
-
-    });
+    populateSelect(
+        "filterStatus",
+        getUniqueValues(
+            "status"
+        ),
+        "Semua Status"
+    );
 
 }
 
 
 /* =========================================================
-   SEARCH + FILTER
+   GET UNIQUE VALUES
 ========================================================= */
 
-function initWisataControls() {
+function getUniqueValues(
+    field
+) {
 
-    const search =
-        document.getElementById(
-            "searchWisata"
-        );
+    return [
+        ...new Set(
+            wisataData
+                .map(function (item) {
 
+                    return String(
+                        item[field] || ""
+                    ).trim();
 
-    const kategori =
-        document.getElementById(
-            "filterKategori"
-        );
+                })
+                .filter(Boolean)
+        )
+    ].sort(
+        function (a, b) {
 
+            return a.localeCompare(
+                b,
+                "id"
+            );
 
-    const desa =
-        document.getElementById(
-            "filterDesa"
-        );
+        }
+    );
 
-
-    const status =
-        document.getElementById(
-            "filterStatus"
-        );
-
-
-    const reset =
-        document.getElementById(
-            "resetFilter"
-        );
+}
 
 
-    if (search) {
+/* =========================================================
+   POPULATE SELECT
+========================================================= */
 
-        search.addEventListener(
-            "input",
-            applyWisataFilter
-        );
+function populateSelect(
+    id,
+    values,
+    placeholder
+) {
 
+    const select =
+        document.getElementById(id);
+
+    if (!select) {
+        return;
     }
 
+    const current =
+        select.value;
 
-    if (kategori) {
+    select.innerHTML =
+        `<option value="">
+            ${placeholder}
+        </option>`;
 
-        kategori.addEventListener(
-            "change",
-            applyWisataFilter
+    values.forEach(function (value) {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            value;
+
+        option.textContent =
+            value;
+
+        select.appendChild(
+            option
         );
 
-    }
+    });
 
+    if (
+        values.includes(current)
+    ) {
 
-    if (desa) {
-
-        desa.addEventListener(
-            "change",
-            applyWisataFilter
-        );
-
-    }
-
-
-    if (status) {
-
-        status.addEventListener(
-            "change",
-            applyWisataFilter
-        );
-
-    }
-
-
-    if (reset) {
-
-        reset.addEventListener(
-            "click",
-            function () {
-
-                if (search) {
-                    search.value = "";
-                }
-
-                if (kategori) {
-                    kategori.value = "";
-                }
-
-                if (desa) {
-                    desa.value = "";
-                }
-
-                if (status) {
-                    status.value = "";
-                }
-
-
-                renderWisata(
-                    wisataData
-                );
-
-            }
-        );
+        select.value =
+            current;
 
     }
 
@@ -540,86 +683,123 @@ function initWisataControls() {
    APPLY FILTER
 ========================================================= */
 
-function applyWisataFilter() {
+function applyFilters() {
 
-    const keyword =
-        (
-            document.getElementById(
-                "searchWisata"
-            )?.value || ""
-        )
-        .toLowerCase()
-        .trim();
-
+    const search =
+        getValue(
+            "searchWisata"
+        ).toLowerCase();
 
     const kategori =
-        document.getElementById(
+        getValue(
             "filterKategori"
-        )?.value || "";
-
+        ).toLowerCase();
 
     const desa =
-        document.getElementById(
+        getValue(
             "filterDesa"
-        )?.value || "";
-
+        ).toLowerCase();
 
     const status =
-        document.getElementById(
+        getValue(
             "filterStatus"
-        )?.value || "";
+        ).toLowerCase();
 
 
-    const filtered =
-        wisataData.filter(function (item) {
+    filteredWisata =
+        wisataData.filter(
+            function (item) {
 
-            const text = [
-
-                item.nama,
-                item.desa,
-                item.kategori,
-                item.jenis,
-                item.status,
-                item.deskripsi
-
-            ]
-            .join(" ")
-            .toLowerCase();
-
-
-            const matchKeyword =
-                !keyword ||
-                text.includes(keyword);
+                const text =
+                    [
+                        item.nama,
+                        item.desa,
+                        item.kategori,
+                        item.jenis,
+                        item.status,
+                        item.deskripsi
+                    ]
+                    .join(" ")
+                    .toLowerCase();
 
 
-            const matchKategori =
-                !kategori ||
-                item.kategori === kategori;
+                const matchSearch =
+                    !search ||
+                    text.includes(
+                        search
+                    );
 
 
-            const matchDesa =
-                !desa ||
-                item.desa === desa;
+                const matchKategori =
+                    !kategori ||
+                    String(
+                        item.kategori || ""
+                    ).toLowerCase()
+                    === kategori;
 
 
-            const matchStatus =
-                !status ||
-                item.status === status;
+                const matchDesa =
+                    !desa ||
+                    String(
+                        item.desa || ""
+                    ).toLowerCase()
+                    === desa;
 
 
-            return (
-                matchKeyword &&
-                matchKategori &&
-                matchDesa &&
-                matchStatus
-            );
-
-        });
+                const matchStatus =
+                    !status ||
+                    String(
+                        item.status || ""
+                    ).toLowerCase()
+                    === status;
 
 
-    renderWisata(
-        filtered
+                return (
+                    matchSearch &&
+                    matchKategori &&
+                    matchDesa &&
+                    matchStatus
+                );
+
+            }
+        );
+
+
+    renderWisata();
+
+}
+
+
+/* =========================================================
+   RESET FILTER
+========================================================= */
+
+function resetFilters() {
+
+    setValue(
+        "searchWisata",
+        ""
     );
+
+    setValue(
+        "filterKategori",
+        ""
+    );
+
+    setValue(
+        "filterDesa",
+        ""
+    );
+
+    setValue(
+        "filterStatus",
+        ""
+    );
+
+    filteredWisata =
+        [...wisataData];
+
+    renderWisata();
 
 }
 
@@ -628,31 +808,28 @@ function applyWisataFilter() {
    RENDER WISATA
 ========================================================= */
 
-function renderWisata(
-    data
-) {
+function renderWisata() {
 
     const container =
         document.getElementById(
             "wisataContainer"
         );
 
-
     const empty =
         document.getElementById(
             "wisataEmpty"
         );
-
 
     if (!container) {
         return;
     }
 
 
-    container.innerHTML = "";
+    if (
+        !filteredWisata.length
+    ) {
 
-
-    if (!data || data.length === 0) {
+        container.innerHTML = "";
 
         if (empty) {
             empty.style.display =
@@ -670,209 +847,187 @@ function renderWisata(
     }
 
 
-    data.forEach(function (item) {
-
-        const col =
-            document.createElement("div");
+    let html = "";
 
 
-        col.className =
-            "col-xl-4 col-md-6";
+    filteredWisata.forEach(
+        function (item) {
+
+            html += createWisataCard(
+                item
+            );
+
+        }
+    );
 
 
-        col.innerHTML =
-            createWisataCard(item);
+    container.innerHTML =
+        html;
 
 
-        container.appendChild(
-            col
-        );
-
-    });
+    bindCardButtons();
 
 }
 
 
 /* =========================================================
-   CARD WISATA
+   CREATE CARD
 ========================================================= */
 
 function createWisataCard(
     item
 ) {
 
-    const gambar =
+    const status =
+        String(
+            item.status || "Potensi Wisata"
+        );
+
+
+    const statusClass =
+        status
+            .toLowerCase()
+            .includes("unggulan")
+            ? "unggulan"
+            : "potensi";
+
+
+    const image =
         item.gambar ||
         "assets/images/wisata/default.jpg";
 
 
-    const ikon =
+    const icon =
         item.ikon ||
-        "🌄";
-
-
-    const nama =
-        escapeHTML(
-            item.nama
-        );
-
-
-    const desa =
-        escapeHTML(
-            item.desa
-        );
-
-
-    const kategori =
-        escapeHTML(
-            item.kategori
-        );
-
-
-    const jenis =
-        escapeHTML(
-            item.jenis
-        );
-
-
-    const status =
-        escapeHTML(
-            item.status
-        );
-
-
-    const deskripsi =
-        escapeHTML(
-            item.deskripsi
-        );
-
-
-    const maps =
-        item.maps ||
-        "#";
-
-
-    let statusClass =
-        "potensi";
-
-
-    if (
-        normalize(item.status)
-        === "destinasi unggulan"
-    ) {
-
-        statusClass =
-            "unggulan";
-
-    }
+        "🌿";
 
 
     return `
 
-        <div class="wisata-card">
+        <div class="col-xl-4 col-md-6">
 
-            <!-- FOTO -->
+            <div class="wisata-admin-card">
 
-            <div class="wisata-card-image">
+                <div class="wisata-card-image">
 
-                <img
-                    src="${escapeHTML(gambar)}"
-                    alt="${nama}"
-                    loading="lazy"
-                    onerror="this.src='assets/images/wisata/default.jpg'"
-                >
+                    <img
+                        src="${escapeHTML(image)}"
+                        alt="${escapeHTML(item.nama || "Wisata")}"
+                        onerror="this.src='assets/images/wisata/default.jpg';"
+                    >
 
+                    <div class="wisata-card-icon">
 
-                <div class="wisata-card-icon">
+                        ${escapeHTML(icon)}
 
-                    ${escapeHTML(ikon)}
+                    </div>
 
-                </div>
+                    <span
+                        class="wisata-status ${statusClass}">
 
-
-                <span
-                    class="wisata-status ${statusClass}">
-
-                    ${status}
-
-                </span>
-
-            </div>
-
-
-            <!-- CONTENT -->
-
-            <div class="wisata-card-body">
-
-
-                <div class="wisata-card-meta">
-
-                    <span>
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        ${desa}
-
-                    </span>
-
-
-                    <span>
-
-                        <i class="fa-solid fa-layer-group"></i>
-
-                        ${kategori}
+                        ${escapeHTML(status)}
 
                     </span>
 
                 </div>
 
 
-                <h4>
-                    ${nama}
-                </h4>
+                <div class="wisata-card-body">
+
+                    <div class="wisata-card-category">
+
+                        ${escapeHTML(item.kategori || "Wisata")}
+
+                    </div>
 
 
-                <div class="wisata-card-type">
+                    <h4>
 
-                    <i class="fa-solid fa-mountain-sun"></i>
+                        ${escapeHTML(item.nama || "-")}
 
-                    ${jenis}
-
-                </div>
+                    </h4>
 
 
-                <p>
-                    ${deskripsi}
-                </p>
-
-
-                <div class="wisata-card-footer">
-
-
-                    <a
-                        href="${escapeHTML(maps)}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-map-wisata">
+                    <div class="wisata-card-location">
 
                         <i class="fa-solid fa-location-dot"></i>
 
-                        Lihat Maps
+                        ${escapeHTML(item.desa || "-")}
 
-                    </a>
+                    </div>
 
 
-                    <button
-                        type="button"
-                        class="btn-detail-wisata"
-                        onclick="detailWisata(${Number(item.id)})">
+                    <p>
 
-                        Detail
+                        ${escapeHTML(
+                            item.deskripsi ||
+                            "Belum ada deskripsi."
+                        )}
 
-                        <i class="fa-solid fa-arrow-right"></i>
+                    </p>
 
-                    </button>
 
+                    <div class="wisata-card-meta">
+
+                        <span>
+
+                            <i class="fa-solid fa-leaf"></i>
+
+                            ${escapeHTML(
+                                item.jenis ||
+                                "Wisata Alam"
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="wisata-card-actions">
+
+                        <button
+                            type="button"
+                            class="btn-wisata-edit"
+                            data-id="${escapeHTML(item.id)}">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="btn-wisata-delete"
+                            data-id="${escapeHTML(item.id)}">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Hapus
+
+                        </button>
+
+
+                        ${
+                            item.maps
+                            ? `
+                            <a
+                                href="${escapeHTML(item.maps)}"
+                                target="_blank"
+                                rel="noopener"
+                                class="btn-wisata-map">
+
+                                <i class="fa-solid fa-map-location-dot"></i>
+
+                                Maps
+
+                            </a>
+                            `
+                            : ""
+                        }
+
+                    </div>
 
                 </div>
 
@@ -886,117 +1041,208 @@ function createWisataCard(
 
 
 /* =========================================================
-   DETAIL WISATA
+   BIND CARD BUTTONS
 ========================================================= */
 
-function detailWisata(
-    id
-) {
+function bindCardButtons() {
 
-    const item =
-        wisataData.find(function (wisata) {
+    document
+        .querySelectorAll(
+            ".btn-wisata-edit"
+        )
+        .forEach(function (button) {
 
-            return Number(wisata.id) === Number(id);
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const id =
+                        this.dataset.id;
+
+                    editWisata(id);
+
+                }
+            );
 
         });
 
 
-    if (!item) {
+    document
+        .querySelectorAll(
+            ".btn-wisata-delete"
+        )
+        .forEach(function (button) {
 
-        alert(
-            "Data wisata tidak ditemukan."
-        );
+            button.addEventListener(
+                "click",
+                function () {
 
-        return;
+                    const id =
+                        this.dataset.id;
 
-    }
+                    deleteWisata(id);
 
+                }
+            );
 
-    alert(
-
-        "DESTINASI WISATA\n\n" +
-
-        "Nama: " +
-        item.nama +
-        "\n" +
-
-        "Kategori: " +
-        item.kategori +
-        "\n" +
-
-        "Desa: " +
-        item.desa +
-        "\n" +
-
-        "Jenis: " +
-        item.jenis +
-        "\n" +
-
-        "Status: " +
-        item.status +
-        "\n\n" +
-
-        item.deskripsi
-
-    );
+        });
 
 }
 
 
 /* =========================================================
-   TAMBAH WISATA
+   MODAL
 ========================================================= */
 
-function initTambahWisata() {
+function openWisataModal(
+    item = null
+) {
 
-    const button =
+    let modal =
         document.getElementById(
-            "btnTambahWisata"
+            "wisataModal"
         );
 
 
-    if (!button) {
+    if (!modal) {
+
+        createWisataModal();
+
+        modal =
+            document.getElementById(
+                "wisataModal"
+            );
+
+    }
+
+
+    const title =
+        document.getElementById(
+            "wisataModalTitle"
+        );
+
+
+    const form =
+        document.getElementById(
+            "formWisata"
+        );
+
+
+    if (!form) {
         return;
     }
 
 
-    button.addEventListener(
-        "click",
-        function () {
+    form.reset();
 
-            openTambahWisataModal();
 
+    document.getElementById(
+        "wisataEditId"
+    ).value =
+        item
+            ? item.id
+            : "";
+
+
+    if (item) {
+
+        title.innerHTML =
+            `<i class="fa-solid fa-pen"></i>
+             Edit Destinasi Wisata`;
+
+        setValue(
+            "wisataNama",
+            item.nama
+        );
+
+        setValue(
+            "wisataKategori",
+            item.kategori
+        );
+
+        setValue(
+            "wisataDesa",
+            item.desa
+        );
+
+        setValue(
+            "wisataJenis",
+            item.jenis
+        );
+
+        setValue(
+            "wisataStatus",
+            item.status
+        );
+
+        setValue(
+            "wisataIkon",
+            item.ikon
+        );
+
+        setValue(
+            "wisataGambar",
+            item.gambar
+        );
+
+        setValue(
+            "wisataMaps",
+            item.maps
+        );
+
+        setValue(
+            "wisataDeskripsi",
+            item.deskripsi
+        );
+
+    }
+
+    else {
+
+        title.innerHTML =
+            `<i class="fa-solid fa-mountain-sun"></i>
+             Tambah Destinasi Wisata`;
+
+    }
+
+
+    modal.classList.add(
+        "show"
+    );
+
+    document.body.classList.add(
+        "modal-open-custom"
+    );
+
+
+    setTimeout(function () {
+
+        const input =
+            document.getElementById(
+                "wisataNama"
+            );
+
+        if (input) {
+            input.focus();
         }
-    );
+
+    }, 200);
 
 }
 
 
 /* =========================================================
-   MODAL TAMBAH WISATA
+   CREATE MODAL
 ========================================================= */
 
-function openTambahWisataModal() {
+function createWisataModal() {
 
-    /*
-     * Untuk tahap pertama,
-     * gunakan form sederhana.
-     */
-
-    const existing =
+    if (
         document.getElementById(
-            "wisataTambahModal"
-        );
-
-
-    if (existing) {
-
-        existing.classList.add(
-            "show"
-        );
-
+            "wisataModal"
+        )
+    ) {
         return;
-
     }
 
 
@@ -1007,11 +1253,10 @@ function openTambahWisataModal() {
 
 
     modal.id =
-        "wisataTambahModal";
-
+        "wisataModal";
 
     modal.className =
-        "wisata-modal-overlay show";
+        "wisata-modal-overlay";
 
 
     modal.innerHTML = `
@@ -1026,10 +1271,17 @@ function openTambahWisataModal() {
                         EKOSISTEM DIGITAL
                     </span>
 
-                    <h3>
+                    <h3 id="wisataModalTitle">
+
                         <i class="fa-solid fa-mountain-sun"></i>
+
                         Tambah Destinasi Wisata
+
                     </h3>
+
+                    <p>
+                        Kelola informasi destinasi wisata Dayeuhluhur.
+                    </p>
 
                 </div>
 
@@ -1047,8 +1299,12 @@ function openTambahWisataModal() {
 
 
             <form
-                id="formTambahWisata"
+                id="formWisata"
                 class="wisata-modal-body">
+
+                <input
+                    type="hidden"
+                    id="wisataEditId">
 
 
                 <div class="row g-3">
@@ -1060,13 +1316,17 @@ function openTambahWisataModal() {
                             Nama Destinasi *
                         </label>
 
-                        <input
-                            type="text"
-                            id="wisataNama"
-                            class="form-control"
-                            placeholder="Contoh: Curug ..."
-                            required
-                        >
+                        <div class="input-group-premium">
+
+                            <i class="fa-solid fa-mountain-sun"></i>
+
+                            <input
+                                type="text"
+                                id="wisataNama"
+                                placeholder="Contoh: Curug Cimandaway"
+                                required>
+
+                        </div>
 
                     </div>
 
@@ -1077,13 +1337,16 @@ function openTambahWisataModal() {
                             Ikon
                         </label>
 
-                        <input
-                            type="text"
-                            id="wisataIkon"
-                            class="form-control"
-                            value="🌄"
-                            placeholder="🌄"
-                        >
+                        <div class="input-group-premium">
+
+                            <i class="fa-solid fa-icons"></i>
+
+                            <input
+                                type="text"
+                                id="wisataIkon"
+                                placeholder="💦">
+
+                        </div>
 
                     </div>
 
@@ -1094,36 +1357,45 @@ function openTambahWisataModal() {
                             Kategori *
                         </label>
 
-                        <select
-                            id="wisataKategori"
-                            class="form-select"
-                            required>
+                        <div class="input-group-premium">
 
-                            <option value="">
-                                Pilih kategori
-                            </option>
+                            <i class="fa-solid fa-layer-group"></i>
 
-                            <option value="Curug">
-                                Curug
-                            </option>
+                            <select
+                                id="wisataKategori"
+                                required>
 
-                            <option value="Bukit">
-                                Bukit
-                            </option>
+                                <option value="">
+                                    Pilih kategori
+                                </option>
 
-                            <option value="Alam">
-                                Alam
-                            </option>
+                                <option value="Curug">
+                                    Curug
+                                </option>
 
-                            <option value="Wisata Air">
-                                Wisata Air
-                            </option>
+                                <option value="Bukit">
+                                    Bukit
+                                </option>
 
-                            <option value="Wisata Edukasi">
-                                Wisata Edukasi
-                            </option>
+                                <option value="Alam">
+                                    Alam
+                                </option>
 
-                        </select>
+                                <option value="Pantai">
+                                    Pantai
+                                </option>
+
+                                <option value="Agrowisata">
+                                    Agrowisata
+                                </option>
+
+                                <option value="Wisata Desa">
+                                    Wisata Desa
+                                </option>
+
+                            </select>
+
+                        </div>
 
                     </div>
 
@@ -1134,67 +1406,36 @@ function openTambahWisataModal() {
                             Desa *
                         </label>
 
-                        <select
-                            id="wisataDesaForm"
-                            class="form-select"
-                            required>
+                        <div class="input-group-premium">
 
-                            <option value="">
-                                Pilih desa
-                            </option>
+                            <i class="fa-solid fa-location-dot"></i>
 
-                            <option>Panulisan</option>
-                            <option>Hanum</option>
-                            <option>Bolang</option>
-                            <option>Datar</option>
-                            <option>Dayeuhluhur</option>
-                            <option>Matenggeng</option>
-                            <option>Cijeruk</option>
-                            <option>Cikalong</option>
-                            <option>Ciwalen</option>
-                            <option>Panulisan Barat</option>
-                            <option>Sadabumi</option>
-                            <option>Sumpinghayu</option>
-                            <option>Kutaagung</option>
-                            <option>Bingkeng</option>
+                            <select
+                                id="wisataDesa"
+                                required>
 
-                        </select>
+                                <option value="">
+                                    Pilih desa
+                                </option>
 
-                    </div>
+                                <option>Panulisan</option>
+                                <option>Hanum</option>
+                                <option>Bolang</option>
+                                <option>Datar</option>
+                                <option>Dayeuhluhur</option>
+                                <option>Matenggeng</option>
+                                <option>Cijeruk</option>
+                                <option>Cikalong</option>
+                                <option>Ciwalen</option>
+                                <option>Panulisan Barat</option>
+                                <option>Sadabumi</option>
+                                <option>Sumpinghayu</option>
+                                <option>Kutaagung</option>
+                                <option>Bingkeng</option>
 
+                            </select>
 
-                    <div class="col-md-6">
-
-                        <label>
-                            Jenis Wisata *
-                        </label>
-
-                        <select
-                            id="wisataJenis"
-                            class="form-select"
-                            required>
-
-                            <option value="">
-                                Pilih jenis
-                            </option>
-
-                            <option value="Wisata Alam">
-                                Wisata Alam
-                            </option>
-
-                            <option value="Wisata Buatan">
-                                Wisata Buatan
-                            </option>
-
-                            <option value="Wisata Edukasi">
-                                Wisata Edukasi
-                            </option>
-
-                            <option value="Wisata Budaya">
-                                Wisata Budaya
-                            </option>
-
-                        </select>
+                        </div>
 
                     </div>
 
@@ -1202,23 +1443,103 @@ function openTambahWisataModal() {
                     <div class="col-md-6">
 
                         <label>
-                            Status *
+                            Jenis Wisata
                         </label>
 
-                        <select
-                            id="wisataStatus"
-                            class="form-select"
-                            required>
+                        <div class="input-group-premium">
 
-                            <option value="Destinasi Unggulan">
-                                Destinasi Unggulan
-                            </option>
+                            <i class="fa-solid fa-leaf"></i>
 
-                            <option value="Potensi Wisata">
-                                Potensi Wisata
-                            </option>
+                            <select
+                                id="wisataJenis">
 
-                        </select>
+                                <option value="Wisata Alam">
+                                    Wisata Alam
+                                </option>
+
+                                <option value="Wisata Buatan">
+                                    Wisata Buatan
+                                </option>
+
+                                <option value="Wisata Desa">
+                                    Wisata Desa
+                                </option>
+
+                                <option value="Agrowisata">
+                                    Agrowisata
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <div class="input-group-premium">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            <select
+                                id="wisataStatus">
+
+                                <option value="Destinasi Unggulan">
+                                    Destinasi Unggulan
+                                </option>
+
+                                <option value="Potensi Wisata">
+                                    Potensi Wisata
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <label>
+                            URL Gambar
+                        </label>
+
+                        <div class="input-group-premium">
+
+                            <i class="fa-solid fa-image"></i>
+
+                            <input
+                                type="text"
+                                id="wisataGambar"
+                                placeholder="assets/images/wisata/nama-file.jpg">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <label>
+                            Google Maps
+                        </label>
+
+                        <div class="input-group-premium">
+
+                            <i class="fa-solid fa-map-location-dot"></i>
+
+                            <input
+                                type="url"
+                                id="wisataMaps"
+                                placeholder="https://www.google.com/maps/...">
+
+                        </div>
 
                     </div>
 
@@ -1231,42 +1552,8 @@ function openTambahWisataModal() {
 
                         <textarea
                             id="wisataDeskripsi"
-                            class="form-control"
                             rows="4"
-                            placeholder="Deskripsikan destinasi wisata..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="col-12">
-
-                        <label>
-                            Google Maps
-                        </label>
-
-                        <input
-                            type="url"
-                            id="wisataMaps"
-                            class="form-control"
-                            placeholder="https://www.google.com/maps/..."
-                        >
-
-                    </div>
-
-
-                    <div class="col-12">
-
-                        <label>
-                            Gambar
-                        </label>
-
-                        <input
-                            type="text"
-                            id="wisataGambar"
-                            class="form-control"
-                            value="assets/images/wisata/default.jpg"
-                        >
+                            placeholder="Deskripsikan destinasi wisata..."></textarea>
 
                     </div>
 
@@ -1309,914 +1596,52 @@ function openTambahWisataModal() {
     );
 
 
-    document
-        .getElementById("closeWisataModal")
-        ?.addEventListener(
-            "click",
-            closeTambahWisataModal
-        );
-
-
-    document
-        .getElementById("cancelWisataModal")
-        ?.addEventListener(
-            "click",
-            closeTambahWisataModal
-        );
-
-
-    document
-        .getElementById("formTambahWisata")
-        ?.addEventListener(
-            "submit",
-            saveNewWisata
-        );
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeTambahWisataModal() {
-
-    const modal =
-        document.getElementById(
-            "wisataTambahModal"
-        );
-
-
-    if (modal) {
-
-        modal.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   SAVE WISATA
-========================================================= */
-
-function saveNewWisata(
-    event
-) {
-
-    event.preventDefault();
-
-
-    const nama =
-        getInputValue(
-            "wisataNama"
-        );
-
-
-    const kategori =
-        getInputValue(
-            "wisataKategori"
-        );
-
-
-    const desa =
-        getInputValue(
-            "wisataDesaForm"
-        );
-
-
-    const jenis =
-        getInputValue(
-            "wisataJenis"
-        );
-
-
-    const status =
-        getInputValue(
-            "wisataStatus"
-        );
-
-
-    const ikon =
-        getInputValue(
-            "wisataIkon"
-        ) || "🌄";
-
-
-    const deskripsi =
-        getInputValue(
-            "wisataDeskripsi"
-        );
-
-
-    const maps =
-        getInputValue(
-            "wisataMaps"
-        );
-
-
-    const gambar =
-        getInputValue(
-            "wisataGambar"
-        ) ||
-        "assets/images/wisata/default.jpg";
-
-
-    if (
-        !nama ||
-        !kategori ||
-        !desa ||
-        !jenis ||
-        !status
-    ) {
-
-        alert(
-            "Mohon lengkapi field yang wajib diisi."
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * ID baru
-     */
-
-    const ids =
-        wisataData.map(function (item) {
-
-            return Number(item.id) || 0;
-
-        });
-
-
-    const newId =
-        ids.length
-            ? Math.max(...ids) + 1
-            : 1;
-
-
-    const newWisata = {
-
-        id: newId,
-
-        nama: nama,
-
-        slug: createSlug(
-            nama
-        ),
-
-        kategori: kategori,
-
-        ikon: ikon,
-
-        desa: desa,
-
-        jenis: jenis,
-
-        status: status,
-
-        deskripsi: deskripsi,
-
-        gambar: gambar,
-
-        maps: maps
-
-    };
-
-
-    /*
-     * Simpan ke localStorage
-     */
-
-    let localWisata =
-        getLocalWisata();
-
-
-    localWisata.push(
-        newWisata
-    );
-
-
-    localStorage.setItem(
-        "plazaWisata",
-        JSON.stringify(
-            localWisata
-        )
-    );
-
-
-    /*
-     * Tambahkan ke tampilan
-     */
-
-    wisataData.push(
-        newWisata
-    );
-
-
-    updateWisataStatistics();
-
-    populateFilters();
-
-    renderWisata(
-        wisataData
-    );
-
-
-    closeTambahWisataModal();
-
-
-    alert(
-        "Destinasi \"" +
-        nama +
-        "\" berhasil ditambahkan."
-    );
-
-
-    console.log(
-        "Wisata baru:",
-        newWisata
-    );
-
-}
-
-
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
-
-function getLocalWisata() {
-
-    try {
-
-        const stored =
-            localStorage.getItem(
-                "plazaWisata"
-            );
-
-
-        if (!stored) {
-            return [];
-        }
-
-
-        const parsed =
-            JSON.parse(
-                stored
-            );
-
-
-        return Array.isArray(parsed)
-            ? parsed
-            : [];
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Gagal membaca localStorage wisata:",
-            error
-        );
-
-
-        return [];
-
-    }
-
-}
-
-
-/* =========================================================
-   ERROR STATE
-========================================================= */
-
-function showWisataError() {
-
-    const container =
-        document.getElementById(
-            "wisataContainer"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    container.innerHTML = `
-
-        <div class="col-12">
-
-            <div class="wisata-empty">
-
-                <div class="empty-icon">
-
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-
-                </div>
-
-                <h3>
-                    Data wisata gagal dimuat
-                </h3>
-
-                <p>
-                    Pastikan file
-                    <strong>
-                        data/wisata.json
-                    </strong>
-                    tersedia dan format JSON benar.
-                </p>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   HELPER
-========================================================= */
-
-function setText(
-    id,
-    value
-) {
-
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    if (element) {
-
-        element.textContent =
-            value;
-
-    }
-
-}
-
-
-function getInputValue(
-    id
-) {
-
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    if (!element) {
-        return "";
-    }
-
-
-    return element.value
-        .trim();
-
-}
-
-
-function normalize(
-    value
-) {
-
-    return String(
-        value || ""
-    )
-    .toLowerCase()
-    .trim();
-
-}
-
-
-function createSlug(
-    text
-) {
-
-    return String(text)
-
-        .toLowerCase()
-
-        .trim()
-
-        .replace(
-            /[^a-z0-9\s-]/g,
-            ""
-        )
-
-        .replace(
-            /\s+/g,
-            "-"
-        )
-
-        .replace(
-            /-+/g,
-            "-"
-        );
-
-}
-
-
-function escapeHTML(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-/* =========================================================
-   WISATA ADMIN V2
-   MODAL TAMBAH / EDIT WISATA
-========================================================= */
-
-function createWisataModal() {
-
-    if (document.getElementById("wisataModal")) {
-        return;
-    }
-
-    const modal = document.createElement("div");
-
-    modal.id = "wisataModal";
-    modal.className = "wisata-modal-overlay";
-
-    modal.innerHTML = `
-
-        <div class="wisata-modal">
-
-            <!-- HEADER -->
-
-            <div class="wisata-modal-header">
-
-                <div>
-
-                    <span>
-                        EKOSISTEM DIGITAL
-                    </span>
-
-                    <h3 id="wisataModalTitle">
-
-                        <i class="fa-solid fa-mountain-sun"></i>
-
-                        Tambah Destinasi Wisata
-
-                    </h3>
-
-                    <p>
-                        Tambahkan informasi destinasi wisata
-                        Kecamatan Dayeuhluhur.
-                    </p>
-
-                </div>
-
-
-                <button
-                    type="button"
-                    class="wisata-modal-close"
-                    id="closeWisataModal">
-
-                    <i class="fa-solid fa-xmark"></i>
-
-                </button>
-
-            </div>
-
-
-            <!-- FORM -->
-
-            <form
-                id="formWisata"
-                class="wisata-modal-body">
-
-                <input
-                    type="hidden"
-                    id="wisataId">
-
-
-                <div class="row g-3">
-
-
-                    <!-- NAMA -->
-
-                    <div class="col-md-8">
-
-                        <label>
-                            Nama Destinasi
-                            <span>*</span>
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-mountain-sun"></i>
-
-                            <input
-                                type="text"
-                                id="wisataNama"
-                                placeholder="Contoh: Curug Cimandaway"
-                                required>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- IKON -->
-
-                    <div class="col-md-4">
-
-                        <label>
-                            Ikon
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-icons"></i>
-
-                            <input
-                                type="text"
-                                id="wisataIkon"
-                                placeholder="💦">
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- KATEGORI -->
-
-                    <div class="col-md-4">
-
-                        <label>
-                            Kategori
-                            <span>*</span>
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-layer-group"></i>
-
-                            <select
-                                id="wisataKategori"
-                                required>
-
-                                <option value="">
-                                    Pilih kategori
-                                </option>
-
-                                <option value="Curug">
-                                    Curug
-                                </option>
-
-                                <option value="Bukit">
-                                    Bukit
-                                </option>
-
-                                <option value="Alam">
-                                    Alam
-                                </option>
-
-                                <option value="Wisata Air">
-                                    Wisata Air
-                                </option>
-
-                                <option value="Agrowisata">
-                                    Agrowisata
-                                </option>
-
-                                <option value="Budaya">
-                                    Budaya
-                                </option>
-
-                                <option value="Religi">
-                                    Religi
-                                </option>
-
-                                <option value="Lainnya">
-                                    Lainnya
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- JENIS -->
-
-                    <div class="col-md-4">
-
-                        <label>
-                            Jenis Wisata
-                            <span>*</span>
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-tree"></i>
-
-                            <select
-                                id="wisataJenis"
-                                required>
-
-                                <option value="">
-                                    Pilih jenis
-                                </option>
-
-                                <option value="Wisata Alam">
-                                    Wisata Alam
-                                </option>
-
-                                <option value="Wisata Budaya">
-                                    Wisata Budaya
-                                </option>
-
-                                <option value="Wisata Religi">
-                                    Wisata Religi
-                                </option>
-
-                                <option value="Wisata Edukasi">
-                                    Wisata Edukasi
-                                </option>
-
-                                <option value="Wisata Keluarga">
-                                    Wisata Keluarga
-                                </option>
-
-                                <option value="Wisata Air">
-                                    Wisata Air
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- DESA -->
-
-                    <div class="col-md-4">
-
-                        <label>
-                            Desa
-                            <span>*</span>
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                            <select
-                                id="wisataDesa"
-                                required>
-
-                                <option value="">
-                                    Pilih desa
-                                </option>
-
-                                <option>Panulisan</option>
-                                <option>Hanum</option>
-                                <option>Bolang</option>
-                                <option>Datar</option>
-                                <option>Dayeuhluhur</option>
-                                <option>Matenggeng</option>
-                                <option>Cijeruk</option>
-                                <option>Cikalong</option>
-                                <option>Ciwalen</option>
-                                <option>Panulisan Barat</option>
-                                <option>Sadabumi</option>
-                                <option>Sumpinghayu</option>
-                                <option>Kutaagung</option>
-                                <option>Bingkeng</option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- STATUS -->
-
-                    <div class="col-md-6">
-
-                        <label>
-                            Status
-                            <span>*</span>
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-star"></i>
-
-                            <select
-                                id="wisataStatus"
-                                required>
-
-                                <option value="Destinasi Unggulan">
-                                    Destinasi Unggulan
-                                </option>
-
-                                <option value="Potensi Wisata">
-                                    Potensi Wisata
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- MAPS -->
-
-                    <div class="col-md-6">
-
-                        <label>
-                            Link Google Maps
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-map"></i>
-
-                            <input
-                                type="url"
-                                id="wisataMaps"
-                                placeholder="https://www.google.com/maps/...">
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- GAMBAR -->
-
-                    <div class="col-12">
-
-                        <label>
-                            Path Gambar
-                        </label>
-
-                        <div class="input-group-premium">
-
-                            <i class="fa-solid fa-image"></i>
-
-                            <input
-                                type="text"
-                                id="wisataGambar"
-                                value="assets/images/wisata/default.jpg"
-                                placeholder="assets/images/wisata/nama.jpg">
-
-                        </div>
-
-                        <small class="form-help">
-                            Untuk sementara gunakan path gambar
-                            yang sudah tersedia di folder wisata.
-                        </small>
-
-                    </div>
-
-
-                    <!-- DESKRIPSI -->
-
-                    <div class="col-12">
-
-                        <label>
-                            Deskripsi
-                        </label>
-
-                        <textarea
-                            id="wisataDeskripsi"
-                            rows="4"
-                            placeholder="Deskripsi singkat tentang destinasi wisata...">
-                        </textarea>
-
-                    </div>
-
-                </div>
-
-
-                <!-- FOOTER -->
-
-                <div class="wisata-modal-footer">
-
-                    <button
-                        type="button"
-                        class="btn-modal-cancel"
-                        id="cancelWisataModal">
-
-                        Batal
-
-                    </button>
-
-
-                    <button
-                        type="submit"
-                        class="btn-modal-save">
-
-                        <i class="fa-solid fa-floppy-disk"></i>
-
-                        Simpan Wisata
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    `;
-
-    document.body.appendChild(modal);
-}
-
-
-/* =========================================================
-   INIT MODAL WISATA
-========================================================= */
-
-function initWisataModal() {
-
-    const modal =
-        document.getElementById("wisataModal");
-
-    if (!modal) {
-        return;
-    }
-
     const close =
-        document.getElementById("closeWisataModal");
+        document.getElementById(
+            "closeWisataModal"
+        );
 
     const cancel =
-        document.getElementById("cancelWisataModal");
+        document.getElementById(
+            "cancelWisataModal"
+        );
 
     const form =
-        document.getElementById("formWisata");
+        document.getElementById(
+            "formWisata"
+        );
 
 
     if (close) {
+
         close.addEventListener(
             "click",
             closeWisataModal
         );
+
     }
 
 
     if (cancel) {
+
         cancel.addEventListener(
             "click",
             closeWisataModal
         );
+
     }
 
 
     modal.addEventListener(
         "click",
-        function(event) {
+        function (event) {
 
-            if (event.target === modal) {
+            if (
+                event.target === modal
+            ) {
+
                 closeWisataModal();
+
             }
 
         }
@@ -2235,7 +1660,7 @@ function initWisataModal() {
 
     document.addEventListener(
         "keydown",
-        function(event) {
+        function (event) {
 
             if (
                 event.key === "Escape" &&
@@ -2253,63 +1678,23 @@ function initWisataModal() {
 
 
 /* =========================================================
-   OPEN TAMBAH WISATA
-========================================================= */
-
-function openAddWisataModal() {
-
-    const modal =
-        document.getElementById("wisataModal");
-
-    if (!modal) {
-        return;
-    }
-
-    const form =
-        document.getElementById("formWisata");
-
-    if (form) {
-        form.reset();
-    }
-
-    document.getElementById("wisataId").value = "";
-
-    document.getElementById("wisataGambar").value =
-        "assets/images/wisata/default.jpg";
-
-
-    document.getElementById("wisataModalTitle").innerHTML = `
-
-        <i class="fa-solid fa-mountain-sun"></i>
-
-        Tambah Destinasi Wisata
-
-    `;
-
-
-    modal.classList.add("show");
-
-    document.body.classList.add(
-        "modal-open-custom"
-    );
-
-}
-
-
-/* =========================================================
    CLOSE MODAL
 ========================================================= */
 
 function closeWisataModal() {
 
     const modal =
-        document.getElementById("wisataModal");
+        document.getElementById(
+            "wisataModal"
+        );
 
     if (!modal) {
         return;
     }
 
-    modal.classList.remove("show");
+    modal.classList.remove(
+        "show"
+    );
 
     document.body.classList.remove(
         "modal-open-custom"
@@ -2319,12 +1704,928 @@ function closeWisataModal() {
 
 
 /* =========================================================
-   GENERATE SLUG
+   SAVE WISATA
 ========================================================= */
 
-function createWisataSlug(nama) {
+function saveWisata(
+    event
+) {
 
-    return String(nama)
+    event.preventDefault();
+
+
+    const editId =
+        getValue(
+            "wisataEditId"
+        );
+
+
+    const nama =
+        getValue(
+            "wisataNama"
+        );
+
+    const kategori =
+        getValue(
+            "wisataKategori"
+        );
+
+    const desa =
+        getValue(
+            "wisataDesa"
+        );
+
+    const jenis =
+        getValue(
+            "wisataJenis"
+        ) || "Wisata Alam";
+
+    const status =
+        getValue(
+            "wisataStatus"
+        ) || "Potensi Wisata";
+
+    const ikon =
+        getValue(
+            "wisataIkon"
+        ) || "🌿";
+
+    const gambar =
+        getValue(
+            "wisataGambar"
+        ) ||
+        "assets/images/wisata/default.jpg";
+
+    const maps =
+        getValue(
+            "wisataMaps"
+        );
+
+    const deskripsi =
+        getValue(
+            "wisataDeskripsi"
+        );
+
+
+    if (
+        !nama ||
+        !kategori ||
+        !desa
+    ) {
+
+        showToast(
+            "warning",
+            "Nama, kategori dan desa wajib diisi."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * EDIT
+     */
+
+    if (editId) {
+
+        const index =
+            wisataData.findIndex(
+                function (item) {
+
+                    return String(
+                        item.id
+                    ) === String(
+                        editId
+                    );
+
+                }
+            );
+
+
+        if (index === -1) {
+
+            showToast(
+                "danger",
+                "Data wisata tidak ditemukan."
+            );
+
+            return;
+
+        }
+
+
+        const old =
+            wisataData[index];
+
+
+        wisataData[index] = {
+
+            ...old,
+
+            nama,
+            slug: createSlug(nama),
+            kategori,
+            ikon,
+            desa,
+            jenis,
+            status,
+            deskripsi,
+            gambar,
+            maps
+
+        };
+
+
+        /*
+         * Untuk data bawaan JSON,
+         * buat salinan edit ke localStorage.
+         */
+
+        saveEditedWisata(
+            wisataData[index]
+        );
+
+
+        saveActivity(
+            "Wisata diperbarui",
+            nama + " — " + desa,
+            "fa-pen"
+        );
+
+
+        showToast(
+            "success",
+            "Destinasi <strong>" +
+            escapeHTML(nama) +
+            "</strong> berhasil diperbarui."
+        );
+
+    }
+
+
+    /*
+     * TAMBAH
+     */
+
+    else {
+
+        const newId =
+            getNextWisataId();
+
+
+        const newWisata = {
+
+            id: newId,
+
+            nama: nama,
+
+            slug:
+                createSlug(
+                    nama
+                ),
+
+            kategori:
+                kategori,
+
+            ikon:
+                ikon,
+
+            desa:
+                desa,
+
+            jenis:
+                jenis,
+
+            status:
+                status,
+
+            deskripsi:
+                deskripsi,
+
+            gambar:
+                gambar,
+
+            maps:
+                maps
+
+        };
+
+
+        wisataData.push(
+            newWisata
+        );
+
+
+        saveStoredWisata();
+
+
+        saveActivity(
+            "Wisata baru ditambahkan",
+            nama + " — " + desa,
+            "fa-mountain-sun"
+        );
+
+
+        showToast(
+            "success",
+            "Destinasi <strong>" +
+            escapeHTML(nama) +
+            "</strong> berhasil ditambahkan."
+        );
+
+    }
+
+
+    filteredWisata =
+        [...wisataData];
+
+
+    updateStatistics();
+
+    populateFilters();
+
+    renderWisata();
+
+    closeWisataModal();
+
+}
+
+
+/* =========================================================
+   SAVE EDITED WISATA
+========================================================= */
+
+function saveEditedWisata(
+    item
+) {
+
+    let stored =
+        getStoredWisata();
+
+
+    const index =
+        stored.findIndex(
+            function (data) {
+
+                return String(
+                    data.id
+                ) === String(
+                    item.id
+                );
+
+            }
+        );
+
+
+    if (index >= 0) {
+
+        stored[index] =
+            item;
+
+    }
+
+    else {
+
+        stored.push(
+            item
+        );
+
+    }
+
+
+    try {
+
+        localStorage.setItem(
+            WISATA_STORAGE_KEY,
+            JSON.stringify(
+                stored
+            )
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Gagal menyimpan perubahan wisata:",
+            error
+        );
+
+        showToast(
+            "danger",
+            "Perubahan gagal disimpan."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GET NEXT ID
+========================================================= */
+
+function getNextWisataId() {
+
+    const ids =
+        wisataData.map(
+            function (item) {
+
+                return Number(
+                    item.id
+                ) || 0;
+
+            }
+        );
+
+
+    return ids.length
+        ? Math.max(...ids) + 1
+        : 1;
+
+}
+
+
+/* =========================================================
+   EDIT WISATA
+========================================================= */
+
+function editWisata(
+    id
+) {
+
+    const item =
+        wisataData.find(
+            function (data) {
+
+                return String(
+                    data.id
+                ) === String(
+                    id
+                );
+
+            }
+        );
+
+
+    if (!item) {
+
+        showToast(
+            "danger",
+            "Data wisata tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    openWisataModal(
+        item
+    );
+
+}
+
+
+/* =========================================================
+   DELETE WISATA
+========================================================= */
+
+function deleteWisata(
+    id
+) {
+
+    const item =
+        wisataData.find(
+            function (data) {
+
+                return String(
+                    data.id
+                ) === String(
+                    id
+                );
+
+            }
+        );
+
+
+    if (!item) {
+
+        showToast(
+            "danger",
+            "Data wisata tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    const yakin =
+        confirm(
+            "Hapus destinasi \"" +
+            item.nama +
+            "\"?"
+        );
+
+
+    if (!yakin) {
+        return;
+    }
+
+
+    /*
+     * Jika data berasal dari JSON,
+     * kita tidak menghapus JSON.
+     * Kita simpan daftar ID yang dihapus.
+     */
+
+    let deleted =
+        getDeletedWisata();
+
+
+    if (
+        !deleted.includes(
+            String(item.id)
+        )
+    ) {
+
+        deleted.push(
+            String(item.id)
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "plazaWisataDeleted",
+        JSON.stringify(
+            deleted
+        )
+    );
+
+
+    wisataData =
+        wisataData.filter(
+            function (data) {
+
+                return String(
+                    data.id
+                ) !== String(
+                    id
+                );
+
+            }
+        );
+
+
+    filteredWisata =
+        filteredWisata.filter(
+            function (data) {
+
+                return String(
+                    data.id
+                ) !== String(
+                    id
+                );
+
+            }
+        );
+
+
+    /*
+     * Hapus juga dari localStorage
+     */
+
+    const stored =
+        getStoredWisata()
+            .filter(
+                function (data) {
+
+                    return String(
+                        data.id
+                    ) !== String(
+                        id
+                    );
+
+                }
+            );
+
+
+    localStorage.setItem(
+        WISATA_STORAGE_KEY,
+        JSON.stringify(
+            stored
+        )
+    );
+
+
+    saveActivity(
+        "Wisata dihapus",
+        item.nama + " — " + item.desa,
+        "fa-trash"
+    );
+
+
+    updateStatistics();
+
+    populateFilters();
+
+    renderWisata();
+
+
+    showToast(
+        "success",
+        "Destinasi <strong>" +
+        escapeHTML(item.nama) +
+        "</strong> berhasil dihapus."
+    );
+
+}
+
+
+/* =========================================================
+   DELETED WISATA
+========================================================= */
+
+function getDeletedWisata() {
+
+    try {
+
+        const stored =
+            localStorage.getItem(
+                "plazaWisataDeleted"
+            );
+
+        if (!stored) {
+            return [];
+        }
+
+        const parsed =
+            JSON.parse(
+                stored
+            );
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }
+
+    catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+function saveActivity(
+    title,
+    description,
+    icon
+) {
+
+    let activities = [];
+
+
+    try {
+
+        const stored =
+            localStorage.getItem(
+                "plazaActivities"
+            );
+
+
+        if (stored) {
+
+            activities =
+                JSON.parse(
+                    stored
+                );
+
+        }
+
+
+        if (
+            !Array.isArray(
+                activities
+            )
+        ) {
+
+            activities = [];
+
+        }
+
+    }
+
+    catch (error) {
+
+        activities = [];
+
+    }
+
+
+    activities.unshift({
+
+        type:
+            "wisata",
+
+        title:
+            title,
+
+        description:
+            description,
+
+        icon:
+            icon || "fa-mountain-sun",
+
+        date:
+            new Date()
+                .toISOString()
+
+    });
+
+
+    activities =
+        activities.slice(
+            0,
+            10
+        );
+
+
+    localStorage.setItem(
+        "plazaActivities",
+        JSON.stringify(
+            activities
+        )
+    );
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function showLoading(
+    show
+) {
+
+    const loading =
+        document.getElementById(
+            "wisataLoading"
+        );
+
+    if (!loading) {
+        return;
+    }
+
+    loading.style.display =
+        show
+            ? "flex"
+            : "none";
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+    type,
+    message
+) {
+
+    const old =
+        document.querySelector(
+            ".wisata-toast"
+        );
+
+    if (old) {
+        old.remove();
+    }
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    toast.className =
+        "wisata-toast " +
+        type;
+
+
+    let icon =
+        "fa-circle-info";
+
+
+    if (type === "success") {
+
+        icon =
+            "fa-circle-check";
+
+    }
+
+    else if (type === "warning") {
+
+        icon =
+            "fa-triangle-exclamation";
+
+    }
+
+    else if (type === "danger") {
+
+        icon =
+            "fa-circle-xmark";
+
+    }
+
+
+    toast.innerHTML = `
+
+        <div class="toast-icon">
+
+            <i class="fa-solid ${icon}"></i>
+
+        </div>
+
+        <div class="toast-content">
+
+            ${message}
+
+        </div>
+
+        <button
+            type="button"
+            class="toast-close">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    `;
+
+
+    document.body.appendChild(
+        toast
+    );
+
+
+    setTimeout(function () {
+
+        toast.classList.add(
+            "show"
+        );
+
+    }, 50);
+
+
+    const close =
+        toast.querySelector(
+            ".toast-close"
+        );
+
+
+    if (close) {
+
+        close.addEventListener(
+            "click",
+            function () {
+
+                toast.remove();
+
+            }
+        );
+
+    }
+
+
+    setTimeout(function () {
+
+        if (
+            document.body.contains(
+                toast
+            )
+        ) {
+
+            toast.classList.remove(
+                "show"
+            );
+
+            setTimeout(function () {
+
+                if (
+                    document.body.contains(
+                        toast
+                    )
+                ) {
+
+                    toast.remove();
+
+                }
+
+            }, 300);
+
+        }
+
+    }, 4000);
+
+}
+
+
+/* =========================================================
+   GET VALUE
+========================================================= */
+
+function getValue(
+    id
+) {
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+    if (!element) {
+        return "";
+    }
+
+    return String(
+        element.value || ""
+    ).trim();
+
+}
+
+
+/* =========================================================
+   SET VALUE
+========================================================= */
+
+function setValue(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+    if (element) {
+
+        element.value =
+            value ?? "";
+
+    }
+
+}
+
+
+/* =========================================================
+   SET TEXT
+========================================================= */
+
+function setText(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+    if (element) {
+
+        element.textContent =
+            value;
+
+    }
+
+}
+
+
+/* =========================================================
+   CREATE SLUG
+========================================================= */
+
+function createSlug(
+    text
+) {
+
+    return String(
+        text || ""
+    )
 
         .toLowerCase()
 
@@ -2349,259 +2650,40 @@ function createWisataSlug(nama) {
 
 
 /* =========================================================
-   SIMPAN WISATA
-========================================================= */
-
-function saveWisata(event) {
-
-    event.preventDefault();
-
-
-    const nama =
-        document.getElementById("wisataNama").value.trim();
-
-    const kategori =
-        document.getElementById("wisataKategori").value;
-
-    const ikon =
-        document.getElementById("wisataIkon").value.trim();
-
-    const desa =
-        document.getElementById("wisataDesa").value;
-
-    const jenis =
-        document.getElementById("wisataJenis").value;
-
-    const status =
-        document.getElementById("wisataStatus").value;
-
-    const deskripsi =
-        document.getElementById("wisataDeskripsi").value.trim();
-
-    const gambar =
-        document.getElementById("wisataGambar").value.trim();
-
-    const maps =
-        document.getElementById("wisataMaps").value.trim();
-
-
-    if (
-        !nama ||
-        !kategori ||
-        !desa ||
-        !jenis ||
-        !status
-    ) {
-
-        alert(
-            "Mohon lengkapi field yang wajib diisi."
-        );
-
-        return;
-    }
-
-
-    const stored =
-        JSON.parse(
-            localStorage.getItem("plazaWisata") || "[]"
-        );
-
-
-    const jsonData =
-        window.plazaWisataData || [];
-
-
-    const allData = [
-        ...jsonData,
-        ...stored
-    ];
-
-
-    const ids =
-        allData.map(
-            item => Number(item.id) || 0
-        );
-
-
-    const newId =
-        ids.length
-            ? Math.max(...ids) + 1
-            : 1;
-
-
-    const wisataBaru = {
-
-        id: newId,
-
-        nama: nama,
-
-        slug:
-            createWisataSlug(nama),
-
-        kategori: kategori,
-
-        ikon:
-            ikon || "🏞️",
-
-        desa: desa,
-
-        jenis: jenis,
-
-        status: status,
-
-        deskripsi: deskripsi,
-
-        gambar:
-            gambar ||
-            "assets/images/wisata/default.jpg",
-
-        maps: maps
-
-    };
-
-
-    stored.push(
-        wisataBaru
-    );
-
-
-    localStorage.setItem(
-        "plazaWisata",
-        JSON.stringify(stored)
-    );
-
-
-    closeWisataModal();
-
-
-    showWisataNotification(
-        "success",
-        "Destinasi <strong>" +
-        escapeWisataHTML(nama) +
-        "</strong> berhasil ditambahkan."
-    );
-
-
-    if (typeof loadWisataData === "function") {
-
-        loadWisataData();
-
-    }
-
-}
-
-
-/* =========================================================
-   NOTIFICATION
-========================================================= */
-
-function showWisataNotification(
-    type,
-    message
-) {
-
-    const old =
-        document.querySelector(
-            ".wisata-notification"
-        );
-
-    if (old) {
-        old.remove();
-    }
-
-
-    const notification =
-        document.createElement("div");
-
-    notification.className =
-        "wisata-notification " + type;
-
-
-    notification.innerHTML = `
-
-        <div class="notification-icon">
-
-            <i class="fa-solid fa-circle-check"></i>
-
-        </div>
-
-        <div class="notification-content">
-
-            ${message}
-
-        </div>
-
-        <button type="button">
-
-            <i class="fa-solid fa-xmark"></i>
-
-        </button>
-
-    `;
-
-
-    document.body.appendChild(
-        notification
-    );
-
-
-    setTimeout(
-        () => notification.classList.add("show"),
-        50
-    );
-
-
-    notification
-        .querySelector("button")
-        .addEventListener(
-            "click",
-            () => notification.remove()
-        );
-
-
-    setTimeout(
-        () => {
-
-            if (
-                document.body.contains(
-                    notification
-                )
-            ) {
-
-                notification.classList.remove(
-                    "show"
-                );
-
-                setTimeout(
-                    () => notification.remove(),
-                    300
-                );
-
-            }
-
-        },
-        4000
-    );
-
-}
-
-
-/* =========================================================
    ESCAPE HTML
 ========================================================= */
 
-function escapeWisataHTML(value) {
+function escapeHTML(
+    value
+) {
 
-    return String(value ?? "")
+    return String(
+        value ?? ""
+    )
 
-        .replace(/&/g, "&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-        .replace(/</g, "&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-        .replace(/>/g, "&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-        .replace(/"/g, "&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        .replace(/'/g, "&#039;");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
