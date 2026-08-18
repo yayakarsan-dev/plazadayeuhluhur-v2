@@ -1,29 +1,32 @@
 /* =========================================================
    PLAZA DAYEUHLUHUR
    ADMIN DASHBOARD
-   DASHBOARD.JS FINAL V3
-   ---------------------------------------------------------
+   DASHBOARD.JS V3 FINAL
+
    Fitur:
-   - Login protection sudah ditangani dashboard.html
-   - Sidebar mobile
-   - Logout
-   - Statistik ekosistem
-   - Status data
-   - Aktivitas terbaru
+   - Statistik Ekosistem
+   - Monitoring Status Data
+   - Produk UMKM
+   - Aktivitas Terbaru
    - Quick Action
    - Modal Tambah UMKM
-   - LocalStorage UMKM
-   - Integrasi Produk melalui halaman produk-admin.html
+   - LocalStorage Integration
+========================================================= */
+
+
+/* =========================================================
+   INIT DASHBOARD
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("====================================");
     console.log("PLAZA DAYEUHLUHUR");
-    console.log("ADMIN DASHBOARD FINAL V3");
+    console.log("ADMIN DASHBOARD V3 FINAL");
     console.log("====================================");
 
     initSidebar();
+
     initLogout();
 
     loadDashboardData();
@@ -31,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initQuickActions();
 
     createUmkmModal();
+
     initUmkmModal();
 
 });
@@ -60,6 +64,7 @@ function initSidebar() {
     mobileButton.addEventListener("click", function () {
 
         sidebar.classList.toggle("show");
+
         overlay.classList.toggle("show");
 
     });
@@ -68,6 +73,7 @@ function initSidebar() {
     overlay.addEventListener("click", function () {
 
         sidebar.classList.remove("show");
+
         overlay.classList.remove("show");
 
     });
@@ -170,9 +176,10 @@ async function loadDashboardData() {
             if (!response.ok) {
 
                 console.warn(
-                    "Data tidak ditemukan:",
+                    "Gagal membaca:",
                     files[key]
                 );
+
 
                 result[key] = [];
 
@@ -190,16 +197,16 @@ async function loadDashboardData() {
                     ? data
                     : [];
 
-
         }
 
         catch (error) {
 
             console.error(
-                "Gagal membaca:",
+                "Error membaca data:",
                 key,
                 error
             );
+
 
             result[key] = [];
 
@@ -252,10 +259,84 @@ async function loadDashboardData() {
 
 
 /* =========================================================
-   UPDATE STATISTIK
+   GET DATA PRODUK
 ========================================================= */
 
-function updateDashboardStatistics(data) {
+function getStoredProduk() {
+
+    try {
+
+        const stored =
+            localStorage.getItem(
+                "plazaProduk"
+            );
+
+
+        if (!stored) {
+
+            return [];
+
+        }
+
+
+        const parsed =
+            JSON.parse(
+                stored
+            );
+
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Error membaca localStorage Produk:",
+            error
+        );
+
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE STATISTIK DASHBOARD
+========================================================= */
+
+function updateDashboardStatistics(
+    data
+) {
+
+    /*
+     * DESA
+     */
+
+    setText(
+        "statDesa",
+        data.desa.length
+    );
+
+
+    /*
+     * BUMDES
+     */
+
+    setText(
+        "statBumdes",
+        data.bumdes.length
+    );
+
+
+    /*
+     * UMKM
+     */
 
     const umkm =
         getCombinedUmkm(
@@ -264,22 +345,14 @@ function updateDashboardStatistics(data) {
 
 
     setText(
-        "statDesa",
-        data.desa.length
-    );
-
-
-    setText(
-        "statBumdes",
-        data.bumdes.length
-    );
-
-
-    setText(
         "statUmkm",
         umkm.length
     );
 
+
+    /*
+     * BISNIS
+     */
 
     setText(
         "statBisnis",
@@ -287,11 +360,19 @@ function updateDashboardStatistics(data) {
     );
 
 
+    /*
+     * BURSA
+     */
+
     setText(
         "statBursa",
         data.bursa.length
     );
 
+
+    /*
+     * WISATA
+     */
 
     setText(
         "statWisata",
@@ -299,15 +380,98 @@ function updateDashboardStatistics(data) {
     );
 
 
+    /*
+     * BERITA
+     */
+
     setText(
         "statBerita",
         data.berita.length
     );
 
 
+    /*
+     * AGENDA
+     */
+
     setText(
         "statAgenda",
         data.agenda.length
+    );
+
+
+    /*
+     * PRODUK
+     *
+     * Jika nanti dashboard.html
+     * memiliki id="statProduk",
+     * otomatis akan terisi.
+     */
+
+    const produk =
+        getStoredProduk();
+
+
+    setText(
+        "statProduk",
+        produk.length
+    );
+
+
+    /*
+     * PRODUK AKTIF
+     */
+
+    const produkAktif =
+        produk.filter(function (item) {
+
+            return (
+                item.status === "aktif" ||
+                item.status === "Aktif"
+            );
+
+        });
+
+
+    setText(
+        "statProdukAktif",
+        produkAktif.length
+    );
+
+
+    /*
+     * UMKM TERLIBAT DALAM PRODUK
+     */
+
+    const umkmProduk =
+        new Set();
+
+
+    produk.forEach(function (item) {
+
+        const namaUmkm =
+            item.umkm ||
+            item.umkmPemilik ||
+            item.pemilik ||
+            "";
+
+
+        if (namaUmkm) {
+
+            umkmProduk.add(
+                String(namaUmkm)
+                    .trim()
+                    .toLowerCase()
+            );
+
+        }
+
+    });
+
+
+    setText(
+        "statUmkmProduk",
+        umkmProduk.size
     );
 
 }
@@ -317,7 +481,9 @@ function updateDashboardStatistics(data) {
    UPDATE STATUS EKOSISTEM
 ========================================================= */
 
-function updateSystemStatus(data) {
+function updateSystemStatus(
+    data
+) {
 
     const umkm =
         getCombinedUmkm(
@@ -325,11 +491,19 @@ function updateSystemStatus(data) {
         );
 
 
+    /*
+     * DESA
+     */
+
     setText(
         "statusDesa",
         data.desa.length + " DATA"
     );
 
+
+    /*
+     * BUMDES
+     */
 
     setText(
         "statusBumdes",
@@ -337,11 +511,19 @@ function updateSystemStatus(data) {
     );
 
 
+    /*
+     * UMKM
+     */
+
     setText(
         "statusUmkm",
         umkm.length + " DATA"
     );
 
+
+    /*
+     * BISNIS
+     */
 
     setText(
         "statusBisnis",
@@ -349,11 +531,19 @@ function updateSystemStatus(data) {
     );
 
 
+    /*
+     * BURSA
+     */
+
     setText(
         "statusBursa",
         data.bursa.length + " DATA"
     );
 
+
+    /*
+     * WISATA
+     */
 
     setText(
         "statusWisata",
@@ -361,25 +551,52 @@ function updateSystemStatus(data) {
     );
 
 
+    /*
+     * BERITA
+     */
+
     setText(
         "statusBerita",
         data.berita.length + " DATA"
     );
 
 
+    /*
+     * AGENDA
+     */
+
     setText(
         "statusAgenda",
         data.agenda.length + " DATA"
+    );
+
+
+    /*
+     * PRODUK
+     *
+     * Jika nanti ditambahkan ke
+     * monitoring dashboard.
+     */
+
+    const produk =
+        getStoredProduk();
+
+
+    setText(
+        "statusProduk",
+        produk.length + " DATA"
     );
 
 }
 
 
 /* =========================================================
-   GABUNG UMKM JSON + LOCAL STORAGE
+   GABUNG DATA UMKM JSON + LOCAL STORAGE
 ========================================================= */
 
-function getCombinedUmkm(jsonData = []) {
+function getCombinedUmkm(
+    jsonData = []
+) {
 
     let localData = [];
 
@@ -433,44 +650,49 @@ function getCombinedUmkm(jsonData = []) {
 function initQuickActions() {
 
     /*
-     * =====================================================
-     * TAMBAH UMKM
-     * =====================================================
-     *
-     * Dashboard HTML lama belum mempunyai ID
-     * quickAddUmkm.
-     *
-     * Karena itu kita cari berdasarkan teks.
+     * Cara 1:
+     * Jika HTML memiliki id quickAddUmkm
      */
 
-    let umkmButton =
+    let button =
         document.getElementById(
             "quickAddUmkm"
         );
 
 
-    if (!umkmButton) {
+    /*
+     * Cara 2:
+     * Jika belum ada ID,
+     * cari berdasarkan teks.
+     */
 
-        const quickActions =
+    if (!button) {
+
+        const actions =
             document.querySelectorAll(
                 ".quick-action"
             );
 
 
-        quickActions.forEach(function (button) {
+        actions.forEach(function (item) {
 
-            const text =
-                button.innerText
-                    .toLowerCase();
+            const strong =
+                item.querySelector(
+                    "strong"
+                );
 
 
             if (
-                text.includes(
-                    "tambah umkm"
-                )
+                strong &&
+                strong.textContent
+                    .trim()
+                    .toLowerCase()
+                    .includes(
+                        "tambah umkm"
+                    )
             ) {
 
-                umkmButton = button;
+                button = item;
 
             }
 
@@ -479,62 +701,27 @@ function initQuickActions() {
     }
 
 
-    if (umkmButton) {
+    if (!button) {
 
-        umkmButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                openUmkmModal();
-
-            }
+        console.warn(
+            "Quick Action Tambah UMKM belum ditemukan."
         );
+
+        return;
 
     }
 
 
-    /*
-     * =====================================================
-     * TAMBAH PRODUK
-     * =====================================================
-     *
-     * Produk sudah mempunyai halaman khusus:
-     *
-     * produk-admin.html
-     *
-     * Jadi tidak perlu modal produk di dashboard.
-     */
+    button.addEventListener(
+        "click",
+        function (event) {
 
+            event.preventDefault();
 
-    const produkButtons =
-        document.querySelectorAll(
-            ".quick-action"
-        );
-
-
-    produkButtons.forEach(function (button) {
-
-        const text =
-            button.innerText
-                .toLowerCase();
-
-
-        if (
-            text.includes(
-                "tambah produk"
-            )
-        ) {
-
-            button.setAttribute(
-                "href",
-                "produk-admin.html"
-            );
+            openUmkmModal();
 
         }
-
-    });
+    );
 
 }
 
@@ -544,10 +731,6 @@ function initQuickActions() {
 ========================================================= */
 
 function createUmkmModal() {
-
-    /*
-     * Jangan membuat modal dua kali
-     */
 
     if (
         document.getElementById(
@@ -578,8 +761,6 @@ function createUmkmModal() {
 
         <div class="umkm-modal">
 
-            <!-- HEADER -->
-
             <div class="umkm-modal-header">
 
                 <div>
@@ -589,11 +770,8 @@ function createUmkmModal() {
                     </span>
 
                     <h3>
-
                         <i class="fa-solid fa-store"></i>
-
                         Tambah UMKM
-
                     </h3>
 
                     <p>
@@ -602,7 +780,6 @@ function createUmkmModal() {
                     </p>
 
                 </div>
-
 
                 <button
                     type="button"
@@ -616,12 +793,9 @@ function createUmkmModal() {
             </div>
 
 
-            <!-- BODY -->
-
             <form
                 id="formTambahUmkm"
                 class="umkm-modal-body">
-
 
                 <div class="row g-3">
 
@@ -631,10 +805,8 @@ function createUmkmModal() {
                     <div class="col-md-7">
 
                         <label>
-
                             Nama UMKM
                             <span>*</span>
-
                         </label>
 
                         <div class="input-group-premium">
@@ -645,8 +817,7 @@ function createUmkmModal() {
                                 type="text"
                                 id="umkmNama"
                                 placeholder="Contoh: WAHYU Barbershop"
-                                required
-                            >
+                                required>
 
                         </div>
 
@@ -658,10 +829,8 @@ function createUmkmModal() {
                     <div class="col-md-5">
 
                         <label>
-
                             Kategori
                             <span>*</span>
-
                         </label>
 
                         <div class="input-group-premium">
@@ -670,8 +839,7 @@ function createUmkmModal() {
 
                             <select
                                 id="umkmKategori"
-                                required
-                            >
+                                required>
 
                                 <option value="">
                                     Pilih kategori
@@ -697,14 +865,6 @@ function createUmkmModal() {
                                     Fashion
                                 </option>
 
-                                <option value="Pertanian">
-                                    Pertanian
-                                </option>
-
-                                <option value="Produk Lokal">
-                                    Produk Lokal
-                                </option>
-
                             </select>
 
                         </div>
@@ -717,10 +877,8 @@ function createUmkmModal() {
                     <div class="col-md-7">
 
                         <label>
-
                             Produk / Jasa
                             <span>*</span>
-
                         </label>
 
                         <div class="input-group-premium">
@@ -731,8 +889,7 @@ function createUmkmModal() {
                                 type="text"
                                 id="umkmProduk"
                                 placeholder="Contoh: Potong Rambut Pria"
-                                required
-                            >
+                                required>
 
                         </div>
 
@@ -744,10 +901,8 @@ function createUmkmModal() {
                     <div class="col-md-5">
 
                         <label>
-
                             Desa
                             <span>*</span>
-
                         </label>
 
                         <div class="input-group-premium">
@@ -756,15 +911,10 @@ function createUmkmModal() {
 
                             <select
                                 id="umkmDesa"
-                                required
-                            >
+                                required>
 
                                 <option value="">
                                     Pilih desa
-                                </option>
-
-                                <option value="Dayeuhluhur">
-                                    Dayeuhluhur
                                 </option>
 
                                 <option value="Panulisan">
@@ -781,6 +931,10 @@ function createUmkmModal() {
 
                                 <option value="Datar">
                                     Datar
+                                </option>
+
+                                <option value="Dayeuhluhur">
+                                    Dayeuhluhur
                                 </option>
 
                                 <option value="Matenggeng">
@@ -819,14 +973,6 @@ function createUmkmModal() {
                                     Bingkeng
                                 </option>
 
-                                <option value="Cilumping">
-                                    Cilumping
-                                </option>
-
-                                <option value="Bolawangi">
-                                    Bolawangi
-                                </option>
-
                             </select>
 
                         </div>
@@ -849,8 +995,7 @@ function createUmkmModal() {
                             <input
                                 type="text"
                                 id="umkmPemilik"
-                                placeholder="Nama pemilik usaha"
-                            >
+                                placeholder="Nama pemilik usaha">
 
                         </div>
 
@@ -872,8 +1017,7 @@ function createUmkmModal() {
                             <input
                                 type="text"
                                 id="umkmWhatsapp"
-                                placeholder="08xxxxxxxxxx"
-                            >
+                                placeholder="08xxxxxxxxxx">
 
                         </div>
 
@@ -895,8 +1039,7 @@ function createUmkmModal() {
                             <input
                                 type="text"
                                 id="umkmAlamat"
-                                placeholder="Alamat lengkap UMKM"
-                            >
+                                placeholder="Alamat lengkap UMKM">
 
                         </div>
 
@@ -914,8 +1057,7 @@ function createUmkmModal() {
                         <textarea
                             id="umkmDeskripsi"
                             rows="3"
-                            placeholder="Deskripsi singkat tentang usaha..."
-                        ></textarea>
+                            placeholder="Deskripsi singkat tentang usaha..."></textarea>
 
                     </div>
 
@@ -967,8 +1109,7 @@ function createUmkmModal() {
                                 value="0"
                                 min="0"
                                 max="5"
-                                step="0.1"
-                            >
+                                step="0.1">
 
                         </div>
 
@@ -1007,8 +1148,6 @@ function createUmkmModal() {
                 </div>
 
 
-                <!-- FOOTER -->
-
                 <div class="umkm-modal-footer">
 
                     <button
@@ -1032,7 +1171,6 @@ function createUmkmModal() {
                     </button>
 
                 </div>
-
 
             </form>
 
@@ -1181,21 +1319,24 @@ function openUmkmModal() {
     );
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        const input =
-            document.getElementById(
-                "umkmNama"
-            );
+            const input =
+                document.getElementById(
+                    "umkmNama"
+                );
 
 
-        if (input) {
+            if (input) {
 
-            input.focus();
+                input.focus();
 
-        }
+            }
 
-    }, 200);
+        },
+        200
+    );
 
 }
 
@@ -1271,13 +1412,11 @@ function saveNewUmkm(event) {
 
 
     const status =
-        getValue("umkmStatus") ||
-        "Buka";
+        getValue("umkmStatus") || "Buka";
 
 
     const rating =
-        getValue("umkmRating") ||
-        "0";
+        getValue("umkmRating") || "0";
 
 
     /*
@@ -1302,7 +1441,7 @@ function saveNewUmkm(event) {
 
 
     /*
-     * DATABASE LOCAL
+     * DATA LAMA
      */
 
     const existing =
@@ -1310,22 +1449,19 @@ function saveNewUmkm(event) {
 
 
     /*
-     * AMBIL SEMUA ID
+     * ID
      */
 
     const allIds =
-        existing.map(function (item) {
+        existing
+            .map(function (item) {
 
-            return Number(
-                item.id
-            ) || 0;
+                return Number(
+                    item.id
+                ) || 0;
 
-        });
+            });
 
-
-    /*
-     * AMBIL ID DARI JSON
-     */
 
     const jsonData =
         window.plazaDashboardData &&
@@ -1336,18 +1472,16 @@ function saveNewUmkm(event) {
             : [];
 
 
-    jsonData.forEach(function (item) {
+    jsonData.forEach(
+        function (item) {
 
-        allIds.push(
-            Number(item.id) || 0
-        );
+            allIds.push(
+                Number(item.id) || 0
+            );
 
-    });
+        }
+    );
 
-
-    /*
-     * ID BARU
-     */
 
     const newId =
         allIds.length > 0
@@ -1356,17 +1490,7 @@ function saveNewUmkm(event) {
 
 
     /*
-     * SLUG
-     */
-
-    const slug =
-        createSlug(
-            nama
-        );
-
-
-    /*
-     * DATA UMKM
+     * DATA UMKM BARU
      */
 
     const newUmkm = {
@@ -1375,7 +1499,10 @@ function saveNewUmkm(event) {
 
         nama: nama,
 
-        slug: slug,
+        slug:
+            createSlug(
+                nama
+            ),
 
         kategori: kategori,
 
@@ -1407,13 +1534,17 @@ function saveNewUmkm(event) {
 
 
     /*
-     * SIMPAN
+     * PUSH
      */
 
     existing.push(
         newUmkm
     );
 
+
+    /*
+     * LOCAL STORAGE
+     */
 
     try {
 
@@ -1455,14 +1586,14 @@ function saveNewUmkm(event) {
 
 
     /*
-     * REFRESH DASHBOARD
+     * REFRESH
      */
 
     refreshDashboardAfterUmkm();
 
 
     /*
-     * RESET FORM
+     * RESET
      */
 
     const form =
@@ -1491,14 +1622,14 @@ function saveNewUmkm(event) {
 
 
     /*
-     * TUTUP MODAL
+     * CLOSE
      */
 
     closeUmkmModal();
 
 
     /*
-     * NOTIFIKASI
+     * ALERT
      */
 
     showDashboardAlert(
@@ -1518,7 +1649,7 @@ function saveNewUmkm(event) {
 
 
 /* =========================================================
-   REFRESH DASHBOARD SETELAH UMKM
+   REFRESH DASHBOARD
 ========================================================= */
 
 function refreshDashboardAfterUmkm() {
@@ -1561,10 +1692,12 @@ function refreshDashboardAfterUmkm() {
 
 
 /* =========================================================
-   SIMPAN AKTIVITAS
+   AKTIVITAS
 ========================================================= */
 
-function saveActivity(umkm) {
+function saveActivity(
+    item
+) {
 
     let activities = [];
 
@@ -1597,11 +1730,6 @@ function saveActivity(umkm) {
 
     catch (error) {
 
-        console.error(
-            "Aktivitas tidak dapat dibaca:",
-            error
-        );
-
         activities = [];
 
     }
@@ -1615,9 +1743,9 @@ function saveActivity(umkm) {
             "UMKM baru ditambahkan",
 
         description:
-            umkm.nama +
+            item.nama +
             " — " +
-            umkm.desa,
+            item.desa,
 
         icon:
             "fa-store",
@@ -1628,10 +1756,6 @@ function saveActivity(umkm) {
     });
 
 
-    /*
-     * Maksimal 10 aktivitas
-     */
-
     activities =
         activities.slice(
             0,
@@ -1639,25 +1763,12 @@ function saveActivity(umkm) {
         );
 
 
-    try {
-
-        localStorage.setItem(
-            "plazaActivities",
-            JSON.stringify(
-                activities
-            )
-        );
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Gagal menyimpan aktivitas:",
-            error
-        );
-
-    }
+    localStorage.setItem(
+        "plazaActivities",
+        JSON.stringify(
+            activities
+        )
+    );
 
 }
 
@@ -1666,7 +1777,9 @@ function saveActivity(umkm) {
    RENDER AKTIVITAS
 ========================================================= */
 
-function updateActivityList(data) {
+function updateActivityList(
+    data
+) {
 
     const container =
         document.getElementById(
@@ -1703,11 +1816,6 @@ function updateActivityList(data) {
 
     catch (error) {
 
-        console.error(
-            "Gagal membaca aktivitas:",
-            error
-        );
-
         activities = [];
 
     }
@@ -1738,55 +1846,56 @@ function updateActivityList(data) {
     let html = "";
 
 
-    activities.forEach(function (item) {
+    activities.forEach(
+        function (item) {
 
-        const time =
-            formatRelativeTime(
-                item.date
-            );
+            const time =
+                formatRelativeTime(
+                    item.date
+                );
 
 
-        html += `
+            html += `
 
-            <div class="activity-item">
+                <div class="activity-item">
 
-                <div class="activity-icon">
+                    <div class="activity-icon">
 
-                    <i class="fa-solid
-                        ${escapeHTML(
-                            item.icon ||
-                            "fa-bolt"
-                        )}">
-                    </i>
+                        <i class="fa-solid
+                            ${escapeHTML(
+                                item.icon ||
+                                "fa-bolt"
+                            )}">
+                        </i>
+
+                    </div>
+
+                    <div class="activity-content">
+
+                        <strong>
+                            ${escapeHTML(
+                                item.title
+                            )}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(
+                                item.description
+                            )}
+                        </span>
+
+                        <small>
+                            ${time}
+                        </small>
+
+                    </div>
 
                 </div>
 
+            `;
 
-                <div class="activity-content">
-
-                    <strong>
-                        ${escapeHTML(
-                            item.title
-                        )}
-                    </strong>
-
-                    <span>
-                        ${escapeHTML(
-                            item.description
-                        )}
-                    </span>
-
-                    <small>
-                        ${time}
-                    </small>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
+        }
+    );
 
 
     container.innerHTML =
@@ -1796,7 +1905,7 @@ function updateActivityList(data) {
 
 
 /* =========================================================
-   DASHBOARD TOAST
+   ALERT / TOAST
 ========================================================= */
 
 function showDashboardAlert(
@@ -1864,13 +1973,11 @@ function showDashboardAlert(
 
         </div>
 
-
         <div class="toast-content">
 
             ${message}
 
         </div>
-
 
         <button
             type="button"
@@ -1888,13 +1995,16 @@ function showDashboardAlert(
     );
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        toast.classList.add(
-            "show"
-        );
+            toast.classList.add(
+                "show"
+            );
 
-    }, 50);
+        },
+        50
+    );
 
 
     const close =
@@ -1917,36 +2027,34 @@ function showDashboardAlert(
     }
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        if (
-            document.body.contains(
-                toast
-            )
-        ) {
+            if (
+                document.body.contains(
+                    toast
+                )
+            ) {
 
-            toast.classList.remove(
-                "show"
-            );
+                toast.classList.remove(
+                    "show"
+                );
 
 
-            setTimeout(function () {
+                setTimeout(
+                    function () {
 
-                if (
-                    document.body.contains(
-                        toast
-                    )
-                ) {
+                        toast.remove();
 
-                    toast.remove();
+                    },
+                    300
+                );
 
-                }
+            }
 
-            }, 300);
-
-        }
-
-    }, 4000);
+        },
+        4000
+    );
 
 }
 
@@ -2003,7 +2111,9 @@ function getStoredUmkm() {
    GET VALUE
 ========================================================= */
 
-function getValue(id) {
+function getValue(
+    id
+) {
 
     const element =
         document.getElementById(
@@ -2018,9 +2128,8 @@ function getValue(id) {
     }
 
 
-    return String(
-        element.value || ""
-    ).trim();
+    return element.value
+        .trim();
 
 }
 
@@ -2076,10 +2185,12 @@ function setText(
 
 
 /* =========================================================
-   CREATE SLUG
+   SLUG
 ========================================================= */
 
-function createSlug(text) {
+function createSlug(
+    text
+) {
 
     return String(text)
 
@@ -2109,7 +2220,9 @@ function createSlug(text) {
    ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(value) {
+function escapeHTML(
+    value
+) {
 
     return String(
         value ?? ""
@@ -2147,7 +2260,9 @@ function escapeHTML(value) {
    FORMAT RELATIVE TIME
 ========================================================= */
 
-function formatRelativeTime(date) {
+function formatRelativeTime(
+    date
+) {
 
     const now =
         new Date();
@@ -2155,17 +2270,6 @@ function formatRelativeTime(date) {
 
     const then =
         new Date(date);
-
-
-    if (
-        isNaN(
-            then.getTime()
-        )
-    ) {
-
-        return "Baru saja";
-
-    }
 
 
     const diff =
@@ -2213,8 +2317,3 @@ function formatRelativeTime(date) {
     );
 
 }
-
-
-/* =========================================================
-   END DASHBOARD.JS
-========================================================= */
