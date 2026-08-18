@@ -1,906 +1,818 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="id" class="scroll-smooth">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Hajatan & Undangan Warga - Plaza Dayeuhluhur</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        wedding: ['"Great Vibes"', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
 
-<meta charset="UTF-8">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>
-Kalender Hajatan & Undangan Online | Plaza Dayeuhluhur
-</title>
-
-<meta
-    name="description"
-    content="Kalender Hajatan Warga dan Undangan Online Kecamatan Dayeuhluhur."
->
-
-
-<!-- Google Font -->
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet"
->
-
-
-<!-- Bootstrap -->
-
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-    rel="stylesheet"
->
-
-
-<!-- Bootstrap Icons -->
-
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
->
-
-
-<!-- Font Awesome -->
-
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
->
-
-
-<!-- Plaza -->
-<link
-    rel="stylesheet"
-    href="assets/css/style.css"
->
-
-<link
-    rel="stylesheet"
-    href="assets/css/theme.css"
->
-
-<link
-    rel="stylesheet"
-    href="assets/css/animation.css"
->
-
-<link
-    rel="stylesheet"
-    href="assets/css/responsive.css"
->
-
-<!-- Kalender Hajatan -->
-<link
-    rel="stylesheet"
-    href="assets/css/undangan.css"
->
-
+    <style>
+        /* ==========================================
+           ASSETS / CSS / UNDANGAN.CSS
+           ========================================== */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #b45309 0%, #f59e0b 50%, #78350f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px), radial-gradient(#cbd5e1 0.75px, #f8fafc 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+    <!-- If using separate file in production: <link rel="stylesheet" href="assets/css/undangan.css"> -->
 </head>
+<body class="bg-pattern font-sans text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-200 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-synagogue text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-slate-900 block leading-none">PLAZA DAYEUHLUHUR</span>
+                        <span class="text-[10px] text-sky-600 font-semibold tracking-wider uppercase">Portal Informasi & Warga</span>
+                    </div>
+                </a>
 
-<body>
+                <!-- Desktop Menu Nav -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-3 text-sm font-medium text-slate-600">
+                    <a href="index.html" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">Beranda</a>
+                    <a href="#" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">Produk</a>
+                    <a href="#" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">Desa</a>
+                    <a href="#" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">BUMDes</a>
+                    <a href="#" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">UMKM</a>
+                    <a href="#" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">Wisata</a>
+                    <a href="#" class="px-3 py-2 rounded-lg text-sky-600 bg-sky-50 font-semibold">Agenda Warga</a>
+                    <a href="#" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">Berita</a>
+                    <a href="#" class="px-3 py-2 rounded-lg hover:text-sky-600 hover:bg-slate-50 transition">Kontak</a>
+                </nav>
 
+                <!-- Action Button -->
+                <div class="hidden sm:flex items-center gap-2">
+                    <a href="#" class="px-4 py-2 text-xs font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-xl shadow-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-gauge-high"></i> Dashboard
+                    </a>
+                </div>
 
-<!-- =====================================================
-     TOP NEWS FLASH
-===================================================== -->
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
 
-<div class="top-news">
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-slate-700 font-medium">Beranda</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-slate-700 font-medium">Produk</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-slate-700 font-medium">Desa</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-sky-600 bg-sky-50 font-bold">Agenda Warga</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-slate-700 font-medium">BUMDes & UMKM</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-slate-700 font-medium">Wisata</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-slate-700 font-medium">Berita</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-slate-700 font-medium">Kontak</a>
+            <a href="#" class="block px-3 py-2 mt-2 text-center text-white bg-sky-600 rounded-lg font-semibold">Dashboard</a>
+        </div>
+    </header>
 
-    <div class="container-fluid">
+    <section class="bg-white border-b border-slate-200 py-3.5 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <!-- Breadcrumb -->
+                <nav class="flex items-center space-x-2 text-xs text-slate-500">
+                    <a href="index.html" class="hover:text-sky-600">Beranda</a>
+                    <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    <a href="#" class="hover:text-sky-600">Agenda Warga</a>
+                    <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    <span class="text-slate-900 font-semibold" id="breadcrumbCurrent">Detail Hajatan</span>
+                </nav>
 
-        <div class="news-wrapper">
+                <!-- Search & Filters -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <div class="relative min-w-[180px] flex-1 sm:flex-initial">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="searchInput" placeholder="Cari Hajatan..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition">
+                    </div>
+                    <select id="villageFilter" class="py-1.5 px-3 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="">Semua Desa</option>
+                        <option value="panulisan" selected>Desa Panulisan</option>
+                        <option value="dayeuhluhur">Desa Dayeuhluhur</option>
+                        <option value="ciwalen">Desa Ciwalen</option>
+                        <option value="bingkeng">Desa Bingkeng</option>
+                        <option value="matenggeng">Desa Matenggeng</option>
+                    </select>
+                    <select id="categoryFilter" class="py-1.5 px-3 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="">Semua Jenis</option>
+                        <option value="pernikahan" selected>Pernikahan</option>
+                        <option value="khitanan">Khitanan</option>
+                        <option value="syukuran">Syukuran</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="news-label">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-sky-100 text-sky-600 font-bold">
+                    <i class="fa-regular fa-calendar-days text-lg"></i>
+                </span>
+                <div>
+                    <span class="text-[11px] font-bold text-sky-600 uppercase tracking-wider block">AGENDA & KALENDER</span>
+                    <h2 class="text-lg font-bold text-slate-900 leading-tight">Kalender Hajatan Warga Dayeuhluhur</h2>
+                </div>
+            </div>
 
-                <span class="live-dot"></span>
+            <!-- Month Switcher Controls -->
+            <div class="flex items-center gap-2 bg-slate-50 p-1.5 rounded-xl border border-slate-200">
+                <button onclick="openToast('Navigasi ke bulan sebelumnya')" class="p-2 hover:bg-white rounded-lg text-slate-600 hover:text-sky-600 transition shadow-2xs">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+                <span class="px-3 text-xs font-bold text-slate-800">Agustus 2026</span>
+                <button onclick="openToast('Menampilkan agenda hari ini')" class="px-2.5 py-1 text-[11px] font-semibold bg-sky-600 text-white rounded-lg shadow-xs hover:bg-sky-700 transition">Hari Ini</button>
+                <button onclick="openToast('Navigasi ke bulan berikutnya')" class="p-2 hover:bg-white rounded-lg text-slate-600 hover:text-sky-600 transition shadow-2xs">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
-                LIVE NEWS
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT / CENTER COLUMN: Detailed Modern Invitation (8 Cols) -->
+            <div class="lg:col-span-8 space-y-8">
+
+                <!-- Invitation Card Container -->
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden relative">
+                    
+                    <!-- Decorative Top Header Banner -->
+                    <div class="relative h-64 sm:h-80 bg-gradient-to-r from-slate-900 via-sky-900 to-slate-900 flex items-center justify-center text-center p-6 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" alt="Wedding Cover" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay">
+                        <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/40"></div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="relative z-10 space-y-2 mt-4">
+                            <span id="eventBadge" class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-amber-500/90 text-white shadow-lg backdrop-blur-md">
+                                <i class="fa-solid fa-ring text-xs"></i> Undangan Pernikahan
+                            </span>
+                            <p class="font-wedding text-4xl sm:text-5xl text-amber-300 drop-shadow-md">Dengan Penuh Kebahagiaan</p>
+                        </div>
+                    </div>
+
+                    <div class="px-6 sm:px-10 pb-8 relative -mt-20 z-20">
+                        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-100 text-center max-w-2xl mx-auto space-y-6">
+                            
+                            <!-- Event Photo Frame -->
+                            <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-full ring-4 ring-amber-400/80 shadow-2xl overflow-hidden group">
+                                <img id="eventPhoto" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="Foto Pengantin" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                            </div>
+
+                            <!-- Couple/Host Names -->
+                            <div>
+                                <h1 id="eventTitle" class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
+                                    Andi & Siti
+                                </h1>
+                                <p class="text-xs sm:text-sm font-medium text-slate-500 mt-2 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-amber-500"></i>
+                                    <span id="eventSubLocation">Panulisan, Dayeuhluhur</span>
+                                    <span>•</span>
+                                    <i class="fa-regular fa-calendar-check text-sky-600"></i>
+                                    <span id="eventSubDate">Minggu, 30 Agustus 2026</span>
+                                </p>
+                            </div>
+
+                            <!-- Countdown Timer Box -->
+                            <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-2xl shadow-inner">
+                                <p class="text-[11px] font-semibold text-amber-400 uppercase tracking-widest mb-3">Hitung Mundur Acara</p>
+                                <div class="grid grid-cols-4 gap-2 text-center" id="countdownContainer">
+                                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/10">
+                                        <span id="days" class="block text-xl sm:text-2xl font-bold text-white">00</span>
+                                        <span class="text-[10px] text-slate-300 uppercase">Hari</span>
+                                    </div>
+                                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/10">
+                                        <span id="hours" class="block text-xl sm:text-2xl font-bold text-white">00</span>
+                                        <span class="text-[10px] text-slate-300 uppercase">Jam</span>
+                                    </div>
+                                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/10">
+                                        <span id="minutes" class="block text-xl sm:text-2xl font-bold text-white">00</span>
+                                        <span class="text-[10px] text-slate-300 uppercase">Menit</span>
+                                    </div>
+                                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/10">
+                                        <span id="seconds" class="block text-xl sm:text-2xl font-bold text-white">00</span>
+                                        <span class="text-[10px] text-slate-300 uppercase">Detik</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quote / Invitation Message -->
+                            <div class="p-4 sm:p-6 bg-amber-50/60 rounded-xl border border-amber-200/70 text-slate-700 space-y-3 relative">
+                                <i class="fa-solid fa-quote-left text-2xl text-amber-300 absolute top-3 left-4"></i>
+                                <p class="text-xs sm:text-sm italic leading-relaxed pt-3 px-2 font-serif" id="eventQuote">
+                                    "Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk berkenan hadir dalam acara pernikahan kami."
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="px-6 sm:px-10 pb-10 space-y-8">
+                        <div>
+                            <div class="flex items-center gap-3 border-b border-slate-200 pb-3 mb-6">
+                                <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900">Detail & Informasi Acara</h3>
+                            </div>
+
+                            <!-- Detail Cards Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                
+                                <!-- Card 1: Tanggal & Waktu -->
+                                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 hover:border-sky-300 transition group">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-sky-200">
+                                            <i class="fa-regular fa-calendar-days text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Pelaksanaan</span>
+                                            <p id="eventFullDate" class="text-sm font-bold text-slate-900 mt-0.5">Minggu, 30 Agustus 2026</p>
+                                            <p id="eventTime" class="text-xs text-slate-600 mt-1 flex items-center gap-1">
+                                                <i class="fa-regular fa-clock text-sky-600"></i> Pukul 10.00 WIB - Selesai
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Lokasi & Alamat -->
+                                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 hover:border-sky-300 transition group">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-200">
+                                            <i class="fa-solid fa-map-location-dot text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Lokasi Acara</span>
+                                            <p id="eventLocationName" class="text-sm font-bold text-slate-900 mt-0.5">Dusun Sukamaju</p>
+                                            <p id="eventAddress" class="text-xs text-slate-600 mt-1 leading-normal">
+                                                Desa Panulisan, Kecamatan Dayeuhluhur, Kab. Cilacap
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3: Hiburan Acara -->
+                                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 hover:border-sky-300 transition group sm:col-span-2">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-indigo-200">
+                                            <i class="fa-solid fa-music text-lg"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Hiburan Pentas Warga</span>
+                                            <p id="eventEntertainment" class="text-sm font-bold text-slate-900 mt-0.5">Organ Tunggal "Nada Melati Panulisan"</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                            <button onclick="openMapModal()" class="px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs sm:text-sm font-bold shadow-lg shadow-sky-600/30 transition flex items-center gap-2">
+                                <i class="fa-solid fa-location-arrow"></i> Lihat Lokasi Google Maps
+                            </button>
+
+                            <button onclick="openRsvpModal()" class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-lg shadow-emerald-600/30 transition flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-base"></i> Konfirmasi Kehadiran (RSVP)
+                            </button>
+
+                            <button onclick="addToCalendar()" class="px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold transition flex items-center gap-2">
+                                <i class="fa-regular fa-calendar-plus text-sky-600"></i> Simpan Kalender
+                            </button>
+
+                            <button onclick="shareInvitation()" class="px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold transition flex items-center gap-2">
+                                <i class="fa-solid fa-share-nodes text-slate-600"></i> Bagikan
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-lg space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest block">Dukungan Usaha Lokal</span>
+                            <h3 class="text-xl font-bold text-slate-900">Vendor & Mitra Pendukung Acara</h3>
+                        </div>
+                        <span class="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full self-start sm:self-auto font-medium">
+                            <i class="fa-solid fa-store text-xs mr-1"></i> UMKM & BUMDes
+                        </span>
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600">
+                        Acara hajatan ini didukung penuh oleh para usahawan lokal dan penyedia jasa kreatif dari wilayah Kecamatan Dayeuhluhur:
+                    </p>
+
+                    <!-- Vendor Cards Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+                        <!-- Vendor 1 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 hover:border-amber-400 bg-slate-50/50 hover:bg-white transition flex items-start gap-4 group">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=200&q=80" alt="Vendor Organ" class="w-16 h-16 rounded-xl object-cover shadow-sm group-hover:scale-105 transition">
+                            <div class="flex-1 min-w-0">
+                                <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md inline-block">Hiburan & Sound</span>
+                                <h4 class="text-sm font-bold text-slate-900 truncate mt-1">Organ Tunggal Nada Melati</h4>
+                                <p class="text-xs text-slate-500">Desa Panulisan • <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 4.9</p>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Nada%20Melati,%20saya%20tertarik%20tanya%20sewa%20sound" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:underline mt-2">
+                                    <i class="fa-brands fa-whatsapp text-emerald-500"></i> Hubungi Vendor
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Vendor 2 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 hover:border-amber-400 bg-slate-50/50 hover:bg-white transition flex items-start gap-4 group">
+                            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=200&q=80" alt="Vendor Catering" class="w-16 h-16 rounded-xl object-cover shadow-sm group-hover:scale-105 transition">
+                            <div class="flex-1 min-w-0">
+                                <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md inline-block">Katering Desa</span>
+                                <h4 class="text-sm font-bold text-slate-900 truncate mt-1">Catering Berkah Matenggeng</h4>
+                                <p class="text-xs text-slate-500">Desa Matenggeng • <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 5.0</p>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Catering%20Berkah,%20saya%20mau%20tanya%20menu%20prasmanan" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:underline mt-2">
+                                    <i class="fa-brands fa-whatsapp text-emerald-500"></i> Hubungi Vendor
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Vendor 3 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 hover:border-amber-400 bg-slate-50/50 hover:bg-white transition flex items-start gap-4 group">
+                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=200&q=80" alt="Vendor Decor" class="w-16 h-16 rounded-xl object-cover shadow-sm group-hover:scale-105 transition">
+                            <div class="flex-1 min-w-0">
+                                <span class="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md inline-block">Rias & Dekorasi</span>
+                                <h4 class="text-sm font-bold text-slate-900 truncate mt-1">Sanggar Rias Mawar Dayeuhluhur</h4>
+                                <p class="text-xs text-slate-500">Desa Dayeuhluhur • <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 4.8</p>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Sanggar%20Mawar" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:underline mt-2">
+                                    <i class="fa-brands fa-whatsapp text-emerald-500"></i> Hubungi Vendor
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Vendor 4 -->
+                        <div class="p-4 rounded-2xl border border-slate-200 hover:border-amber-400 bg-slate-50/50 hover:bg-white transition flex items-start gap-4 group">
+                            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=200&q=80" alt="Vendor Photo" class="w-16 h-16 rounded-xl object-cover shadow-sm group-hover:scale-105 transition">
+                            <div class="flex-1 min-w-0">
+                                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md inline-block">Dokumentasi</span>
+                                <h4 class="text-sm font-bold text-slate-900 truncate mt-1">Dayeuhluhur Lens Creative</h4>
+                                <p class="text-xs text-slate-500">Desa Ciwalen • <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 4.9</p>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Dayeuhluhur%20Lens" target="_blank" class="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:underline mt-2">
+                                    <i class="fa-brands fa-whatsapp text-emerald-500"></i> Hubungi Vendor
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
             </div>
 
-            <div class="news-marquee">
+            <div class="lg:col-span-4 space-y-6">
 
-                <div id="newsFlashContent">
+                <!-- Agenda Summary Widget -->
+                <div class="bg-gradient-to-br from-sky-600 to-indigo-700 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-sky-200 bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-md">
+                        Agenda Warga Bulan Ini
+                    </span>
+                    <div class="mt-4 flex items-baseline justify-between">
+                        <h3 class="text-3xl font-extrabold">3 Hajatan</h3>
+                        <span class="text-xs text-sky-100 font-medium"><i class="fa-solid fa-circle text-[8px] text-emerald-300 mr-1"></i> Terverifikasi</span>
+                    </div>
+                    <p class="text-xs text-sky-100 mt-2 leading-relaxed">
+                        Data agenda warga terekam resmi di sistem portal Desa Plaza Dayeuhluhur.
+                    </p>
+                </div>
 
-                    Memuat informasi terbaru...
+                <!-- Daftar Hajatan Warga Lainnya Card -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md space-y-4">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-list-ul text-sky-600"></i> Daftar Hajatan Lain
+                        </h3>
+                        <span class="text-xs text-slate-400">Pilih Acara</span>
+                    </div>
 
+                    <!-- Event Item List Dynamic Switchers -->
+                    <div class="space-y-3" id="otherEventsList">
+                        
+                        <!-- Event Item 1 -->
+                        <a href="undangan.html?id=1" id="eventItem-1" class="block p-3.5 rounded-2xl border-2 border-sky-500 bg-sky-50/50 hover:bg-sky-50 transition relative group">
+                            <span class="absolute top-3 right-3 text-[10px] font-bold text-sky-700 bg-sky-200 px-2 py-0.5 rounded-full">Active</span>
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=120&q=80" alt="Andi & Siti" class="w-12 h-12 rounded-xl object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-900">Andi & Siti</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-ring text-amber-500 mr-1"></i> Pernikahan</p>
+                                    <p class="text-[11px] text-slate-400 mt-0.5"><i class="fa-regular fa-calendar mr-1"></i> 30 Ags 2026 • Panulisan</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Event Item 2 -->
+                        <a href="undangan.html?id=2" id="eventItem-2" class="block p-3.5 rounded-2xl border border-slate-200 hover:border-sky-300 bg-white hover:bg-slate-50 transition relative group">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=120&q=80" alt="Khitanan Raihan" class="w-12 h-12 rounded-xl object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-900">Khitanan Raihan</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-child text-sky-500 mr-1"></i> Khitanan</p>
+                                    <p class="text-[11px] text-slate-400 mt-0.5"><i class="fa-regular fa-calendar mr-1"></i> 05 Sep 2026 • Matenggeng</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Event Item 3 -->
+                        <a href="undangan.html?id=3" id="eventItem-3" class="block p-3.5 rounded-2xl border border-slate-200 hover:border-sky-300 bg-white hover:bg-slate-50 transition relative group">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=120&q=80" alt="Syukuran Rumah Bpk. Ahmad" class="w-12 h-12 rounded-xl object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-900">Walimatul Bpk. Ahmad</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-house text-emerald-500 mr-1"></i> Syukuran Rumah</p>
+                                    <p class="text-[11px] text-slate-400 mt-0.5"><i class="fa-regular fa-calendar mr-1"></i> 12 Sep 2026 • Ciwalen</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Submit New Agenda Banner -->
+                <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl p-6 text-white shadow-md space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                        <i class="fa-solid fa-bullhorn text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-base leading-snug">Ingin Mendaftarkan Acara Hajatan Anda?</h4>
+                    <p class="text-xs text-amber-100">
+                        Warga Dayeuhluhur dapat mempublikasikan jadwal hajatan agar diketahui oleh warga sekitar & perangkat desa.
+                    </p>
+                    <button onclick="openToast('Fitur pendaftaran hajatan online akan segera dibuka untuk RT/RW!')" class="w-full py-2.5 bg-white text-orange-600 hover:bg-amber-50 rounded-xl font-bold text-xs shadow-md transition">
+                        Daftarkan Hajatan Warga
+                    </button>
                 </div>
 
             </div>
 
         </div>
+    </main>
 
+    <div id="rsvpModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-5 animate-in fade-in zoom-in duration-200">
+            <button onclick="closeRsvpModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="text-center space-y-1">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-xl mb-2">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Konfirmasi Kehadiran (RSVP)</h3>
+                <p class="text-xs text-slate-500">Kirim pesan konfirmasi langsung ke Whatsapp pihak pengantin/penyelenggara.</p>
+            </div>
+
+            <form id="rsvpForm" onsubmit="sendRsvpWhatsApp(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="rsvpName" required placeholder="Contoh: Bpk. Herman & Keluarga" class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Status Kehadiran</label>
+                    <select id="rsvpStatus" class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        <option value="Hadir">Ya, Saya Akan Hadir</option>
+                        <option value="Ragu-ragu">Masih Ragu-ragu / Belum Pasti</option>
+                        <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Jumlah Tamu</label>
+                    <input type="number" id="rsvpGuests" min="1" max="10" value="2" class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Ucapan & Doa Restu</label>
+                    <textarea id="rsvpMessage" rows="3" placeholder="Tulis ucapan selamat & doa..." class="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Kirim Konfirmasi ke WhatsApp
+                </button>
+            </form>
+        </div>
     </div>
 
-</div>
-
-
-<!-- =====================================================
-     HEADER — SAMA DENGAN INDEX
-===================================================== -->
-
-<header>
-
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-
-<div class="container">
-
-
-<a
-    class="navbar-brand"
-    href="index.html"
->
-
-    <img
-        src="assets/images/logo.png"
-        height="55"
-        alt="Plaza Dayeuhluhur"
-    >
-
-    <span class="fw-bold ms-2">
-        PLAZA DAYEUHLUHUR
-    </span>
-
-</a>
-
-
-<button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
->
-
-    <span class="navbar-toggler-icon"></span>
-
-</button>
-
-
-<div
-    class="collapse navbar-collapse"
-    id="navbarNav"
->
-
-
-<ul class="navbar-nav ms-auto">
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="index.html"
->
-    Beranda
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="produk.html"
->
-    Produk
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="desa.html"
->
-    Desa
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="bumdes.html"
->
-    BUMDes
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="umkm.html"
->
-    UMKM
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="wisata.html"
->
-    Wisata
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="berita.html"
->
-    Berita
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="kontak.html"
->
-    Kontak
-</a>
-
-</li>
-
-
-<li class="nav-item">
-
-<a
-    class="nav-link"
-    href="dashboard.html"
->
-    Dashboard
-</a>
-
-</li>
-
-
-</ul>
-
-</div>
-
-</div>
-
-</nav>
-
-</header>
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="undangan-page">
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="undangan-hero-section">
-
-<div class="container">
-
-<div class="row align-items-center">
-
-
-<div class="col-lg-7">
-
-<span class="undangan-kicker">
-
-<i class="bi bi-calendar-heart"></i>
-
-KALENDER WARGA
-
-</span>
-
-
-<h1>
-
-Kalender Hajatan Warga
-<span>Dayeuhluhur</span>
-
-</h1>
-
-
-<p>
-
-Temukan berbagai informasi hajatan warga
-Dayeuhluhur mulai dari pernikahan, khitanan,
-syukuran, pengajian hingga hiburan masyarakat.
-
-</p>
-
-
-<div class="undangan-hero-stats">
-
-
-<div>
-
-<strong id="jumlahHajatan">
-0
-</strong>
-
-<span>
-Hajatan
-</span>
-
-</div>
-
-
-<div>
-
-<strong>
-14
-</strong>
-
-<span>
-Desa
-</span>
-
-</div>
-
-
-<div>
-
-<strong>
-2026
-</strong>
-
-<span>
-Kalender
-</span>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<div class="col-lg-5">
-
-<div class="undangan-hero-icon">
-
-<i class="bi bi-envelope-heart"></i>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     FILTER
-===================================================== -->
-
-<section class="undangan-filter-section">
-
-<div class="container">
-
-<div class="undangan-filter-card">
-
-
-<div class="filter-item filter-search">
-
-<label>
-<i class="bi bi-search"></i>
-Cari Hajatan
-</label>
-
-<div class="search-box">
-
-<i class="bi bi-search"></i>
-
-<input
-    type="text"
-    id="searchUndangan"
-    placeholder="Nama, alamat, acara..."
->
-
-</div>
-
-</div>
-
-
-<div class="filter-item">
-
-<label>
-Desa
-</label>
-
-<select id="filterDesa">
-
-<option value="">
-Semua Desa
-</option>
-
-</select>
-
-</div>
-
-
-<div class="filter-item">
-
-<label>
-Jenis Acara
-</label>
-
-<select id="filterJenis">
-
-<option value="">
-Semua Acara
-</option>
-
-</select>
-
-</div>
-
-
-<div class="filter-item">
-
-<label>
-Bulan
-</label>
-
-<select id="filterBulan">
-
-<option value="">
-Semua Bulan
-</option>
-
-</select>
-
-</div>
-
-
-<div class="filter-item filter-button">
-
-<button
-    id="resetFilter"
-    type="button"
->
-
-<i class="bi bi-arrow-counterclockwise"></i>
-
-Reset
-
-</button>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     HAJATAN TERDEKAT
-===================================================== -->
-
-<section class="undangan-near-section">
-
-<div class="container">
-
-
-<div class="section-mini-heading">
-
-<span>
-
-<i class="bi bi-calendar-event"></i>
-
-AGENDA WARGA
-
-</span>
-
-<h2>
-Hajatan Terdekat
-</h2>
-
-</div>
-
-
-<div class="near-count">
-
-<span id="jumlahHajatanIndex">
-0 Hajatan
-</span>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     KALENDER
-===================================================== -->
-
-<section class="undangan-calendar-section">
-
-<div class="container">
-
-
-<div class="section-mini-heading">
-
-<span>
-
-<i class="bi bi-calendar3"></i>
-
-AGENDA
-
-</span>
-
-<h2>
-Kalender Hajatan
-</h2>
-
-</div>
-
-
-<div class="calendar-box">
-
-
-<button
-    type="button"
-    id="prevMonth"
-    class="calendar-nav"
->
-
-<i class="bi bi-chevron-left"></i>
-
-</button>
-
-
-<div class="calendar-title">
-
-<strong id="calendarMonth">
-Agustus 2026
-</strong>
-
-<button
-    type="button"
-    id="todayCalendar"
->
-Hari Ini
-</button>
-
-</div>
-
-
-<button
-    type="button"
-    id="nextMonth"
-    class="calendar-nav"
->
-
-<i class="bi bi-chevron-right"></i>
-
-</button>
-
-
-</div>
-
-
-<div
-    id="calendarGrid"
-    class="calendar-grid"
->
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     DAFTAR HAJATAN
-===================================================== -->
-
-<section class="undangan-list-section">
-
-<div class="container">
-
-
-<div class="section-mini-heading mb-4">
-
-<span>
-
-<i class="bi bi-grid"></i>
-
-INFORMASI WARGA
-
-</span>
-
-<h2>
-Daftar Hajatan
-</h2>
-
-</div>
-
-
-<div
-    id="undanganGrid"
-    class="undangan-grid"
->
-
-<div class="undangan-loading">
-
-<div class="spinner-border"></div>
-
-<p>
-Memuat kalender hajatan...
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     CTA
-===================================================== -->
-
-<section class="undangan-cta-section">
-
-<div class="container">
-
-<div class="undangan-cta">
-
-<div>
-
-<span>
-PUNYA HAJATAN?
-</span>
-
-<h2>
-Bagikan Informasi Hajatan Anda
-</h2>
-
-<p>
-Publikasikan hajatan Anda di Kalender Warga
-Plaza Dayeuhluhur sekaligus membantu
-mempromosikan usaha lokal seperti katering,
-hiburan, sound system, dekorasi dan vendor lainnya.
-</p>
-
-</div>
-
-
-<a
-    href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur%2C%20saya%20ingin%20mengajukan%20hajatan%20untuk%20ditampilkan%20di%20Kalender%20Warga."
-    target="_blank"
-    rel="noopener noreferrer"
->
-
-<i class="fa-brands fa-whatsapp"></i>
-
-Ajukan Hajatan
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-</main>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="footer">
-
-<div class="container">
-
-<div class="row">
-
-
-<div class="col-lg-4 mb-4">
-
-<img
-    src="assets/images/logo.png"
-    height="70"
-    alt="Plaza Dayeuhluhur"
->
-
-<h4 class="mt-3">
-PLAZA DAYEUHLUHUR
-</h4>
-
-<p>
-Gerbang Digital Kecamatan Dayeuhluhur
-</p>
-
-</div>
-
-
-<div class="col-lg-2">
-
-<h5>
-Menu
-</h5>
-
-<ul class="list-unstyled">
-
-<li>
-<a href="index.html">
-Beranda
-</a>
-</li>
-
-<li>
-<a href="produk.html">
-Produk
-</a>
-</li>
-
-<li>
-<a href="desa.html">
-Desa
-</a>
-</li>
-
-<li>
-<a href="umkm.html">
-UMKM
-</a>
-</li>
-
-<li>
-<a href="undangan.html">
-Hajatan
-</a>
-</li>
-
-</ul>
-
-</div>
-
-
-<div class="col-lg-3">
-
-<h5>
-Kontak
-</h5>
-
-<p>
-<i class="fa-solid fa-location-dot"></i>
-Kecamatan Dayeuhluhur
-</p>
-
-<p>
-<i class="fa-solid fa-envelope"></i>
-info@plazadayeuhluhur.com
-</p>
-
-</div>
-
-
-<div class="col-lg-3">
-
-<h5>
-Media Sosial
-</h5>
-
-<div class="social-icons">
-
-<a href="#">
-<i class="fab fa-facebook"></i>
-</a>
-
-<a href="#">
-<i class="fab fa-instagram"></i>
-</a>
-
-<a href="#">
-<i class="fab fa-youtube"></i>
-</a>
-
-<a href="#">
-<i class="fab fa-tiktok"></i>
-</a>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<hr>
-
-
-<div class="text-center">
-
-© 2026 PLAZA DAYEUHLUHUR
-
-<br>
-
-Gerbang Digital Kecamatan Dayeuhluhur
-
-</div>
-
-</div>
-
-</footer>
-
-
-<!-- Bootstrap -->
-
-<script
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
-</script>
-
-
-<!-- Newsflash -->
-
-<script src="assets/js/newsflash.js"></script>
-
-
-<!-- Undangan -->
-
-<script src="assets/js/undangan.js"></script>
-
-
+    <div id="mapModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeMapModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 z-10">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center">
+                    <i class="fa-solid fa-map-location-dot text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-slate-900">Peta Lokasi Acara</h3>
+                    <p class="text-xs text-slate-500" id="mapAddressModal">Dusun Sukamaju, Desa Panulisan, Kecamatan Dayeuhluhur</p>
+                </div>
+            </div>
+
+            <!-- Map Iframe Container -->
+            <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden border border-slate-200 relative bg-slate-100">
+                <iframe class="w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31668.618698083884!2d108.6012431!3d-7.2346904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f7df2b88aa0b5%3A0x501e7f012019c0!2sDayeuhluhur%2C%20Cilacap%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1700000000000" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-1">
+                <a id="externalMapBtn" href="https://maps.google.com/?q=Dayeuhluhur+Cilacap" target="_blank" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-diamond-turn-right"></i> Buka Petunjuk Arah di Maps App
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toastBox" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-2xl hidden items-center gap-3 text-xs font-medium transform transition duration-300">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">Pesan berhasil dikirim.</span>
+    </div>
+
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 mt-16 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-sky-600 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-synagogue"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white tracking-tight">PLAZA DAYEUHLUHUR</span>
+                </div>
+                <p class="text-xs text-slate-400 text-center md:text-right">
+                    Kecamatan Dayeuhluhur, Kabupaten Cilacap, Jawa Tengah
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+                <p>&copy; 2026 Plaza Dayeuhluhur. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-slate-300">Privasi</a>
+                    <a href="#" class="hover:text-slate-300">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-slate-300">Bantuan Portal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ==========================================
+           ASSETS / JS / UNDANGAN.JS
+           ========================================== */
+
+        // Dynamic Event Database Mock Data
+        const hajatanDatabase = {
+            "1": {
+                title: "Andi & Siti",
+                badge: "Undangan Pernikahan",
+                quote: `"Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk berkenan hadir dalam acara pernikahan kami."`,
+                subLocation: "Panulisan, Dayeuhluhur",
+                subDate: "Minggu, 30 Agustus 2026",
+                fullDate: "Minggu, 30 Agustus 2026",
+                time: "Pukul 10.00 WIB - Selesai",
+                locationName: "Dusun Sukamaju",
+                address: "Desa Panulisan, Kecamatan Dayeuhluhur, Kab. Cilacap",
+                entertainment: "Organ Tunggal \"Nada Melati Panulisan\"",
+                targetDate: new Date("2026-08-30T10:00:00").getTime(),
+                photo: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80"
+            },
+            "2": {
+                title: "Khitanan Raihan",
+                badge: "Syukuran Khitanan",
+                quote: `"Dengan mengucap syukur kepada Allah SWT, kami mengharapkan kehadiran Bapak/Ibu/Saudara/i pada acara Syukuran Khitanan putra kami Raihan."`,
+                subLocation: "Matenggeng, Dayeuhluhur",
+                subDate: "Sabtu, 05 September 2026",
+                fullDate: "Sabtu, 05 September 2026",
+                time: "Pukul 09.00 WIB - Selesai",
+                locationName: "Dusun Cikumpay",
+                address: "Desa Matenggeng, Kecamatan Dayeuhluhur, Kab. Cilacap",
+                entertainment: "Seni Calung & Marawis Warga",
+                targetDate: new Date("2026-09-05T09:00:00").getTime(),
+                photo: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80"
+            },
+            "3": {
+                title: "Walimatul Bpk. Ahmad",
+                badge: "Syukuran Rumah Baru",
+                quote: `"Atas berkat rahmat Allah SWT, kami mengundang bapak/ibu tetangga dan kerabat untuk bersama-sama mendoakan keselamatan rumah baru kami."`,
+                subLocation: "Ciwalen, Dayeuhluhur",
+                subDate: "Sabtu, 12 September 2026",
+                fullDate: "Sabtu, 12 September 2026",
+                time: "Pukul 19.30 WIB (Ba'da Isya)",
+                locationName: "Dusun Ciwalen Tengah",
+                address: "Desa Ciwalen, Kecamatan Dayeuhluhur, Kab. Cilacap",
+                entertainment: "Pengajian & Hadroh Warga RT 02",
+                targetDate: new Date("2026-09-12T19:30:00").getTime(),
+                photo: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80"
+            }
+        };
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Parse query parameter ?id=
+        const urlParams = new URLSearchParams(window.location.search);
+        let eventId = urlParams.get('id') || '1';
+
+        // Load Event Data Function
+        function loadEventData(id) {
+            const data = hajatanDatabase[id] || hajatanDatabase['1'];
+            
+            document.getElementById('eventTitle').innerText = data.title;
+            document.getElementById('breadcrumbCurrent').innerText = data.title;
+            document.getElementById('eventQuote').innerText = data.quote;
+            document.getElementById('eventSubLocation').innerText = data.subLocation;
+            document.getElementById('eventSubDate').innerText = data.subDate;
+            document.getElementById('eventFullDate').innerText = data.fullDate;
+            document.getElementById('eventTime').innerHTML = `<i class="fa-regular fa-clock text-sky-600"></i> ${data.time}`;
+            document.getElementById('eventLocationName').innerText = data.locationName;
+            document.getElementById('eventAddress').innerText = data.address;
+            document.getElementById('mapAddressModal').innerText = data.address;
+            document.getElementById('eventEntertainment').innerText = data.entertainment;
+            document.getElementById('eventPhoto').src = data.photo;
+            document.getElementById('eventBadge').innerHTML = `<i class="fa-solid fa-ring text-xs"></i> ${data.badge}`;
+            document.getElementById('externalMapBtn').href = `https://maps.google.com/?q=${encodeURIComponent(data.address)}`;
+
+            // Highlight active event in sidebar switcher
+            ['1', '2', '3'].forEach(num => {
+                const el = document.getElementById(`eventItem-${num}`);
+                if (el) {
+                    if (num === id) {
+                        el.className = "block p-3.5 rounded-2xl border-2 border-sky-500 bg-sky-50/50 hover:bg-sky-50 transition relative group";
+                    } else {
+                        el.className = "block p-3.5 rounded-2xl border border-slate-200 hover:border-sky-300 bg-white hover:bg-slate-50 transition relative group";
+                    }
+                }
+            });
+
+            startCountdown(data.targetDate);
+        }
+
+        let countdownInterval;
+        function startCountdown(targetTime) {
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = targetTime - now;
+
+                if (diff <= 0) {
+                    document.getElementById('countdownContainer').innerHTML = '<div class="col-span-4 font-bold text-amber-400 py-2 text-sm">Acara sedang berlangsung / telah selesai</div>';
+                    return;
+                }
+
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(d).padStart(2, '0');
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+            }
+
+            updateTimer();
+            countdownInterval = setInterval(updateTimer, 1000);
+        }
+
+        // RSVP Modal Functions
+        function openRsvpModal() {
+            document.getElementById('rsvpModal').classList.remove('hidden');
+        }
+        function closeRsvpModal() {
+            document.getElementById('rsvpModal').classList.add('hidden');
+        }
+
+        function sendRsvpWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('rsvpName').value;
+            const status = document.getElementById('rsvpStatus').value;
+            const guests = document.getElementById('rsvpGuests').value;
+            const message = document.getElementById('rsvpMessage').value;
+            const eventTitle = document.getElementById('eventTitle').innerText;
+
+            const text = `Halo, Saya *${name}* ingin mengonfirmasi kehadiran untuk acara *${eventTitle}*:%0A- *Status:* ${status}%0A- *Jumlah Tamu:* ${guests} orang%0A- *Ucapan:* ${message || '-'}`;
+            
+            window.open(`https://wa.me/6281234567890?text=${text}`, '_blank');
+            closeRsvpModal();
+            openToast('Membuka WhatsApp untuk mengirim konfirmasi...');
+        }
+
+        // Map Modal Functions
+        function openMapModal() {
+            document.getElementById('mapModal').classList.remove('hidden');
+        }
+        function closeMapModal() {
+            document.getElementById('mapModal').classList.add('hidden');
+        }
+
+        // Add to Google Calendar
+        function addToCalendar() {
+            const title = document.getElementById('eventTitle').innerText;
+            const address = document.getElementById('eventAddress').innerText;
+            const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&location=${encodeURIComponent(address)}&details=${encodeURIComponent('Undangan Hajatan Warga Plaza Dayeuhluhur')}`;
+            window.open(googleCalUrl, '_blank');
+        }
+
+        // Share Link Function
+        function shareInvitation() {
+            const tempInput = document.createElement('input');
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            openToast('Link undangan berhasil disalin ke clipboard!');
+        }
+
+        // Toast Notification Helper
+        function openToast(msg) {
+            const toastBox = document.getElementById('toastBox');
+            document.getElementById('toastMessage').innerText = msg;
+            toastBox.classList.remove('hidden');
+            toastBox.classList.add('flex');
+            setTimeout(() => {
+                toastBox.classList.add('hidden');
+                toastBox.classList.remove('flex');
+            }, 3500);
+        }
+
+        window.onload = function() {
+            loadEventData(eventId);
+        };
+    </script>
 </body>
-
 </html>
