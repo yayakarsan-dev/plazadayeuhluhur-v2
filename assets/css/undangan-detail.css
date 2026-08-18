@@ -1,999 +1,716 @@
-/* =========================================================
+/* =====================================================
    PLAZA DAYEUHLUHUR
-   KALENDER WARGA / HAJATAN
-   UNDANGAN DETAIL CSS — FINAL V1
-========================================================= */
+   KALENDER HAJATAN & UNDANGAN ONLINE
+   UNDANGAN-DETAIL.CSS
+   FINAL DETAIL LAYOUT
+===================================================== */
 
-:root {
-    --und-primary: #1769ff;
-    --und-primary-dark: #0f4fc4;
-    --und-secondary: #eef5ff;
-    --und-dark: #172033;
-    --und-muted: #6b778c;
-    --und-border: #e7edf5;
-    --und-bg: #f7f9fc;
-    --und-white: #ffffff;
-    --und-success: #198754;
-    --und-danger: #dc3545;
-    --und-shadow: 0 12px 35px rgba(23, 32, 51, .08);
-    --und-radius: 20px;
-}
-
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background: var(--und-bg);
-    color: var(--und-dark);
-}
-
-* {
+/* =====================================================
+   GLOBAL DETAIL
+===================================================== */
+.undangan-detail-page,
+.undangan-detail-page * {
     box-sizing: border-box;
 }
 
-img {
+.undangan-detail-page {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #172033;
+    font-family: "Poppins", sans-serif;
+    background: #f5f8fc;
+}
+
+.undangan-detail-page img {
     max-width: 100%;
 }
 
-a {
+.undangan-detail-page a {
     text-decoration: none;
 }
 
-
-/* =========================================================
-   TOP NEWS
-========================================================= */
-
-.top-news {
+/* =====================================================
+   HERO
+===================================================== */
+.undangan-hero {
     position: relative;
-    z-index: 1055;
-}
-
-.top-news .news-wrapper {
-    min-height: 36px;
-}
-
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-header {
-    position: relative;
-    z-index: 1050;
-}
-
-.navbar {
-    min-height: 72px;
-}
-
-.navbar.fixed-top {
-    top: 36px;
-}
-
-.navbar-dark {
-    background: #101d31 !important;
-    box-shadow: 0 5px 22px rgba(0, 0, 0, .12);
-}
-
-.navbar-brand {
+    width: 100%;
+    min-height: 650px;
+    padding: 75px 20px 90px;
     display: flex;
     align-items: center;
-    min-height: 65px;
-    white-space: nowrap;
-}
-
-.navbar-brand img {
-    width: auto;
-    height: 48px !important;
-    object-fit: contain;
-}
-
-.navbar-brand span {
-    color: #ffffff;
-    font-size: 14px;
-    letter-spacing: .2px;
-}
-
-.navbar .nav-link {
-    color: rgba(255, 255, 255, .86) !important;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 10px 10px !important;
-    border-radius: 8px;
-    transition: .2s ease;
-}
-
-.navbar .nav-link:hover {
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, .08);
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.undangan-page {
-    padding-top: 72px;
-    background:
-        linear-gradient(
-            180deg,
-            #f7faff 0%,
-            #ffffff 45%,
-            #f7f9fc 100%
-        );
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.undangan-hero-section {
-    position: relative;
+    justify-content: center;
     overflow: hidden;
-    padding: 85px 0 75px;
+    text-align: center;
     background:
-        radial-gradient(
-            circle at 85% 25%,
-            rgba(23, 105, 255, .14),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #f4f8ff 0%,
-            #ffffff 55%,
-            #eef5ff 100%
-        );
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,.98), rgba(255,255,255,.78) 28%, rgba(239,246,255,.98) 75%),
+        linear-gradient(135deg, #eef5ff, #f9fbff);
 }
 
-.undangan-hero-section::after {
+.undangan-hero::before,
+.undangan-hero::after {
     content: "";
     position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.undangan-hero::before {
     width: 360px;
     height: 360px;
-    right: -150px;
-    bottom: -180px;
-    border-radius: 50%;
-    background: rgba(23, 105, 255, .06);
+    top: -180px;
+    left: -120px;
+    background: rgba(24,119,255,.08);
 }
 
-.undangan-hero-section .container {
+.undangan-hero::after {
+    width: 420px;
+    height: 420px;
+    right: -180px;
+    bottom: -220px;
+    background: rgba(24,119,255,.06);
+}
+
+.undangan-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,.18),
+        rgba(235,243,255,.28)
+    );
+    pointer-events: none;
+}
+
+.undangan-hero-content {
     position: relative;
     z-index: 2;
+    width: min(900px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.undangan-kicker {
+/* =====================================================
+   LABEL
+===================================================== */
+.undangan-label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 14px;
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    border: 1px solid #d7e6ff;
     border-radius: 999px;
-    background: #eaf2ff;
-    color: var(--und-primary);
-    font-size: 11px;
+    background: rgba(255,255,255,.9);
+    color: #1877ff;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: .7px;
+    letter-spacing: .4px;
+    box-shadow: 0 8px 25px rgba(25,60,110,.07);
 }
 
-.undangan-hero-section h1 {
-    margin: 18px 0 14px;
-    color: var(--und-dark);
-    font-size: clamp(32px, 5vw, 54px);
+/* =====================================================
+   FOTO UTAMA
+===================================================== */
+.undangan-main-photo {
+    width: min(330px, 78vw);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 26px;
+    padding: 7px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow:
+        0 20px 55px rgba(25,60,110,.16),
+        0 0 0 1px rgba(24,119,255,.08);
+    overflow: hidden;
+}
+
+.undangan-main-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* =====================================================
+   HERO TEXT
+===================================================== */
+.undangan-pembuka {
+    margin: 0 0 8px;
+    color: #687386;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.undangan-hero h1 {
+    margin: 0 0 15px;
+    color: #172033;
+    font-size: clamp(34px, 5vw, 58px);
     line-height: 1.12;
     font-weight: 800;
-    letter-spacing: -.8px;
 }
 
-.undangan-hero-section h1 span {
-    display: block;
-    color: var(--und-primary);
-}
-
-.undangan-hero-section p {
-    max-width: 650px;
-    margin: 0;
-    color: var(--und-muted);
-    font-size: 15px;
-    line-height: 1.8;
-}
-
-
-/* =========================================================
-   HERO STATS
-========================================================= */
-
-.undangan-hero-stats {
+.undangan-date-main,
+.undangan-location-main {
     display: flex;
-    gap: 14px;
-    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #596579;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-.undangan-hero-stats > div {
-    min-width: 110px;
-    padding: 14px 18px;
-    border: 1px solid rgba(23, 105, 255, .10);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, .82);
-    box-shadow: 0 8px 25px rgba(23, 32, 51, .05);
+.undangan-date-main {
+    color: #1877ff;
+    font-weight: 600;
 }
 
-.undangan-hero-stats strong {
-    display: block;
-    color: var(--und-dark);
-    font-size: 23px;
+.undangan-location-main {
+    margin-top: 5px;
+}
+
+/* =====================================================
+   SECTION DETAIL
+===================================================== */
+.undangan-detail-section {
+    width: 100%;
+    padding: 75px 20px;
+    background: #ffffff;
+}
+
+.undangan-detail-container {
+    width: min(1080px, 100%);
+    margin: 0 auto;
+}
+
+.detail-section-heading {
+    margin-bottom: 30px;
+}
+
+.detail-section-heading > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 7px;
+    color: #1877ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+.detail-section-heading h2 {
+    margin: 0;
+    color: #172033;
+    font-size: clamp(28px, 4vw, 38px);
     line-height: 1.2;
     font-weight: 800;
 }
 
-.undangan-hero-stats span {
-    display: block;
-    margin-top: 4px;
-    color: var(--und-muted);
-    font-size: 11px;
-}
-
-
-/* =========================================================
-   HERO ICON
-========================================================= */
-
-.undangan-hero-icon {
-    width: 260px;
-    height: 260px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #eaf2ff
-        );
-    color: var(--und-primary);
-    font-size: 105px;
-    box-shadow:
-        0 25px 60px rgba(23, 105, 255, .13),
-        inset 0 0 0 1px rgba(23, 105, 255, .08);
-}
-
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-.undangan-filter-section {
-    position: relative;
-    z-index: 10;
-    margin-top: -35px;
-    padding-bottom: 35px;
-}
-
-.undangan-filter-card {
-    display: grid;
-    grid-template-columns:
-        minmax(240px, 1.8fr)
-        minmax(150px, 1fr)
-        minmax(150px, 1fr)
-        minmax(150px, 1fr)
-        auto;
-    gap: 14px;
-    padding: 20px;
-    border: 1px solid var(--und-border);
-    border-radius: 20px;
-    background: #ffffff;
-    box-shadow: var(--und-shadow);
-}
-
-.filter-item label {
-    display: block;
-    margin-bottom: 7px;
-    color: #344054;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.filter-item label i {
-    margin-right: 5px;
-    color: var(--und-primary);
-}
-
-.search-box {
-    position: relative;
-}
-
-.search-box > i {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #8a96a8;
-}
-
-.search-box input,
-.filter-item select {
-    width: 100%;
-    height: 46px;
-    border: 1px solid var(--und-border);
-    border-radius: 12px;
-    outline: none;
-    background: #ffffff;
-    color: var(--und-dark);
-    font-family: inherit;
-    font-size: 12px;
-    transition: .2s ease;
-}
-
-.search-box input {
-    padding: 0 14px 0 40px;
-}
-
-.filter-item select {
-    padding: 0 12px;
-}
-
-.search-box input:focus,
-.filter-item select:focus {
-    border-color: var(--und-primary);
-    box-shadow: 0 0 0 3px rgba(23, 105, 255, .10);
-}
-
-.filter-button {
-    display: flex;
-    align-items: flex-end;
-}
-
-.filter-button button {
-    width: 100%;
-    min-width: 95px;
-    height: 46px;
-    border: 0;
-    border-radius: 12px;
-    background: #f0f3f8;
-    color: #465267;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    transition: .2s ease;
-}
-
-.filter-button button:hover {
-    background: var(--und-primary);
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   SECTION HEADING
-========================================================= */
-
-.section-mini-heading {
-    margin-bottom: 25px;
-}
-
-.section-mini-heading > span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--und-primary);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .9px;
-}
-
-.section-mini-heading h2 {
-    margin: 7px 0 0;
-    color: var(--und-dark);
-    font-size: clamp(25px, 3vw, 34px);
-    font-weight: 800;
-}
-
-
-/* =========================================================
-   HAJATAN TERDEKAT
-========================================================= */
-
-.undangan-near-section {
-    padding: 35px 0 15px;
-}
-
-.near-count {
-    margin-top: -5px;
-    color: var(--und-muted);
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   CALENDAR
-========================================================= */
-
-.undangan-calendar-section {
-    padding: 45px 0;
-}
-
-.calendar-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 18px 22px;
-    border: 1px solid var(--und-border);
-    border-radius: 18px 18px 0 0;
-    background: #ffffff;
-    box-shadow: 0 5px 20px rgba(23, 32, 51, .04);
-}
-
-.calendar-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    flex: 1;
-}
-
-.calendar-title strong {
-    color: var(--und-dark);
-    font-size: 18px;
-    font-weight: 800;
-}
-
-.calendar-title button {
-    padding: 6px 11px;
-    border: 0;
-    border-radius: 8px;
-    background: #eef4ff;
-    color: var(--und-primary);
-    font-family: inherit;
-    font-size: 10px;
-    font-weight: 700;
-}
-
-.calendar-nav {
-    width: 40px;
-    height: 40px;
-    flex: 0 0 40px;
-    border: 1px solid var(--und-border);
-    border-radius: 10px;
-    background: #ffffff;
-    color: var(--und-primary);
-    transition: .2s ease;
-}
-
-.calendar-nav:hover {
-    background: var(--und-primary);
-    color: #ffffff;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border: 1px solid var(--und-border);
-    border-top: 0;
-    overflow: hidden;
-    border-radius: 0 0 18px 18px;
-    background: #ffffff;
-}
-
-.calendar-day-name {
-    padding: 12px 5px;
-    background: #f5f8fc;
-    color: #687386;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 700;
-}
-
-.calendar-day {
-    min-height: 85px;
-    padding: 9px;
-    border-top: 1px solid #edf1f6;
-    border-right: 1px solid #edf1f6;
-    background: #ffffff;
-}
-
-.calendar-day:nth-child(7n) {
-    border-right: 0;
-}
-
-.calendar-day-number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 27px;
-    height: 27px;
-    margin-bottom: 5px;
-    border-radius: 50%;
-    color: #465267;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.calendar-day.today .calendar-day-number {
-    background: var(--und-primary);
-    color: #ffffff;
-}
-
-.calendar-event {
-    display: block;
-    margin-top: 3px;
-    padding: 4px 5px;
-    overflow: hidden;
-    border-radius: 6px;
-    background: #eaf2ff;
-    color: var(--und-primary);
-    font-size: 8px;
-    font-weight: 600;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-
-/* =========================================================
-   DAFTAR HAJATAN
-========================================================= */
-
-.undangan-list-section {
-    padding: 50px 0 70px;
-}
-
-.undangan-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 25px;
-}
-
-
-/* =========================================================
-   CARD HAJATAN
-========================================================= */
-
-.undangan-card {
-    overflow: hidden;
-    border: 1px solid var(--und-border);
-    border-radius: 20px;
-    background: #ffffff;
-    box-shadow: 0 8px 28px rgba(23, 32, 51, .06);
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.undangan-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 18px 42px rgba(23, 32, 51, .11);
-}
-
-.undangan-card-image {
-    position: relative;
-    height: 225px;
-    overflow: hidden;
-    background: #eef2f7;
-}
-
-.undangan-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .35s ease;
-}
-
-.undangan-card:hover .undangan-card-image img {
-    transform: scale(1.04);
-}
-
-.undangan-card-body {
-    padding: 21px;
-}
-
-.undangan-card-badge {
-    display: inline-flex;
-    padding: 6px 10px;
-    margin-bottom: 10px;
-    border-radius: 999px;
-    background: #eaf2ff;
-    color: var(--und-primary);
-    font-size: 9px;
-    font-weight: 700;
-}
-
-.undangan-card h3 {
-    margin: 0 0 9px;
-    color: var(--und-dark);
-    font-size: 21px;
-    font-weight: 800;
-}
-
-.undangan-card .event-date,
-.undangan-card .event-location {
-    margin-bottom: 6px;
-    color: var(--und-muted);
-    font-size: 11px;
-}
-
-.undangan-card .event-date i,
-.undangan-card .event-location i {
-    width: 17px;
-    color: var(--und-primary);
-}
-
-.undangan-card-description {
-    margin-top: 12px;
-    color: var(--und-muted);
-    font-size: 11px;
+.detail-section-heading p {
+    max-width: 650px;
+    margin: 10px 0 0;
+    color: #6d7788;
+    font-size: 14px;
     line-height: 1.7;
 }
 
-.undangan-card-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 18px;
+/* =====================================================
+   INFO GRID
+===================================================== */
+.detail-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
 }
 
-.undangan-card-actions a,
-.undangan-card-actions button {
-    flex: 1;
-    min-height: 40px;
+.detail-info-card {
+    min-width: 0;
+    min-height: 135px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px;
+    border: 1px solid #e5ebf3;
+    border-radius: 16px;
+    background: #f9fbfe;
+    box-shadow: 0 8px 25px rgba(30,60,100,.05);
+}
+
+.detail-info-icon,
+.detail-address-icon,
+.share-icon {
+    width: 45px;
+    height: 45px;
+    flex: 0 0 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #eaf3ff;
+    color: #1877ff;
+    font-size: 20px;
+}
+
+.detail-info-card small,
+.detail-address-card small {
+    display: block;
+    margin-bottom: 5px;
+    color: #7b8496;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.detail-info-card strong {
+    display: block;
+    color: #172033;
+    font-size: 14px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   ADDRESS
+===================================================== */
+.detail-address-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 22px;
+    border: 1px solid #e5ebf3;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(30,60,100,.05);
+}
+
+.detail-address-card p {
+    margin: 0;
+    color: #4f5a6d;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+.detail-description {
+    position: relative;
+    margin-top: 20px;
+    padding: 25px 28px 25px 58px;
+    border-left: 4px solid #1877ff;
+    border-radius: 12px;
+    background: #f5f9ff;
+}
+
+.detail-description > i {
+    position: absolute;
+    left: 20px;
+    top: 22px;
+    color: #1877ff;
+    font-size: 25px;
+}
+
+.detail-description p {
+    margin: 0;
+    color: #556174;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+.detail-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-detail {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 20px;
     border-radius: 10px;
-    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+.btn-maps {
+    background: #1877ff;
+    color: #ffffff;
+}
+
+.btn-maps:hover {
+    background: #0d5ed7;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.btn-whatsapp {
+    background: #eaf8ef;
+    color: #198754;
+    border: 1px solid #cdebd8;
+}
+
+.btn-whatsapp:hover {
+    background: #dff3e6;
+    color: #146c43;
+}
+
+/* =====================================================
+   VENDOR
+===================================================== */
+.detail-vendor-section {
+    width: min(1080px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 75px 0;
+}
+
+.detail-vendor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.detail-vendor-card {
+    min-width: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px;
+    border: 1px solid #e5ebf3;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(30,60,100,.06);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.detail-vendor-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(30,60,100,.10);
+}
+
+.vendor-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #eef5ff;
+    color: #1877ff;
+    font-size: 20px;
+}
+
+.vendor-content {
+    min-width: 0;
+}
+
+.vendor-content > span {
+    display: block;
+    margin-bottom: 5px;
+    color: #1877ff;
     font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.vendor-content h3 {
+    margin: 0 0 10px;
+    color: #172033;
+    font-size: 16px;
+    line-height: 1.35;
     font-weight: 700;
 }
 
-
-/* =========================================================
-   LOADING / EMPTY
-========================================================= */
-
-.undangan-loading,
-.undangan-empty {
-    grid-column: 1 / -1;
-    padding: 70px 20px;
-    border: 1px solid var(--und-border);
-    border-radius: 20px;
-    background: #ffffff;
-    text-align: center;
-    box-shadow: var(--und-shadow);
+.vendor-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #1877ff;
+    font-size: 11px;
+    font-weight: 700;
 }
 
-.undangan-loading .spinner-border {
-    width: 35px;
-    height: 35px;
-    color: var(--und-primary);
+.vendor-link:hover {
+    color: #0d5ed7;
 }
 
-.undangan-loading p,
-.undangan-empty p {
-    margin: 15px 0 0;
-    color: var(--und-muted);
-    font-size: 12px;
+/* =====================================================
+   SHARE
+===================================================== */
+.undangan-share-section {
+    width: min(1080px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 0 0 45px;
 }
 
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.undangan-cta-section {
-    padding: 30px 0 80px;
-}
-
-.undangan-cta {
+.undangan-share-box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    padding: 40px 45px;
-    border-radius: 24px;
-    background:
-        linear-gradient(
-            135deg,
-            #1769ff,
-            #0d4fc2
-        );
-    color: #ffffff;
-    box-shadow: 0 20px 50px rgba(23, 105, 255, .20);
+    gap: 18px;
+    padding: 25px 28px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #eef5ff, #f7faff);
+    border: 1px solid #dbe8fb;
 }
 
-.undangan-cta > div {
-    max-width: 720px;
+.undangan-share-box > div:nth-child(2) {
+    flex: 1;
+    min-width: 0;
 }
 
-.undangan-cta > div > span {
-    font-size: 10px;
+.undangan-share-box h3 {
+    margin: 0 0 5px;
+    color: #172033;
+    font-size: 19px;
     font-weight: 800;
-    letter-spacing: 1px;
-    opacity: .78;
 }
 
-.undangan-cta h2 {
-    margin: 8px 0;
+.undangan-share-box p {
+    margin: 0;
+    color: #687386;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.btn-share-undangan {
+    min-height: 44px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 9px;
+    background: #1877ff;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-share-undangan:hover {
+    background: #0d5ed7;
+}
+
+/* =====================================================
+   BACK
+===================================================== */
+.undangan-back-wrapper {
+    width: min(1080px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 0 0 80px;
+    text-align: center;
+}
+
+.btn-back-undangan {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid #dbe3ee;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #4f5a6d;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.btn-back-undangan:hover {
+    border-color: #1877ff;
+    color: #1877ff;
+}
+
+/* =====================================================
+   ERROR
+===================================================== */
+.undangan-error-page {
+    width: min(700px, calc(100% - 40px));
+    margin: 80px auto;
+    padding: 55px 30px;
+    text-align: center;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 15px 45px rgba(30,60,100,.08);
+}
+
+.undangan-error-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eef5ff;
+    color: #1877ff;
+    font-size: 30px;
+}
+
+.undangan-error-page h1 {
+    margin: 0 0 10px;
+    color: #172033;
     font-size: 28px;
     font-weight: 800;
 }
 
-.undangan-cta p {
+.undangan-error-page p {
     margin: 0;
-    max-width: 680px;
-    color: rgba(255,255,255,.82);
-    font-size: 12px;
+    color: #6d7788;
+    font-size: 14px;
     line-height: 1.7;
 }
 
-.undangan-cta > a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-width: 175px;
-    min-height: 48px;
-    padding: 0 20px;
-    border-radius: 999px;
-    background: #ffffff;
-    color: var(--und-success);
-    font-size: 12px;
-    font-weight: 700;
-    box-shadow: 0 10px 25px rgba(0,0,0,.12);
-    transition: .2s ease;
-}
-
-.undangan-cta > a:hover {
-    transform: translateY(-2px);
-    color: var(--und-success);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.undangan-page + .footer,
-footer.footer {
-    position: relative;
-    background: #101d31;
-    color: rgba(255,255,255,.75);
-}
-
-footer.footer h4,
-footer.footer h5 {
-    color: #ffffff;
-}
-
-footer.footer a {
-    color: rgba(255,255,255,.72);
-}
-
-footer.footer a:hover {
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   RESPONSIVE TABLET
-========================================================= */
-
-@media (max-width: 1199px) {
-
-    .navbar .nav-link {
-        padding-left: 7px !important;
-        padding-right: 7px !important;
-        font-size: 11px;
+/* =====================================================
+   TABLET
+===================================================== */
+@media (max-width: 992px) {
+    .undangan-hero {
+        min-height: 580px;
+        padding-top: 55px;
     }
 
-    .undangan-filter-card {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+    .undangan-main-photo {
+        width: min(290px, 72vw);
     }
 
-    .filter-search {
-        grid-column: span 2;
+    .detail-info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .filter-button {
-        align-items: stretch;
-    }
-
-    .filter-button button {
-        height: 46px;
-    }
-
-    .undangan-grid {
+    .detail-vendor-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-
-/* =========================================================
-   RESPONSIVE MOBILE
-========================================================= */
-
-@media (max-width: 991.98px) {
-
-    .navbar.fixed-top {
-        top: 36px;
+/* =====================================================
+   MOBILE
+===================================================== */
+@media (max-width: 768px) {
+    .undangan-hero {
+        min-height: auto;
+        padding: 45px 16px 65px;
     }
 
-    .navbar-collapse {
-        padding: 12px 0 15px;
+    .undangan-label {
+        margin-bottom: 20px;
+        font-size: 10px;
     }
 
-    .undangan-page {
-        padding-top: 65px;
+    .undangan-main-photo {
+        width: min(245px, 72vw);
+        margin-bottom: 22px;
     }
 
-    .undangan-hero-section {
-        padding: 65px 0 55px;
+    .undangan-pembuka {
+        font-size: 13px;
     }
 
-    .undangan-hero-icon {
-        width: 180px;
-        height: 180px;
-        margin: 40px auto 0;
-        font-size: 75px;
-    }
-
-    .undangan-cta {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-}
-
-
-@media (max-width: 767.98px) {
-
-    .undangan-hero-section h1 {
+    .undangan-hero h1 {
         font-size: 34px;
     }
 
-    .undangan-hero-section p {
-        font-size: 13px;
+    .undangan-date-main,
+    .undangan-location-main {
+        font-size: 12px;
     }
 
-    .undangan-hero-stats {
-        flex-wrap: wrap;
+    .undangan-detail-section {
+        padding: 55px 16px;
     }
 
-    .undangan-hero-stats > div {
-        flex: 1;
-        min-width: 90px;
+    .detail-info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
-    .undangan-filter-card {
+    .detail-info-card {
+        min-height: auto;
+        padding: 18px;
+    }
+
+    .detail-vendor-section,
+    .undangan-share-section,
+    .undangan-back-wrapper {
+        width: calc(100% - 32px);
+    }
+
+    .detail-vendor-section {
+        padding: 55px 0;
+    }
+
+    .detail-vendor-grid {
         grid-template-columns: 1fr;
     }
 
-    .filter-search {
-        grid-column: auto;
-    }
-
-    .undangan-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .calendar-box {
-        padding: 14px;
-    }
-
-    .calendar-title strong {
-        font-size: 15px;
-    }
-
-    .calendar-day {
-        min-height: 60px;
-        padding: 5px;
-    }
-
-    .calendar-event {
-        display: none;
-    }
-
-    .calendar-day-number {
-        margin: 0 auto;
-    }
-
-    .undangan-cta {
-        padding: 30px 25px;
-    }
-
-    .undangan-cta h2 {
-        font-size: 23px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE SMALL
-========================================================= */
-
-@media (max-width: 575.98px) {
-
-    .navbar.fixed-top {
-        top: 36px;
-    }
-
-    .navbar-brand img {
-        height: 40px !important;
-    }
-
-    .navbar-brand span {
-        font-size: 11px;
-    }
-
-    .undangan-page {
-        padding-top: 60px;
-    }
-
-    .undangan-hero-section {
-        padding: 50px 0 45px;
-    }
-
-    .undangan-hero-section h1 {
-        font-size: 29px;
-    }
-
-    .undangan-hero-stats > div {
-        padding: 11px;
-    }
-
-    .undangan-hero-stats strong {
-        font-size: 19px;
-    }
-
-    .section-mini-heading h2 {
-        font-size: 25px;
-    }
-
-    .calendar-day {
-        min-height: 48px;
-        font-size: 9px;
-    }
-
-    .calendar-day-name {
-        padding: 9px 2px;
-        font-size: 8px;
-    }
-
-    .calendar-nav {
-        width: 34px;
-        height: 34px;
-        flex-basis: 34px;
-    }
-
-    .calendar-title {
-        gap: 5px;
-    }
-
-    .calendar-title strong {
-        font-size: 13px;
-    }
-
-    .calendar-title button {
-        padding: 5px 7px;
-        font-size: 8px;
-    }
-
-    .undangan-card-image {
-        height: 210px;
-    }
-
-    .undangan-card h3 {
-        font-size: 19px;
-    }
-
-    .undangan-card-actions {
+    .detail-action-buttons {
         flex-direction: column;
     }
 
-    .undangan-cta > a {
+    .btn-detail {
         width: 100%;
+    }
+
+    .undangan-share-box {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 22px;
+    }
+
+    .undangan-share-box > div:nth-child(2) {
+        flex: 1 1 calc(100% - 80px);
+    }
+
+    .btn-share-undangan {
+        width: 100%;
+    }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+@media (max-width: 480px) {
+    .undangan-hero h1 {
+        font-size: 29px;
+    }
+
+    .undangan-main-photo {
+        width: 210px;
+    }
+
+    .detail-section-heading h2 {
+        font-size: 27px;
+    }
+
+    .detail-description {
+        padding: 22px 20px 22px 48px;
+    }
+
+    .detail-description > i {
+        left: 15px;
+        top: 19px;
+    }
+
+    .detail-address-card {
+        padding: 18px;
     }
 }
