@@ -1,240 +1,384 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<script>
-    if (sessionStorage.getItem("plazaAdminLogin") !== "true") {
-        window.location.href = "login.html";
-    }
-</script>
+
+    <!-- =====================================================
+         LOGIN PROTECTION
+    ===================================================== -->
+
+    <script>
+        if (sessionStorage.getItem("plazaAdminLogin") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard Admin | Plaza Dayeuhluhur</title>
 
-    <!-- Bootstrap -->
+    <title>
+        Dashboard Admin | Plaza Dayeuhluhur
+    </title>
+
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ===================================================== -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Font Awesome -->
+
+    <!-- =====================================================
+         FONT AWESOME
+    ===================================================== -->
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Dashboard CSS -->
+
+    <!-- =====================================================
+         DASHBOARD CSS
+    ===================================================== -->
+
     <link
         rel="stylesheet"
         href="assets/css/dashboard.css">
 
 </head>
 
+
 <body>
+
 
 <div class="dashboard-wrapper">
 
-    <!-- =========================================
-         SIDEBAR
-    ========================================== -->
 
-    <aside class="sidebar" id="sidebar">
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar">
+
+
+        <!-- BRAND -->
 
         <div class="sidebar-brand">
 
             <div class="brand-icon">
+
                 <i class="fa-solid fa-leaf"></i>
+
             </div>
 
+
             <div>
-                <h5>PLAZA</h5>
-                <span>DAYEUHLUHUR</span>
+
+                <h5>
+                    PLAZA
+                </h5>
+
+                <span>
+                    DAYEUHLUHUR
+                </span>
+
             </div>
 
         </div>
 
 
+
+        <!-- MENU -->
+
         <nav class="sidebar-menu">
+
+
+            <!-- UTAMA -->
 
             <div class="menu-title">
                 UTAMA
             </div>
 
-            <a href="dashboard.html"
-               class="menu-item active">
+
+            <a
+                href="dashboard.html"
+                class="menu-item active">
 
                 <i class="fa-solid fa-gauge-high"></i>
 
-                <span>Dashboard</span>
+                <span>
+                    Dashboard
+                </span>
 
             </a>
 
+
+
+            <!-- EKOSISTEM -->
 
             <div class="menu-title">
                 EKOSISTEM
             </div>
 
-            <a href="desa.html"
-               class="menu-item">
+
+            <!-- DESA -->
+
+            <a
+                href="desa.html"
+                class="menu-item">
 
                 <i class="fa-solid fa-house"></i>
 
-                <span>Desa</span>
+                <span>
+                    Desa
+                </span>
 
             </a>
 
-            <a href="bumdes.html"
-               class="menu-item">
+
+            <!-- BUMDES -->
+
+            <a
+                href="bumdes.html"
+                class="menu-item">
 
                 <i class="fa-solid fa-building"></i>
 
-                <span>BUMDes</span>
+                <span>
+                    BUMDes
+                </span>
 
             </a>
 
-            <a href="umkm.html"
-               class="menu-item">
+
+            <!-- UMKM -->
+
+            <a
+                href="umkm.html"
+                class="menu-item">
 
                 <i class="fa-solid fa-store"></i>
 
-                <span>UMKM</span>
+                <span>
+                    UMKM
+                </span>
 
             </a>
-            <a href="produk-admin.html"
-              class="menu-item">
 
-            <i class="fa-solid fa-box-open"></i>
 
-           <span>Produk</span>
+            <!-- PRODUK -->
 
-           </a>
+            <a
+                href="produk-admin.html"
+                class="menu-item">
 
-            <a href="bisnis-admin.html"
-               class="menu-item">
+                <i class="fa-solid fa-box-open"></i>
+
+                <span>
+                    Produk
+                </span>
+
+            </a>
+
+
+            <!-- BISNIS -->
+
+            <a
+                href="bisnis-admin.html"
+                class="menu-item">
 
                 <i class="fa-solid fa-briefcase"></i>
 
-                <span>Bisnis</span>
+                <span>
+                    Bisnis
+                </span>
 
             </a>
 
 
-            <a href="#"
-               class="menu-item">
+            <!-- BURSA -->
+
+            <a
+                href="bursa-admin.html"
+                class="menu-item">
 
                 <i class="fa-solid fa-arrows-rotate"></i>
 
-                <span>Bursa Lokal</span>
+                <span>
+                    Bursa Lokal
+                </span>
 
             </a>
 
 
-            <a href="#"
-               class="menu-item">
+            <!-- WISATA -->
+
+            <a
+                href="wisata-admin.html"
+                class="menu-item">
 
                 <i class="fa-solid fa-mountain-sun"></i>
 
-                <span>Wisata</span>
+                <span>
+                    Wisata
+                </span>
 
             </a>
 
+
+
+            <!-- INFORMASI -->
 
             <div class="menu-title">
                 INFORMASI
             </div>
 
 
-            <a href="#"
-               class="menu-item">
+            <!-- BERITA -->
+
+            <a
+                href="#"
+                class="menu-item">
 
                 <i class="fa-solid fa-newspaper"></i>
 
-                <span>Berita</span>
+                <span>
+                    Berita
+                </span>
 
             </a>
 
 
-            <a href="#"
-               class="menu-item">
+            <!-- AGENDA -->
+
+            <a
+                href="#"
+                class="menu-item">
 
                 <i class="fa-solid fa-calendar-days"></i>
 
-                <span>Agenda</span>
+                <span>
+                    Agenda
+                </span>
 
             </a>
 
+
+
+            <!-- SISTEM -->
 
             <div class="menu-title">
                 SISTEM
             </div>
 
 
-            <a href="pengguna.html"
-              class="menu-item">
+            <!-- PENGGUNA -->
 
-              <i class="fa-solid fa-users"></i>
+            <a
+                href="pengguna.html"
+                class="menu-item">
 
-             <span>Pengguna</span>
+                <i class="fa-solid fa-users"></i>
+
+                <span>
+                    Pengguna
+                </span>
 
             </a>
 
-            <a href="#"
-               class="menu-item">
+
+            <!-- PENGATURAN -->
+
+            <a
+                href="#"
+                class="menu-item">
 
                 <i class="fa-solid fa-gear"></i>
 
-                <span>Pengaturan</span>
+                <span>
+                    Pengaturan
+                </span>
 
             </a>
+
 
         </nav>
 
 
-<div class="sidebar-footer">
 
-    <a href="index.html" class="back-home">
+        <!-- =================================================
+             SIDEBAR FOOTER
+        ================================================= -->
 
-        <i class="fa-solid fa-house"></i>
-
-        Kembali ke Plaza Dayeuhluhur
-
-    </a>
+        <div class="sidebar-footer">
 
 
-    <a
-        href="#"
-        class="back-home logout-button"
-        id="logoutButton">
+            <a
+                href="index.html"
+                class="back-home">
 
-        <i class="fa-solid fa-right-from-bracket"></i>
+                <i class="fa-solid fa-house"></i>
 
-        Keluar dari Dashboard
+                Kembali ke Plaza Dayeuhluhur
 
-    </a>
+            </a>
 
-</div>
+
+            <a
+                href="#"
+                class="back-home logout-button"
+                id="logoutButton">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Keluar dari Dashboard
+
+            </a>
+
+
+        </div>
+
 
     </aside>
 
 
-    <!-- OVERLAY MOBILE -->
 
-    <div class="sidebar-overlay"
-         id="sidebarOverlay"></div>
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ===================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
 
 
-    <!-- =========================================
+
+    <!-- =====================================================
          MAIN CONTENT
-    ========================================== -->
+    ===================================================== -->
 
     <main class="main-content">
 
 
-        <!-- HEADER -->
+
+        <!-- =================================================
+             HEADER
+        ================================================= -->
 
         <header class="dashboard-header">
 
+
             <div class="header-left">
+
 
                 <button
                     class="mobile-menu-btn"
@@ -247,24 +391,33 @@
 
                 <div class="header-title">
 
+
                     <span class="header-label">
                         PLAZA DAYEUHLUHUR
                     </span>
+
 
                     <h1>
                         Dashboard
                     </h1>
 
+
                     <p>
                         Pusat pengelolaan ekosistem digital Dayeuhluhur.
                     </p>
 
+
                 </div>
+
 
             </div>
 
 
+
+            <!-- PROFILE -->
+
             <div class="header-profile">
+
 
                 <div class="profile-icon">
 
@@ -272,46 +425,57 @@
 
                 </div>
 
+
                 <div class="profile-info">
+
 
                     <strong>
                         Administrator
                     </strong>
 
+
                     <span>
                         Pengelola Platform
                     </span>
 
+
                 </div>
 
+
             </div>
+
 
         </header>
 
 
 
-        <!-- =====================================
+        <!-- =================================================
              WELCOME
-        ====================================== -->
+        ================================================= -->
 
         <section class="welcome-card">
 
+
             <div>
+
 
                 <span class="welcome-label">
                     SELAMAT DATANG
                 </span>
 
+
                 <h2>
                     Pusat Kendali Plaza Dayeuhluhur
                 </h2>
 
+
                 <p>
                     Kelola informasi desa, BUMDes, UMKM,
-                    bisnis lokal, bursa, wisata, berita
-                    dan agenda masyarakat Dayeuhluhur
+                    produk, bisnis lokal, bursa, wisata,
+                    berita dan agenda masyarakat Dayeuhluhur
                     melalui satu dashboard.
                 </p>
+
 
             </div>
 
@@ -322,37 +486,47 @@
 
             </div>
 
+
         </section>
 
 
 
-        <!-- =====================================
-             STATISTIK
-        ====================================== -->
+        <!-- =================================================
+             STATISTIK EKOSISTEM
+        ================================================= -->
 
         <section class="dashboard-section">
 
+
             <div class="section-heading">
+
 
                 <span>
                     RINGKASAN PLATFORM
                 </span>
 
+
                 <h3>
                     Statistik Ekosistem
                 </h3>
 
+
             </div>
+
 
 
             <div class="row g-3">
 
 
-                <!-- DESA -->
+
+                <!-- =================================================
+                     DESA
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
 
                         <div class="stat-icon desa-icon">
 
@@ -360,21 +534,27 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 Desa
                             </span>
 
+
                             <strong id="statDesa">
-                                14
+                                0
                             </strong>
+
 
                             <small>
                                 Desa terdaftar
                             </small>
 
+
                         </div>
+
 
                     </div>
 
@@ -382,11 +562,14 @@
 
 
 
-                <!-- BUMDES -->
+                <!-- =================================================
+                     BUMDES
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
 
                         <div class="stat-icon bumdes-icon">
 
@@ -394,21 +577,27 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 BUMDes
                             </span>
 
+
                             <strong id="statBumdes">
-                                -
+                                0
                             </strong>
+
 
                             <small>
                                 BUMDes terdaftar
                             </small>
 
+
                         </div>
+
 
                     </div>
 
@@ -416,11 +605,14 @@
 
 
 
-                <!-- UMKM -->
+                <!-- =================================================
+                     UMKM
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
 
                         <div class="stat-icon umkm-icon">
 
@@ -428,21 +620,27 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 UMKM
                             </span>
 
+
                             <strong id="statUmkm">
-                                -
+                                0
                             </strong>
+
 
                             <small>
                                 Pelaku usaha
                             </small>
 
+
                         </div>
+
 
                     </div>
 
@@ -450,11 +648,57 @@
 
 
 
-                <!-- BISNIS -->
+                <!-- =================================================
+                     PRODUK
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
+
+                        <div class="stat-icon produk-icon">
+
+                            <i class="fa-solid fa-box-open"></i>
+
+                        </div>
+
+
+                        <div class="stat-content">
+
+
+                            <span>
+                                Produk
+                            </span>
+
+
+                            <strong id="statProduk">
+                                0
+                            </strong>
+
+
+                            <small>
+                                Produk UMKM
+                            </small>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     BISNIS
+                ================================================= -->
+
+                <div class="col-xl-3 col-md-6">
+
+                    <div class="stat-card">
+
 
                         <div class="stat-icon bisnis-icon">
 
@@ -462,21 +706,27 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 Bisnis Lokal
                             </span>
 
+
                             <strong id="statBisnis">
-                                -
+                                0
                             </strong>
+
 
                             <small>
                                 Direktori bisnis
                             </small>
 
+
                         </div>
+
 
                     </div>
 
@@ -484,11 +734,14 @@
 
 
 
-                <!-- BURSA -->
+                <!-- =================================================
+                     BURSA
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
 
                         <div class="stat-icon bursa-icon">
 
@@ -496,21 +749,27 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 Bursa
                             </span>
 
+
                             <strong id="statBursa">
-                                -
+                                0
                             </strong>
+
 
                             <small>
                                 Listing lokal
                             </small>
 
+
                         </div>
+
 
                     </div>
 
@@ -518,11 +777,14 @@
 
 
 
-                <!-- WISATA -->
+                <!-- =================================================
+                     WISATA
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
 
                         <div class="stat-icon wisata-icon">
 
@@ -530,21 +792,27 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 Wisata
                             </span>
 
+
                             <strong id="statWisata">
-                                -
+                                0
                             </strong>
+
 
                             <small>
                                 Destinasi
                             </small>
 
+
                         </div>
+
 
                     </div>
 
@@ -552,11 +820,14 @@
 
 
 
-                <!-- BERITA -->
+                <!-- =================================================
+                     BERITA
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
 
                         <div class="stat-icon berita-icon">
 
@@ -564,21 +835,27 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 Berita
                             </span>
 
+
                             <strong id="statBerita">
-                                -
+                                0
                             </strong>
+
 
                             <small>
                                 Informasi
                             </small>
 
+
                         </div>
+
 
                     </div>
 
@@ -586,11 +863,14 @@
 
 
 
-                <!-- AGENDA -->
+                <!-- =================================================
+                     AGENDA
+                ================================================= -->
 
                 <div class="col-xl-3 col-md-6">
 
                     <div class="stat-card">
+
 
                         <div class="stat-icon agenda-icon">
 
@@ -598,25 +878,32 @@
 
                         </div>
 
+
                         <div class="stat-content">
+
 
                             <span>
                                 Agenda
                             </span>
 
+
                             <strong id="statAgenda">
-                                -
+                                0
                             </strong>
+
 
                             <small>
                                 Kegiatan
                             </small>
 
+
                         </div>
+
 
                     </div>
 
                 </div>
+
 
             </div>
 
@@ -624,87 +911,118 @@
 
 
 
-        <!-- =====================================
-             BOTTOM PANELS
-        ====================================== -->
+        <!-- =====================================================
+             INFORMASI TERBARU + STATUS
+        ===================================================== -->
 
         <div class="row g-4">
 
 
-            <!-- AKTIVITAS -->
+
+            <!-- =================================================
+                 AKTIVITAS
+            ================================================= -->
 
             <div class="col-lg-8">
 
+
                 <div class="dashboard-panel">
+
 
                     <div class="panel-header">
 
+
                         <div>
+
 
                             <span>
                                 INFORMASI TERBARU
                             </span>
 
+
                             <h3>
                                 Aktivitas Terbaru
                             </h3>
 
+
                         </div>
+
 
                         <i class="fa-solid fa-bolt"></i>
 
+
                     </div>
+
 
 
                     <div
                         class="activity-list"
                         id="activityList">
 
+
                         <div class="loading-state">
+
 
                             <i class="fa-solid fa-spinner fa-spin"></i>
 
+
                             Memuat informasi...
+
 
                         </div>
 
+
                     </div>
 
+
                 </div>
+
 
             </div>
 
 
 
-            <!-- STATUS -->
+            <!-- =================================================
+                 STATUS SISTEM
+            ================================================= -->
 
             <div class="col-lg-4">
 
+
                 <div class="dashboard-panel">
+
 
                     <div class="panel-header">
 
+
                         <div>
+
 
                             <span>
                                 PLATFORM
                             </span>
 
+
                             <h3>
                                 Status Sistem
                             </h3>
 
+
                         </div>
+
 
                         <i class="fa-solid fa-server"></i>
 
+
                     </div>
+
 
 
                     <div class="system-status">
 
 
                         <div class="system-item">
+
 
                             <div>
 
@@ -714,14 +1032,18 @@
 
                             </div>
 
+
                             <strong>
                                 ONLINE
                             </strong>
 
+
                         </div>
 
 
+
                         <div class="system-item">
+
 
                             <div>
 
@@ -731,14 +1053,18 @@
 
                             </div>
 
+
                             <strong>
                                 ONLINE
                             </strong>
 
+
                         </div>
 
 
+
                         <div class="system-item">
+
 
                             <div>
 
@@ -748,14 +1074,18 @@
 
                             </div>
 
+
                             <strong>
                                 ONLINE
                             </strong>
 
+
                         </div>
 
 
+
                         <div class="system-item">
+
 
                             <div>
 
@@ -765,14 +1095,39 @@
 
                             </div>
 
+
                             <strong>
                                 ONLINE
                             </strong>
 
+
                         </div>
 
 
+
                         <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Data Produk
+
+                            </div>
+
+
+                            <strong>
+                                ONLINE
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <div class="system-item">
+
 
                             <div>
 
@@ -782,325 +1137,640 @@
 
                             </div>
 
+
                             <strong>
                                 ONLINE
                             </strong>
 
+
                         </div>
 
+
                     </div>
+
 
                 </div>
 
+
             </div>
+
 
         </div>
 
-<!-- =====================================================
-     DASHBOARD V1.1
-     STATUS DATA & QUICK ACTION
-===================================================== -->
 
-<div class="row g-4 mt-1">
 
-    <!-- STATUS DATA -->
-    <div class="col-lg-7">
+        <!-- =====================================================
+             STATUS EKOSISTEM + QUICK ACTION
+        ===================================================== -->
 
-        <div class="dashboard-panel">
+        <div class="row g-4 mt-1">
 
-            <div class="panel-header">
 
-                <div>
-                    <span>MONITORING</span>
-                    <h3>Status Ekosistem</h3>
+
+            <!-- =================================================
+                 STATUS EKOSISTEM
+            ================================================= -->
+
+            <div class="col-lg-7">
+
+
+                <div class="dashboard-panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+
+                            <span>
+                                MONITORING
+                            </span>
+
+
+                            <h3>
+                                Status Ekosistem
+                            </h3>
+
+
+                        </div>
+
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+
+                    </div>
+
+
+
+                    <div
+                        class="system-status"
+                        id="systemStatus">
+
+
+
+                        <!-- DESA -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Desa
+
+                            </div>
+
+
+                            <strong id="statusDesa">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- BUMDES -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                BUMDes
+
+                            </div>
+
+
+                            <strong id="statusBumdes">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- UMKM -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                UMKM
+
+                            </div>
+
+
+                            <strong id="statusUmkm">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- PRODUK -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Produk
+
+                            </div>
+
+
+                            <strong id="statusProduk">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- BISNIS -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Bisnis Lokal
+
+                            </div>
+
+
+                            <strong id="statusBisnis">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- BURSA -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Bursa Lokal
+
+                            </div>
+
+
+                            <strong id="statusBursa">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- WISATA -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Wisata
+
+                            </div>
+
+
+                            <strong id="statusWisata">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- BERITA -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Berita
+
+                            </div>
+
+
+                            <strong id="statusBerita">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- AGENDA -->
+
+                        <div class="system-item">
+
+
+                            <div>
+
+                                <span class="status-dot online"></span>
+
+                                Agenda
+
+                            </div>
+
+
+                            <strong id="statusAgenda">
+                                0 DATA
+                            </strong>
+
+
+                        </div>
+
+
+                    </div>
+
+
                 </div>
 
-                <i class="fa-solid fa-chart-line"></i>
 
             </div>
 
-            <div class="system-status" id="systemStatus">
 
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        Desa
+
+            <!-- =================================================
+                 QUICK ACTION
+            ================================================= -->
+
+            <div class="col-lg-5">
+
+
+                <div class="dashboard-panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+
+                            <span>
+                                SHORTCUT
+                            </span>
+
+
+                            <h3>
+                                Aksi Cepat
+                            </h3>
+
+
+                        </div>
+
+
+                        <i class="fa-solid fa-bolt"></i>
+
+
                     </div>
 
-                    <strong id="statusDesa">0 DATA</strong>
-                </div>
 
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        BUMDes
+
+                    <div class="quick-actions">
+
+
+
+                        <!-- TAMBAH UMKM -->
+
+                        <a
+                            href="umkm.html"
+                            class="quick-action">
+
+
+                            <div class="quick-icon umkm-icon">
+
+                                <i class="fa-solid fa-store"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+                                    Tambah UMKM
+                                </strong>
+
+
+                                <span>
+                                    Tambahkan pelaku usaha baru
+                                </span>
+
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                        </a>
+
+
+
+                        <!-- TAMBAH PRODUK -->
+
+                        <a
+                            href="produk-admin.html"
+                            class="quick-action">
+
+
+                            <div class="quick-icon produk-icon">
+
+                                <i class="fa-solid fa-box-open"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+                                    Tambah Produk
+                                </strong>
+
+
+                                <span>
+                                    Tambahkan produk UMKM baru
+                                </span>
+
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                        </a>
+
+
+
+                        <!-- TAMBAH BISNIS -->
+
+                        <a
+                            href="bisnis-admin.html"
+                            class="quick-action">
+
+
+                            <div class="quick-icon bisnis-icon">
+
+                                <i class="fa-solid fa-briefcase"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+                                    Tambah Bisnis
+                                </strong>
+
+
+                                <span>
+                                    Tambahkan bisnis lokal baru
+                                </span>
+
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                        </a>
+
+
+
+                        <!-- TAMBAH BURSA -->
+
+                        <a
+                            href="bursa-admin.html"
+                            class="quick-action">
+
+
+                            <div class="quick-icon bursa-icon">
+
+                                <i class="fa-solid fa-tags"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+                                    Tambah Bursa
+                                </strong>
+
+
+                                <span>
+                                    Tambahkan listing lokal
+                                </span>
+
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                        </a>
+
+
+
+                        <!-- TAMBAH WISATA -->
+
+                        <a
+                            href="wisata-admin.html"
+                            class="quick-action">
+
+
+                            <div class="quick-icon wisata-icon">
+
+                                <i class="fa-solid fa-mountain-sun"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+                                    Tambah Wisata
+                                </strong>
+
+
+                                <span>
+                                    Tambahkan destinasi wisata baru
+                                </span>
+
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                        </a>
+
+
+
+                        <!-- TAMBAH BERITA -->
+
+                        <a
+                            href="#"
+                            class="quick-action">
+
+
+                            <div class="quick-icon berita-icon">
+
+                                <i class="fa-solid fa-newspaper"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+                                    Tambah Berita
+                                </strong>
+
+
+                                <span>
+                                    Publikasikan informasi terbaru
+                                </span>
+
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                        </a>
+
+
+
+                        <!-- TAMBAH AGENDA -->
+
+                        <a
+                            href="#"
+                            class="quick-action">
+
+
+                            <div class="quick-icon agenda-icon">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+                                    Tambah Agenda
+                                </strong>
+
+
+                                <span>
+                                    Tambahkan kegiatan masyarakat
+                                </span>
+
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                        </a>
+
+
+
                     </div>
 
-                    <strong id="statusBumdes">0 DATA</strong>
+
                 </div>
 
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        UMKM
-                    </div>
-
-                    <strong id="statusUmkm">0 DATA</strong>
-                </div>
-
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        Bisnis Lokal
-                    </div>
-
-                    <strong id="statusBisnis">0 DATA</strong>
-                </div>
-
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        Bursa Lokal
-                    </div>
-
-                    <strong id="statusBursa">0 DATA</strong>
-                </div>
-
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        Wisata
-                    </div>
-
-                    <strong id="statusWisata">0 DATA</strong>
-                </div>
-
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        Berita
-                    </div>
-
-                    <strong id="statusBerita">0 DATA</strong>
-                </div>
-
-                <div class="system-item">
-                    <div>
-                        <span class="status-dot online"></span>
-                        Agenda
-                    </div>
-
-                    <strong id="statusAgenda">0 DATA</strong>
-                </div>
 
             </div>
+
 
         </div>
 
-    </div>
 
 
-    <!-- QUICK ACTION -->
-    <div class="col-lg-5">
-
-        <div class="dashboard-panel">
-
-            <div class="panel-header">
-
-                <div>
-                    <span>SHORTCUT</span>
-                    <h3>Aksi Cepat</h3>
-                </div>
-
-                <i class="fa-solid fa-bolt"></i>
-
-            </div>
-
-
-            <div class="quick-actions">
-
-                <a href="#" class="quick-action">
-
-                    <div class="quick-icon umkm-icon">
-
-                        <i class="fa-solid fa-store"></i>
-
-                    </div>
-
-                    <div>
-                        <strong>Tambah UMKM</strong>
-
-                        <span>
-                            Tambahkan pelaku usaha baru
-                        </span>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-right arrow"></i>
-
-                </a>
-
-<a href="produk-admin.html"
-   class="quick-action">
-
-    <div class="quick-icon produk-icon">
-
-        <i class="fa-solid fa-box-open"></i>
-
-    </div>
-
-    <div>
-
-        <strong>Tambah Produk</strong>
-
-        <span>
-            Tambahkan produk UMKM baru
-        </span>
-
-    </div>
-
-    <i class="fa-solid fa-chevron-right arrow"></i>
-
-</a>
-
-                <a href="#" class="quick-action">
-
-                    <div class="quick-icon berita-icon">
-
-                        <i class="fa-solid fa-newspaper"></i>
-
-                    </div>
-
-                    <div>
-                        <strong>Tambah Berita</strong>
-
-                        <span>
-                            Publikasikan informasi terbaru
-                        </span>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-right arrow"></i>
-
-                </a>
-
-
-                <a href="#" class="quick-action">
-
-                    <div class="quick-icon agenda-icon">
-
-                        <i class="fa-solid fa-calendar-days"></i>
-
-                    </div>
-
-                    <div>
-                        <strong>Tambah Agenda</strong>
-
-                        <span>
-                            Tambahkan kegiatan masyarakat
-                        </span>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-right arrow"></i>
-
-                </a>
-
-
-                <a href="bursa-admin.html" class="quick-action">
-
-                    <div class="quick-icon bursa-icon">
-
-                        <i class="fa-solid fa-tags"></i>
-
-                    </div>
-
-                    <div>
-                        <strong>Tambah Bursa</strong>
-
-                        <span>
-                            Tambahkan listing lokal
-                        </span>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-right arrow"></i>
-
-                </a>
-
-                <a href="bisnis-admin.html" class="quick-action">
-
-                    <div class="quick-icon bisnis-icon">
-
-                        <i class="fa-solid fa-briefcase"></i>
-
-                    </div>
-
-                    <div>
-                        <strong>Tambah Bisnis</strong>
-
-                        <span>
-                            Tambahkan bisnis lokal baru
-                        </span>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-right arrow"></i>
-
-                </a>
-<!-- TAMBAH WISATA -->
-
-<a href="wisata-admin.html"
-   class="quick-action">
-
-    <div class="quick-icon wisata-icon">
-
-        <i class="fa-solid fa-mountain-sun"></i>
-
-    </div>
-
-    <div>
-
-        <strong>Tambah Wisata</strong>
-
-        <span>
-            Tambahkan destinasi wisata baru
-        </span>
-
-    </div>
-
-    <i class="fa-solid fa-chevron-right arrow"></i>
-
-</a>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-        <!-- FOOTER -->
+        <!-- =====================================================
+             FOOTER
+        ===================================================== -->
 
         <footer class="dashboard-footer">
+
 
             <span>
                 © 2026 Plaza Dayeuhluhur
             </span>
 
+
             <span>
                 Digital Ecosystem Platform
             </span>
+
 
         </footer>
 
 
     </main>
 
+
 </div>
 
 
 
-<!-- =========================================
+<!-- =====================================================
      DASHBOARD JS
-========================================= -->
+===================================================== -->
 
 <script src="assets/js/dashboard.js"></script>
 
+
 </body>
+
 </html>
