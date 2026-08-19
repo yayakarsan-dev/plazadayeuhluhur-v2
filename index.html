@@ -1,1184 +1,1706 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="id" class="scroll-smooth">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>PLAZA DAYEUHLUHUR | Gerbang Digital Kecamatan Dayeuhluhur</title>
-
-<meta name="description"
-content="Portal Resmi Digital Kecamatan Dayeuhluhur">
-
-<!-- Google Font -->
-
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<!-- Bootstrap -->
-
-<link
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-rel="stylesheet">
-
-<!-- Font Awesome -->
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<!-- AOS -->
-
-<link
-href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-rel="stylesheet">
-
-<!-- CSS -->
-
-<link
-rel="stylesheet"
-href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/theme.css">
-
-<link
-rel="stylesheet"
-href="assets/css/animation.css">
-
-<link
-rel="stylesheet"
-href="assets/css/responsive.css">
-
-<link rel="stylesheet" href="assets/css/index-undangan.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plaza Dayeuhluhur - Pusat Ekonomi Digital & Bursa Komunitas Kecamatan Dayeuhluhur</title>
+  <meta name="description" content="Pusat promosi digital produk unggulan UMKM, direktori usaha masyarakat, bursa penawaran warga (Dijual, Dicari, Disewakan, Dibeli), kriya anyaman, kopi pegunungan, dan agrowisata Kecamatan Dayeuhluhur, Cilacap." />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            indigo: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+              950: '#1e1b4b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+  </style>
 </head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
 
-<body>
-<!-- ==========================
-     TOP NEWS FLASH
-========================== -->
-
-<div class="top-news">
-
-    <div class="container-fluid">
-
-        <div class="news-wrapper">
-
-            <div class="news-label">
-
-                <span class="live-dot"></span>
-
-                LIVE NEWS
-
-            </div>
-
-            <div class="news-marquee">
-
-                <div id="newsFlashContent">
-
-                    Memuat informasi terbaru...
-
-                </div>
-
-            </div>
-
+  <!-- NAVBAR (Geometric Balance) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 py-3.5 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#beranda" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
+          <div class="w-4 h-4 border-2 border-white rounded-xs"></div>
         </div>
+        <div class="flex flex-col">
+          <span class="text-lg font-extrabold tracking-tight text-slate-800 font-sans">
+            PLAZA<span class="text-indigo-600">DAYEUHLUHUR</span>
+          </span>
+          <span class="text-[10px] text-slate-400 font-medium -mt-0.5">KECAMATAN DAYEUHLUHUR</span>
+        </div>
+      </a>
 
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-5 xl:gap-6 text-sm font-medium text-slate-600">
+        <a href="#beranda" class="text-indigo-600 border-b-2 border-indigo-600 pb-0.5 font-semibold">Beranda</a>
+        <a href="#produk" class="hover:text-slate-900 transition-colors pb-0.5">Katalog Produk</a>
+        <a href="#umkm" class="hover:text-slate-900 transition-colors pb-0.5 font-semibold text-slate-700">Direktori UMKM</a>
+        <a href="#afiliasi" class="hover:text-orange-600 transition-colors pb-0.5 font-semibold text-orange-600">Produk Affiliate</a>
+        <a href="#bursa" class="hover:text-slate-900 transition-colors pb-0.5 font-semibold text-indigo-600">Bursa Warga</a>
+        <a href="#galeri" class="hover:text-slate-900 transition-colors pb-0.5">Galeri</a>
+        <a href="#dukung-kami" class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 rounded-full text-xs font-bold shadow-2xs transition-all">
+          <i data-lucide="heart" class="w-3.5 h-3.5 text-amber-600 fill-amber-500"></i>
+          <span>Dukung Kami</span>
+          <span class="text-[9px] bg-amber-200 text-amber-900 font-extrabold px-1.5 py-0.2 rounded-full uppercase">Donasi</span>
+        </a>
+      </nav>
+
+      <!-- Action -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20tertarik%20dengan%20produk%20lokal" target="_blank" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full text-xs font-semibold shadow-sm transition-all flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>Hubungi Kami</span>
+        </a>
+      </div>
     </div>
-
-</div>
-<!-- HEADER -->
-<header>
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-
-<div class="container">
-
-<a class="navbar-brand" href="#">
-
-<img src="assets/images/logo.png"
-height="55">
-
-<span class="fw-bold ms-2">
-
-PLAZA DAYEUHLUHUR
-
-</span>
-
-</a>
-
-<button
-class="navbar-toggler"
-type="button"
-data-bs-toggle="collapse"
-data-bs-target="#navbarNav">
-
-<span class="navbar-toggler-icon"></span>
-
-</button>
-
-<div
-class="collapse navbar-collapse"
-id="navbarNav">
-
-<ul class="navbar-nav ms-auto">
-
-<li class="nav-item">
-
-<a class="nav-link"
-href="index.html">Beranda</a>
-
-</li>
-<li class="nav-item">
-
-<a class="nav-link"
-href="produk.html">Produk</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link"
-href="desa.html">Desa</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link"
-href="bumdes.html">BUMDes</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link"
-href="umkm.html">UMKM</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link"
-href="wisata.html">Wisata</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link"
-href="berita.html">Berita</a>
-
-</li>
-
-<li class="nav-item">
-
-<a class="nav-link"
-href="kontak.html">Kontak</a>
-
-</li>
-<li class="nav-item">
-
-<a class="nav-link"
-href="dashboard.html">Dashboard</a>
-
-</li>
-</ul>
-
-</div>
-
-</div>
-
-</nav>
-</header>
-
-<!-- HERO -->
-<section id="hero">
-
-<div class="hero-overlay">
-
-<div class="container">
-
-<div class="row align-items-center vh-100">
-
-<div class="col-lg-7">
-
-<h5 data-aos="fade-right">
-SELAMAT DATANG DI
-</h5>
-
-<h1 data-aos="fade-up">
-
-PLAZA DAYEUHLUHUR
-
-</h1>
-
-<p data-aos="fade-up" data-aos-delay="200">
-
-Gerbang Digital Kecamatan Dayeuhluhur
-
-yang menghubungkan masyarakat, desa,
-
-BUMDes, UMKM dan potensi wisata
-
-dalam satu platform digital.
-
-</p>
-
-<div class="mt-4">
-
-<a href="#desa"
-
-class="btn btn-primary btn-lg me-3">
-
-<i class="fa-solid fa-map-location-dot"></i>
-
-Jelajahi Desa
-
-</a>
-
-<a href="#umkm"
-
-class="btn btn-outline-light btn-lg">
-
-<i class="fa-solid fa-store"></i>
-
-UMKM
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-</section>
-<!-- ==========================
-     TENTANG
-========================== -->
-
-<section id="tentang" class="py-5 bg-light">
-
-<div class="container">
-
-<div class="row align-items-center">
-
-<div class="col-lg-6">
-
-<img src="assets/images/about-dayeuhluhur.jpg"
-class="img-fluid rounded shadow">
-
-</div>
-
-<div class="col-lg-6">
-
-<h6 class="text-primary fw-bold">
-
-TENTANG PLAZA DAYEUHLUHUR
-
-</h6>
-
-<h3 class="fw-bold mb-4">
-
-Gerbang Informasi, Bisnis, dan Potensi
-Kecamatan Dayeuhluhur
-
-</h3>
-
-<p>
-
-PLAZA DAYEUHLUHUR merupakan platform digital terpadu yang dikembangkan sebagai pusat informasi, promosi bisnis, dan pengembangan potensi Kecamatan Dayeuhluhur.
-
-</p>
-
-<p>
-
-Platform ini menghubungkan masyarakat, pemerintah desa, BUMDes, pelaku UMKM, penyedia jasa, komunitas, investor, dan wisatawan dalam satu ekosistem digital yang modern, informatif, dan mudah diakses.
-
-</p>
-
-<p>
-
-Melalui platform ini masyarakat dapat menemukan informasi desa, produk lokal, direktori bisnis, destinasi wisata, berita, agenda kegiatan, serta berbagai layanan yang tersedia di Kecamatan Dayeuhluhur.
-
-</p>
-
-<a href="#desa" class="btn btn-primary mt-3">
-
-Jelajahi Dayeuhluhur
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- UMKM -->
-<section id="umkm">
-<!-- ==========================
-     ETALASE PRODUK UMKM
-========================== -->
-
-<section id="umkm" class="py-5 bg-light">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <h6 class="text-primary fw-bold">
-                ETALASE PRODUK UMKM
-            </h6>
-
-            <h2 class="fw-bold">
-                Produk Lokal Dayeuhluhur
-            </h2>
-
-            <p class="text-muted">
-                Temukan berbagai produk unggulan masyarakat
-                Kecamatan Dayeuhluhur dan hubungi penjual
-                secara langsung melalui WhatsApp.
+  </header>
+
+  <!-- HERO SLIDER SECTION (Pusat Ekonomi Digital & Highlight Program Slider) -->
+  <section id="beranda" class="pt-8 pb-10 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Left Main Slider Card (8 Columns) -->
+        <div id="heroSliderBox" class="lg:col-span-8 bg-slate-900 rounded-3xl p-6 sm:p-10 lg:p-11 flex flex-col justify-between relative overflow-hidden shadow-md border border-slate-800 transition-all min-h-[500px]">
+          <!-- Geometric Accents -->
+          <div class="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full -mr-24 -mt-24 pointer-events-none blur-xl"></div>
+          <div class="absolute bottom-0 right-10 w-44 h-44 border border-white/10 rounded-full -mb-16 pointer-events-none"></div>
+
+          <!-- Top Slider Header: Badge & Controls -->
+          <div class="relative z-10 flex flex-wrap items-center justify-between gap-3 pb-4">
+            <div id="slideBadgeWrapper">
+              <div id="slideBadge" class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border text-xs font-semibold backdrop-blur-md shadow-xs bg-slate-800/90 border-indigo-500/40 text-indigo-300">
+                <div id="slideDot" class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></div>
+                <span id="slideBadgeText">Pusat Ekonomi Digital • Program Utama</span>
+              </div>
+            </div>
+
+            <!-- Slide Counter & Autoplay Indicator -->
+            <div class="flex items-center gap-2 bg-slate-800/80 border border-slate-700/80 rounded-full px-3 py-1 text-slate-300 text-xs font-mono">
+              <button id="togglePlayBtn" onclick="toggleAutoPlay()" class="hover:text-white transition-colors flex items-center gap-1 cursor-pointer pr-1 border-r border-slate-700">
+                <span id="playIconText" class="text-[10px] font-sans text-amber-400 font-bold">● Auto</span>
+              </button>
+              <span id="slideCurrentNum" class="text-white font-bold">01</span>
+              <span class="text-slate-500">/</span>
+              <span class="text-slate-400">05</span>
+            </div>
+          </div>
+
+          <!-- Slide Content Container -->
+          <div id="slideContent" class="relative z-10 my-auto py-2 transition-opacity duration-300 space-y-4 max-w-2xl">
+            <div>
+              <h1 id="slideTitle" class="text-2xl sm:text-4xl lg:text-[40px] font-extrabold text-white leading-[1.18] tracking-tight font-sans">
+                Pusat Ekonomi Digital <span id="slideHighlight" class="text-indigo-400">Kecamatan Dayeuhluhur</span>
+              </h1>
+              <p id="slideSubtitle" class="text-xs sm:text-sm font-medium text-slate-300 mt-1.5 flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i>
+                <span id="slideSubtitleText">Gerbang Terpadu 14 Desa Berdaya & 450+ Produk Lokal Unggulan</span>
+              </p>
+            </div>
+
+            <p id="slideDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
+              Mendorong produk UMKM lokal menembus pasar modern nasional & global dengan standar mutu terbaik. Akses langsung komoditas kopi pegunungan, gula semut organik, anyaman bambu, kuliner tradisional, dan agrowisata terpadu.
             </p>
 
+            <!-- Highlights Tags -->
+            <div id="slideTags" class="flex flex-wrap items-center gap-2 pt-1">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-indigo-500/20 bg-indigo-500/10 text-indigo-200">
+                <i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-400"></i>
+                <span>14 Desa Terkoneksi</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-indigo-500/20 bg-indigo-500/10 text-indigo-200">
+                <i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-400"></i>
+                <span>450+ Produk Terkurasi</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-indigo-500/20 bg-indigo-500/10 text-indigo-200">
+                <i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-400"></i>
+                <span>Verifikasi Standar Mutu</span>
+              </span>
+            </div>
+
+            <!-- Action CTAs -->
+            <div id="slideCtas" class="flex flex-wrap items-center gap-3 pt-3">
+              <a id="slidePrimaryCta" href="#produk" class="px-5 sm:px-6 py-2.5 sm:py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-xs sm:text-sm font-semibold shadow-md transition-all inline-flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                <span id="slidePrimaryCtaText">Jelajahi Katalog UMKM</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <a id="slideSecondaryCta" href="#galeri" class="px-4 sm:px-5 py-2.5 sm:py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-full text-xs sm:text-sm font-medium transition-all inline-flex items-center gap-2">
+                <i data-lucide="image" class="w-4 h-4 text-slate-300"></i>
+                <span id="slideSecondaryCtaText">Galeri Kegiatan</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation & Tabs -->
+          <div class="relative z-10 pt-6 mt-4 border-t border-slate-800/80 space-y-3">
+            <!-- Progress bar -->
+            <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+              <div id="slideProgressBar" class="h-full bg-indigo-500 transition-all duration-100" style="width: 0%;"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+              <!-- 5 Quick Tabs -->
+              <div class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0">
+                <button onclick="setSlide(0)" id="tabSlide0" class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-indigo-600 text-white cursor-pointer transition-all">01. Pusat Digital</button>
+                <button onclick="setSlide(1)" id="tabSlide1" class="px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-slate-800 text-slate-400 hover:text-white cursor-pointer transition-all">02. Gebyar Festival</button>
+                <button onclick="setSlide(2)" id="tabSlide2" class="px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-slate-800 text-slate-400 hover:text-white cursor-pointer transition-all">03. Legalitas & Halal</button>
+                <button onclick="setSlide(3)" id="tabSlide3" class="px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-slate-800 text-slate-400 hover:text-white cursor-pointer transition-all">04. Kemitraan CSR</button>
+                <button onclick="setSlide(4)" id="tabSlide4" class="px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-slate-800 text-slate-400 hover:text-white cursor-pointer transition-all">05. Afiliasi & Bursa</button>
+              </div>
+
+              <!-- Prev/Next -->
+              <div class="flex items-center gap-2 shrink-0">
+                <button onclick="prevSlide()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors cursor-pointer">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <button onclick="nextSlide()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors cursor-pointer">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
+        <!-- Right Stats Card (4 Columns) -->
+        <div class="lg:col-span-4 bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-2xs space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h3 class="font-bold text-slate-800 text-sm sm:text-base">Statistik & Ekosistem</h3>
+              <span class="flex items-center gap-1 text-[11px] text-emerald-600 font-semibold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
+                Aktif Realtime
+              </span>
+            </div>
 
-        <!-- ==========================
-             PRODUK UMKM
-        =========================== -->
+            <div class="grid grid-cols-2 gap-3">
+              <div class="p-3 bg-slate-50 border border-slate-100 rounded-2xl">
+                <p class="text-[11px] text-slate-500 font-medium">UMKM Terdaftar</p>
+                <p class="text-xl sm:text-2xl font-extrabold text-indigo-600 mt-0.5 font-sans">120+</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">Mitra Desa Aktif</p>
+              </div>
+              <div class="p-3 bg-slate-50 border border-slate-100 rounded-2xl">
+                <p class="text-[11px] text-slate-500 font-medium">Produk Unggulan</p>
+                <p class="text-xl sm:text-2xl font-extrabold text-indigo-600 mt-0.5 font-sans">450+</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">Terkurasi Standar</p>
+              </div>
+              <div class="p-3 bg-slate-50 border border-slate-100 rounded-2xl">
+                <p class="text-[11px] text-slate-500 font-medium">Desa Berdaya</p>
+                <p class="text-xl sm:text-2xl font-extrabold text-slate-800 mt-0.5 font-sans">14 Desa</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">Se-Kecamatan</p>
+              </div>
+              <div class="p-3 bg-slate-50 border border-slate-100 rounded-2xl">
+                <p class="text-[11px] text-slate-500 font-medium">Kepuasan Mitra</p>
+                <p class="text-xl sm:text-2xl font-extrabold text-slate-800 mt-0.5 font-sans">99.4%</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">Ulasan Positif</p>
+              </div>
+            </div>
 
-        <div
-            class="row g-4"
-            id="umkmContainer"
-        >
-        </div>
-
-
-<!-- ==========================
-     ACTION ETALASE PRODUK
-========================== -->
-
-<div class="d-flex justify-content-center align-items-center gap-2 flex-wrap mt-4 mb-2">
-
-    <!-- LIHAT SEMUA PRODUK -->
-
-    <a
-        href="produk.html"
-        class="btn btn-primary"
-    >
-        <i class="fa-solid fa-store me-2"></i>
-        LIHAT SEMUA PRODUK
-    </a>
-
-
-    <!-- DAFTARKAN PRODUK -->
-
-    <a
-        href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur%2C%20saya%20ingin%20mendaftarkan%20produk%20UMKM%20saya%20untuk%20ditampilkan%20di%20Etalase%20Produk.%20Mohon%20informasi%20prosedur%20pendaftarannya.%20Terima%20kasih."
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-success"
-    >
-        <i class="fa-brands fa-whatsapp me-2"></i>
-        DAFTARKAN PRODUK ANDA
-    </a>
-
-</div>
-</div></section>
-
-l
-<!-- ==========================
-     DIREKTORI BISNIS DAYEUHLUHUR
-========================== -->
-
-<section id="bisnis" class="py-5 bg-white">
-
-    <div class="container">
-
-        <!-- ==========================
-             HEADER DIREKTORI
-        =========================== -->
-
-        <div class="text-center mb-5">
-
-            <h6 class="text-primary fw-bold">
-                DIREKTORI BISNIS DAYEUHLUHUR
-            </h6>
-
-            <h2 class="fw-bold">
-                Temukan Produk, Jasa & Layanan Lokal
-            </h2>
-
-            <p class="text-muted">
-                Jelajahi berbagai usaha lokal mulai dari kuliner,
-                fashion, jasa profesional, otomotif hingga layanan
-                lainnya di Kecamatan Dayeuhluhur.
-            </p>
-
-        </div>
-
-
-        <!-- ==========================
-             DAFTAR BISNIS
-        =========================== -->
-
-        <div
-            class="row g-4"
-            id="bisnisContainer"
-        >
-            <!-- Data bisnis diisi oleh bisnis.js -->
-        </div>
-
-
-        <!-- ==========================
-             ACTION DIREKTORI
-        =========================== -->
-
-        <div class="text-center mt-5">
-
-            <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
-
-                <!-- LIHAT SEMUA DIREKTORI -->
-
-                <a
-                    href="bisnis.html"
-                    class="btn btn-primary"
-                >
-                    <i class="fa-solid fa-store me-2"></i>
-                    LIHAT SEMUA DIREKTORI
+            <!-- Agenda Box -->
+            <div class="p-3.5 bg-indigo-50/70 border border-indigo-100 rounded-2xl space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-indigo-900">Agenda Terkini 2026</span>
+                <span class="text-[10px] bg-indigo-200/70 text-indigo-800 font-bold px-1.5 py-0.2 rounded">Aktif</span>
+              </div>
+              <p class="text-xs text-indigo-950 leading-relaxed font-medium">
+                Pendaftaran stand Gebyar Festival UMKM & program fasilitasi Sertifikasi Halal Gratis batch 1 sedang dibuka.
+              </p>
+              <div class="pt-1 flex items-center justify-between text-[11px]">
+                <a href="#kontak" class="font-bold text-indigo-700 hover:text-indigo-900 inline-flex items-center gap-1">
+                  <span>Daftar Sekarang</span>
+                  <i data-lucide="arrow-right" class="w-3 h-3"></i>
                 </a>
+                <a href="#dukung-kami" class="font-semibold text-rose-600 hover:text-rose-700">Dukung / CSR</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <a href="#produk" class="w-full py-2.5 bg-slate-900 hover:bg-indigo-600 text-white rounded-xl text-xs font-semibold text-center block transition-colors">
+              Lihat Semua Komoditas UMKM
+            </a>
+            <p class="text-[10px] text-center text-slate-400">Pemerintah Kecamatan Dayeuhluhur & BUMDes Bersama</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATEGORI PRODUK (Geometric Balance Grid) -->
+  <section id="kategori" class="py-8 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-4">
+      <div class="flex items-center justify-between px-1">
+        <h2 class="text-lg sm:text-xl font-bold text-slate-800 font-sans tracking-tight">Kategori Produk</h2>
+        <a href="#produk" class="text-xs font-semibold text-indigo-600 uppercase tracking-wider">Lihat Semua</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <!-- Kuliner (Orange) -->
+        <a href="#produk" class="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+          <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600">
+            <i data-lucide="utensils" class="w-6 h-6"></i>
+          </div>
+          <span class="text-sm font-semibold text-slate-700">Kuliner</span>
+        </a>
+        <!-- Kriya (Blue) -->
+        <a href="#produk" class="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+            <i data-lucide="package" class="w-6 h-6"></i>
+          </div>
+          <span class="text-sm font-semibold text-slate-700">Kriya Anyaman</span>
+        </a>
+        <!-- Fashion (Green) -->
+        <a href="#produk" class="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600">
+            <i data-lucide="shirt" class="w-6 h-6"></i>
+          </div>
+          <span class="text-sm font-semibold text-slate-700">Batik & Fashion</span>
+        </a>
+        <!-- Jasa / Kopi (Purple) -->
+        <a href="#produk" class="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+          <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600">
+            <i data-lucide="coffee" class="w-6 h-6"></i>
+          </div>
+          <span class="text-sm font-semibold text-slate-700">Kopi Robusta</span>
+        </a>
+        <!-- Agribisnis (Rose) -->
+        <a href="#produk" class="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+          <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center text-rose-600">
+            <i data-lucide="wheat" class="w-6 h-6"></i>
+          </div>
+          <span class="text-sm font-semibold text-slate-700">Hasil Bumi & Madu</span>
+        </a>
+        <!-- Oleh-oleh (Cyan) -->
+        <a href="#produk" class="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+          <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-cyan-600">
+            <i data-lucide="gift" class="w-6 h-6"></i>
+          </div>
+          <span class="text-sm font-semibold text-slate-700">Oleh-oleh Khas</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESI PRODUK UNGGULAN UMKM & KATEGORI PRODUK -->
+  <section id="produk" class="py-14 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-8">
+      <!-- Judul Sesi: PRODUK UNGGULAN UMKM -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 font-sans">Etalase Resmi Dayeuhluhur</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-sans tracking-tight">PRODUK UNGGULAN UMKM</h2>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-2xl mt-1">Koleksi produk unggulan terbaik khas dari 14 desa Kecamatan Dayeuhluhur. Kualitas terjamin langsung dari tangan perajin, petani, dan pelaku UMKM lokal.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-full shrink-0">
+          Produk Pilihan Desa
+        </span>
+      </div>
+
+      <!-- Kategori Produk -->
+      <div class="space-y-3 pt-2">
+        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Kategori Produk</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+          <!-- Kuliner (Orange) -->
+          <a href="#produk" class="bg-white border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+            <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600">
+              <i data-lucide="utensils" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-semibold text-slate-700">Kuliner</span>
+          </a>
+          <!-- Kriya (Blue) -->
+          <a href="#produk" class="bg-white border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+              <i data-lucide="package" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-semibold text-slate-700">Kerajinan</span>
+          </a>
+          <!-- Fashion (Green) -->
+          <a href="#produk" class="bg-white border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+            <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-green-600">
+              <i data-lucide="shirt" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-semibold text-slate-700">Batik & Tenun</span>
+          </a>
+          <!-- Kopi (Purple) -->
+          <a href="#produk" class="bg-white border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+            <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600">
+              <i data-lucide="coffee" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-semibold text-slate-700">Kopi Robusta</span>
+          </a>
+          <!-- Agribisnis (Rose) -->
+          <a href="#produk" class="bg-white border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+            <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center text-rose-600">
+              <i data-lucide="wheat" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-semibold text-slate-700">Hasil Bumi</span>
+          </a>
+          <!-- Semua Produk (Indigo) -->
+          <a href="#produk" class="bg-white border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-2 hover:border-indigo-300 transition-all">
+            <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xs font-semibold text-slate-700">Semua Produk</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tampilan Produk: 2 Baris x 5 Produk (10 Produk Grid) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+        <!-- Product 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281144?auto=format&fit=crop&w=600&q=80" alt="Sale Pisang" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Terlaris</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Panulisan</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Sale Pisang Goreng Renyah</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 25.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/250gr</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Pak%20Sutarman,%20saya%20tertarik%20membeli%20Sale%20Pisang%20Goreng%20Renyah" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" alt="Kopi Robusta" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Juara</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Datar</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Kopi Robusta Single Origin</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 45.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/200gr</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Kang%20Deni,%20saya%20tertarik%20membeli%20Kopi%20Robusta%20Single%20Origin" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80" alt="Gula Semut" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Organik</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Hanum</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Gula Semut Aren Organik</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 35.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/500gr</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Pak%20Karyo,%20saya%20tertarik%20membeli%20Gula%20Semut%20Aren%20Organik" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80" alt="Besek Bambu" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Anyaman</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Ciwalen</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Besek & Tas Anyaman Bambu</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 65.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/pcs</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Ibu%20Narsih,%20saya%20tertarik%20membeli%20Besek%20dan%20Tas%20Anyaman%20Bambu" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1606914501449-5a96b6ce24ca?auto=format&fit=crop&w=600&q=80" alt="Batik Motif Dayeuhluhur" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Tradisi</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Dayeuhluhur</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Kain Batik Tulis Motif Dayeuh</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 185.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/lembar</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Ibu%20Ratna,%20saya%20tertarik%20membeli%20Kain%20Batik%20Tulis%20Motif%20Dayeuh" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=600&q=80" alt="Madu Odeng Liar" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Murni</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Kutaagung</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Madu Hutan Odeng Liar</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 85.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/350ml</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Sahabat%20Rimba,%20saya%20tertarik%20membeli%20Madu%20Hutan%20Odeng%20Liar" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=600&q=80" alt="Keripik Singkong" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Gurih</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Bingkeng</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Keripik Singkong Renyah Gurih</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 18.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/200gr</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Mak%20Nyos,%20saya%20tertarik%20membeli%20Keripik%20Singkong" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80" alt="Wedang Jahe" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Herbal</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Cilumping</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Wedang Jahe Merah Instan</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 28.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/250gr</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Herbal%20Alam,%20saya%20tertarik%20membeli%20Wedang%20Jahe%20Merah" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&q=80" alt="Cobek Batu Kali" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Batu Alam</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Datar</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Cobek Batu Kali Sungai Cibeet</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 95.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/set</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Pengrajin%20Batu,%20saya%20tertarik%20membeli%20Cobek%20Batu%20Kali" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 10 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between">
+          <div class="relative aspect-4/3 overflow-hidden bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80" alt="Keranjang Bambu" class="w-full h-full object-cover" />
+            <span class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Kerajinan</span>
+          </div>
+          <div class="p-3 sm:p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+            <div class="space-y-1">
+              <span class="text-[11px] text-slate-500 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-indigo-600"></i> Desa Ciwalen</span>
+              <h3 class="font-bold text-slate-800 text-xs sm:text-sm line-clamp-2">Keranjang Anyaman Serbaguna</h3>
+            </div>
+            <div class="pt-2 border-t border-slate-100 space-y-2">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm sm:text-base font-extrabold text-indigo-600 font-sans">Rp 50.000</span>
+                <span class="text-[10px] text-slate-400 font-medium">/pcs</span>
+              </div>
+              <a href="https://wa.me/6285803417383?text=Halo%20Sanggar%20Anyam,%20saya%20tertarik%20membeli%20Keranjang%20Anyaman" target="_blank" class="w-full py-2 px-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>Hubungi Penjual</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Bawah Sesi Produk -->
+      <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <a href="produk.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-2xl shadow-sm hover:shadow transition-all uppercase tracking-wider">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>Tampilkan Semua Produk</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+        <a href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20ingin%20mendaftarkan%20produk%20UMKM%20saya" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-2xl shadow-sm hover:shadow transition-all uppercase tracking-wider">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>Daftarkan Produk Anda</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESI 1: DIREKTORI UMKM (USAHA MASYARAKAT BERDASARKAN JENIS USAHA) -->
+  <section id="umkm" class="py-14 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 font-sans">Direktori Terverifikasi</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-sans tracking-tight mt-1">Direktori Usaha Masyarakat (UMKM)</h2>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-2xl mt-1">Profil lengkap kelompok usaha, pengrajin, dan jasa masyarakat se-Kecamatan Dayeuhluhur.</p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-xs font-semibold px-3 py-1.5 bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-full">
+            10 Usaha Terverifikasi
+          </span>
+        </div>
+      </div>
+
+      <!-- UMKM Cards (5 Kolom per Baris x 2 Baris) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
+        <!-- UMKM 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80" alt="Sale Berkah" class="w-full h-full object-cover" />
+              <span class="absolute top-2 left-2 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Kuliner</span>
+            </div>
+            <div class="p-3.5 space-y-2">
+              <span class="text-[10px] text-slate-500 block">Pemilik: <strong>Pak Sutarman</strong></span>
+              <h3 class="text-sm font-bold text-slate-800 line-clamp-1">Sale Pisang Berkah</h3>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Sentra olahan pisang siam lokal binaan koperasi desa Panulisan.</p>
+              <div class="flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-md">
+                <i data-lucide="check-circle" class="w-3 h-3 text-emerald-600"></i>
+                <span class="truncate">P-IRT & Halal MUI</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-3.5 pt-0">
+            <a href="https://wa.me/6281234567890?text=Halo%20Pak%20Sutarman,%20saya%20tertarik%20dengan%20produk%20Sale%20Berkah" target="_blank" class="w-full py-2 bg-slate-900 hover:bg-indigo-600 text-white text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Usaha</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- UMKM 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" alt="Kopi Gunung" class="w-full h-full object-cover" />
+              <span class="absolute top-2 left-2 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Pertanian</span>
+            </div>
+            <div class="p-3.5 space-y-2">
+              <span class="text-[10px] text-slate-500 block">Pemilik: <strong>Kang Deni Rohimat</strong></span>
+              <h3 class="text-sm font-bold text-slate-800 line-clamp-1">Koperasi Kopi Gunung</h3>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Kebun kopi robusta lereng pegunungan Dayeuhluhur 650 mdpl.</p>
+              <div class="flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-md">
+                <i data-lucide="check-circle" class="w-3 h-3 text-emerald-600"></i>
+                <span class="truncate">BPOM & NIB</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-3.5 pt-0">
+            <a href="https://wa.me/6281234567891?text=Halo%20Kang%20Deni,%20saya%20tertarik%20dengan%20kopi%20robusta" target="_blank" class="w-full py-2 bg-slate-900 hover:bg-indigo-600 text-white text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Usaha</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- UMKM 3 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80" alt="Anyaman Ciwalen" class="w-full h-full object-cover" />
+              <span class="absolute top-2 left-2 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Kerajinan</span>
+            </div>
+            <div class="p-3.5 space-y-2">
+              <span class="text-[10px] text-slate-500 block">Pemilik: <strong>Ibu Narsih</strong></span>
+              <h3 class="text-sm font-bold text-slate-800 line-clamp-1">Anyaman Bambu Kencana</h3>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Sentra perajin anyaman bambu tali halus kualitas ekspor.</p>
+              <div class="flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-md">
+                <i data-lucide="check-circle" class="w-3 h-3 text-emerald-600"></i>
+                <span class="truncate">NIB Mikro</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-3.5 pt-0">
+            <a href="https://wa.me/6281234567892?text=Halo%20Ibu%20Narsih,%20saya%20tertarik%20dengan%20souvenir%20anyaman" target="_blank" class="w-full py-2 bg-slate-900 hover:bg-indigo-600 text-white text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Usaha</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- UMKM 4 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80" alt="Gula Aren Hanum" class="w-full h-full object-cover" />
+              <span class="absolute top-2 left-2 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Hasil Bumi</span>
+            </div>
+            <div class="p-3.5 space-y-2">
+              <span class="text-[10px] text-slate-500 block">Pemilik: <strong>Pak Kuswanto</strong></span>
+              <h3 class="text-sm font-bold text-slate-800 line-clamp-1">Aren Alami Hanum</h3>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Penyedia nira aren murni & gula semut organik tanpa bahan kimia.</p>
+              <div class="flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-md">
+                <i data-lucide="check-circle" class="w-3 h-3 text-emerald-600"></i>
+                <span class="truncate">Sertifikat Organik</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-3.5 pt-0">
+            <a href="https://wa.me/6281234567893?text=Halo%20Pak%20Kuswanto,%20saya%20tertarik%20dengan%20gula%20aren" target="_blank" class="w-full py-2 bg-slate-900 hover:bg-indigo-600 text-white text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Usaha</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- UMKM 5 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1606914501449-5a96b6ce24ca?auto=format&fit=crop&w=600&q=80" alt="Batik Dayeuh" class="w-full h-full object-cover" />
+              <span class="absolute top-2 left-2 px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-600 text-white">Fashion</span>
+            </div>
+            <div class="p-3.5 space-y-2">
+              <span class="text-[10px] text-slate-500 block">Pemilik: <strong>Ibu Endang</strong></span>
+              <h3 class="text-sm font-bold text-slate-800 line-clamp-1">Batik Tulis Pusaka</h3>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Sanggar batik tulis & cap melestarikan motif etnik Dayeuhluhur.</p>
+              <div class="flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-md">
+                <i data-lucide="check-circle" class="w-3 h-3 text-emerald-600"></i>
+                <span class="truncate">Hak Cipta Seni</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-3.5 pt-0">
+            <a href="https://wa.me/6281234567894?text=Halo%20Ibu%20Endang,%20saya%20tertarik%20dengan%20kain%20batik" target="_blank" class="w-full py-2 bg-slate-900 hover:bg-indigo-600 text-white text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Usaha</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Bawah Sesi UMKM: TAMPILKAN SEMUA UMKM & DAFTARKAN UMKM ANDA -->
+      <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <!-- Tombol 1: TAMPILKAN SEMUA UMKM -->
+        <a href="umkm.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold rounded-2xl shadow-sm hover:shadow transition-all uppercase tracking-wider">
+          <i data-lucide="store" class="w-4 h-4"></i>
+          <span>TAMPILKAN SEMUA UMKM</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+        <!-- Tombol 2: DAFTARKAN UMKM ANDA -->
+        <a href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20ingin%20mendaftarkan%20usaha%20UMKM%20saya" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-2xl shadow-sm hover:shadow transition-all uppercase tracking-wider">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>DAFTARKAN UMKM ANDA</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESI AFFILIATE: PRODUK REKOMENDASI & TERLARIS SHOPEE -->
+  <section id="afiliasi" class="py-14 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-8">
+      
+      <!-- SPONSOR BANNER MEMANJANG: ADVANCE DIGITAL -->
+      <div class="w-full bg-slate-900 text-white rounded-3xl overflow-hidden border border-slate-800 shadow-md relative">
+        <div class="p-6 sm:p-8 lg:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div class="space-y-4 max-w-2xl text-center lg:text-left">
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+              <span class="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-full text-[11px] font-extrabold uppercase tracking-wider font-sans flex items-center gap-1.5">
+                <i data-lucide="award" class="w-3.5 h-3.5 text-amber-400"></i>
+                Official Sponsor & Mitra Utama
+              </span>
+              <span class="px-2.5 py-1 bg-white/10 text-slate-300 rounded-full text-[11px] font-medium border border-white/15 flex items-center gap-1">
+                <i data-lucide="shield-check" class="w-3 h-3 text-emerald-400"></i>
+                Didukung Resmi oleh Advance Digitals
+              </span>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-center lg:justify-start gap-3">
+                <span class="text-2xl sm:text-3xl font-black tracking-tight font-sans text-white">
+                  ADVANCE<span class="text-orange-500 font-extrabold">DIGITALS</span>
+                </span>
+                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 border-l border-slate-700 pl-3">
+                  Smart Home & Audio
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Perusahaan elektronik & teknologi terkemuka Indonesia yang bangga mendukung percepatan ekonomi digital serta kemajuan UMKM di Kecamatan Dayeuhluhur.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+              <div class="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-200">
+                <i data-lucide="radio" class="w-4 h-4 text-orange-400"></i>
+                <span>Speaker & Audio</span>
+              </div>
+              <div class="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-200">
+                <i data-lucide="coffee" class="w-4 h-4 text-amber-400"></i>
+                <span>Dapur & UMKM</span>
+              </div>
+              <div class="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-200">
+                <i data-lucide="tv" class="w-4 h-4 text-cyan-400"></i>
+                <span>Smart TV & Display</span>
+              </div>
+              <div class="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center gap-2 text-[11px] font-medium text-slate-200">
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+                <span>Garansi 1 Tahun</span>
+              </div>
+            </div>
+          </div>
+          <div class="w-full lg:w-auto flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 items-center justify-center">
+            <a href="https://shopee.co.id/advanceofficialstore" target="_blank" class="w-full sm:w-auto lg:w-full px-6 py-3.5 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-xs sm:text-sm font-bold rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2">
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+              <span>Kunjungi Official Store Shopee</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+            <a href="https://advancedigitals.co.id" target="_blank" class="w-full sm:w-auto lg:w-full px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-semibold rounded-2xl border border-slate-700 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="zap" class="w-4 h-4 text-cyan-400"></i>
+              <span>Website Resmi Advance</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-400"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-orange-600 font-sans flex items-center gap-1.5">
+            <i data-lucide="flame" class="w-3.5 h-3.5 text-orange-600"></i>
+            Shopee Affiliate & Rekomendasi Terlaris
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-sans tracking-tight mt-1">Produk Terlaris & Alat Pendukung UMKM</h2>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-2xl mt-1">Koleksi barang berkualitas dengan diskon spesial dari Shopee dan marketplace terpercaya untuk menunjang usaha dan kebutuhan rumah tangga.</p>
+        </div>
+        <a href="https://shopee.co.id" target="_blank" class="px-5 py-2.5 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-xs font-bold rounded-full shadow-sm flex items-center gap-2 shrink-0">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>Buka Shopee Mall</span>
+        </a>
+      </div>
+
+      <!-- Affiliate Cards Grid (5 Kolom per Baris) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+        <!-- Aff Item 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-orange-300 transition-all flex flex-col justify-between group">
+          <div class="relative aspect-square bg-slate-100 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&q=80" alt="Vacuum Sealer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#ee4d2d] text-white shadow-xs">Mall</span>
+            <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-amber-500 text-slate-950 shadow-xs">Terlaris</span>
+          </div>
+          <div class="p-3 space-y-1.5">
+            <span class="text-[10px] text-slate-400 block truncate">Alat Kemasan</span>
+            <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Mesin Vacuum Sealer Portable Otomatis</h3>
+            <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 line-through block">Rp 185rb</span>
+                <span class="text-sm font-extrabold text-[#ee4d2d]">Rp 89.000</span>
+              </div>
+              <span class="text-[9px] text-slate-400">10RB+ Terjual</span>
+            </div>
+            <a href="https://shopee.co.id/search?keyword=vacuum+sealer+portable+otomatis" target="_blank" class="w-full py-2 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors mt-1">
+              <i data-lucide="shopping-bag" class="w-3 h-3"></i>
+              <span>Beli di Shopee</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Aff Item 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-orange-300 transition-all flex flex-col justify-between group">
+          <div class="relative aspect-square bg-slate-100 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" alt="Coffee Grinder" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#ee4d2d] text-white shadow-xs">Star+</span>
+            <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-amber-500 text-slate-950 shadow-xs">Terlaris</span>
+          </div>
+          <div class="p-3 space-y-1.5">
+            <span class="text-[10px] text-slate-400 block truncate">Kopi & Barista</span>
+            <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Mesin Penggiling Kopi Stainless Elektrik</h3>
+            <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 line-through block">Rp 135rb</span>
+                <span class="text-sm font-extrabold text-[#ee4d2d]">Rp 74.900</span>
+              </div>
+              <span class="text-[9px] text-slate-400">8.4RB Terjual</span>
+            </div>
+            <a href="https://shopee.co.id/search?keyword=electric+coffee+grinder+stainless" target="_blank" class="w-full py-2 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors mt-1">
+              <i data-lucide="shopping-bag" class="w-3 h-3"></i>
+              <span>Beli di Shopee</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Aff Item 3 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-orange-300 transition-all flex flex-col justify-between group">
+          <div class="relative aspect-square bg-slate-100 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1592417817098-8f3d6ef23a48?auto=format&fit=crop&w=600&q=80" alt="Sprayer Elektrik" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#ee4d2d] text-white shadow-xs">Mall</span>
+            <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-amber-500 text-slate-950 shadow-xs">Terlaris</span>
+          </div>
+          <div class="p-3 space-y-1.5">
+            <span class="text-[10px] text-slate-400 block truncate">Alat Tani</span>
+            <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Semprot Hama Pertanian Elektrik 16L</h3>
+            <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 line-through block">Rp 480rb</span>
+                <span class="text-sm font-extrabold text-[#ee4d2d]">Rp 345.000</span>
+              </div>
+              <span class="text-[9px] text-slate-400">4.2RB Terjual</span>
+            </div>
+            <a href="https://shopee.co.id/search?keyword=sprayer+elektrik+16+liter+pertanian" target="_blank" class="w-full py-2 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors mt-1">
+              <i data-lucide="shopping-bag" class="w-3 h-3"></i>
+              <span>Beli di Shopee</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Aff Item 4 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-orange-300 transition-all flex flex-col justify-between group">
+          <div class="relative aspect-square bg-slate-100 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80" alt="Impulse Sealer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#ee4d2d] text-white shadow-xs">Star+</span>
+            <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-amber-500 text-slate-950 shadow-xs">Terlaris</span>
+          </div>
+          <div class="p-3 space-y-1.5">
+            <span class="text-[10px] text-slate-400 block truncate">Alat Kemasan</span>
+            <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Impulse Sealer 20cm Las Perekat Snack</h3>
+            <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 line-through block">Rp 150rb</span>
+                <span class="text-sm font-extrabold text-[#ee4d2d]">Rp 85.000</span>
+              </div>
+              <span class="text-[9px] text-slate-400">12RB+ Terjual</span>
+            </div>
+            <a href="https://shopee.co.id/search?keyword=impulse+sealer+20cm+perekat+plastik" target="_blank" class="w-full py-2 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors mt-1">
+              <i data-lucide="shopping-bag" class="w-3 h-3"></i>
+              <span>Beli di Shopee</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Aff Item 5 -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-orange-300 transition-all flex flex-col justify-between group">
+          <div class="relative aspect-square bg-slate-100 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80" alt="Smart Watch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#ee4d2d] text-white shadow-xs">Official</span>
+            <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-amber-500 text-slate-950 shadow-xs">Terlaris</span>
+          </div>
+          <div class="p-3 space-y-1.5">
+            <span class="text-[10px] text-slate-400 block truncate">Elektronik</span>
+            <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Smartwatch Advance Amoled Waterproof</h3>
+            <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 line-through block">Rp 399rb</span>
+                <span class="text-sm font-extrabold text-[#ee4d2d]">Rp 199.000</span>
+              </div>
+              <span class="text-[9px] text-slate-400">6.8RB Terjual</span>
+            </div>
+            <a href="https://shopee.co.id/advanceofficialstore" target="_blank" class="w-full py-2 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors mt-1">
+              <i data-lucide="shopping-bag" class="w-3 h-3"></i>
+              <span>Beli di Shopee</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Bagian Bawah: TAMPILKAN SEMUA PRODUK AFFILIATE -->
+      <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <a href="affiliate.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#ee4d2d] hover:bg-[#d73211] text-white text-xs font-bold rounded-2xl shadow-sm hover:shadow transition-all uppercase tracking-wider">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>TAMPILKAN SEMUA PRODUK AFFILIATE</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </section>
 
 
-                <!-- DAFTARKAN BISNIS -->
+  <!-- SESI 2: BURSA PENAWARAN WARGA (DIJUAL, DICARI, DISEWAKAN, DIBELI) -->
+  <section id="bursa" class="py-14 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 font-sans">Komunitas & Transaksi Warga</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-sans tracking-tight mt-1">Bursa Penawaran & Permintaan Warga</h2>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-2xl mt-1">Papan informasi interaktif untuk jual-beli tanah/kebun, sewa ruko/alat, cari tenaga kerja, hingga pasokan hasil bumi antarwarga Dayeuhluhur.</p>
+        </div>
+      </div>
 
-                <a
-                    href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur%2C%20saya%20ingin%20mendaftarkan%20bisnis%20saya%20ke%20Direktori%20Bisnis%20Dayeuhluhur.%20Mohon%20informasi%20prosedur%20pendaftarannya.%20Terima%20kasih."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-success"
-                >
-                    <i class="fa-brands fa-whatsapp me-2"></i>
-                    DAFTARKAN BISNIS ANDA
+      <!-- Bursa Items Grid (5 Kolom per Baris) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+        <!-- Item 1: DIJUAL -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80" alt="Kebun Durian" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[8px] font-extrabold rounded bg-rose-600 text-white shadow-xs">DIJUAL</span>
+              <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-slate-900/80 text-white">Lahan</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span class="truncate max-w-[80px]">Desa Datar</span>
+                <span class="text-[9px] font-mono">18 Ags</span>
+              </div>
+              <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Tanah Kebun Durian & Kapulaga 1.500 m²</h3>
+              <p class="text-xs sm:text-sm font-extrabold text-indigo-600 font-sans truncate">Rp 165.000.000</p>
+              <p class="text-[10px] text-slate-500 line-clamp-2">25 pohon durian montong berbuah, akses mobil cor.</p>
+              <div class="pt-1 text-[10px] text-slate-600 border-t border-slate-100 truncate">
+                Oleh: <strong class="text-slate-800">Pak H. Sukardi</strong>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 pt-0">
+            <a href="https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20iklan%20kebun%20durian" target="_blank" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Pengiklan</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 2: DICARI -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80" alt="Bambu Tali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[8px] font-extrabold rounded bg-amber-500 text-slate-950 shadow-xs">DICARI</span>
+              <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-slate-900/80 text-white">Bahan Baku</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span class="truncate max-w-[80px]">Desa Ciwalen</span>
+                <span class="text-[9px] font-mono">17 Ags</span>
+              </div>
+              <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Pasokan Bambu Tali Tua Diameter 8-10cm</h3>
+              <p class="text-xs sm:text-sm font-extrabold text-indigo-600 font-sans truncate">Rp 12.000 / Btg</p>
+              <p class="text-[10px] text-slate-500 line-clamp-2">Dibutuhkan 300 batang/minggu untuk anyaman Ciwalen.</p>
+              <div class="pt-1 text-[10px] text-slate-600 border-t border-slate-100 truncate">
+                Oleh: <strong class="text-slate-800">Ibu Narsih</strong>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 pt-0">
+            <a href="https://wa.me/6281234567892?text=Halo%20saya%20punya%20pasokan%20bambu%20tali" target="_blank" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Pengiklan</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 3: DISEWAKAN -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80" alt="Kios Ruko" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[8px] font-extrabold rounded bg-blue-600 text-white shadow-xs">DISEWAKAN</span>
+              <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-slate-900/80 text-white">Ruko</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span class="truncate max-w-[80px]">Pasar Dayeuh</span>
+                <span class="text-[9px] font-mono">16 Ags</span>
+              </div>
+              <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Kios Ruko Strategis Depan Pasar Dayeuhluhur</h3>
+              <p class="text-xs sm:text-sm font-extrabold text-indigo-600 font-sans truncate">Rp 8.500.000 / Thn</p>
+              <p class="text-[10px] text-slate-500 line-clamp-2">Ukuran 4x8m, rolling door besi, listrik 1300 watt, air.</p>
+              <div class="pt-1 text-[10px] text-slate-600 border-t border-slate-100 truncate">
+                Oleh: <strong class="text-slate-800">Kang Yayan</strong>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 pt-0">
+            <a href="https://wa.me/6281234567894?text=Halo%20saya%20mau%20sewa%20ruko%20pasar" target="_blank" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Pengiklan</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 4: DIBELI -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" alt="Kopi Petik Merah" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[8px] font-extrabold rounded bg-emerald-600 text-white shadow-xs">DIBELI</span>
+              <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-slate-900/80 text-white">Hasil Bumi</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span class="truncate max-w-[80px]">Desa Datar</span>
+                <span class="text-[9px] font-mono">15 Ags</span>
+              </div>
+              <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Biji Kopi Robusta Gelondong Merah Segar</h3>
+              <p class="text-xs sm:text-sm font-extrabold text-indigo-600 font-sans truncate">Rp 10.500 / Kg</p>
+              <p class="text-[10px] text-slate-500 line-clamp-2">Tampung panen kopi cherry petik merah. Bayar tunai.</p>
+              <div class="pt-1 text-[10px] text-slate-600 border-t border-slate-100 truncate">
+                Oleh: <strong class="text-slate-800">Deni Rohimat</strong>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 pt-0">
+            <a href="https://wa.me/6281234567891?text=Halo%20saya%20punya%20panenan%20kopi%20petik%20merah" target="_blank" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Pengiklan</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 5: DISEWAKAN -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative aspect-16/10 bg-slate-100 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Pikap Carry" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <span class="absolute top-2 left-2 px-1.5 py-0.5 text-[8px] font-extrabold rounded bg-blue-600 text-white shadow-xs">DISEWAKAN</span>
+              <span class="absolute top-2 right-2 px-1.5 py-0.5 text-[8px] font-bold rounded bg-slate-900/80 text-white">Angkutan</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span class="truncate max-w-[80px]">Panulisan</span>
+                <span class="text-[9px] font-mono">15 Ags</span>
+              </div>
+              <h3 class="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">Mobil Pikap Carry Muatan + Sopir Pengalaman</h3>
+              <p class="text-xs sm:text-sm font-extrabold text-indigo-600 font-sans truncate">Rp 200.000 / Rit</p>
+              <p class="text-[10px] text-slate-500 line-clamp-2">Angkut hasil panen & pindahan area Dayeuhluhur-Cilacap.</p>
+              <div class="pt-1 text-[10px] text-slate-600 border-t border-slate-100 truncate">
+                Oleh: <strong class="text-slate-800">Pak Dedi Trans</strong>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 pt-0">
+            <a href="https://wa.me/6281234567898?text=Halo%20saya%20mau%20sewa%20pikap" target="_blank" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 transition-colors">
+              <i data-lucide="phone" class="w-3 h-3"></i>
+              <span>Hubungi Pengiklan</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Bagian Bawah: TAMPILKAN SEMUA BURSA & DAFTAR BURSA -->
+      <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <!-- Tombol 1: TAMPILKAN SEMUA BURSA -->
+        <a href="bursa.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold rounded-2xl shadow-sm hover:shadow transition-all uppercase tracking-wider">
+          <i data-lucide="tag" class="w-4 h-4"></i>
+          <span>TAMPILKAN SEMUA BURSA</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+        <!-- Tombol 2: DAFTAR BURSA -->
+        <a href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20ingin%20mendaftarkan%20iklan%20Bursa%20Penawaran%20/%20Permintaan%20Warga" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-2xl shadow-sm hover:shadow transition-all uppercase tracking-wider">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>DAFTAR BURSA</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI KEGIATAN (Geometric Balance Bento) -->
+  <section id="galeri" class="py-14 bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg sm:text-xl font-bold text-slate-800 font-sans tracking-tight">Galeri Kegiatan</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Main Event Card -->
+        <div class="md:col-span-2 md:row-span-2 bg-slate-900 rounded-3xl relative overflow-hidden group min-h-[300px] border border-slate-200">
+          <img src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80" alt="Festival Budaya" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <p class="text-xs font-medium uppercase tracking-widest text-indigo-300">Event Utama</p>
+            <h4 class="text-xl font-bold font-sans">Festival Budaya & Pasar Rakyat Dayeuhluhur</h4>
+          </div>
+        </div>
+
+        <div class="md:col-span-1 bg-slate-900 rounded-2xl overflow-hidden h-48 border border-slate-200 relative group">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80" alt="Pasar UMKM" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute bottom-3 left-3 text-white text-xs font-bold">Bazar Produk Desa</div>
+        </div>
+
+        <div class="md:col-span-1 bg-slate-900 rounded-2xl overflow-hidden h-48 border border-slate-200 relative group">
+          <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&q=80" alt="Kerajinan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute bottom-3 left-3 text-white text-xs font-bold">Workshop Anyaman</div>
+        </div>
+
+        <div class="md:col-span-2 bg-slate-900 rounded-2xl overflow-hidden h-48 border border-slate-200 relative group">
+          <img src="https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?auto=format&fit=crop&q=80" alt="Lanskap Alam" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute bottom-3 left-3 text-white text-xs font-bold">Panorama Perbukitan Dayeuhluhur</div>
+        </div>
+      </div>
+
+      <!-- Hajatan Warga & Undangan Online Section (Di dalam Galeri) -->
+      <div id="hajatan-warga" class="pt-10 border-t border-slate-200 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold mb-2">
+              <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
+              <span>Kearifan & Guyub Warga</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Hajatan Warga & Undangan Online</h3>
+            <p class="text-xs text-slate-500 mt-1">Agenda resmi hajatan warga (Pernikahan, Khitanan, Syukuran) di 14 Desa Kecamatan Dayeuhluhur, lengkap dengan kartu undangan digital resmi siap dibagikan.</p>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20ingin%20mendaftarkan%20undangan%20hajatan%20keluarga%20kami" target="_blank" class="px-4 py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-xl text-xs font-bold inline-flex items-center gap-2 transition-colors shrink-0">
+            <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+            <span>Daftarkan Hajatan Gratis</span>
+          </a>
+        </div>
+
+        <!-- Grid Kartu Undangan Online -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Undangan 1: Pernikahan -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:border-indigo-300 transition-all flex flex-col justify-between">
+            <div class="relative h-44 w-full bg-slate-900 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=80" alt="Pernikahan" class="w-full h-full object-cover opacity-90" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/30"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white text-slate-900">Pernikahan</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">6 Hari Lagi</span>
+              </div>
+              <div class="absolute bottom-2.5 left-3 text-white text-[11px] font-medium text-amber-200">
+                <i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>Desa Dayeuhluhur
+              </div>
+            </div>
+            <div class="p-4 space-y-3 flex-1 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">Mempelai Pengantin</span>
+                <h4 class="text-sm font-bold text-slate-900 mt-0.5">dr. Rian Pratama & Neng Siti Aminah</h4>
+                <p class="text-[11px] text-slate-500 line-clamp-1 mt-0.5">Kel. Bpk. H. Sutisna & Ibu Hj. Rohayati</p>
+                <div class="mt-2.5 p-2 bg-slate-50 rounded-xl border border-slate-100 text-[11px] text-slate-600 space-y-1">
+                  <div><strong>Hari/Tgl:</strong> Minggu, 24 Agustus 2026</div>
+                  <div><strong>Waktu:</strong> Resepsi 10.30 - 16.00 WIB</div>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-slate-100 flex items-center gap-2">
+                <a href="https://api.whatsapp.com/send?text=Undangan%20Resmi%20Pernikahan%20dr.%20Rian%20%26%20Neng%20Siti%20Aminah%20-%20Kecamatan%20Dayeuhluhur" target="_blank" class="flex-1 py-2 px-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                  <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                  <span>Bagikan Undangan</span>
                 </a>
-
+              </div>
             </div>
+          </div>
 
+          <!-- Undangan 2: Khitanan -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:border-indigo-300 transition-all flex flex-col justify-between">
+            <div class="relative h-44 w-full bg-slate-900 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop&q=80" alt="Khitanan" class="w-full h-full object-cover opacity-90" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/30"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white text-slate-900">Khitanan</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">12 Hari Lagi</span>
+              </div>
+              <div class="absolute bottom-2.5 left-3 text-white text-[11px] font-medium text-amber-200">
+                <i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>Desa Bingkeng
+              </div>
+            </div>
+            <div class="p-4 space-y-3 flex-1 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">Ananda Tercinta</span>
+                <h4 class="text-sm font-bold text-slate-900 mt-0.5">Ananda Muhammad Fatih Al-Faruq</h4>
+                <p class="text-[11px] text-slate-500 line-clamp-1 mt-0.5">Bpk. Asep Saepudin & Ibu Dewi Kartika</p>
+                <div class="mt-2.5 p-2 bg-slate-50 rounded-xl border border-slate-100 text-[11px] text-slate-600 space-y-1">
+                  <div><strong>Hari/Tgl:</strong> Sabtu, 30 Agustus 2026</div>
+                  <div><strong>Waktu:</strong> Tasyakuran 10.00 - 15.30 WIB</div>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-slate-100 flex items-center gap-2">
+                <a href="https://api.whatsapp.com/send?text=Undangan%20Resmi%20Khitanan%20Ananda%20Muhammad%20Fatih%20-%20Desa%20Bingkeng%20Dayeuhluhur" target="_blank" class="flex-1 py-2 px-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                  <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                  <span>Bagikan Undangan</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Undangan 3: Pernikahan -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:border-indigo-300 transition-all flex flex-col justify-between">
+            <div class="relative h-44 w-full bg-slate-900 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop&q=80" alt="Pernikahan" class="w-full h-full object-cover opacity-90" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/30"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white text-slate-900">Pernikahan</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">19 Hari Lagi</span>
+              </div>
+              <div class="absolute bottom-2.5 left-3 text-white text-[11px] font-medium text-amber-200">
+                <i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>Desa Panulisan
+              </div>
+            </div>
+            <div class="p-4 space-y-3 flex-1 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">Mempelai Pengantin</span>
+                <h4 class="text-sm font-bold text-slate-900 mt-0.5">Kang Dedi & Neng Fitri Handayani</h4>
+                <p class="text-[11px] text-slate-500 line-clamp-1 mt-0.5">Kel. Bpk. Suwardi (Alm) & Bpk. Ending</p>
+                <div class="mt-2.5 p-2 bg-slate-50 rounded-xl border border-slate-100 text-[11px] text-slate-600 space-y-1">
+                  <div><strong>Hari/Tgl:</strong> Minggu, 6 September 2026</div>
+                  <div><strong>Waktu:</strong> Resepsi 10.30 - 17.00 WIB</div>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-slate-100 flex items-center gap-2">
+                <a href="https://api.whatsapp.com/send?text=Undangan%20Resmi%20Pernikahan%20Kang%20Dedi%20%26%20Neng%20Fitri%20-%20Desa%20Panulisan%20Dayeuhluhur" target="_blank" class="flex-1 py-2 px-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                  <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                  <span>Bagikan Undangan</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Undangan 4: Aqiqah -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:border-indigo-300 transition-all flex flex-col justify-between">
+            <div class="relative h-44 w-full bg-slate-900 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=800&auto=format&fit=crop&q=80" alt="Aqiqah" class="w-full h-full object-cover opacity-90" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/30"></div>
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white text-slate-900">Aqiqah</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">26 Hari Lagi</span>
+              </div>
+              <div class="absolute bottom-2.5 left-3 text-white text-[11px] font-medium text-amber-200">
+                <i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>Desa Datar
+              </div>
+            </div>
+            <div class="p-4 space-y-3 flex-1 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">Ananda Tercinta</span>
+                <h4 class="text-sm font-bold text-slate-900 mt-0.5">Ananda Zahra Khairunnisa</h4>
+                <p class="text-[11px] text-slate-500 line-clamp-1 mt-0.5">Bpk. H. Ahmad Fauzi & Ibu Hj. Nurhayati</p>
+                <div class="mt-2.5 p-2 bg-slate-50 rounded-xl border border-slate-100 text-[11px] text-slate-600 space-y-1">
+                  <div><strong>Hari/Tgl:</strong> Ahad, 13 September 2026</div>
+                  <div><strong>Waktu:</strong> Jamuan 11.30 - 14.30 WIB</div>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-slate-100 flex items-center gap-2">
+                <a href="https://api.whatsapp.com/send?text=Undangan%20Resmi%20Aqiqah%20Ananda%20Zahra%20Khairunnisa%20-%20Desa%20Datar%20Dayeuhluhur" target="_blank" class="flex-1 py-2 px-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                  <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                  <span>Bagikan Undangan</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
+  </section>
 
-</section>
+  <!-- SESI DUKUNG KAMI (SPONSOR, CSR & DONASI QRIS) -->
+  <section id="dukung-kami" class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-10">
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold uppercase tracking-wider font-sans">
+          <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500 fill-rose-500"></i>
+          <span>Gotong Royong & Dukung Ekosistem</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-sans tracking-tight">
+          Bersinergi Memajukan Digitalisasi Dayeuhluhur
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Portal Plaza Dayeuhluhur dikembangkan secara mandiri dan gotong royong. Dukungan sponsor, kemitraan CSR, maupun donasi sukarela Anda sangat berarti untuk biaya server, riset desa, dan pemeliharaan website berkelanjutan.
+        </p>
+      </div>
 
-
-<!-- ==========================
-     BURSA LOKAL DAYEUHLUHUR
-========================== -->
-
-<section id="bursa" class="py-5 bg-light">
-
-<div class="container">
-
-<div class="text-center mb-5">
-
-<h6 class="text-primary fw-bold">
-
-🏡 BURSA LOKAL DAYEUHLUHUR
-
-</h6>
-
-<h2 class="fw-bold">
-
-Jual • Beli • Cari • Tawarkan
-
-</h2>
-
-<p>
-
-Temukan berbagai penawaran dari masyarakat Dayeuhluhur.
-
-</p>
-
-</div>
-
-<div class="row" id="bursaContainer">
-
-</div>
-
-<!-- =====================================================
-     ACTION BURSA LOKAL
-===================================================== -->
-
-<div class="d-flex justify-content-center align-items-center gap-2 flex-wrap mt-4 mb-2">
-
-    <!-- LIHAT SEMUA BURSA -->
-
-    <a
-        href="bursa.html"
-        class="btn btn-primary"
-    >
-        <i class="fa-solid fa-store me-2"></i>
-        LIHAT SEMUA BURSA LOKAL
-    </a>
-
-    <!-- DAFTARKAN PRODUK -->
-
-    <a
-        href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur%2C%20saya%20ingin%20mendaftarkan%20produk%20untuk%20ditampilkan%20di%20Bursa%20Lokal.%20Mohon%20informasi%20prosedur%20pendaftarannya.%20Terima%20kasih."
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-success"
-    >
-        <i class="fa-brands fa-whatsapp me-2"></i>
-        DAFTARKAN PRODUK ANDA
-    </a>
-
-</div>
-</div>
-</section>
-<!-- WISATA -->
-<section id="wisata">
-<!-- ==========================
-     WISATA
-========================== -->
-
-<section id="wisata" class="py-5 bg-light">
-
-<div class="container">
-
-<div class="text-center mb-5">
-
-<h6 class="text-success fw-bold">
-
-DESTINASI WISATA
-
-</h6>
-
-<h2 class="fw-bold">
-
-Pesona Alam Dayeuhluhur
-
-</h2>
-
-<p>
-
-Jelajahi berbagai destinasi wisata alam yang indah dan masih asri.
-
-</p>
-
-</div>
-
-<div class="row" id="wisataContainer">
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================
-     BERITA
-========================== -->
-
-<section id="berita" class="py-5">
-
-<div class="container">
-
-<div class="text-center mb-5">
-
-<h6 class="text-danger fw-bold">
-BERITA TERBARU
-</h6>
-
-<h2 class="fw-bold">
-Informasi Terkini
-</h2>
-
-<p>
-Ikuti perkembangan terbaru seputar Kecamatan Dayeuhluhur.
-</p>
-
-</div>
-
-<div class="row" id="beritaContainer">
-
-</div>
-
-</div>
-
-</section>
-<!-- =====================================================
-     KALENDER HAJATAN & UNDANGAN ONLINE
-===================================================== -->
-
-<section
-    id="kalender-hajatan"
-    class="section-padding kalender-hajatan-section"
->
-
-    <div class="container">
-
-        <!-- HEADER SECTION -->
-        <div class="section-heading text-center mb-5">
-
-            <span class="section-kicker">
-                <i class="bi bi-calendar-heart"></i>
-                Kalender Warga
-            </span>
-
-            <h2 class="section-title">
-                Kalender Hajatan &
-                <span>Undangan Online</span>
-            </h2>
-
-            <p class="section-description">
-                Temukan berbagai informasi hajatan warga
-                Dayeuhluhur mulai dari pernikahan, khitanan,
-                syukuran, pengajian hingga hiburan masyarakat.
-            </p>
-
+      <!-- 3 Skema Sponsor & Kemitraan -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 flex flex-col justify-between shadow-2xs space-y-4">
+          <div class="space-y-3">
+            <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-indigo-100 text-indigo-700 border-indigo-200">Brand & Usaha</span>
+            <h3 class="text-base font-bold text-slate-800">Pemasangan Banner Sponsor</h3>
+            <p class="text-xs text-slate-500">Slot banner promosi bisnis/produk Anda di posisi strategis beranda dan katalog website.</p>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Pengembang,%20saya%20tertarik%20pasang%20banner%20sponsor" target="_blank" class="w-full py-2.5 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors">
+            <span>Ajukan Pasang Banner</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
 
-
-        <!-- INFO BAR -->
-        <div class="kalender-info-bar">
-
-            <div class="kalender-info-item">
-
-                <div class="kalender-info-icon">
-                    <i class="bi bi-calendar-event"></i>
-                </div>
-
-                <div>
-                    <strong id="jumlahHajatanIndex">
-                        0
-                    </strong>
-
-                    <span>
-                        Hajatan Mendatang
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="kalender-info-item">
-
-                <div class="kalender-info-icon">
-                    <i class="bi bi-geo-alt"></i>
-                </div>
-
-                <div>
-                    <strong>
-                        Dayeuhluhur
-                    </strong>
-
-                    <span>
-                        Kabupaten Cilacap
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="kalender-info-item">
-
-                <div class="kalender-info-icon">
-                    <i class="bi bi-megaphone"></i>
-                </div>
-
-                <div>
-                    <strong>
-                        Promosi Lokal
-                    </strong>
-
-                    <span>
-                        UMKM & Vendor Hajatan
-                    </span>
-                </div>
-
-            </div>
-
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 flex flex-col justify-between shadow-2xs space-y-4">
+          <div class="space-y-3">
+            <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-100 text-emerald-700 border-emerald-200">Perusahaan & Instansi</span>
+            <h3 class="text-base font-bold text-slate-800">Kemitraan Program CSR</h3>
+            <p class="text-xs text-slate-500">Penyaluran dana CSR untuk pelatihan literasi digital dan legalitas UMKM desa Dayeuhluhur.</p>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Pengembang,%20kami%20ingin%20mendiskusikan%20Program%20CSR" target="_blank" class="w-full py-2.5 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors">
+            <span>Konsultasi Program CSR</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
 
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 flex flex-col justify-between shadow-2xs space-y-4">
+          <div class="space-y-3">
+            <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-amber-100 text-amber-800 border-amber-200">Pemberdayaan Desa</span>
+            <h3 class="text-base font-bold text-slate-800">Sponsor Liputan UMKM</h3>
+            <p class="text-xs text-slate-500">Sponsori pembuatan foto produk studio & video profil perajin desa di pelosok.</p>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Pengembang,%20saya%20ingin%20sponsori%20liputan%20UMKM" target="_blank" class="w-full py-2.5 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors">
+            <span>Sponsori Liputan UMKM</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
 
-        <!-- GRID UNDANGAN -->
-        <div
-            id="indexUndanganGrid"
-            class="row g-4 kalender-undangan-grid"
-        >
+      <!-- Donasi QRIS & WhatsApp Konfirmasi -->
+      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xs">
+        <div class="space-y-3 max-w-lg text-center md:text-left">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold">
+            <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+            <span>Donasi & Infaq Digital QRIS</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Donasi Sukarela Operasional Server & Sistem</h3>
+          <p class="text-xs text-slate-500">Mendukung sewa server cloud dan peliputan UMKM desa. Anda dapat scan kode QRIS atau transfer via Bank, lalu kirimkan konfirmasi ke pengembang.</p>
+          <div class="pt-2 text-xs text-slate-700 font-mono bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <p><strong>BCA:</strong> 1234 5678 90 (a.n. Yaya Karsan)</p>
+            <p><strong>BRI:</strong> 0123 0100 4567 503 (a.n. Tim Pengembang)</p>
+          </div>
+        </div>
 
-            <!-- Loading -->
-            <div class="col-12">
-
-                <div
-                    class="kalender-loading"
-                >
-
-                    <div
-                        class="spinner-border"
-                        role="status"
-                    ></div>
-
-                    <p>
-                        Memuat kalender hajatan...
-                    </p>
-
-                </div>
-
+        <div class="flex flex-col items-center gap-3 shrink-0">
+          <div class="p-3 bg-slate-900 rounded-2xl text-white text-center space-y-1.5 shadow-md">
+            <span class="text-[10px] font-bold text-amber-300">QRIS STANDAR NASIONAL</span>
+            <div class="w-36 h-36 bg-white p-2 rounded-xl mx-auto flex items-center justify-center">
+              <svg viewBox="0 0 100 100" class="w-full h-full text-slate-900 fill-current">
+                <path d="M0 0h30v30H0zm4 4h22v22H4zm4 4h14v14H8zm62-8h30v30H70zm4 4h22v22H74zm4 4h14v14H78zM0 70h30v30H0zm4 4h22v22H4zm4 4h14v14H8zm38-70h6v6h-6zm12 0h6v6h-6zm-12 12h6v6h-6zm12 0h6v6h-6zm-12 12h6v6h-6zm12 0h6v6h-6zm-12 12h6v6h-6zm12 0h6v6h-6zm-38 6h6v6H0zm6 0h6v6H6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm6 0h6v6h-6zm-54 12h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm-48 12h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm-48 12h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6zm12 0h6v6h-6z" />
+              </svg>
             </div>
-
+            <p class="text-[9px] text-slate-300">PLAZA DAYEUHLUHUR DEV</p>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Pengembang,%20saya%20telah%20mengirimkan%20donasi%20pengembangan%20website" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-sm flex items-center gap-2 transition-colors">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            <span>Konfirmasi Donasi via WA</span>
+          </a>
         </div>
-
-
-        <!-- FOOTER SECTION -->
-        <div class="text-center mt-5">
-
-            <a
-                href="undangan.html"
-                class="btn btn-kalender-primary"
-            >
-
-                <i class="bi bi-calendar3 me-2"></i>
-
-                Lihat Semua Kalender Hajatan
-
-            </a>
-
-
-            <a
-                href="undangan.html"
-                class="btn btn-kalender-outline ms-2"
-            >
-
-                <i class="bi bi-envelope-paper me-2"></i>
-
-                Undangan Online
-
-            </a>
-
-        </div>
-
-
-        <!-- CTA UNTUK WARGA -->
-        <div class="kalender-cta mt-5">
-
-            <div class="kalender-cta-content">
-
-                <div class="kalender-cta-icon">
-
-                    <i class="bi bi-envelope-heart"></i>
-
-                </div>
-
-                <div>
-
-                    <h3>
-                        Punya Hajatan?
-                    </h3>
-
-                    <p>
-                        Publikasikan informasi hajatan Anda
-                        di Kalender Warga Plaza Dayeuhluhur
-                        sekaligus bantu promosikan vendor
-                        lokal yang terlibat.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <a
-                href="undangan.html"
-                class="btn btn-kalender-cta"
-            >
-
-                <i class="bi bi-plus-circle me-2"></i>
-
-                Ajukan Undangan
-
-            </a>
-
-        </div>
-
+      </div>
     </div>
-
-</section>
-
-<!-- =====================================================
-     END KALENDER HAJATAN
-===================================================== -->
-<!-- ==========================
-     PARTNER
-========================== -->
-
-<section id="partner" class="py-5">
-
-<div class="container">
-
-<div class="text-center mb-5">
-
-<h6 class="text-primary fw-bold">
-PARTNER & KOLABORASI
-</h6>
-
-<h2 class="fw-bold">
-Bersama Membangun Dayeuhluhur Digital
-</h2>
-
-<p>
-Kolaborasi pemerintah, pendidikan, dunia usaha, komunitas, dan masyarakat.
-</p>
-
-</div>
-
-<div class="row text-center">
-
-<div class="col-6 col-md-2 mb-4">
-<img src="assets/images/partner/kecamatan.png" class="img-fluid partner-logo" alt="Kecamatan">
-</div>
-
-<div class="col-6 col-md-2 mb-4">
-<img src="assets/images/partner/bri.png" class="img-fluid partner-logo" alt="BRI">
-</div>
-
-<div class="col-6 col-md-2 mb-4">
-<img src="assets/images/partner/smkn2.png" class="img-fluid partner-logo" alt="SMKN 2 Banjar">
-</div>
-
-<div class="col-6 col-md-2 mb-4">
-<img src="assets/images/partner/bumdes.png" class="img-fluid partner-logo" alt="BUMDes">
-</div>
-
-<div class="col-6 col-md-2 mb-4">
-<img src="assets/images/partner/komunitas.png" class="img-fluid partner-logo" alt="Komunitas">
-</div>
-
-<div class="col-6 col-md-2 mb-4">
-<img src="assets/images/logo.png" class="img-fluid partner-logo" alt="Plaza Dayeuhluhur">
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- STATISTIK -->
-<section id="statistik">
-<section id="statistik" class="py-5 bg-light">
-
-<div class="container">
-
-<div class="row text-center">
-
-<div class="col-md-3 mb-4">
-
-<div class="stat-card">
-
-<i class="fa-solid fa-house fa-3x text-primary mb-3"></i>
-
-<h2 class="counter" data-target="14">0</h2>
-
-<p>Desa</p>
-
-</div>
-
-</div>
-
-<div class="col-md-3 mb-4">
-
-<div class="stat-card">
-
-<i class="fa-solid fa-building fa-3x text-success mb-3"></i>
-
-<h2 class="counter" data-target="14">0</h2>
-
-<p>BUMDes</p>
-
-</div>
-
-</div>
-
-<div class="col-md-3 mb-4">
-
-<div class="stat-card">
-
-<i class="fa-solid fa-store fa-3x text-warning mb-3"></i>
-
-<h2 class="counter" data-target="500">0</h2>
-
-<p>UMKM</p>
-
-</div>
-
-</div>
-
-<div class="col-md-3 mb-4">
-
-<div class="stat-card">
-
-<i class="fa-solid fa-users fa-3x text-danger mb-3"></i>
-
-<h2 class="counter" data-target="26000">0</h2>
-
-<p>Penduduk</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-<footer>
-<footer class="footer">
-
-<div class="container">
-
-<div class="row">
-
-<div class="col-lg-4 mb-4">
-
-<img src="assets/images/logo.png" height="70">
-
-<h4 class="mt-3">
-
-PLAZA DAYEUHLUHUR
-
-</h4>
-
-<p>
-
-Gerbang Digital Kecamatan Dayeuhluhur
-
-</p>
-
-</div>
-
-<div class="col-lg-2">
-
-<h5>Menu</h5>
-
-<ul class="list-unstyled">
-
-<li><a href="#hero">Beranda</a></li>
-
-<li><a href="#desa">Desa</a></li>
-
-<li><a href="#bumdes">BUMDes</a></li>
-
-<li><a href="#umkm">UMKM</a></li>
-
-<li><a href="#wisata">Wisata</a></li>
-
-<li><a href="#berita">Berita</a></li>
-
-</ul>
-
-</div>
-
-<div class="col-lg-3">
-
-<h5>Kontak</h5>
-
-<p>
-
-<i class="fa-solid fa-location-dot"></i>
-
-Kecamatan Dayeuhluhur
-
-</p>
-
-<p>
-
-<i class="fa-solid fa-envelope"></i>
-
-info@plazadayeuhluhur.com
-
-</p>
-
-<p>
-
-<i class="fa-solid fa-phone"></i>
-
-(0280) xxxx
-
-</p>
-
-</div>
-<div class="col-lg-3">
-
-    <!-- MEDIA SOSIAL -->
-
-    <h5>Media Sosial</h5>
-
-    <div class="social-icons mb-4">
-
-        <a href="#">
-            <i class="fab fa-facebook"></i>
-        </a>
-
-        <a href="#">
-            <i class="fab fa-instagram"></i>
-        </a>
-
-        <a href="#">
-            <i class="fab fa-youtube"></i>
-        </a>
-
-        <a href="#">
-            <i class="fab fa-tiktok"></i>
-        </a>
-
+  </section>
+
+  <!-- FOOTER (Geometric Balance) -->
+  <footer class="bg-white border-t border-slate-200 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+      <div class="flex items-center gap-2">
+        <span>&copy; 2026 Plaza Dayeuhluhur. Semua Hak Dilindungi.</span>
+      </div>
+      <div class="flex gap-4 items-center">
+        <div class="flex items-center gap-1.5">
+          <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+          <span class="text-slate-500 font-medium">Sistem Operasional</span>
+        </div>
+        <span class="px-2 py-0.5 border border-slate-200 rounded text-slate-400 font-mono text-[10px]">Versi 2.0.4</span>
+      </div>
     </div>
+  </footer>
 
+  <script>
+    lucide.createIcons();
 
-    <!-- STATISTIK PENGUNJUNG -->
+    // Data 5 Slide Hero Carousel
+    const slidesData = [
+      {
+        badge: 'Pusat Ekonomi Digital • Program Utama',
+        badgeBg: 'bg-slate-800/90 border-indigo-500/40 text-indigo-300',
+        dotBg: 'bg-indigo-400',
+        title: 'Pusat Ekonomi Digital',
+        highlight: 'Kecamatan Dayeuhluhur',
+        highlightColor: 'text-indigo-400',
+        subtitle: 'Gerbang Terpadu 14 Desa Berdaya & 450+ Produk Lokal Unggulan',
+        desc: 'Mendorong produk UMKM lokal menembus pasar modern nasional & global dengan standar mutu terbaik. Akses langsung komoditas kopi pegunungan, gula semut organik, anyaman bambu, kuliner tradisional, dan agrowisata terpadu.',
+        tags: ['14 Desa Terkoneksi', '450+ Produk Terkurasi', 'Verifikasi Standar Mutu'],
+        primaryText: 'Jelajahi Katalog UMKM',
+        primaryHref: '#produk',
+        primaryIcon: 'shopping-bag',
+        primaryBtnClass: 'bg-indigo-600 hover:bg-indigo-500 text-white',
+        secText: 'Galeri Kegiatan',
+        secHref: '#galeri',
+        secIcon: 'image'
+      },
+      {
+        badge: 'Event & Pameran Akbar • September 2026',
+        badgeBg: 'bg-amber-950/80 border-amber-600/40 text-amber-300',
+        dotBg: 'bg-amber-400',
+        title: 'Gebyar Festival UMKM',
+        highlight: '& Pameran Budaya 2026',
+        highlightColor: 'text-amber-400',
+        subtitle: 'Pesta Panen Hasil Bumi, Pameran Kriya Tradisi & Temu Bisnis UMKM',
+        desc: 'Saksikan pameran kuliner khas Sunda-Banyumasan, parade komoditas lereng pegunungan, panggung kreasi seni warga, workshop sangrai kopi Dayeuhluhur, dan sarasehan temu pembeli skala besar.',
+        tags: ['Bazar Rakyat 14 Desa', 'Demo Sangrai Kopi & Kriya', 'Temu Mitra Investor'],
+        primaryText: 'Daftar Stand / Informasi',
+        primaryHref: '#kontak',
+        primaryIcon: 'calendar',
+        primaryBtnClass: 'bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold',
+        secText: 'Lihat Potensi 14 Desa',
+        secHref: '#potensi',
+        secIcon: 'compass'
+      },
+      {
+        badge: 'Fasilitasi Pemerintah & BPJPH • Kuota Terbatas',
+        badgeBg: 'bg-emerald-950/80 border-emerald-600/40 text-emerald-300',
+        dotBg: 'bg-emerald-400',
+        title: 'Sertifikasi Halal & NIB',
+        highlight: 'Gratis untuk 100 UMKM',
+        highlightColor: 'text-emerald-400',
+        subtitle: 'Pendampingan Legalitas Usaha OSS RBA & Sertifikasi Halal Resmi',
+        desc: 'Akselerasi izin edar dan kepatuhan hukum bagi pelaku usaha kuliner, minuman olahan, dan kerajinan. Dapatkan Nomor Induk Berusaha (NIB) dan sertifikasi Halal Self-Declare gratis dengan pendampingan tuntas.',
+        tags: ['100% Bebas Biaya', 'Pendampingan Sampai Terbit', 'Legalitas OSS RBA Resmi'],
+        primaryText: 'Daftar Program Halal & NIB',
+        primaryHref: '#kontak',
+        primaryIcon: 'shield-check',
+        primaryBtnClass: 'bg-emerald-600 hover:bg-emerald-500 text-white font-semibold',
+        secText: 'Konsultasi Syarat (WA)',
+        secHref: 'https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20tertarik%20mendaftar%20Program%20Sertifikasi%20Halal%20dan%20NIB%20Gratis',
+        secIcon: 'message-circle'
+      },
+      {
+        badge: 'Kemitraan Perusahaan & Perantau • Gotong Royong',
+        badgeBg: 'bg-rose-950/80 border-rose-600/40 text-rose-300',
+        dotBg: 'bg-rose-400',
+        title: 'Sinergi Kemitraan CSR',
+        highlight: '& Inkubator Bisnis Warga',
+        highlightColor: 'text-rose-400',
+        subtitle: 'Bantuan Alat Produksi, Studio Foto Produk & Pelatihan Digital Desa',
+        desc: 'Membuka ruang kolaborasi bagi BUMN, swasta, dan jejaring perantau untuk mendukung digitalisasi UMKM. Menyalurkan program CSR tepat sasaran untuk pelatihan e-commerce, kemasan higienis, dan sewa server.',
+        tags: ['Pelatihan Foto Produk Studio', 'Bantuan Mesin Kemasan Sealer', 'Laporan Dampak Transparan'],
+        primaryText: 'Dukung Program / Donasi CSR',
+        primaryHref: '#dukung-kami',
+        primaryIcon: 'heart-handshake',
+        primaryBtnClass: 'bg-rose-600 hover:bg-rose-500 text-white font-semibold',
+        secText: 'Diskusi Kemitraan (WA)',
+        secHref: 'https://wa.me/6281234567890?text=Halo%20Tim%20Plaza%20Dayeuhluhur,%20kami%20ingin%20mendiskusikan%20Kemitraan%20CSR%20dan%20Sponsor',
+        secIcon: 'file-text'
+      },
+      {
+        badge: 'Pemberdayaan Pemuda & Komunitas • Komisi 8%-15%',
+        badgeBg: 'bg-purple-950/80 border-purple-600/40 text-purple-300',
+        dotBg: 'bg-purple-400',
+        title: 'Program Afiliasi Warga',
+        highlight: '& Logistik Antar-Desa',
+        highlightColor: 'text-purple-400',
+        subtitle: 'Dapatkan Komisi Penjualan Produk Lokal & Pengiriman Cepat',
+        desc: 'Dukung tetangga dengan membagikan tautan produk pilihan ke media sosial dan dapatkan komisi 8%-15% per transaksi. Dilengkapi layanan bursa jual-beli warga dan jasa titip antar-pelosok desa.',
+        tags: ['Komisi 8% - 15% Tiap Penjualan', 'Koleksi Produk Teruji', 'Bursa Jual-Beli Warga'],
+        primaryText: 'Katalog Afiliasi Pilihan',
+        primaryHref: '#afiliasi',
+        primaryIcon: 'trending-up',
+        primaryBtnClass: 'bg-purple-600 hover:bg-purple-500 text-white font-semibold',
+        secText: 'Bursa Jual Beli Warga',
+        secHref: '#bursa',
+        secIcon: 'store'
+      }
+    ];
 
-    <div class="footer-visitor-stat">
+    let currentSlideIndex = 0;
+    let isAutoPlaying = true;
+    let slideTimer = null;
+    let progressTimer = null;
+    let progressPct = 0;
+    const DURATION = 6000;
 
-        <h5 class="mb-3">
-            Statistik Pengunjung
-        </h5>
+    function renderSlide(index) {
+      const data = slidesData[index];
+      if (!data) return;
 
+      const slideBox = document.getElementById('slideContent');
+      if (slideBox) {
+        slideBox.style.opacity = '0.3';
+        setTimeout(() => {
+          document.getElementById('slideBadgeText').innerText = data.badge;
+          document.getElementById('slideBadge').className = 'inline-flex items-center gap-2 px-3.5 py-1 rounded-full border text-xs font-semibold backdrop-blur-md shadow-xs ' + data.badgeBg;
+          document.getElementById('slideDot').className = 'w-2 h-2 rounded-full animate-pulse ' + data.dotBg;
+          
+          document.getElementById('slideCurrentNum').innerText = '0' + (index + 1);
+          document.getElementById('slideTitle').innerHTML = data.title + ' <span id="slideHighlight" class="' + data.highlightColor + '">' + data.highlight + '</span>';
+          document.getElementById('slideSubtitleText').innerText = data.subtitle;
+          document.getElementById('slideDesc').innerText = data.desc;
+          
+          // Tags
+          const tagsContainer = document.getElementById('slideTags');
+          if (tagsContainer) {
+            tagsContainer.innerHTML = data.tags.map(function(t) {
+              return '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-white/10 bg-white/5 text-slate-200">' +
+                '<i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-400"></i>' +
+                '<span>' + t + '</span>' +
+              '</span>';
+            }).join('');
+          }
 
-        <div class="visitor-stat-item">
+          // Primary CTA
+          const primBtn = document.getElementById('slidePrimaryCta');
+          if (primBtn) {
+            primBtn.href = data.primaryHref;
+            primBtn.className = 'px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold shadow-md transition-all inline-flex items-center gap-2 ' + data.primaryBtnClass;
+            document.getElementById('slidePrimaryCtaText').innerText = data.primaryText;
+          }
 
-            <span>
-                <i class="fa-solid fa-chart-line"></i>
-                Kunjungan Hari Ini
-            </span>
+          // Secondary CTA
+          const secBtn = document.getElementById('slideSecondaryCta');
+          if (secBtn) {
+            secBtn.href = data.secHref;
+            document.getElementById('slideSecondaryCtaText').innerText = data.secText;
+          }
 
-            <strong id="kunjunganHariIni">
-                3
-            </strong>
+          // Update tabs
+          for (let i = 0; i < 5; i++) {
+            const tab = document.getElementById('tabSlide' + i);
+            if (tab) {
+              if (i === index) {
+                tab.className = 'px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-indigo-600 text-white cursor-pointer transition-all shadow-xs';
+              } else {
+                tab.className = 'px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-slate-800 text-slate-400 hover:text-white cursor-pointer transition-all';
+              }
+            }
+          }
 
-        </div>
+          slideBox.style.opacity = '1';
+          lucide.createIcons();
+        }, 150);
+      }
+    }
 
+    function startProgress() {
+      progressPct = 0;
+      const bar = document.getElementById('slideProgressBar');
+      if (progressTimer) clearInterval(progressTimer);
+      if (slideTimer) clearTimeout(slideTimer);
 
-        <div class="visitor-stat-item">
+      if (!isAutoPlaying) {
+        if (bar) bar.style.width = '0%';
+        return;
+      }
 
-            <span>
-                <i class="fa-solid fa-user"></i>
-                Pengunjung Hari Ini
-            </span>
+      progressTimer = setInterval(() => {
+        progressPct += (100 / (DURATION / 50));
+        if (bar) bar.style.width = Math.min(progressPct, 100) + '%';
+      }, 50);
 
-            <strong id="pengunjungHariIni">
-                1
-            </strong>
+      slideTimer = setTimeout(() => {
+        nextSlide();
+      }, DURATION);
+    }
 
-        </div>
+    function setSlide(index) {
+      currentSlideIndex = index;
+      renderSlide(currentSlideIndex);
+      startProgress();
+    }
 
+    function nextSlide() {
+      currentSlideIndex = (currentSlideIndex + 1) % slidesData.length;
+      setSlide(currentSlideIndex);
+    }
 
-        <div class="visitor-stat-item">
+    function prevSlide() {
+      currentSlideIndex = (currentSlideIndex - 1 + slidesData.length) % slidesData.length;
+      setSlide(currentSlideIndex);
+    }
 
-            <span>
-                <i class="fa-solid fa-chart-column"></i>
-                Total Kunjungan
-            </span>
+    function toggleAutoPlay() {
+      isAutoPlaying = !isAutoPlaying;
+      const playText = document.getElementById('playIconText');
+      if (playText) {
+        playText.innerText = isAutoPlaying ? '● Auto' : '❚❚ Jeda';
+        playText.className = isAutoPlaying ? 'text-[10px] font-sans text-amber-400 font-bold' : 'text-[10px] font-sans text-slate-400';
+      }
+      startProgress();
+    }
 
-            <strong id="totalKunjungan">
-                195
-            </strong>
+    const sliderBox = document.getElementById('heroSliderBox');
+    if (sliderBox) {
+      sliderBox.addEventListener('mouseenter', () => {
+        if (slideTimer) clearTimeout(slideTimer);
+        if (progressTimer) clearInterval(progressTimer);
+      });
+      sliderBox.addEventListener('mouseleave', () => {
+        if (isAutoPlaying) startProgress();
+      });
+    }
 
-        </div>
-
-
-        <div class="visitor-stat-item">
-
-            <span>
-                <i class="fa-solid fa-users"></i>
-                Total Pengunjung
-            </span>
-
-            <strong id="totalPengunjung">
-                19
-            </strong>
-
-        </div>
-
-
-        <div class="visitor-stat-item">
-
-            <span>
-                <i class="fa-solid fa-circle online-dot"></i>
-                Pengunjung Online
-            </span>
-
-            <strong id="pengunjungOnline">
-                1
-            </strong>
-
-        </div>
-
-    </div>
-
-</div>
-
-<hr>
-
-<div class="text-center">
-
-© 2026 PLAZA DAYEUHLUHUR
-
-<br>
-
-Gerbang Digital Kecamatan Dayeuhluhur
-
-</div>
-
-</div>
-
-</footer>
-<!-- Bootstrap -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- AOS -->
-
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
-<script>
-AOS.init();
-</script>
-
-<!-- Javascript -->
-
-<script src="assets/js/app.js"></script>
-<script src="assets/js/bumdes.js"></script>
-<script src="assets/js/umkm.js"></script>
-<script src="assets/js/umkm-home.js"></script>
-<script src="assets/js/bisnis.js"></script>
-<script src="assets/js/wisata.js"></script>
-<script src="assets/js/berita.js"></script>
-<script src="assets/js/agenda.js"></script>
-<script src="assets/js/newsflash.js"></script>
-<script src="assets/js/counter.js"></script>
-<script src="assets/js/bursa.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/index-undangan.js"></script>
+    // Init first slide & autoplay
+    startProgress();
+  </script>
 </body>
-
-</html>    
+</html>
