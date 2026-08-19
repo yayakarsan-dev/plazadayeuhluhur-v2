@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Direktori Resmi UMKM & Pelaku Usaha - Plaza Dayeuhluhur</title>
+  <meta name="description" content="Direktori lengkap profil pelaku usaha, kelompok tani, pengrajin kriya, dan sentra produksi UMKM dari 14 desa di Kecamatan Dayeuhluhur, Cilacap." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-indigo-600 selection:text-white">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-slate-900 text-white text-xs py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold text-[11px] border border-emerald-500/30">
+          <i data-lucide="shield-check" class="w-3 h-3"></i> Terverifikasi Komunitas
+        </span>
+        <span class="text-slate-300 text-[11px]">Direktori Resmi Pelaku Usaha & UMKM 14 Desa Kecamatan Dayeuhluhur</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-300 text-[11px]">
+        <a href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20ingin%20mendaftarkan%20usaha%20UMKM%20saya" target="_blank" class="hover:text-amber-400 transition-colors flex items-center gap-1">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>Daftarkan Usaha Anda Gratis</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-3.5 flex items-center justify-between">
+      <!-- Logo Branding -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 to-indigo-800 flex items-center justify-center text-white shadow-md shadow-indigo-600/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="store" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-lg font-extrabold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">Plaza Dayeuhluhur</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">UMKM</span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium">Etalase Digital & Direktori Usaha Masyarakat</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-indigo-600 transition-colors">Beranda</a>
+        <a href="produk.html" class="hover:text-indigo-600 transition-colors">Katalog Produk</a>
+        <a href="umkm.html" class="text-indigo-600 font-bold border-b-2 border-indigo-600 pb-0.5">Direktori UMKM</a>
+        <a href="index.html#afiliasi" class="hover:text-indigo-600 transition-colors">Produk Pilihan</a>
+        <a href="index.html#bursa" class="hover:text-indigo-600 transition-colors">Bursa Warga</a>
+        <a href="index.html#galeri" class="hover:text-indigo-600 transition-colors">Galeri</a>
+        <a href="index.html#dukung-kami" class="hover:text-indigo-600 transition-colors">Dukung Kami</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-slate-700 hover:text-indigo-600 bg-slate-100 hover:bg-indigo-50 rounded-xl transition-all border border-slate-200">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Kembali ke Beranda</span>
+        </a>
+        <a href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20ingin%20mendaftarkan%20usaha%20UMKM%20baru" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-xs hover:shadow transition-all">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+          <span>Daftarkan UMKM</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH INTEGRATED SEARCH & FILTERS -->
+  <main class="flex-1">
+    <section class="bg-gradient-to-b from-white via-indigo-50/30 to-slate-50 pt-10 pb-8 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-6">
+        
+        <!-- Breadcrumb & Badges -->
+        <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 text-slate-500">
+            <a href="index.html" class="hover:text-indigo-600">Beranda</a>
+            <i data-lucide="chevron-right" class="w-3 h-3 text-slate-400"></i>
+            <span class="text-slate-800 font-bold">Direktori UMKM & Pelaku Usaha</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-800 font-bold text-[11px] flex items-center gap-1">
+              <i data-lucide="store" class="w-3 h-3"></i> 14 Usaha Terverifikasi
+            </span>
+            <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[11px] flex items-center gap-1">
+              <i data-lucide="map-pin" class="w-3 h-3"></i> 14 Desa Dayeuhluhur
+            </span>
+          </div>
+        </div>
+
+        <!-- Hero Headline -->
+        <div class="max-w-3xl space-y-3">
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Direktori Resmi <span class="text-indigo-600">Pelaku Usaha & UMKM</span> Warga Dayeuhluhur
+          </h1>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Dukung ekonomi mandiri pedesaan. Temukan profil lengkap produsen olahan makanan, kelompok tani kopi & beras organik, sentra kriya anyaman, pengrajin batik, peternak, serta bengkel jasa teknik lokal dari seluruh 14 desa di Kecamatan Dayeuhluhur.
+          </p>
+        </div>
+
+        <!-- Filter & Search Control Panel -->
+        <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
+          
+          <!-- Top Row: Search Input, Village Dropdown, Sort Dropdown -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            
+            <!-- Live Search Bar -->
+            <div class="md:col-span-6 relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Cari nama usaha, nama pemilik, produk utama, atau desa..."
+                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 focus:border-indigo-500 rounded-2xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none transition-all"
+              />
+            </div>
+
+            <!-- Village Filter Dropdown -->
+            <div class="md:col-span-3 relative">
+              <select
+                id="village-select"
+                class="w-full pl-3 pr-8 py-2.5 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 focus:border-indigo-500 rounded-2xl text-xs sm:text-sm text-slate-700 font-medium focus:outline-none appearance-none cursor-pointer"
+              >
+                <option value="all">Semua Desa (14 Desa)</option>
+                <option value="Panulisan">Desa Panulisan</option>
+                <option value="Panulisan Barat">Desa Panulisan Barat</option>
+                <option value="Panulisan Timur">Desa Panulisan Timur</option>
+                <option value="Ciwalen">Desa Ciwalen</option>
+                <option value="Datar">Desa Datar</option>
+                <option value="Hanum">Desa Hanum</option>
+                <option value="Dayeuhluhur">Desa Dayeuhluhur Pusat</option>
+                <option value="Kutaagung">Desa Kutaagung</option>
+                <option value="Bingkeng">Desa Bingkeng</option>
+                <option value="Cilumping">Desa Cilumping</option>
+                <option value="Matenggeng">Desa Matenggeng</option>
+                <option value="Sumpinghayu">Desa Sumpinghayu</option>
+                <option value="Cijeruk">Desa Cijeruk</option>
+                <option value="Bolang">Desa Bolang</option>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            </div>
+
+            <!-- Sort By Dropdown -->
+            <div class="md:col-span-3 relative">
+              <select
+                id="sort-select"
+                class="w-full pl-3 pr-8 py-2.5 bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-slate-200 focus:border-indigo-500 rounded-2xl text-xs sm:text-sm text-slate-700 font-medium focus:outline-none appearance-none cursor-pointer"
+              >
+                <option value="default">Urutan: Rekomendasi</option>
+                <option value="rating-desc">Rating Tertinggi</option>
+                <option value="reviews-desc">Ulasan Terbanyak</option>
+                <option value="year-asc">Tahun Berdiri Terlama</option>
+                <option value="employees-desc">Jumlah Staf Terbanyak</option>
+                <option value="name-asc">Nama Usaha (A - Z)</option>
+              </select>
+              <i data-lucide="arrow-up-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            </div>
+          </div>
+
+          <!-- Bottom Row: Category Pills & Reset Button -->
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+            <div id="category-pills" class="flex flex-wrap gap-1.5">
+              <!-- Rendered via JS -->
+            </div>
+            
+            <button
+              id="btn-reset-filter"
+              class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-500 hover:text-rose-600 bg-slate-100 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
+            >
+              <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
+              <span>Reset Filter</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- DIRECTORY RESULTS SECTION -->
+    <section class="py-10 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-6">
+        
+        <!-- Status Bar Result Count -->
+        <div class="flex items-center justify-between">
+          <div class="text-xs text-slate-500">
+            Menampilkan <strong id="visible-count" class="text-slate-900 font-bold">14</strong> profil UMKM terverifikasi
+          </div>
+          <div class="text-xs text-slate-400">
+            Data diperbarui: <strong>Agustus 2026</strong>
+          </div>
+        </div>
+
+        <!-- Grid Cards Container -->
+        <div
+          id="umkm-grid"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6"
+        >
+          <!-- Business Cards dynamically generated via JavaScript -->
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div
+          id="empty-state"
+          class="hidden py-16 px-6 text-center bg-white rounded-3xl border border-dashed border-slate-300 max-w-lg mx-auto space-y-4"
+        >
+          <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto">
+            <i data-lucide="store" class="w-7 h-7"></i>
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-base font-bold text-slate-800">Tidak Menemukan Usaha</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Tidak ada profil UMKM yang cocok dengan filter atau kata kunci yang Anda masukkan. Silakan atur ulang filter pencarian.
+            </p>
+          </div>
+          <button
+            onclick="resetAllFilters()"
+            class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl text-xs font-bold transition-all shadow-xs"
+          >
+            Tampilkan Semua UMKM
+          </button>
+        </div>
+
+        <!-- REGISTER UMKM CALL TO ACTION BANNER -->
+        <div class="mt-12 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-indigo-600/20 blur-3xl pointer-events-none"></div>
+          <div class="relative z-10 max-w-2xl space-y-4">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/30 text-indigo-200 text-xs font-bold border border-indigo-400/30">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i> Gratis & Terbuka untuk Seluruh Warga
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Punya Usaha di Dayeuhluhur? Daftarkan ke Etalase Digital!
+            </h2>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Tingkatkan jangkauan pembeli lokal dan luar kota. Tim pengelola Plaza Dayeuhluhur siap membantu penayangan profil usaha, foto produk, dan sambungan pesanan WhatsApp tanpa dipungut biaya.
+            </p>
+            <div class="pt-2 flex flex-wrap items-center gap-3">
+              <a
+                href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur,%20saya%20ingin%20mendaftarkan%20usaha%20UMKM%20saya%20ke%20katalog%20website"
+                target="_blank"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-xs font-bold rounded-2xl shadow-lg shadow-indigo-600/30 transition-all hover:scale-102"
+              >
+                <i data-lucide="phone" class="w-4 h-4"></i>
+                <span>Hubungi Admin via WhatsApp</span>
+              </a>
+              <a
+                href="produk.html"
+                class="inline-flex items-center gap-2 px-5 py-3 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-2xl backdrop-blur-xs transition-colors"
+              >
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                <span>Lihat Katalog Produk</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-300 text-xs border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+        
+        <!-- Col 1: Branding -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold">
+              <i data-lucide="store" class="w-4 h-4"></i>
+            </div>
+            <span class="text-base font-extrabold text-white tracking-tight">Plaza Dayeuhluhur</span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Pusat promosi produk unggulan, direktori UMKM, bursa warga, dan potensi 14 desa Kecamatan Dayeuhluhur, Kabupaten Cilacap.
+          </p>
+        </div>
+
+        <!-- Col 2: Navigasi Cepat -->
+        <div class="space-y-2.5">
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider">Halaman Utama</h4>
+          <ul class="space-y-1.5 text-slate-400">
+            <li><a href="index.html" class="hover:text-indigo-400 transition-colors">Beranda Utama</a></li>
+            <li><a href="produk.html" class="hover:text-indigo-400 transition-colors">Katalog Semua Produk</a></li>
+            <li><a href="umkm.html" class="text-indigo-400 font-semibold">Direktori Lengkap UMKM</a></li>
+            <li><a href="index.html#afiliasi" class="hover:text-indigo-400 transition-colors">Produk Affiliate & Perlengkapan</a></li>
+            <li><a href="index.html#bursa" class="hover:text-indigo-400 transition-colors">Bursa Jual Beli Warga</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Wilayah 14 Desa -->
+        <div class="space-y-2.5">
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider">Wilayah 14 Desa</h4>
+          <p class="text-slate-400 text-[11px] leading-relaxed">
+            Dayeuhluhur Pusat, Panulisan, Panulisan Barat, Panulisan Timur, Ciwalen, Datar, Hanum, Kutaagung, Bingkeng, Cilumping, Matenggeng, Sumpinghayu, Cijeruk, Bolang.
+          </p>
+        </div>
+
+        <!-- Col 4: Layanan Bantuan -->
+        <div class="space-y-2.5">
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider">Pusat Layanan Warga</h4>
+          <p class="text-slate-400 text-[11px] leading-relaxed">
+            Ingin mendaftarkan produk, usaha UMKM, atau pasang iklan bursa warga?
+          </p>
+          <a
+            href="https://wa.me/6285803417383?text=Halo%20Admin%20Plaza%20Dayeuhluhur"
+            target="_blank"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-colors"
+          >
+            <i data-lucide="phone" class="w-3.5 h-3.5"></i> WhatsApp: 0858-0341-7383
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px]">
+        <p>© 2026 Plaza Dayeuhluhur. Dikembangkan untuk kemajuan UMKM dan pemberdayaan masyarakat pedesaan.</p>
+        <div class="flex items-center gap-4">
+          <a href="index.html" class="hover:text-slate-300">Beranda</a>
+          <a href="produk.html" class="hover:text-slate-300">Produk</a>
+          <a href="umkm.html" class="text-indigo-400">UMKM</a>
+          <a href="index.html#kontak" class="hover:text-slate-300">Kontak</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC (CLIENT-SIDE FILTERING, SEARCH, SORT, AND MODAL) -->
+  <script>
+    const ALL_BUSINESSES = [{"id":"umkm-1","name":"Kelompok Tani & Pengolah Sale \"Berkah Panulisan\"","owner":"Pak Sutarman","businessType":"kuliner","businessTypeLabel":"Kuliner & Olahan Pangan","village":"Desa Panulisan","address":"RT 03 / RW 02, Dusun Cikondang, Desa Panulisan","establishedYear":2014,"employeeCount":12,"whatsapp":"6281234567890","featuredProducts":["Sale Pisang Goreng","Sale Basah Gulung","Keripik Pisang Keju"],"image":"https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80","legalStatus":"P-IRT & Sertifikasi Halal MUI","rating":4.9,"reviewCount":98,"description":"Sentra olahan pisang siam lokal binaan koperasi desa. Memproduksi 200kg sale pisang per hari yang didistribusikan ke Jabodetabek dan Bandung."},{"id":"umkm-2","name":"Koperasi Kopi Robusta \"Gunung Dayeuh\"","owner":"Kang Deni Rohimat","businessType":"pertanian","businessTypeLabel":"Pertanian & Perkebunan","village":"Desa Datar","address":"Blok Pasir Gombong No. 15, Desa Datar","establishedYear":2017,"employeeCount":25,"whatsapp":"6281234567891","featuredProducts":["Kopi Robusta Natural","Kopi Robusta Wine","Green Bean Grade 1"],"image":"https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80","legalStatus":"NIB & Izin Edar BPOM P-IRT","rating":4.8,"reviewCount":76,"description":"Mengelola lebih dari 40 hektar kebun kopi lereng pegunungan Dayeuhluhur di ketinggian 650 mdpl. Melayani biji sangrai (roast bean) dan bubuk halus."},{"id":"umkm-3","name":"Sanggar Anyaman Bambu \"Kencana Ciwalen\"","owner":"Ibu Narsih","businessType":"kriya","businessTypeLabel":"Kerajinan & Kriya","village":"Desa Ciwalen","address":"Jl. Lapang Desa Ciwalen RT 01 / RW 04","establishedYear":2011,"employeeCount":18,"whatsapp":"6281234567892","featuredProducts":["Tas Anyaman Bambu","Besek Hantaran","Kap Lampu Artistik","Nampan Saji"],"image":"https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80","legalStatus":"NIB Usaha Mikro & Hak Cipta Desain","rating":4.9,"reviewCount":64,"description":"Menghimpun para perajin wanita desa untuk memproduksi kerajinan anyaman bambu tali halus kualitas ekspor dan souvenir hajatan ramah lingkungan."},{"id":"umkm-4","name":"Gula Aren Semut \"Lembur Hanum\"","owner":"Bapak Rusdianto","businessType":"kuliner","businessTypeLabel":"Kuliner & Hasil Hutan","village":"Desa Hanum","address":"Dusun Sukamaju, Desa Hanum","establishedYear":2016,"employeeCount":15,"whatsapp":"6281234567893","featuredProducts":["Gula Semut Organik","Gula Gandu Murni","Sirup Aren Cair"],"image":"https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80","legalStatus":"Sertifikasi Organik & P-IRT","rating":5,"reviewCount":112,"description":"Mengolah nira pohon aren liar pegunungan menjadi gula semut berbutir kering higienis dengan aroma karamel alami tanpa zat pewarna dan kimia pengawet."},{"id":"umkm-5","name":"Bengkel Bubut & Las Mesin Pertanian \"Sinar Teknik\"","owner":"Pak Maman Rustaman","businessType":"jasa","businessTypeLabel":"Jasa & Bengkel Teknik","village":"Desa Dayeuhluhur","address":"Jl. Raya Dayeuhluhur Km 1 (Dekat Pasar Desa)","establishedYear":2008,"employeeCount":6,"whatsapp":"6281234567894","featuredProducts":["Servis Traktor Tangan","Modifikasi Mesin Parut Kelapa","Pembuatan Pintu Tralis"],"image":"https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80","legalStatus":"NIB & Izin Operasional Bengkel","rating":4.7,"reviewCount":43,"description":"Pusat perawatan dan perbaikan alat mesin pertanian (alsintan), pompa air sawah, pembuatan gerobak angkut gabah, serta fabrikasi konstruksi besi."},{"id":"umkm-6","name":"Batik Canting Cantik \"Puspa Perbatasan\"","owner":"Mbak Dewi Lestari","businessType":"fashion","businessTypeLabel":"Batik & Konveksi","village":"Desa Kutaagung","address":"Kompleks Rumah Batik Kutaagung No. 8","establishedYear":2019,"employeeCount":9,"whatsapp":"6281234567895","featuredProducts":["Kain Batik Tulis Motif Cijolang","Batik Cap Dayeuhluhur","Kemeja Batik Pria"],"image":"https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=600&q=80","legalStatus":"NIB & Binaan Dewan Kerajinan Nasional","rating":4.8,"reviewCount":38,"description":"Pelopor kreasi motif batik khas daerah perbatasan yang memadukan filosofi alam Dayeuhluhur, aliran Sungai Cijolang, dan daun kapulaga lokal."},{"id":"umkm-7","name":"Peternakan Kambing Perah & Madu \"Bingkeng Farm\"","owner":"H. Ujang Suherman","businessType":"peternakan","businessTypeLabel":"Peternakan & Perikanan","village":"Desa Bingkeng","address":"Area Perbukitan Bingkeng RT 04 / RW 01","establishedYear":2018,"employeeCount":8,"whatsapp":"6281234567896","featuredProducts":["Susu Kambing Etawa Segar","Madu Klanceng Trigona","Bibit Kambing Unggul"],"image":"https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=600&q=80","legalStatus":"Surat Keterangan Bebas Penyakit Hewan & Halal","rating":4.9,"reviewCount":52,"description":"Peternakan terpadu ramah lingkungan dengan kambing etawa pakan hijauan alami dan budidaya lebah madu tanpa sengat (trigona) di kebun buah."},{"id":"umkm-8","name":"Aneka Keripik Singkong & Pisang \"Gurih Mandiri\"","owner":"Ibu Eni Rohaeni","businessType":"kuliner","businessTypeLabel":"Kuliner & Camilan","village":"Desa Cilumping","address":"Dusun Mekarsari No. 22, Desa Cilumping","establishedYear":2015,"employeeCount":7,"whatsapp":"6281234567897","featuredProducts":["Keripik Singkong Balado","Keripik Pisang Cokelat","Keripik Talas Gurih"],"image":"https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=600&q=80","legalStatus":"P-IRT Resmi Cilacap","rating":4.7,"reviewCount":65,"description":"Produsen camilan renyah berbahan singkong mentega dan talas pegunungan dengan bumbu rempah asli racikan turun-temurun."},{"id":"umkm-9","name":"Sentra Kerupuk Tenggiri & Sale \"Maju Jaya\"","owner":"Bapak H. Sukendar","businessType":"kuliner","businessTypeLabel":"Kuliner & Olahan Pangan","village":"Desa Panulisan Barat","address":"Jl. Raya Panulisan Barat No. 88","establishedYear":2013,"employeeCount":14,"whatsapp":"6281234567898","featuredProducts":["Kerupuk Tenggiri Super","Sale Lidah Crispy","Opak Ketan Bakar"],"image":"https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80","legalStatus":"P-IRT & Halal MUI","rating":4.8,"reviewCount":84,"description":"Pusat oleh-oleh khas jalur lintas perbatasan dengan aneka olahan kerupuk ikan gurih renyah dan olahan pisang berkualitas."},{"id":"umkm-10","name":"Kopi Arabika Specialty \"Pegunungan Dayeuh\"","owner":"Kang Iman Nugraha","businessType":"pertanian","businessTypeLabel":"Pertanian & Perkebunan","village":"Desa Panulisan Timur","address":"Dusun Cigintung RT 02 / RW 03, Panulisan Timur","establishedYear":2020,"employeeCount":8,"whatsapp":"6281234567804","featuredProducts":["Arabika Full Wash","Honey Process Specialty","Cold Brew Kemasan"],"image":"https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=600&q=80","legalStatus":"NIB & Izin Edar P-IRT","rating":5,"reviewCount":56,"description":"Mikro roastery kopi specialty yang mengangkat potensi kopi arabika dataran tinggi Dayeuhluhur dengan profil rasa fruity dan floral."},{"id":"umkm-11","name":"Kelompok Tani Beras Organik \"Subur Makmur\"","owner":"Pak Sukirno","businessType":"pertanian","businessTypeLabel":"Pertanian & Pangan Pokok","village":"Desa Matenggeng","address":"Blok Sawah Luhur RT 01 / RW 01, Matenggeng","establishedYear":2012,"employeeCount":30,"whatsapp":"6281234567899","featuredProducts":["Beras Merah Organik","Beras Hitam Khusus","Beras Pandan Wangi Alami"],"image":"https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80","legalStatus":"Sertifikasi Organik INOFICE","rating":4.9,"reviewCount":92,"description":"Budidaya padi organik dengan sistem pengairan mata air pegunungan alami bebas pestisida kimia untuk gaya hidup sehat keluarga."},{"id":"umkm-12","name":"Dodol Gula Aren & Wajik \"Berkah Sumpinghayu\"","owner":"Ibu Warsinah","businessType":"kuliner","businessTypeLabel":"Kuliner Tradisional","village":"Desa Sumpinghayu","address":"Dusun Karanganyar RT 03 / RW 02, Sumpinghayu","establishedYear":2009,"employeeCount":10,"whatsapp":"6281234567800","featuredProducts":["Dodol Aren Wijen","Wajik Ketan Legit","Jenang Tradisional"],"image":"https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80","legalStatus":"P-IRT & Halal Kemenag","rating":4.8,"reviewCount":77,"description":"Resep warisan tiga generasi olahan dodol gula aren murni dengan wangi harum pandan dan taburan wijen sangrai renyah."},{"id":"umkm-13","name":"Kriya Rotan & Anyaman \"Karya Indah Cijeruk\"","owner":"Pak Sanusi","businessType":"kriya","businessTypeLabel":"Kerajinan & Kriya","village":"Desa Cijeruk","address":"Jl. Sentra Anyam No. 12, Desa Cijeruk","establishedYear":2016,"employeeCount":11,"whatsapp":"6281234567802","featuredProducts":["Tempat Tisu Rotan","Kursi Teras Anyam","Keranjang Buah Estetik"],"image":"https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80","legalStatus":"NIB Usaha Mikro","rating":4.8,"reviewCount":48,"description":"Menciptakan produk dekorasi interior ramah lingkungan berbahan rotan alam dan bambu tali pilihan pengrajin lokal Cijeruk."},{"id":"umkm-14","name":"Koperasi Rempah & Kapulaga \"Bolang Sejahtera\"","owner":"Pak Tatang Suherman","businessType":"pertanian","businessTypeLabel":"Pertanian & Rempah Herbal","village":"Desa Bolang","address":"Kawasan Perkebunan Bolang RT 02 / RW 01","establishedYear":2015,"employeeCount":22,"whatsapp":"6281234567801","featuredProducts":["Kapulaga Kering Grade A","Cengkeh Pilihan","Jahe Merah Instan"],"image":"https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=600&q=80","legalStatus":"NIB Koperasi & Sertifikat Mutu","rating":5,"reviewCount":63,"description":"Menghubungkan ratusan petani rempah Desa Bolang untuk memenuhi pasokan rempah kering kapulaga dan cengkeh standar industri dan ekspor."}];
+    const BUSINESS_CATEGORIES = [{"key":"all","name":"Semua Usaha","iconName":"Store","color":"indigo"},{"key":"kuliner","name":"Kuliner & Pangan","iconName":"Utensils","color":"orange"},{"key":"pertanian","name":"Pertanian & Kebun","iconName":"Wheat","color":"emerald"},{"key":"kriya","name":"Kerajinan & Kriya","iconName":"Sparkles","color":"blue"},{"key":"jasa","name":"Jasa & Bengkel","iconName":"Wrench","color":"purple"},{"key":"fashion","name":"Batik & Konveksi","iconName":"Shirt","color":"rose"},{"key":"peternakan","name":"Ternak & Ikan","iconName":"Fish","color":"cyan"}];
+
+    let currentCategory = 'all';
+    let currentVillage = 'all';
+    let currentSearch = '';
+    let currentSort = 'default';
+
+    // Initialize Category Pills
+    function renderCategoryPills() {
+      const container = document.getElementById('category-pills');
+      if (!container) return;
+
+      container.innerHTML = BUSINESS_CATEGORIES.map(cat => {
+        const isActive = currentCategory === cat.key;
+        return `
+          <button
+            onclick="setCategory('${cat.key}')"
+            class="px-3 py-1 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              isActive
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+            }"
+          >
+            ${cat.name}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setCategory(catKey) {
+      currentCategory = catKey;
+      renderCategoryPills();
+      filterAndRenderBusinesses();
+    }
+
+    function resetAllFilters() {
+      currentCategory = 'all';
+      currentVillage = 'all';
+      currentSearch = '';
+      currentSort = 'default';
+
+      const searchInput = document.getElementById('search-input');
+      const villageSelect = document.getElementById('village-select');
+      const sortSelect = document.getElementById('sort-select');
+
+      if (searchInput) searchInput.value = '';
+      if (villageSelect) villageSelect.value = 'all';
+      if (sortSelect) sortSelect.value = 'default';
+
+      renderCategoryPills();
+      filterAndRenderBusinesses();
+    }
+
+    function filterAndRenderBusinesses() {
+      const query = currentSearch.toLowerCase().trim();
+
+      let filtered = ALL_BUSINESSES.filter(biz => {
+        const matchesCategory = currentCategory === 'all' || biz.businessType === currentCategory;
+        const matchesVillage = currentVillage === 'all' || biz.village.toLowerCase().includes(currentVillage.toLowerCase());
+        const matchesSearch = !query ||
+          biz.name.toLowerCase().includes(query) ||
+          biz.owner.toLowerCase().includes(query) ||
+          biz.village.toLowerCase().includes(query) ||
+          biz.description.toLowerCase().includes(query) ||
+          biz.featuredProducts.some(p => p.toLowerCase().includes(query));
+
+        return matchesCategory && matchesVillage && matchesSearch;
+      });
+
+      // Sorting
+      if (currentSort === 'rating-desc') {
+        filtered.sort((a, b) => b.rating - a.rating);
+      } else if (currentSort === 'reviews-desc') {
+        filtered.sort((a, b) => b.reviewCount - a.reviewCount);
+      } else if (currentSort === 'year-asc') {
+        filtered.sort((a, b) => a.establishedYear - b.establishedYear);
+      } else if (currentSort === 'employees-desc') {
+        filtered.sort((a, b) => b.employeeCount - a.employeeCount);
+      } else if (currentSort === 'name-asc') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      // Render cards
+      const grid = document.getElementById('umkm-grid');
+      const emptyState = document.getElementById('empty-state');
+      const countEl = document.getElementById('visible-count');
+
+      if (countEl) countEl.innerText = filtered.length;
+
+      if (filtered.length === 0) {
+        if (grid) grid.innerHTML = '';
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      }
+
+      if (emptyState) emptyState.classList.add('hidden');
+
+      if (grid) {
+        grid.innerHTML = filtered.map(biz => {
+          const waMessage = encodeURIComponent(
+            `Halo ${biz.owner} dari *${biz.name}*, saya melihat profil usaha Anda di Plaza Dayeuhluhur. Saya ingin bertanya seputar produk/kerjasama usaha.`
+          );
+
+          const productsBadges = biz.featuredProducts.slice(0, 3).map(p => 
+            `<span class="px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-[10px] font-medium text-indigo-700 truncate max-w-[130px]">${p}</span>`
+          ).join('');
+
+          return `
+            <div class="bg-white rounded-3xl border border-slate-200/90 overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+              <div>
+                <!-- Image Header with Badges -->
+                <div class="relative h-48 overflow-hidden bg-slate-100">
+                  <img
+                    src="${biz.image}"
+                    alt="${biz.name}"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+
+                  <!-- Category Badge -->
+                  <div class="absolute top-3 left-3">
+                    <span class="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-indigo-600 text-white shadow-sm">
+                      ${biz.businessTypeLabel}
+                    </span>
+                  </div>
+
+                  <!-- Village & Rating Footer inside image -->
+                  <div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white text-xs z-10">
+                    <span class="flex items-center gap-1 font-semibold text-indigo-200 truncate max-w-[140px]">
+                      <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0 text-indigo-300"></i>
+                      <span class="truncate">${biz.village}</span>
+                    </span>
+                    <div class="flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded-md text-[11px] text-amber-300 font-bold shrink-0">
+                      <i data-lucide="star" class="w-3 h-3 fill-amber-300 text-amber-300"></i>
+                      <span>${biz.rating}</span>
+                      <span class="text-slate-300 text-[10px] font-normal">(${biz.reviewCount})</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Body Content -->
+                <div class="p-4 sm:p-5 space-y-3">
+                  <div class="space-y-1">
+                    <div class="flex items-center gap-1.5 text-[11px] text-slate-500">
+                      <span>Pemilik:</span>
+                      <strong class="text-slate-800 font-bold truncate">${biz.owner}</strong>
+                      <i data-lucide="shield-check" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-1">
+                      ${biz.name}
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                      ${biz.description}
+                    </p>
+                  </div>
+
+                  <!-- Spec Badges (Year & Employees) -->
+                  <div class="grid grid-cols-2 gap-1.5 pt-2 border-t border-slate-100 text-[11px] text-slate-600">
+                    <div class="flex items-center gap-1.5 p-1.5 bg-slate-50 rounded-xl truncate">
+                      <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
+                      <span class="truncate">Berdiri: <strong>${biz.establishedYear}</strong></span>
+                    </div>
+                    <div class="flex items-center gap-1.5 p-1.5 bg-slate-50 rounded-xl truncate">
+                      <i data-lucide="users" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
+                      <span class="truncate">Staf: <strong>${biz.employeeCount} Orang</strong></span>
+                    </div>
+                  </div>
+
+                  <!-- Legal Status -->
+                  ${biz.legalStatus ? `
+                    <div class="flex items-center gap-1 text-[11px] text-emerald-700 bg-emerald-50/80 px-2.5 py-1 rounded-xl border border-emerald-100 font-medium truncate">
+                      <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                      <span class="truncate">${biz.legalStatus}</span>
+                    </div>
+                  ` : ''}
+
+                  <!-- Featured Products List -->
+                  <div class="space-y-1 pt-1">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                      Produk / Layanan Unggulan:
+                    </span>
+                    <div class="flex flex-wrap gap-1">
+                      ${productsBadges}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Button -->
+              <div class="p-4 sm:p-5 pt-0">
+                <a
+                  href="https://wa.me/${biz.whatsapp}?text=${waMessage}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full py-2.5 px-4 bg-slate-900 hover:bg-indigo-600 active:bg-indigo-700 text-white text-xs font-bold rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xs hover:shadow"
+                >
+                  <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-400"></i>
+                  <span>Hubungi Pelaku Usaha</span>
+                </a>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Re-initialize lucide icons for newly added DOM elements
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    // Attach DOM Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCategoryPills();
+      filterAndRenderBusinesses();
+
+      const searchInput = document.getElementById('search-input');
+      const villageSelect = document.getElementById('village-select');
+      const sortSelect = document.getElementById('sort-select');
+      const resetBtn = document.getElementById('btn-reset-filter');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentSearch = e.target.value;
+          filterAndRenderBusinesses();
+        });
+      }
+
+      if (villageSelect) {
+        villageSelect.addEventListener('change', (e) => {
+          currentVillage = e.target.value;
+          filterAndRenderBusinesses();
+        });
+      }
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+          currentSort = e.target.value;
+          filterAndRenderBusinesses();
+        });
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', resetAllFilters);
+      }
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
